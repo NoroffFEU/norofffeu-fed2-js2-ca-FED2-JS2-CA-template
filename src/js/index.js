@@ -1,0 +1,1 @@
+import {NoroffAPI} from "./api/index.js";
