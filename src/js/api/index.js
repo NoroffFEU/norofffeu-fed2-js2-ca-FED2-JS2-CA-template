@@ -1,13 +1,16 @@
 export default class NoroffAPI {
     apiBase = ""
+    apiLoginPath = ""
+
     constructor(apiBase){
         this.apiBase = apiBase
+        this.apiLoginPath = apiBase + "/auth/login"
     }
 
     async login({ email, password}){
         const body = JSON.stringify({ email, password});
 
-        const response = await fetch (API_AUTH_LOGIN, {
+        const response = await fetch (this.apiLoginPath, {
             headers: {
                 "Content-Type": "application/json"
             },
