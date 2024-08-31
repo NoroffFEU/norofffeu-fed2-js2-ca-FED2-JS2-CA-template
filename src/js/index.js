@@ -3,6 +3,8 @@ import { onRegister } from "./ui/auth/register.js";
 import { onLogin } from "./ui/auth/login.js";
 
 const api = new NoroffAPI("https://v2.api.noroff.dev")
+await api.login()
+await api.register()
 
 switch (window.location.pathname){
     case "/":

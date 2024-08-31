@@ -57,4 +57,10 @@ export default class NoroffAPI {
           throw new Error ("Could not register this account")
         }
     }    
+    post = {
+      get: () => {},
+      put: () => {},
+      delete: () => {},
+      post: () => {}
+    }
 }
