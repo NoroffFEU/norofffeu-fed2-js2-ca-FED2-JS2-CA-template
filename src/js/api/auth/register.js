@@ -3,10 +3,7 @@ import { API_AUTH_REGISTER } from "../constants.js";
 export async function register({
   name,
   email,
-  password,
-  bio,
-  banner,
-  avatar,
+  password
 }) {
   const body = JSON.stringify({name, email, password})
   
