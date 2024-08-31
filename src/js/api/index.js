@@ -3,53 +3,58 @@ export default class NoroffAPI {
     apiLoginPath = ""
     apiRegisterPath = ""
 
-    constructor(apiBase){
-        this.apiBase = apiBase
-        this.apiLoginPath = apiBase + "/auth/login"
-        this.apiRegisterPath = apiBase + "/auth/register"
-
+    constructor(apiBase = "https://v2.api.noroff.dev"){
+      this.apiBase = apiBase
+    }
+    get apiLoginPath(){
+      return `${this.apiBase}/auth/login`
     }
 
-    async login({ email, password}){
-        const body = JSON.stringify({ email, password});
+    get apiRegisterPath(){
+       return `${this.apiBase}/auth/register`
+    }
 
-        const response = await fetch (this.apiLoginPath, {
-            headers: {
-                "Content-Type": "application/json"
-            },
+    auth ={
+      login: async ({ email, password}) => {
+          const body = JSON.stringify({ email, password});
+  
+          const response = await fetch (this.apiLoginPath, {
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              method: "post",
+              body,
+          });
+          
+          if (response.ok){
+              const {data} = await response.json();
+              const { accessToken: token, ...user} = data;
+              localStorage.token = token;
+              localStorage.user = JSON.stringify(user);
+              return data;
+          }
+          throw new Error ("Could not login with this account");
+      },
+      register: async ({
+          name,
+          email,
+          password
+        }) => {
+          const body = JSON.stringify({name, email, password})
+          
+          const response = await fetch (API_AUTH_REGISTER,{
+            headers: 
+            {"Content-Type": "application/json",},
             method: "post",
-            body,
-        });
+            body
+          } );
         
-        if (response.ok){
+          if (response.ok){
             const {data} = await response.json();
-            const { accessToken: token, ...user} = data;
-            localStorage.token = token;
-            localStorage.user = JSON.stringify(user);
-            return data;
-        }
-    }
-
-    async register({
-        name,
-        email,
-        password
-      }) {
-        const body = JSON.stringify({name, email, password})
+            return data
+          }
         
-        const response = await fetch (API_AUTH_REGISTER,{
-          headers: 
-          {"Content-Type": "application/json",},
-          method: "post",
-          body
-        } );
-      
-        if (response.ok){
-          const {data} = await response.json();
-          return data
+          throw new Error ("Could not register this account")
         }
-      
-        throw new Error ("Could not register this account")
-      }
-      
+    }    
 }
