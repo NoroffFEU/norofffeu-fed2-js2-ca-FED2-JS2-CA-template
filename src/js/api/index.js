@@ -1,7 +1,7 @@
+import router from "../router"
+
 export default class NoroffAPI {
     apiBase = ""
-    apiLoginPath = ""
-    apiRegisterPath = ""
 
     constructor(apiBase = "https://v2.api.noroff.dev"){
       this.apiBase = apiBase
@@ -31,6 +31,7 @@ export default class NoroffAPI {
               const { accessToken: token, ...user} = data;
               localStorage.token = token;
               localStorage.user = JSON.stringify(user);
+              router("/")
               return data;
           }
           throw new Error ("Could not login with this account");
@@ -51,6 +52,7 @@ export default class NoroffAPI {
         
           if (response.ok){
             const {data} = await response.json();
+            router("/")
             return data
           }
         

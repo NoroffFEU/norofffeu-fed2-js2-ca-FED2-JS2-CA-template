@@ -1,5 +1,4 @@
 import NoroffAPI from "../../api/index.js";
-
 const api = new NoroffAPI()
 
 export async function onLogin(event) {
