@@ -42,7 +42,7 @@ export default class NoroffAPI {
         }) => {
           const body = JSON.stringify({name, email, password})
           
-          const response = await fetch (API_AUTH_REGISTER,{
+          const response = await fetch (this.apiRegisterPath,{
             headers: 
             {"Content-Type": "application/json",},
             method: "post",

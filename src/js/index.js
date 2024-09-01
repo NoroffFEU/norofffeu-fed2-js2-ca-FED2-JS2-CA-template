@@ -1,4 +1,4 @@
-import {NoroffAPI} from "./api/index.js";
+import NoroffAPI from "./api/index.js";
 import { onRegister } from "./ui/auth/register.js";
 import { onLogin } from "./ui/auth/login.js";
 
