@@ -10,3 +10,9 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}

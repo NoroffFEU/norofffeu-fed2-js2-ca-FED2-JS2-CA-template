@@ -15,6 +15,18 @@
     <h1>Create Post</h1>
 
     <form name="createPost">
+      <label for="postTitle">Title</label>
+      <input type="text" name="title" id="postTitle" required>
+
+      <label for="postBody">body</label>
+      <textarea name="body" id="postBody" required></textarea>
+      
+      <label for="postTag">Tag</label>
+      <input type="text" name="tags" id="postTag">
+
+      <label for="postMedia">Media</label>
+      <input type="url" name="media" id="postMedia" required>
+
       <button>Create Post</button>
     </form>
   </body>
