@@ -1,1 +1,3 @@
-export async function onCreatePost(event) {}
+export async function onCreatePost(event) {
+    
+}

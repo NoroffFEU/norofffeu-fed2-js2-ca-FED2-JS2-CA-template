@@ -11,7 +11,7 @@ body {
   margin: 0;
 }
 
-form {
+.postForm form {
   display: flex;
   flex-direction: column;
   width: 20rem;

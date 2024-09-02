@@ -59,9 +59,9 @@ export default class NoroffAPI {
           throw new Error ("Could not register this account")
         },
 
-        createPost: async ({
-
-        }),
+        // createPost: async ({
+          
+        // }),
 
         logout: async (
         ) => {
