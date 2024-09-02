@@ -57,6 +57,11 @@ export default class NoroffAPI {
           }
         
           throw new Error ("Could not register this account")
+        },
+        logout: async (
+        ) => {
+          localStorage.removeItem("token")
+          localStorage.removeItem("user")
         }
     }    
     post = {
@@ -65,4 +70,6 @@ export default class NoroffAPI {
       delete: () => {},
       post: () => {}
     }
+
+
 }
