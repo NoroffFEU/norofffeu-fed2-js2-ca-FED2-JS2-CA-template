@@ -5,6 +5,21 @@ import { onLogin } from "./ui/auth/login.js";
 
 const api = new NoroffAPI("https://v2.api.noroff.dev")
 
+const userTest = {
+    name:"natnoppol",
+    email:"natnoppol@stud.noroff.no",
+    password: "123456789"
+}
+
+await api.auth.register(userTest);
+
+await api.auth.login({email:userTest.email, password:userTest.password, })
+
+await api.post.read(post.id)
+
+alert("test finished")
+
+
 
 switch (window.location.pathname){
     case "/":

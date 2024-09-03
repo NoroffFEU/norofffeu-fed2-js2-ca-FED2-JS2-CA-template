@@ -18,4 +18,6 @@ export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
 
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
 
+export const API_BLOG_USER_POST = `${API_SOCIAL_POSTS}/<id>` 
+
 

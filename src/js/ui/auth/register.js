@@ -10,6 +10,7 @@ export async function onRegister(event) {
 
     try{
         await api.auth.register(data)
+        window.location.href = "/"
     } catch (error){
         alert(error)
     }
