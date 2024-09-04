@@ -24,6 +24,10 @@ export default class NoroffAPI {
     return `${this.apiBase}/blog/posts/${this.user.name}`
   }
 
+  get apiSocialPath () {
+    return `${this.apiBase}/social/posts`;
+  }
+
 
   auth = {
     login: async ({ email, password }) => {
@@ -67,6 +71,7 @@ export default class NoroffAPI {
     logout: async () => {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      window.location.href = "/"
     },
   };
 
@@ -131,13 +136,13 @@ export default class NoroffAPI {
 
     },
     create: async ({title, body, tags, media}) => {
-      const {token, user} = getCurrentUser ();
+      const {token} = this.getCurrentUser;
 
-      const response = await fetch (this.apiPostPath,{
+      const response = await fetch (this.apiSocialPath,{
         method: "post",
         headers: {
           "Content-type": "application/json",
-          Authorization: `Bearer ${token}`
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({title,body,tags,media})
       })
@@ -150,5 +155,30 @@ export default class NoroffAPI {
     throw new Error ('Could not create post');
     },
   
+  }
+
+  posts ={
+    read: async (tag, limit =12, page = 1) => {
+      const user = getCurrentUser();
+      const url = new URL(API_BLOG_USER_POST(user.name))
+    }
+  }
+
+  getPosts = async () => {
+    const {token} = this.getCurrentUser
+
+    const response = await fetch (`${this.apiSocialPath}`,{
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      }
+    })
+    
+    if (response.ok){
+      const data = await response.json();
+      return data
+    }
+    throw new Error ("could not read the posts")
   }
 }

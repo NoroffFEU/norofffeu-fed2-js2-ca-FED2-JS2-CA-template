@@ -2,9 +2,18 @@ import NoroffAPI from "../../api";
 
 const api = new NoroffAPI();
 
-
-
 export async function onCreatePost(event) {
-    alert ("You have created post")
-    await api.post.create({title,body,tags,media});
+  event.preventDefault();
+  const form = event.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    alert("You have created post");
+    
+    await api.post.create(data);
+    window.location.href = "/post/";
+  } catch (error) {
+    alert(error);
+  }
 }
