@@ -1,15 +1,14 @@
-import router from "../router";
 import { getCurrentUser } from "../utilities/currentUser.js";
-import { API_BLOG_USER_POST } from "./constants.js";
+import { API_AUTH_KEY } from "./constants.js";
 
 export default class NoroffAPI {
   apiBase = "";
 
-  constructor(apiBase="https://v2.api.noroff.dev") {
+  constructor(apiBase = "https://v2.api.noroff.dev") {
     this.apiBase = apiBase;
   }
 
-  get getCurrentUser(){
+  get getCurrentUser() {
     return getCurrentUser();
   }
   get apiLoginPath() {
@@ -20,14 +19,13 @@ export default class NoroffAPI {
     return `${this.apiBase}/auth/register`;
   }
 
-  get apiPostPath (){
-    return `${this.apiBase}/blog/posts/${this.user.name}`
+  get apiPostPath() {
+    return `${this.apiBase}/blog/posts/${this.user.name}`;
   }
 
-  get apiSocialPath () {
+  get apiSocialPath() {
     return `${this.apiBase}/social/posts`;
   }
-
 
   auth = {
     login: async ({ email, password }) => {
@@ -71,114 +69,150 @@ export default class NoroffAPI {
     logout: async () => {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      window.location.href = "/"
+      window.location.href = "/";
     },
   };
 
   post = {
     read: async (id) => {
-     
-      const {token, user} = getCurrentUser ();
+      const { token, user } = getCurrentUser();
 
+      const url = `${this.apiPostPath}/blog/posts/${user.name}/${id}`;
 
-      const url = `${this.apiPostPath}/blog/posts/${user.name}/${id}`
-
-    
-      const response = await fetch (url,{
-          headers:{
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-          },
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
-  
-      if (response.ok){
-          const data = await response.json()
-          return data
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
       }
-  
-      throw new Error ('Could not create post');
+
+      throw new Error("Could not create post");
     },
-    update: async (id,{title, body, tags, media}) => {
-      const {token, user} = getCurrentUser ();
+    update: async (id, { title, body, tags, media }) => {
+      const { token, user } = getCurrentUser();
 
-      const response = await fetch (API_BLOG_USER_POST(user.name, id),{
-          headers:{
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-          },
-          method:"put",
-          body: JSON.stringify({title, body, tags,media}),
+      const response = await fetch(API_BLOG_USER_POST(user.name, id), {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "put",
+        body: JSON.stringify({ title, body, tags, media }),
       });
-  
-      if (response.ok){
-          const data = await response.json()
-          return data
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
       }
-  
-      throw new Error ('Could not update post' + id);
+
+      throw new Error("Could not update post" + id);
     },
     delete: async (id) => {
-      const {token} = getCurrentUser ();
+      const { token } = getCurrentUser();
 
-      const response = await fetch (`${this.apiPostPath}/${id}`,{
+      const response = await fetch(`${this.apiPostPath}/${id}`, {
         method: "delete",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      if (response.ok){
-        const data = await response.json()
-        return data
-    }
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
 
-    throw new Error ('Could not delete post' + id);
-
+      throw new Error("Could not delete post" + id);
     },
-    create: async ({title, body, tags, media}) => {
-      const {token} = this.getCurrentUser;
+    create: async ({ title, body, tags, media }) => {
+      const { token } = this.getCurrentUser;
 
-      const response = await fetch (this.apiSocialPath,{
+      const tagsArray = Array.isArray(tags) ? tags : tags.split (',').map (tag => tag.trim())
+
+      const apiKeyData = await this.options.apiKey();
+      
+      const formattedMedia = {
+        url: media || '',
+        alt: media.alt || ''
+      }
+      const requestBody = {
+        title,
+        body,
+        tags: tagsArray,
+        media: formattedMedia
+      };
+
+
+      const response = await fetch(this.apiSocialPath, {
         method: "post",
         headers: {
           "Content-type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": `${apiKeyData.data.key}`
         },
-        body: JSON.stringify({title,body,tags,media})
-      })
+        body: JSON.stringify(requestBody),
+      });
 
-      if (response.ok){
-        const data = await response.json()
-        return data
-    }
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
 
-    throw new Error ('Could not create post');
+      throw new Error("Could not create post");
     },
-  
-  }
+  };
 
-  posts ={
-    read: async (tag, limit =12, page = 1) => {
+  posts = {
+    read: async (tag, limit = 12, page = 1) => {
       const user = getCurrentUser();
-      const url = new URL(API_BLOG_USER_POST(user.name))
-    }
-  }
+      const url = new URL(API_BLOG_USER_POST(user.name));
+    },
+  };
 
   getPosts = async () => {
-    const {token} = this.getCurrentUser
+    const { token } = this.getCurrentUser;
 
-    const response = await fetch (`${this.apiSocialPath}`,{
+    const response = await fetch(`${this.apiSocialPath}`, {
       method: "get",
       headers: {
         "content-type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      }
-    })
-    
-    if (response.ok){
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
       const data = await response.json();
-      return data
+      return data;
     }
-    throw new Error ("could not read the posts")
-  }
+    throw new Error("could not read the posts");
+  };
+
+  options = {
+    apiKey: async () => {
+      const { token } = this.getCurrentUser;
+
+      const options = {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(`${API_AUTH_KEY}`, options);
+
+      if (response.ok) {
+        const data = await response.json();
+
+        return data;
+
+      } else {
+        throw new Error("Failed to fetch options");
+      }
+    },
+  };
 }
