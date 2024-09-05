@@ -1,6 +1,6 @@
 import { headers } from "../headers"
 
-export async function register({url, data}) {
+export async function register(url, data) {
   try {
     const postData = {
       method: "POST",
@@ -9,15 +9,15 @@ export async function register({url, data}) {
     };
 
     const response = await fetch(url, postData);
+    const json = await response.json();
+    console.log(json); //delete later!!
 
     if(!response.ok) {
-      throw new Error(`Server status: ${response.status}`);
+      throw new Error(`Error: ${json.errors[0].message}`);
     }
-
-    const json = await response.json();
 
     return json;
   } catch(error) {
-    console.error(`Error message: ${error.message}`);
+    throw error;
   }
 }
