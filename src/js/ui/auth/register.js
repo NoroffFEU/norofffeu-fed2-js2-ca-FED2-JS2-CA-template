@@ -1,6 +1,31 @@
-export async function onRegister(event) {}
+import { register } from "../../api/auth/register";
+import { API_AUTH_REGISTER } from "../../api/constants";
 
-//get input value
-//fetch data by using api
-//clear the input area
-//show success message or error message
+export async function onRegister(event) {
+  event.preventDefault();
+
+  const usernameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+
+  let username = usernameInput.value;
+  let email = emailInput.value;
+  let password = passwordInput.value;
+
+  const user = {
+    name : username,
+    email : email,
+    password : password
+  }
+
+  usernameInput.value = "";
+  emailInput.value = "";
+  passwordInput.value = "";
+
+  try {
+    await register(API_AUTH_REGISTER, user);
+    window.location.href = "/auth/login/";
+  } catch(error) {
+    alert(`${error.message}.\nPlease try again.`);
+  }
+}
