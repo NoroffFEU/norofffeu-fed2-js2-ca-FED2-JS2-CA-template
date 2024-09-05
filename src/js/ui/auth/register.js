@@ -24,7 +24,8 @@ export async function onRegister(event) {
 
   try {
     await register(API_AUTH_REGISTER, user);
-    window.location.href = "/auth/login/";
+    alert(`Registration successful!\nUsername: ${user.name}\nEmail: ${user.email}`);
+    //window.location.href = "/auth/login/";
   } catch(error) {
     alert(`${error.message}.\nPlease try again.`);
   }

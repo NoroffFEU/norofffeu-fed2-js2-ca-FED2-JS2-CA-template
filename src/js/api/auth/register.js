@@ -18,6 +18,6 @@ export async function register({url, data}) {
 
     return json;
   } catch(error) {
-    console.error(`Error message: ${error.message}`)
+    console.error(`Error message: ${error.message}`);
   }
 }
