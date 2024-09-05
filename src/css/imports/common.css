@@ -1,0 +1,60 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+main {
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin-bottom: 8rem;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 3.2rem;
+  font-size: 4rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+input {
+  width: 100%;
+  padding: 1.2rem 1rem;
+}
+
+input::placeholder {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+}
+
+button {
+  width: 100%;
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+ul {
+  list-style: none;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+  padding-bottom: 3.2rem;
+}
