@@ -5,3 +5,13 @@ header {
 header img {
   width: 12.8rem;
 }
+
+@media screen and (min-width: 1024px) {
+  header {
+    padding: 4rem 6.4rem;
+  }
+
+  header img {
+    width: 18.4rem;
+  }
+}

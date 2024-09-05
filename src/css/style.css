@@ -1,11 +1,13 @@
 @import url(imports/_reset.css);
 @import url(imports/common.css);
 @import url(imports/header.css);
+@import url(imports/footer.css);
+@import url(imports/feed.css);
 
 .auth-info {
   font-size: 1.4rem;
   text-align: center;
-  margin: 1.2rem 0 0 0 ;
+  margin: 1.2rem 0 0 0;
 }
 
 .auth-link {

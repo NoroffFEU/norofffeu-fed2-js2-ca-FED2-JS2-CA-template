@@ -30,6 +30,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  width: 100%;
 }
 
 input {
@@ -43,6 +44,10 @@ input::placeholder {
 }
 
 button {
+  font-size: 1.2rem;
+}
+
+.submit-type-button {
   width: 100%;
   text-align: center;
   padding: 1.2rem 0;
@@ -52,9 +57,27 @@ ul {
   list-style: none;
 }
 
-footer {
-  display: flex;
-  justify-content: center;
-  gap: 2.4rem;
-  padding-bottom: 3.2rem;
+@media screen and (min-width: 1024px) {
+  h1 {
+    margin-bottom: 4rem;
+  }
+
+  form {
+    width: 60%;
+    gap: 1.6rem;
+    margin: 0 auto;
+  }
+
+  input {
+    padding: 1.6rem 1.2rem;
+  }
+
+  button {
+    font-size: 1.4rem;
+  }
+
+  .submit-type-button {
+    padding: 1.6rem 0;
+    margin-top: 0.8rem;
+  }
 }
