@@ -1,4 +1,6 @@
-import { register } from "../../api/auth/register";
+import NoroffAPI from "../../api/index.js";
+
+const api = new NoroffAPI();
 
 export async function onRegister(event) {
   event.preventDefault();
@@ -16,7 +18,7 @@ export async function onRegister(event) {
   passwordInput.value = "";
 
   try {
-    await register({ name, email, password });
+    await api.auth.register({ name, email, password });
     alert(`Registration successful!\nUsername: ${name}\nEmail: ${email}`);
     window.location.href = "/auth/login/";
   } catch(error) {
