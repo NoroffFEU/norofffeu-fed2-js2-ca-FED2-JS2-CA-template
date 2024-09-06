@@ -1,5 +1,4 @@
 import { login } from "../../api/auth/login";
-import { API_AUTH_LOGIN } from "../../api/constants";
 
 export async function onLogin(event) {
   event.preventDefault();
@@ -7,19 +6,14 @@ export async function onLogin(event) {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
 
-  let email = emailInput.value;
-  let password = passwordInput.value;
-
-  const user = {
-    email : email,
-    password : password
-  }
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
   emailInput.value = "";
   passwordInput.value = "";
 
   try {
-    await login(API_AUTH_LOGIN, user);
+    await login({ email, password });
   } catch(error) {
     alert(error.message);
   }

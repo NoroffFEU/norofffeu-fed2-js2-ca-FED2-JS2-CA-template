@@ -1,28 +1,25 @@
+import { API_AUTH_LOGIN } from "../constants";
 import { headers } from "../headers";
 
-let accessToken;
+export async function login({ email, password }) {
+  const body = JSON.stringify({ email, password });
 
-export async function login(url, data) {
-  try {
-    const postData = {
-      method: "POST",
-      headers: headers(),
-      body: JSON.stringify(data),
-    };
+  const response = await fetch(API_AUTH_LOGIN, {
+    headers: headers(),
+    method: "POST",
+    body,
+  });
 
-    const response = await fetch(url, postData);
-    const json = await response.json();
-    console.log(json); //delete later!!
-
-    if(response.ok) {
-      accessToken = json.data.accessToken;
-      localStorage.setItem("accessToken", accessToken);
-      window.location.href = "/post/feed/";
-      return json;
-    } else {
-      throw new Error(json.errors[0].message);
-    }
-  } catch(error) {
-    throw error;
+  if(response.ok) {
+    const { data } = await response.json();
+    const { accessToken: token, ...user } = data;
+    localStorage.token = token;
+    localStorage.user = JSON.stringify(user);
+    window.location.href = "/post/feed/";
+    return data;
   }
+  
+  const errorData = await response.json();
+  const errorMessage = errorData.errors[0]?.message || "Could not login with this account";
+  throw new Error(errorMessage);
 }
