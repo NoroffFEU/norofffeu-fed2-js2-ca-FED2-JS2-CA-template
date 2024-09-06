@@ -1,6 +1,4 @@
-import NoroffAPI from "../../api/index.js";
-
-const api = new NoroffAPI();
+import api from "../../api/instance.js";
 
 export async function onRegister(event) {
   event.preventDefault();
