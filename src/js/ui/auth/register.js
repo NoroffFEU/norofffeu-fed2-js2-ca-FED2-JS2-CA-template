@@ -1,30 +1,23 @@
 import { register } from "../../api/auth/register";
-import { API_AUTH_REGISTER } from "../../api/constants";
 
 export async function onRegister(event) {
   event.preventDefault();
 
-  const usernameInput = document.getElementById("name");
+  const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
 
-  let username = usernameInput.value;
-  let email = emailInput.value;
-  let password = passwordInput.value;
+  const name = nameInput.value;
+  const email = emailInput.value;
+  const password = passwordInput.value;
 
-  const user = {
-    name : username,
-    email : email,
-    password : password
-  }
-
-  usernameInput.value = "";
+  nameInput.value = "";
   emailInput.value = "";
   passwordInput.value = "";
 
   try {
-    await register(API_AUTH_REGISTER, user);
-    alert(`Registration successful!\nUsername: ${user.name}\nEmail: ${user.email}`);
+    await register({ name, email, password });
+    alert(`Registration successful!\nUsername: ${name}\nEmail: ${email}`);
     window.location.href = "/auth/login/";
   } catch(error) {
     alert(`${error.message}.\nPlease try again.`);
