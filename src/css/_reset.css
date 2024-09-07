@@ -14,5 +14,23 @@ body {
 .postForm form {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 2rem;
+}
+
+#postsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+.post{
+  flex: 1 1 calc(33.333% - 20px); 
+  border: 1px solid #ddd; 
+  padding: 10px;
+  border-radius: 5px;
+}
+.post img {
+  width: 100%; 
+  object-fit: cover;
 }

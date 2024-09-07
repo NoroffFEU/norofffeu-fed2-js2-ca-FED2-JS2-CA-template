@@ -3,6 +3,7 @@ import { API_AUTH_KEY } from "./constants.js";
 
 export default class NoroffAPI {
   apiBase = "";
+  postId = "";
 
   constructor(apiBase = "https://v2.api.noroff.dev") {
     this.apiBase = apiBase;
@@ -44,7 +45,7 @@ export default class NoroffAPI {
         const { accessToken: token, ...user } = data;
         localStorage.token = token;
         localStorage.user = JSON.stringify(user);
-        router("/");
+
         return data;
       }
       throw new Error("Could not login with this account");
@@ -160,6 +161,7 @@ export default class NoroffAPI {
 
       if (response.ok) {
         const data = await response.json();
+        this.postId = data.id
         return data;
       }
 
@@ -177,11 +179,16 @@ export default class NoroffAPI {
   getPosts = async () => {
     const { token } = this.getCurrentUser;
 
-    const response = await fetch(`${this.apiSocialPath}`, {
+    
+    const apiKeyData = await this.options.apiKey();
+
+    const response = await fetch(`${this.apiSocialPath}/${this.postId}`, {
       method: "get",
       headers: {
         "content-type": "application/json",
         Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": `${apiKeyData.data.key}`
+        
       },
     });
 
