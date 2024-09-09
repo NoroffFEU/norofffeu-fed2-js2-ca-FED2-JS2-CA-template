@@ -3,6 +3,7 @@
 @import url(imports/header.css);
 @import url(imports/footer.css);
 @import url(imports/feed.css);
+@import url(imports/create.css);
 
 .auth-info {
   font-size: 1.4rem;
@@ -14,4 +15,28 @@
   margin-left: 3px;
   font-size: 1.4rem;
   font-weight: bold;
+}
+
+.auth-main {
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+
+.post-main {
+  padding-right: 2rem;
+  padding-left: 2rem;
+  margin-top: 3.2rem;
+}
+
+.submit-type-button {
+  width: 100%;
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .submit-type-button {
+    padding: 1.6rem 0;
+    margin-top: 0.8rem;
+  }
 }

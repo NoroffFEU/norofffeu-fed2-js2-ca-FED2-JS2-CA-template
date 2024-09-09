@@ -5,11 +5,13 @@ export default class NoroffAPI {
   apiBase = ""
   apiLoginPath = ""
   apiRegisterPath = ""
+  apiCreatePath = ""
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
     this.apiLoginPath = apiBase + "/auth/login";
-    this.apiRegisterPath = apiBase + "/auth/register"
+    this.apiRegisterPath = apiBase + "/auth/register";
+    this.apiCreatePath = apiBase + "/social/posts";
   }
 
   auth = {
@@ -80,7 +82,17 @@ export default class NoroffAPI {
   }
 
   post = {
-    create: async ({ title, body, tags, media }) => {},
+    // create: async ({ title, body, tags, media }) => {
+    //   const body = JSON.stringify({ title, body, tags, media });
+
+    //   const response = await fetch(this.apiCreatePath, {
+    //     headers: headers(true),
+    //     method: "POST",
+    //     body,
+    //   });
+
+    //   const data = await this.util.handleResponse(response, "Could not create post");
+    // },
 
     delete: async (id) => {},
 

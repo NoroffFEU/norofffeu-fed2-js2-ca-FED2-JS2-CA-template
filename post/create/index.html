@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,10 +7,44 @@
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <h1>Create Post</h1>
+    <header>
+      <a href="/">
+        <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+      </a>
+      <button class="logout-button">Log out</button>
+    </header>
 
-    <form name="createPost">
-      <button>Create Post</button>
-    </form>
+    <main class="post-main">
+      <h1>New Post</h1>
+
+      <form name="createPost" class="create-form">
+        <label for="title">
+          Title
+          <input id="title" type="text" required />
+        </label>
+        <label for="img-url">
+          Image URL
+          <input id="img-url" type="text" required />
+        </label>
+        <label for="img-alt">
+          Image alt
+          <input id="img-alt" type="text" required />
+        </label>
+        <label for="tags">
+          Tag
+          <input id="tags" type="text" />
+        </label>
+        <label for="content">
+          Content
+          <textarea id="content" cols="30" rows="25" required></textarea>
+        </label>
+        <button type="submit" class="submit-type-button">Create Post</button>
+      </form>
+    </main>
+
+    <footer>
+      <a href="#">Terms Of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
   </body>
 </html>

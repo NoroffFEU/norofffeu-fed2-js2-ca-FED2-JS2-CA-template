@@ -10,8 +10,6 @@ body {
 }
 
 main {
-  padding-right: 4rem;
-  padding-left: 4rem;
   margin-bottom: 8rem;
 }
 
@@ -33,6 +31,12 @@ form {
   width: 100%;
 }
 
+label {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
 input {
   width: 100%;
   padding: 1.2rem 1rem;
@@ -43,14 +47,13 @@ input::placeholder {
   line-height: 1.5rem;
 }
 
-button {
-  font-size: 1.2rem;
+textarea {
+  width: 100%;
+  padding: 1.2rem 1rem;
 }
 
-.submit-type-button {
-  width: 100%;
-  text-align: center;
-  padding: 1.2rem 0;
+button {
+  font-size: 1.8rem;
 }
 
 ul {
@@ -76,8 +79,4 @@ ul {
     font-size: 1.4rem;
   }
 
-  .submit-type-button {
-    padding: 1.6rem 0;
-    margin-top: 0.8rem;
-  }
 }
