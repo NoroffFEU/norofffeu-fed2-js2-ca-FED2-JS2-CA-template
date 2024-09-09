@@ -1,6 +1,7 @@
 import { getCurrentUser } from "../utilities/currentUser.js";
 import { API_AUTH_KEY } from "./constants.js";
 
+
 export default class NoroffAPI {
   apiBase = "";
   postId = "";
@@ -20,9 +21,9 @@ export default class NoroffAPI {
     return `${this.apiBase}/auth/register`;
   }
 
-  get apiPostPath() {
-    return `${this.apiBase}/blog/posts/${this.user.name}`;
-  }
+  // get apiPostPath() {
+  //   return `${this.apiBase}/blog/posts/${this.user.name}`;
+  // }
 
   get apiSocialPath() {
     return `${this.apiBase}/social/posts`;
@@ -78,12 +79,14 @@ export default class NoroffAPI {
     read: async (id) => {
       const { token, user } = getCurrentUser();
 
-      const url = `${this.apiPostPath}/blog/posts/${user.name}/${id}`;
+      const url = `${this.apiSocialPath}/${id}`;
+      const apiKeyData = await this.options.apiKey();
 
       const response = await fetch(url, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+           "X-Noroff-API-Key": `${apiKeyData.data.key}`
         },
       });
 
@@ -97,7 +100,7 @@ export default class NoroffAPI {
     update: async (id, { title, body, tags, media }) => {
       const { token, user } = getCurrentUser();
 
-      const response = await fetch(API_BLOG_USER_POST(user.name, id), {
+      const response = await fetch(`${this.apiSocialPath}/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -182,7 +185,7 @@ export default class NoroffAPI {
     
     const apiKeyData = await this.options.apiKey();
 
-    const response = await fetch(`${this.apiSocialPath}/${this.postId}`, {
+    const response = await fetch(`${this.apiSocialPath}`, {
       method: "get",
       headers: {
         "content-type": "application/json",

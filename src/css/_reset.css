@@ -11,10 +11,10 @@ body {
   margin: 0;
 }
 
-.postForm form {
+.postForm form, .postEditContainer form {
   display: flex;
   flex-direction: column;
-  width: 2rem;
+  width: 20rem;
 }
 
 #postsContainer {
