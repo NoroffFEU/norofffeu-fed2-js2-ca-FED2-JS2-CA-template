@@ -6,6 +6,7 @@ export default defineConfig({
   base: "",
   build: {
     target: "esnext",
+    sourcemap: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
@@ -17,6 +18,11 @@ export default defineConfig({
         editPost: resolve(__dirname, "./post/edit/index.html"),
         createPost: resolve(__dirname, "./post/create/index.html"),
       },
+    },
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "./src"),
     },
   },
 });
