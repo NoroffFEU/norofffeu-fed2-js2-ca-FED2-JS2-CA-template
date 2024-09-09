@@ -24,7 +24,7 @@ export default class NoroffAPI {
         body,
       });
 
-      const data = await this.util.handleResponse(response, "Could not login this account");
+      const { data } = await this.util.handleResponse(response, "Could not login this account");
       const { accessToken: token, ...user } = data;
       localStorage.token = token;
       localStorage.user = JSON.stringify(user);
@@ -82,17 +82,19 @@ export default class NoroffAPI {
   }
 
   post = {
-    // create: async ({ title, body, tags, media }) => {
-    //   const body = JSON.stringify({ title, body, tags, media });
+    create: async ({ title, body: content, tags, media }) => {
+      const body = JSON.stringify({ title, body: content, tags, media });
 
-    //   const response = await fetch(this.apiCreatePath, {
-    //     headers: headers(true),
-    //     method: "POST",
-    //     body,
-    //   });
+      const response = await fetch(this.apiCreatePath, {
+        headers: headers(true),
+        method: "POST",
+        body,
+      });
 
-    //   const data = await this.util.handleResponse(response, "Could not create post");
-    // },
+      const data = await this.util.handleResponse(response, "Could not create post");
+      window.location.href = "/post/feed/";
+      return data;
+    },
 
     delete: async (id) => {},
 
