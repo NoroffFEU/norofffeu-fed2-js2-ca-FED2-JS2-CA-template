@@ -1,4 +1,5 @@
-import "./css/style.css";
+import { register } from "./js/api/auth/register";
+import { onRegister } from "./js/ui/auth/register";
 
 import router from "./js/router";
 
