@@ -3,15 +3,21 @@ import { headers } from "./headers";
 
 export default class NoroffAPI {
   apiBase = ""
-  apiLoginPath = ""
-  apiRegisterPath = ""
-  apiCreatePath = ""
 
   constructor(apiBase = API_BASE) {
     this.apiBase = apiBase;
-    this.apiLoginPath = apiBase + "/auth/login";
-    this.apiRegisterPath = apiBase + "/auth/register";
-    this.apiCreatePath = apiBase + "/social/posts";
+  }
+
+  get apiLoginPath() {
+    return `${this.apiBase}/auth/login`;
+  }
+
+  get apiRegisterPath() {
+    return `${this.apiBase}/auth/register`;
+  }
+
+  get apiPostPath() {
+    return `${this.apiBase}/social/posts`;
   }
 
   auth = {
@@ -85,7 +91,7 @@ export default class NoroffAPI {
     create: async ({ title, body: content, tags, media }) => {
       const body = JSON.stringify({ title, body: content, tags, media });
 
-      const response = await fetch(this.apiCreatePath, {
+      const response = await fetch(this.apiPostPath, {
         headers: headers(true),
         method: "POST",
         body,
@@ -100,10 +106,29 @@ export default class NoroffAPI {
 
     readPost: async (id) => {},
 
-    readPosts: async () => {},
+    update: async (id, { title, body, tags, media }) => {},
+  }
+
+  posts = {
+    getPosts: async (limit = 12, page = 1, tag) => {
+      const url = new URL(this.apiPostPath);
+    
+      url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
+
+      if(tag) {
+        url.searchParams.append("_tag", tag);
+      }
+
+      const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: "GET"
+      });
+
+      const data = await this.util.handleResponse(response, "Could not get posts");
+      return data;
+    },
 
     readPostsByUser: async () => {},
-
-    update: async (id, { title, body, tags, media }) => {},
   }
 }
