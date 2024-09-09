@@ -1,4 +1,4 @@
-import { onRegister } from "../../ui/auth/register";
+import { onRegister } from "@/js/ui/auth/register";
 
 const form = document.forms.namedItem("register");
 

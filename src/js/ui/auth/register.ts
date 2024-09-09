@@ -1,4 +1,4 @@
-import { register } from "../../api/auth/register";
+import { register } from "@/js/api/auth/register";
 
 export async function onRegister(event: Event) {
   event.preventDefault();
@@ -13,6 +13,7 @@ export async function onRegister(event: Event) {
     (form.elements.namedItem("password") as HTMLInputElement)?.value || "";
 
   const data = await register({ name, email, password });
+
   if (data) {
     alert("Registration successful!");
     const { name, email, bio, avatar, banner } = data;

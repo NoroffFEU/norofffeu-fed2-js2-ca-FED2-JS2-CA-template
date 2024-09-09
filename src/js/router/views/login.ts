@@ -1,4 +1,4 @@
-import { onLogin } from "../../ui/auth/login";
+import { onLogin } from "@/js/ui/auth/login";
 
 const form = document.forms.namedItem("login");
 
