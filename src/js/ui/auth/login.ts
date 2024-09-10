@@ -13,7 +13,7 @@ export async function onLogin(event: Event) {
   const data = await login({ email, password });
   if (data) {
     alert("Login successful!");
-    const { name, email, bio, avatar, banner, accessToken } = data.data;
+    const { name, email, bio, avatar, banner, accessToken } = data;
     console.log(name, email, bio, avatar.url, avatar.alt, banner, accessToken);
   }
   return data;

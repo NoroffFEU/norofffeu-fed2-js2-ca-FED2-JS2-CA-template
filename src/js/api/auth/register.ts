@@ -1,7 +1,11 @@
-import { APIRegister } from "../../../types/types";
-import { API_AUTH_REGISTER } from "../constants";
+import {
+  APIRegisterRequest,
+  APIRegisterResponse,
+  APIError,
+} from "@/types/types";
+import { API_AUTH_REGISTER } from "@api/constants";
 
-export async function register({ name, email, password }: APIRegister) {
+export async function register({ name, email, password }: APIRegisterRequest) {
   try {
     const response = await fetch(API_AUTH_REGISTER, {
       method: "POST",
@@ -15,15 +19,13 @@ export async function register({ name, email, password }: APIRegister) {
       }),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
+      const { errors }: { errors: APIError[] } = await response.json();
       const errorMessage =
-        data?.errors?.[0]?.message ||
-        "Something went wrong registering the user.";
+        errors?.[0]?.message || "Something went wrong registering the user.";
       throw new Error(errorMessage);
     }
-
+    const { data }: { data: APIRegisterResponse } = await response.json();
     return data;
   } catch (error) {
     if (error instanceof Error) {

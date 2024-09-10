@@ -1,7 +1,7 @@
-import { onLogin } from "@/js/ui/auth/login";
+// import { onLogin } from "@/js/ui/auth/login";
 
-const form = document.forms.namedItem("login");
+// const form = document.forms.namedItem("login");
 
-if (form) {
-  form.addEventListener("submit", onLogin);
-}
+// if (form) {
+//   form.addEventListener("submit", onLogin);
+// }

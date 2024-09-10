@@ -1,7 +1,7 @@
-import { APILogin } from "../../../types/types";
-import { API_AUTH_LOGIN } from "../constants";
+import { APILoginRequest, APILoginResponse, APIError } from "@/types/types";
+import { API_AUTH_LOGIN } from "@api/constants";
 
-export async function login({ email, password }: APILogin) {
+export async function login({ email, password }: APILoginRequest) {
   try {
     const response = await fetch(API_AUTH_LOGIN, {
       method: "POST",
@@ -14,15 +14,13 @@ export async function login({ email, password }: APILogin) {
       }),
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
+      const { errors }: { errors: APIError[] } = await response.json();
       const errorMessage =
-        data?.errors?.[0]?.message ||
-        "Something went wrong logging in the user.";
+        errors?.[0]?.message || "Something went wrong logging in the user.";
       throw new Error(errorMessage);
     }
-
+    const { data }: { data: APILoginResponse } = await response.json();
     return data;
   } catch (error) {
     if (error instanceof Error) {
