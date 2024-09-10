@@ -68,3 +68,61 @@ export interface APIKeyResponse {
   };
   meta: Meta;
 }
+
+//Pagination
+export interface Pagination {
+  limit: number;
+  page: number;
+  tag?: string;
+}
+
+// Posts
+export type PostID = number;
+
+type Media = {
+  url: string;
+  alt: string;
+};
+
+type Comment = {
+  body: string;
+  replyToId: number | null;
+  id: number;
+  postId: number;
+  owner: string;
+  created: Date;
+  author: Author;
+};
+
+type Reaction = {
+  symbol: string;
+  count: number;
+  reactors: string[];
+};
+
+type Author = {
+  name: string;
+  email: string;
+  bio: string;
+  avatar: Media;
+  banner: Media;
+};
+
+type Count = {
+  comments: number;
+  reactions: number;
+};
+
+export interface PostResponse {
+  id: number;
+  title: string;
+  body: string;
+  tags: string[];
+  media: Media;
+  comments: Comment[];
+  created: Date;
+  updated: Date;
+  reactions: Reaction[];
+  author: Author;
+  _count: Count;
+}
