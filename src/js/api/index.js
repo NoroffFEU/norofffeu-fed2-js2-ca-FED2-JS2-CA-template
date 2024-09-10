@@ -36,19 +36,6 @@ export default class NoroffAPI {
       localStorage.user = JSON.stringify(user);
       window.location.href = "/post/feed/";
       return data;
-    
-      // if(response.ok) {
-      //   const { data } = await response.json();
-      //   const { accessToken: token, ...user } = data;
-      //   localStorage.token = token;
-      //   localStorage.user = JSON.stringify(user);
-      //   window.location.href = "/post/feed/";
-      //   return data;
-      // }
-      
-      // const errorData = await response.json();
-      // const errorMessage = errorData.errors[0]?.message || "Could not login with this account";
-      // throw new Error(errorMessage);
     },
 
     register: async ({ name, email, password }) => {
@@ -62,15 +49,6 @@ export default class NoroffAPI {
 
       const data = await this.util.handleResponse(response, "Could not register this account");
       return data;
-  
-      // if(response.ok) {
-      //   const { data } = await response.json();
-      //   return data
-      // }
-  
-      // const errorData = await response.json();
-      // const errorMessage = errorData.errors[0]?.message || "Could not register this account";
-      // throw new Error(errorMessage);
     },
   }
 
@@ -115,6 +93,8 @@ export default class NoroffAPI {
     
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
+      url.searchParams.append("_author", true);
+      url.searchParams.append("_comments", true);
 
       if(tag) {
         url.searchParams.append("_tag", tag);

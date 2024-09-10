@@ -8,10 +8,12 @@ logoutButton.addEventListener("click", onLogout);
 export async function displayAllPosts() {
   try {
     const posts = await api.posts.getPosts();
-    const PostData = posts.data;
+    const postData = posts.data;
+    console.log(postData); //delete later
+    console.log(postData[0].comments.length);
     const postFeed = document.querySelector('.feed');
     postFeed.innerHTML = '';
-    PostData.forEach(post => {
+    postData.forEach(post => {
       const postHTML = generatePostHTML(post);
       postFeed.appendChild(postHTML);
     })

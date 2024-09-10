@@ -12,7 +12,7 @@ export function generatePostHTML(post) {
     thumbnail.src = post.media.url;
     thumbnail.alt = post.media.alt;
   } else {
-    thumbnail.src = "https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?q=80&w=2976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    thumbnail.src = "../../../../public/images/default-thumbnail.jpg";
     thumbnail.alt = "No Media Available";
   }
   
@@ -25,7 +25,10 @@ export function generatePostHTML(post) {
   postUserContainer.classList.add("user");
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user");
-  postUserContainer.append(postUserIcon);
+  const userName = document.createElement("a");
+  userName.textContent = post.author.name;
+  userName.href = "#" //to profile page
+  postUserContainer.append(postUserIcon, userName);
 
   const postDateContainer =  document.createElement("div");
   postDateContainer.classList.add("date");
@@ -48,7 +51,14 @@ export function generatePostHTML(post) {
     tagItem.textContent = tag;
     tagList.appendChild(tagItem);
   });
-  postTagComment.append(tagList);
+  const comment = document.createElement("div");
+  comment.classList.add("comment");
+  const commentIcon = document.createElement("i");
+  commentIcon.classList.add("fa-regular", "fa-comments");
+  const commentNumber = document.createElement("p");
+  commentNumber.textContent = post.comments.length;
+  comment.append(commentIcon, commentNumber);
+  postTagComment.append(tagList, comment);
 
   const postTitle = document.createElement("p");
   postTitle.classList.add("post-title");
