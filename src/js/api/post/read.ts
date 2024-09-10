@@ -1,5 +1,5 @@
 import { PostID, APIError, PostResponse } from "@/types/types";
-import { API_SOCIAL_POSTS } from "../constants";
+import { API_SOCIAL_POSTS } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function readPost(id: PostID) {
@@ -19,6 +19,7 @@ export async function readPost(id: PostID) {
     }
 
     const { data }: { data: PostResponse } = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

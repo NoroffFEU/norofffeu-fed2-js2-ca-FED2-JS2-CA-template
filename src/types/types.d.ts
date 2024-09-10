@@ -126,3 +126,10 @@ export interface PostResponse {
   author: Author;
   _count: Count;
 }
+
+export interface CreatePostRequest {
+  title: string;
+  body: string;
+  tags: string[];
+  media: Media;
+}
