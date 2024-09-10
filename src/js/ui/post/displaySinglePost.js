@@ -37,7 +37,7 @@ export function generateSinglePostHTML(post) {
   postUserDate.append(postUserContainer, postDateContainer);
 
   const tagList = document.createElement('ul');
-  tagList.classList.add('tag-list');
+  tagList.classList.add('tag-list', "single-post-tag-list");
   const tagsArray = post.tags;
   tagsArray?.forEach(tag => {
     const tagItem = document.createElement('li');
@@ -56,19 +56,20 @@ export function generateSinglePostHTML(post) {
   commentSection.classList.add("comment-section")
   const sectionTitle = document.createElement("p")
   sectionTitle.classList.add("section-title");
-  sectionTitle.textContent = "Comment";
+  sectionTitle.textContent = `Comment (${post.comments.length})`;
 
   const commentList = document.createElement('ul');
   commentList.classList.add("comment-list");
   const commentsArray = post.comments;
   commentsArray?.forEach(comment => {
-    const commentItem = document.createElement('li');
-    commentItem.classList.add("comment-item");
-    commentItem.textContent = comment;
-    commentList.appendChild(commentItem);
+  const commentItem = document.createElement('li');
+  commentItem.classList.add("comment-item");
+  commentItem.textContent = comment;
+  commentList.appendChild(commentItem);
   })
 
   const commentForm = document.createElement("form");
+  commentForm.classList.add("comment-form");
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
   myUserName.textContent = JSON.parse(localStorage.getItem("user")).name;

@@ -4,6 +4,7 @@
 @import url(imports/footer.css);
 @import url(imports/feed.css);
 @import url(imports/create.css);
+@import url(imports/singlePost.css);
 
 .auth-info {
   font-size: 1.4rem;
@@ -20,6 +21,10 @@
 .auth-main {
   padding-right: 4rem;
   padding-left: 4rem;
+}
+
+.post-body {
+  display: block;
 }
 
 .post-main {
