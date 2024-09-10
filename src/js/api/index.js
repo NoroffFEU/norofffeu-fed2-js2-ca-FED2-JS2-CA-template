@@ -82,20 +82,33 @@ export default class NoroffAPI {
 
     delete: async (id) => {},
 
-    readPost: async (id) => {},
+    readPost: async (id, tag = null) => {
+      const url = new URL(`${this.apiPostPath}/${id}`);
+      url.searchParams.append("_author", true);
+      url.searchParams.append("_comments", true);
+      if(tag) {
+        url.searchParams.append("_tag", tag);
+      }
+
+      const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: "GET"
+      });
+
+      const data = await this.util.handleResponse(response, "Could not get the post");
+      return data
+    },
 
     update: async (id, { title, body, tags, media }) => {},
   }
 
   posts = {
     getPosts: async (limit = 12, page = 1, tag) => {
-      const url = new URL(this.apiPostPath);
-    
+      const url = new URL(this.apiPostPath);  
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
       url.searchParams.append("_author", true);
       url.searchParams.append("_comments", true);
-
       if(tag) {
         url.searchParams.append("_tag", tag);
       }

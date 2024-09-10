@@ -1,13 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
+    <script
+      src="https://kit.fontawesome.com/98d292e689.js"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <h1>Post Page</h1>
+    <header class="post-header">
+      <a href="/post/feed/">
+        <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+      </a>
+      <nav class="header-nav">
+        <a href="/post/create/" class="new-post-button-desktop">
+          <i class="fa-solid fa-pen-fancy"></i>
+          New Post
+        </a>
+        <button class="logout-button">Log out</button>
+      </nav>
+    </header>
+
+    <main class="post-main">
+      <a href="/post/create/" class="new-post-button-mobile">
+        <i class="fa-solid fa-pen-fancy"></i>
+        New Post
+      </a>
+      <div class="single-post"></div>
+    </main>
+
+    <footer>
+      <a href="#">Terms Of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
   </body>
 </html>

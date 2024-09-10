@@ -4,7 +4,7 @@ export function generatePostHTML(post) {
   const postContainer = document.createElement('a');
   postContainer.classList.add('post-container');
   postContainer.id = post.id;
-  //postContainer.href = ``;
+  postContainer.href = `/post/?id=${post.id}`;
 
   const thumbnail = document.createElement("img");
   thumbnail.classList.add("thumbnail");
