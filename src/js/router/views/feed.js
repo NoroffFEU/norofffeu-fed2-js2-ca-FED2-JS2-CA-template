@@ -10,7 +10,6 @@ export async function displayAllPosts() {
     const posts = await api.posts.getPosts();
     const postData = posts.data;
     console.log(postData); //delete later
-    console.log(postData[0].comments.length);
     const postFeed = document.querySelector('.feed');
     postFeed.innerHTML = '';
     postData.forEach(post => {

@@ -1,5 +1,6 @@
 import "./css/style.css";
 import { API_KEY } from "./js/api/constants.js";
+import NoroffAPI from "./js/api/index.js";
 
 import router from "./js/router/index.js";
 

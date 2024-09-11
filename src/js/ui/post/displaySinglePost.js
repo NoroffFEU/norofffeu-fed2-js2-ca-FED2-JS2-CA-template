@@ -1,3 +1,4 @@
+import NoroffAPI from "../../api";
 import { formatDate } from "../../utilities/authGuard";
 
 export function generateSinglePostHTML(post) {
@@ -72,7 +73,7 @@ export function generateSinglePostHTML(post) {
   commentForm.classList.add("comment-form");
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
-  myUserName.textContent = JSON.parse(localStorage.getItem("user")).name;
+  myUserName.textContent = NoroffAPI.user;
   const commentTextArea = document.createElement("textarea");
   commentTextArea.placeholder = "Write comment here";
   const commentButton = document.createElement("button");

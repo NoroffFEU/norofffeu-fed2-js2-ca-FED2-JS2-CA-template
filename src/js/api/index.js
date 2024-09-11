@@ -2,29 +2,37 @@ import { API_BASE } from "./constants";
 import { headers } from "./headers";
 
 export default class NoroffAPI {
-  apiBase = ""
+  static apiBase = API_BASE;
 
-  constructor(apiBase = API_BASE) {
-    this.apiBase = apiBase;
+  static get user() {
+    try{
+      return JSON.parse(localStorage.getItem("user")).name;
+    } catch(error) {
+      return null;
+    }
   }
 
-  get apiLoginPath() {
-    return `${this.apiBase}/auth/login`;
-  }
+  static loginPath = `${NoroffAPI.apiBase}/auth/login`;
+  static registerPath = `${NoroffAPI.apiBase}/auth/register`;
+  static socialPostPath = `${NoroffAPI.apiBase}/social/posts`;
 
-  get apiRegisterPath() {
-    return `${this.apiBase}/auth/register`;
-  }
+  // get apiLoginPath() {
+  //   return `${NoroffAPI.apiBase}/auth/login`;
+  // }
 
-  get apiPostPath() {
-    return `${this.apiBase}/social/posts`;
-  }
+  // get apiRegisterPath() {
+  //   return `${NoroffAPI.apiBase}/auth/register`;
+  // }
+
+  // get apiPostPath() {
+  //   return `${NoroffAPI.apiBase}/social/posts`;
+  // }
 
   auth = {
     login: async ({ email, password }) => {
       const body = JSON.stringify({ email, password });
   
-      const response = await fetch(this.apiLoginPath, {
+      const response = await fetch(NoroffAPI.loginPath, {
         headers: headers(true),
         method: "POST",
         body,
@@ -41,7 +49,7 @@ export default class NoroffAPI {
     register: async ({ name, email, password }) => {
       const body = JSON.stringify({ name, email, password });
   
-      const response = await fetch(this.apiRegisterPath, {
+      const response = await fetch(NoroffAPI.registerPath, {
         headers: headers(true),
         method: "POST",
         body,
@@ -69,7 +77,7 @@ export default class NoroffAPI {
     create: async ({ title, body: content, tags, media }) => {
       const body = JSON.stringify({ title, body: content, tags, media });
 
-      const response = await fetch(this.apiPostPath, {
+      const response = await fetch(NoroffAPI.socialPostPath, {
         headers: headers(true),
         method: "POST",
         body,
@@ -83,7 +91,7 @@ export default class NoroffAPI {
     delete: async (id) => {},
 
     readPost: async (id, tag = null) => {
-      const url = new URL(`${this.apiPostPath}/${id}`);
+      const url = new URL(`${NoroffAPI.socialPostPath}/${id}`);
       url.searchParams.append("_author", true);
       url.searchParams.append("_comments", true);
       if(tag) {
@@ -104,7 +112,7 @@ export default class NoroffAPI {
 
   posts = {
     getPosts: async (limit = 12, page = 1, tag) => {
-      const url = new URL(this.apiPostPath);  
+      const url = new URL(NoroffAPI.socialPostPath);  
       url.searchParams.append("limit", limit);
       url.searchParams.append("page", page);
       url.searchParams.append("_author", true);
