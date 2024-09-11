@@ -10,5 +10,6 @@ import { createComment } from "./js/api/post/create";
 import { reactToPost } from "./js/api/post/react";
 import { searchPosts } from "./js/api/post/search";
 import { readPosts } from "./js/api/post/read";
+import { readPostsByUser } from "./js/api/post/read";
 
 await router(window.location.pathname);

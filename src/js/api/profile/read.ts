@@ -27,7 +27,7 @@ export async function readProfile(username: string) {
   }
 }
 
-export async function readProfiles({ limit, page }: Params) {
+export async function readProfiles({ limit = 12, page = 1 }: Params = {}) {
   try {
     const response = await fetch(
       `${API_SOCIAL_PROFILES}?limit=${limit}&page=${page}&_following=true&_followers=true&_posts=true`,

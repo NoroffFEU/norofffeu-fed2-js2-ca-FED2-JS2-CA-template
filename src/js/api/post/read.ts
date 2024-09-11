@@ -1,5 +1,5 @@
 import { PostID, APIError, PostResponse, Params } from "@/types/types";
-import { API_SOCIAL_POSTS } from "@api/constants";
+import { API_SOCIAL_POSTS, API_SOCIAL_PROFILES } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function readPost(id: PostID) {
@@ -37,6 +37,33 @@ export async function readPosts({ limit = 12, page = 1, tag }: Params = {}) {
         headers: headers(localStorage.token),
       }
     );
+    if (!response.ok) {
+      const { errors }: { errors: APIError[] } = await response.json();
+      const errorMessage =
+        errors?.[0]?.message || "Something went wrong reading the posts.";
+      throw new Error(errorMessage);
+    }
+    const { data }: { data: PostResponse[] } = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function readPostsByUser(
+  username: string,
+  { limit = 12, page = 1 }: Params = {}
+) {
+  try {
+    const response = await fetch(
+      `${API_SOCIAL_PROFILES}/${username}/posts?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true`,
+      {
+        method: "GET",
+        headers: headers(localStorage.token),
+      }
+    );
+
     if (!response.ok) {
       const { errors }: { errors: APIError[] } = await response.json();
       const errorMessage =
