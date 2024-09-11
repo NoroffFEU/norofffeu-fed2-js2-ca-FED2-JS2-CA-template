@@ -148,6 +148,19 @@ export interface ReactionResponse {
   reactions: Reaction[];
 }
 
+export interface SearchPostsResponse {
+  body: string;
+  created: Date;
+  id: number;
+  tags: string[];
+  title: string;
+  updated: Date;
+  _count: {
+    comments: number;
+    reactions: number;
+  };
+}
+
 export interface CreatePostRequest {
   title: string;
   body: string;
