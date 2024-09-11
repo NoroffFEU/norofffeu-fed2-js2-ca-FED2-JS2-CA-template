@@ -190,6 +190,20 @@ export interface ProfileResponse {
   };
 }
 
+export type ToggleFollow = "follow" | "unfollow";
+
+type Follower = {
+  name: string;
+  email: string;
+  bio: string;
+  banner: Media;
+  avatar: Media;
+};
+
+export interface FollowResponse {
+  followers: Follower[];
+  following: Follower[];
+}
 // PARAMS
 
 export interface Params {
