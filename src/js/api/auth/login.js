@@ -20,8 +20,7 @@ export async function login({ email, password }) {
       console.log("Data:", data.data.name);
       localStorage.setItem("UserInfo", JSON.stringify(data.data));
       localStorage.setItem("token", JSON.stringify(data.data.accessToken));
-      // window.location.href = "/";
-      getKey(data.data.name);
+      window.location.href = "/";
     }
   } catch (error) {
     alert("Something went wrong trying to login");
