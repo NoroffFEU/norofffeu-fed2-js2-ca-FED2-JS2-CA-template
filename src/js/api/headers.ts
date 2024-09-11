@@ -1,4 +1,4 @@
-import { API_KEY } from "./constants";
+import { API_KEY } from "@api/constants";
 
 export function headers(userToken: string) {
   const headers = new Headers();

@@ -1,6 +1,6 @@
 import { Media, APIError } from "@/types/types";
-import { API_SOCIAL_PROFILES } from "../constants";
-import { headers } from "../headers";
+import { API_SOCIAL_PROFILES } from "@api/constants";
+import { headers } from "@api/headers";
 
 export async function updateProfile(
   username: string,
