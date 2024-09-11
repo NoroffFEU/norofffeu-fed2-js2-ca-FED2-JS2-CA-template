@@ -79,7 +79,7 @@ export interface Pagination {
 // Posts
 export type PostID = number;
 
-type Media = {
+export type Media = {
   url: string;
   alt: string;
 };
@@ -139,4 +139,29 @@ export interface UpdatePostRequest {
   body: string;
   tags: string[];
   media: Media;
+}
+
+// Profiles
+
+export interface ProfileResponse {
+  name: string;
+  email: string;
+  bio: string;
+  banner: Media;
+  avatar: Media;
+  _count: {
+    posts: number;
+    followers: number;
+    following: number;
+  };
+}
+
+// PARAMS
+
+export interface Params {
+  limit?: number;
+  page?: number;
+  _following?: boolean;
+  _followers?: boolean;
+  _posts?: boolean;
 }
