@@ -1,6 +1,6 @@
 import { APIError, ReactionResponse } from "@/types/types";
-import { API_SOCIAL_POSTS } from "../constants";
-import { headers } from "../headers";
+import { API_SOCIAL_POSTS } from "@api/constants";
+import { headers } from "@api/headers";
 
 export async function reactToPost(id: number, symbol: string) {
   try {

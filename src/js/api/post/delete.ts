@@ -1,4 +1,4 @@
-import { PostID, APIError, PostResponse } from "@/types/types";
+import { PostID, APIError } from "@/types/types";
 import { API_SOCIAL_POSTS } from "@api/constants";
 import { headers } from "@api/headers";
 

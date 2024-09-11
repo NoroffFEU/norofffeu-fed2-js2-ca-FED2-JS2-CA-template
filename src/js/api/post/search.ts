@@ -1,6 +1,6 @@
-import { APIError, PostResponse, SearchPostsResponse } from "@/types/types";
-import { API_SOCIAL_POSTS } from "../constants";
-import { headers } from "../headers";
+import { APIError, SearchPostsResponse } from "@/types/types";
+import { API_SOCIAL_POSTS } from "@api/constants";
+import { headers } from "@api/headers";
 
 export async function searchPosts(query: string) {
   try {
