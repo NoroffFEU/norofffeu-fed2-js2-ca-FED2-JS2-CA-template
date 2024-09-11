@@ -2,8 +2,6 @@ import { API_AUTH_LOGIN } from "../constants";
 import { headers } from "../headers";
 
 export async function login({ email, password }) {
-  console.log("Clicked login");
-
   const body = {
     email: email,
     password: password,
@@ -15,7 +13,7 @@ export async function login({ email, password }) {
       headers: headers(),
       body: JSON.stringify(body),
     });
-    if (response) {
+    if (response.ok) {
       alert(`Successfully logged in"`);
       const data = await response.json();
       console.log("Data:", data);

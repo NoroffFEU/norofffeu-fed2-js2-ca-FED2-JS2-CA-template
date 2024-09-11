@@ -6,10 +6,7 @@ export async function register({ name, email, password }) {
     name: name,
     email: email,
     password: password,
-    venueManager: true,
   };
-
-  console.log("Body:", body, name);
 
   try {
     const response = await fetch(API_AUTH_REGISTER, {
