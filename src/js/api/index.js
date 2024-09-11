@@ -155,8 +155,6 @@ export default class NoroffAPI {
           window.location.href = "/";
           return; 
         }
-         window.location.href="/"
-        return data;
       }
 
       throw new Error("Could not delete post" + id);
