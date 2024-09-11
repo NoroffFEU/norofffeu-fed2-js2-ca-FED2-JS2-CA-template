@@ -133,3 +133,10 @@ export interface CreatePostRequest {
   tags: string[];
   media: Media;
 }
+
+export interface UpdatePostRequest {
+  title: string;
+  body: string;
+  tags: string[];
+  media: Media;
+}
