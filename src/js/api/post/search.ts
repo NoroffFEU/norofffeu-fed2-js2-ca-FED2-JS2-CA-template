@@ -1,13 +1,19 @@
-import { APIError, SearchPostsResponse } from "@/types/types";
+import { APIError, Params, SearchPostsResponse } from "@/types/types";
 import { API_SOCIAL_POSTS } from "@api/constants";
 import { headers } from "@api/headers";
 
-export async function searchPosts(query: string) {
+export async function searchPosts(
+  query: string,
+  { limit = 12, page = 1 }: Params = {}
+) {
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/search?q=${query}`, {
-      method: "GET",
-      headers: headers(localStorage.token),
-    });
+    const response = await fetch(
+      `${API_SOCIAL_POSTS}/search?q=${query}&limit=${limit}&page=${page}`,
+      {
+        method: "GET",
+        headers: headers(localStorage.token),
+      }
+    );
 
     if (!response.ok) {
       const { errors }: { errors: APIError[] } = await response.json();

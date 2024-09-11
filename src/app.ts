@@ -12,7 +12,6 @@ import { searchPosts } from "./js/api/post/search";
 import { readPosts } from "./js/api/post/read";
 import { readPostsByUser } from "./js/api/post/read";
 import { toggleFollowUser } from "./js/api/profile/follow";
+import { searchProfiles } from "./js/api/profile/search";
 
 await router(window.location.pathname);
-
-toggleFollowUser("andgram", "follow");
