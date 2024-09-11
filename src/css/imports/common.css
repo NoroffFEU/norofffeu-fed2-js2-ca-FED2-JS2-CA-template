@@ -53,10 +53,6 @@ textarea {
   padding: 1.2rem 1rem;
 }
 
-button {
-  font-size: 1.8rem;
-}
-
 ul {
   list-style: none;
 }
@@ -74,10 +70,6 @@ ul {
 
   input {
     padding: 1.6rem 1.2rem;
-  }
-
-  button {
-    font-size: 1.4rem;
   }
 
 }

@@ -1,3 +1,7 @@
+.single-post {
+    margin: 0 auto 4.8rem auto;
+  }
+
 .single-post-container h1 {
   font-size: 2.4rem;
   font-weight: 600;
@@ -24,10 +28,6 @@
   margin-bottom: 3.2rem;
 }
 
-.comment-section {
-  margin-bottom: 5.6rem;
-}
-
 .section-title {
   font-size: 1.6rem;
   margin-bottom: 1.6rem;
@@ -48,11 +48,33 @@
   margin-bottom: 1rem;
 }
 
+.single-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.pagination-button {
+  font-size: 1.4rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.fa-chevron-left {
+  margin: 0 4px 0 0;
+}
+
+.fa-chevron-right {
+  margin: 0 0 0 4px;
+}
+
 @media screen and (min-width: 1024px) {
 
   .single-post {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 5.6rem auto;
   }
 
   .single-post-container h1 {
@@ -77,5 +99,10 @@
   .comment-form {
     padding-top: 3.2rem;
     width: 100%;
+  }
+
+  .single-pagination {
+    width: 80%;
+    margin: 0 auto;
   }
 }
