@@ -195,7 +195,11 @@ export interface ProfileResponse {
 export interface Params {
   limit?: number;
   page?: number;
-  _following?: boolean;
-  _followers?: boolean;
-  _posts?: boolean;
+  following?: boolean;
+  followers?: boolean;
+  posts?: boolean;
+  autor?: boolean;
+  comments?: boolean;
+  reactions?: boolean;
+  tag?: string;
 }
