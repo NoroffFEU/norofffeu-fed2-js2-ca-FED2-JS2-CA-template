@@ -15,3 +15,5 @@ import { toggleFollowUser } from "./js/api/profile/follow";
 import { searchProfiles } from "./js/api/profile/search";
 
 await router(window.location.pathname);
+
+searchPosts("a");
