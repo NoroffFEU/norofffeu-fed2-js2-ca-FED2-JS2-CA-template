@@ -1,5 +1,5 @@
 import router from "@router/index";
-import { readPost } from "@api/post/read";
+import { readPost, readPostsFromFollowing } from "@api/post/read";
 import { createPost } from "@api/post/create";
 import { deleteComment, deletePost } from "@api/post/delete";
 import { read } from "fs";
@@ -12,5 +12,3 @@ import { searchPosts } from "./js/api/post/search";
 import { readPosts } from "./js/api/post/read";
 
 await router(window.location.pathname);
-
-readPosts({ tag: "test" });

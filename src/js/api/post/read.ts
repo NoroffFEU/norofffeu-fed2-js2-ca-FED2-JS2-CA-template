@@ -51,7 +51,23 @@ export async function readPosts({ limit = 12, page = 1, tag }: Params = {}) {
   }
 }
 
-export async function readPostsByUser(
-  username: string,
-  { limit = 12, page = 1, tag }: Params
-) {}
+export async function readPostsFromFollowing() {
+  try {
+    const response = await fetch(`${API_SOCIAL_POSTS}/following`, {
+      method: "GET",
+      headers: headers(localStorage.token),
+    });
+
+    if (!response.ok) {
+      const { errors }: { errors: APIError[] } = await response.json();
+      const errorMessage =
+        errors?.[0]?.message || "Something went wrong reading the posts.";
+      throw new Error(errorMessage);
+    }
+    const { data }: { data: PostResponse[] } = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
