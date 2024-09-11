@@ -127,6 +127,27 @@ export interface PostResponse {
   _count: Count;
 }
 
+export interface CommentResponse {
+  body: string;
+  replyToId: number | null;
+  id: number;
+  postId: number;
+  owner: string;
+  created: Date;
+}
+
+type Reaction = {
+  symbol: string;
+  count: number;
+  reactors: string[];
+};
+
+export interface ReactionResponse {
+  postId: number;
+  symbol: string;
+  reactions: Reaction[];
+}
+
 export interface CreatePostRequest {
   title: string;
   body: string;
