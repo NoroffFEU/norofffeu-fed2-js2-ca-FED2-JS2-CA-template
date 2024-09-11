@@ -4,7 +4,7 @@ import {
   UpdatePostRequest,
   PostResponse,
 } from "@/types/types";
-import { API_SOCIAL_POSTS } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function updatePost(
@@ -12,7 +12,7 @@ export async function updatePost(
   { title, body, tags, media }: UpdatePostRequest
 ) {
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
+    const response = await fetch(`${API_SOCIAL.POSTS}/${id}`, {
       method: "PUT",
       headers: headers(localStorage.token),
       body: JSON.stringify({

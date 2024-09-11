@@ -3,11 +3,11 @@ import {
   APIRegisterResponse,
   APIError,
 } from "@/types/types";
-import { API_AUTH_REGISTER } from "@api/constants";
+import { API_AUTH } from "@api/constants";
 
 export async function register({ name, email, password }: APIRegisterRequest) {
   try {
-    const response = await fetch(API_AUTH_REGISTER, {
+    const response = await fetch(API_AUTH.REGISTER, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

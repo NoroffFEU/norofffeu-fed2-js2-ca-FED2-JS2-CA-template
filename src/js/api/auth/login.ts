@@ -1,9 +1,9 @@
 import { APILoginRequest, APILoginResponse, APIError } from "@/types/types";
-import { API_AUTH_LOGIN } from "@api/constants";
+import { API_AUTH } from "@api/constants";
 
 export async function login({ email, password }: APILoginRequest) {
   try {
-    const response = await fetch(API_AUTH_LOGIN, {
+    const response = await fetch(API_AUTH.LOGIN, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

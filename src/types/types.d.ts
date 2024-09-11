@@ -1,3 +1,17 @@
+// Constants
+export interface APIAuthEndpoints {
+  BASE: string;
+  LOGIN: string;
+  REGISTER: string;
+  CREATE_API_KEY: string;
+}
+
+export interface APISocialEndpoints {
+  BASE: string;
+  POSTS: string;
+  PROFILES: string;
+}
+
 // API Types
 type Name = string;
 type Email = string;

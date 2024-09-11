@@ -1,5 +1,5 @@
 import { APIError, Params, ProfileResponse } from "@/types/types";
-import { API_SOCIAL_PROFILES } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function searchProfiles(
@@ -8,7 +8,7 @@ export async function searchProfiles(
 ) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_PROFILES}/search?q=${query}&limit=${limit}&page=${page}`,
+      `${API_SOCIAL.PROFILES}/search?q=${query}&limit=${limit}&page=${page}`,
       {
         method: "GET",
         headers: headers(localStorage.token),

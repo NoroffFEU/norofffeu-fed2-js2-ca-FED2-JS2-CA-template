@@ -1,11 +1,11 @@
 import { APIError, Params, ProfileResponse } from "@/types/types";
-import { API_SOCIAL_PROFILES } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function readProfile(username: string) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_PROFILES}/${username}?_following=true&_followers=true&_posts=true`,
+      `${API_SOCIAL.PROFILES}/${username}?_following=true&_followers=true&_posts=true`,
       {
         method: "GET",
         headers: headers(localStorage.token),
@@ -30,7 +30,7 @@ export async function readProfile(username: string) {
 export async function readProfiles({ limit = 12, page = 1 }: Params = {}) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_PROFILES}?limit=${limit}&page=${page}&_following=true&_followers=true&_posts=true`,
+      `${API_SOCIAL.PROFILES}?limit=${limit}&page=${page}&_following=true&_followers=true&_posts=true`,
       {
         method: "GET",
         headers: headers(localStorage.token),

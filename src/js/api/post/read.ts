@@ -1,11 +1,11 @@
 import { PostID, APIError, PostResponse, Params } from "@/types/types";
-import { API_SOCIAL_POSTS, API_SOCIAL_PROFILES } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function readPost(id: PostID) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_POSTS}/${id}?_author=true&_comments=true&_reactions=true`,
+      `${API_SOCIAL.POSTS}/${id}?_author=true&_comments=true&_reactions=true`,
       {
         headers: headers(localStorage.token),
       }
@@ -29,7 +29,9 @@ export async function readPost(id: PostID) {
 export async function readPosts({ limit = 12, page = 1, tag }: Params = {}) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_POSTS}/?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true${
+      `${
+        API_SOCIAL.POSTS
+      }/?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true${
         tag ? `&_tag=${tag}` : ""
       }`,
       {
@@ -57,7 +59,7 @@ export async function readPostsByUser(
 ) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_PROFILES}/${username}/posts?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true`,
+      `${API_SOCIAL.PROFILES}/${username}/posts?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true`,
       {
         method: "GET",
         headers: headers(localStorage.token),
@@ -80,7 +82,7 @@ export async function readPostsByUser(
 
 export async function readPostsFromFollowing() {
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/following`, {
+    const response = await fetch(`${API_SOCIAL.POSTS}/following`, {
       method: "GET",
       headers: headers(localStorage.token),
     });

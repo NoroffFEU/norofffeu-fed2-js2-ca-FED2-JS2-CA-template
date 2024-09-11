@@ -1,11 +1,11 @@
 import { APIError, FollowResponse, ToggleFollow } from "@/types/types";
-import { API_SOCIAL_PROFILES } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function toggleFollowUser(username: string, action: ToggleFollow) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_PROFILES}/${username}/${action}`,
+      `${API_SOCIAL.PROFILES}/${username}/${action}`,
       {
         method: "PUT",
         headers: headers(localStorage.token),

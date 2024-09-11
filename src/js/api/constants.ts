@@ -1,17 +1,18 @@
-export const API_KEY = "b58ae560-67eb-499f-b95c-97188b151f34";
+import { APIAuthEndpoints, APISocialEndpoints } from "@/types/types";
 
-export const API_BASE = "https://v2.api.noroff.dev";
+export const API_KEY: string = import.meta.env.VITE_API_KEY;
 
-export const API_AUTH = `${API_BASE}/auth`;
+export const API_BASE: string = "https://v2.api.noroff.dev";
 
-export const API_AUTH_LOGIN = `${API_AUTH}/login`;
+export const API_AUTH: APIAuthEndpoints = {
+  BASE: `${API_BASE}/auth`,
+  LOGIN: `${API_BASE}/auth/login`,
+  REGISTER: `${API_BASE}/auth/register`,
+  CREATE_API_KEY: `${API_BASE}/auth/create-api-key`,
+};
 
-export const API_AUTH_REGISTER = `${API_AUTH}/register`;
-
-export const API_AUTH_KEY = `${API_AUTH}/create-api-key`;
-
-export const API_SOCIAL = `${API_BASE}/social`;
-
-export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
-
-export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
+export const API_SOCIAL: APISocialEndpoints = {
+  BASE: `${API_BASE}/social`,
+  POSTS: `${API_BASE}/social/posts`,
+  PROFILES: `${API_BASE}/social/profiles`,
+};

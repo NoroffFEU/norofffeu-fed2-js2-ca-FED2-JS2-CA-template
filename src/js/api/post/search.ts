@@ -1,5 +1,5 @@
 import { APIError, Params, SearchPostsResponse } from "@/types/types";
-import { API_SOCIAL_POSTS } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function searchPosts(
@@ -8,7 +8,7 @@ export async function searchPosts(
 ) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_POSTS}/search?q=${query}&limit=${limit}&page=${page}`,
+      `${API_SOCIAL.POSTS}/search?q=${query}&limit=${limit}&page=${page}`,
       {
         method: "GET",
         headers: headers(localStorage.token),

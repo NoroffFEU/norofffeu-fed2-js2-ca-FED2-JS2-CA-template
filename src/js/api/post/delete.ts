@@ -1,10 +1,10 @@
 import { PostID, APIError } from "@/types/types";
-import { API_SOCIAL_POSTS } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function deletePost(postId: PostID) {
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${postId}`, {
+    const response = await fetch(`${API_SOCIAL.POSTS}/${postId}`, {
       method: "DELETE",
       headers: headers(localStorage.token),
     });
@@ -25,7 +25,7 @@ export async function deletePost(postId: PostID) {
 export async function deleteComment(postId: number, commentId: number) {
   try {
     const response = await fetch(
-      `${API_SOCIAL_POSTS}/${postId}/comment/${commentId}`,
+      `${API_SOCIAL.POSTS}/${postId}/comment/${commentId}`,
       {
         method: "DELETE",
         headers: headers(localStorage.token),

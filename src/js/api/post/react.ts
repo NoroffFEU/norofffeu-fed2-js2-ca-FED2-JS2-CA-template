@@ -1,10 +1,10 @@
 import { APIError, ReactionResponse } from "@/types/types";
-import { API_SOCIAL_POSTS } from "@api/constants";
+import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
 export async function reactToPost(id: number, symbol: string) {
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${id}/react/${symbol}`, {
+    const response = await fetch(`${API_SOCIAL.POSTS}/${id}/react/${symbol}`, {
       method: "PUT",
       headers: headers(localStorage.token),
       body: JSON.stringify({
