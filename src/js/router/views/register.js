@@ -1,5 +1,5 @@
-import { onRegister } from "../../ui/auth/register";
+import NoroffApp from "../../ui";
 
 const form = document.forms["register"];
 
-form.addEventListener("submit", onRegister);
+form.addEventListener("submit", NoroffApp.events.register);

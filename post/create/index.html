@@ -22,23 +22,29 @@
       <form name="createPost" class="create-form">
         <label for="title">
           Title
-          <input id="title" type="text" required />
+          <input name="title" id="title" type="text" required />
         </label>
         <label for="img-url">
           Image URL
-          <input id="img-url" type="text" required />
+          <input name="media[url]" id="img-url" type="text" required />
         </label>
         <label for="img-alt">
           Image alt
-          <input id="img-alt" type="text" required />
+          <input name="media[alt]" id="img-alt" type="text" required />
         </label>
         <label for="tags">
           Tag
-          <input id="tags" type="text" />
+          <input name="tags" id="tags" type="text" />
         </label>
         <label for="content">
           Content
-          <textarea id="content" cols="30" rows="12" required></textarea>
+          <textarea
+            name="body"
+            id="content"
+            cols="30"
+            rows="12"
+            required
+          ></textarea>
         </label>
         <button type="submit" class="submit-type-button">Create Post</button>
       </form>

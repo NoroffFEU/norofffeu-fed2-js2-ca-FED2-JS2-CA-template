@@ -1,6 +1,6 @@
 import { formatDate } from "../../utilities/authGuard";
 
-export function generatePostHTML(post) {
+export function generateFeedHTML(post) {
   const postContainer = document.createElement('a');
   postContainer.classList.add('post-container');
   postContainer.id = post.id;
