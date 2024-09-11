@@ -10,14 +10,18 @@ export default class NoroffAPI {
       return null;
     }
   }
+
+  static set user(userData) {
+    localStorage.setItem("user", JSON.stringify(userData));
+  }
+
+  static set token(accessToken) {
+    localStorage.setItem("token", accessToken);
+  }
   
   static apiBase = API_BASE;
-  // static loginPath = `${NoroffAPI.apiBase}/auth/login`;
-  // static registerPath = `${NoroffAPI.apiBase}/auth/register`;
-  // static socialPostPath = `${NoroffAPI.apiBase}/social/posts`;
 
   static paths = {
-    base: API_BASE,
     login: `${NoroffAPI.apiBase}/auth/login`,
     register: `${NoroffAPI.apiBase}/auth/register`,
     socialPost: `${NoroffAPI.apiBase}/social/posts`,
@@ -35,8 +39,8 @@ export default class NoroffAPI {
 
       const { data } = await NoroffAPI.util.handleResponse(response, "Could not login this account");
       const { accessToken: token, ...user } = data;
-      localStorage.token = token;
-      localStorage.user = JSON.stringify(user);
+      NoroffAPI.token = token;
+      NoroffAPI.user = user;
       window.location.href = "/post/feed/";
       return data;
     },
