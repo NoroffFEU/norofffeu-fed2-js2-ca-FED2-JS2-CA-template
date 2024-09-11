@@ -34,7 +34,6 @@ async function displayPosts(){
        
 
     }else {
-        console.error("Posts is not an array:", posts);
         alert("Error: Data is not in the expected format");
     }
     }catch (error){

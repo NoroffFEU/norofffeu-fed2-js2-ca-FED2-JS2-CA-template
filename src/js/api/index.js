@@ -97,20 +97,37 @@ export default class NoroffAPI {
 
       throw new Error("Could not create post");
     },
-    update: async (id, { title, body, tags, media }) => {
+    update: async (id, {title, body, tags, media }) => {
       const { token, user } = getCurrentUser();
+
+      const apiKeyData = await this.options.apiKey();
+      const tagsArray = Array.isArray(tags) ? tags : tags.split (',').map (tag => tag.trim());
+      const formattedMedia = {
+        url: media || '',
+        alt: media.alt || ''
+      }
+      const requestBody = {
+        title,
+        body,
+        tags: tagsArray,
+        media: formattedMedia
+      };
 
       const response = await fetch(`${this.apiSocialPath}/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": `${apiKeyData.data.key}`
         },
         method: "put",
-        body: JSON.stringify({ title, body, tags, media }),
+        body: JSON.stringify(requestBody),
       });
 
       if (response.ok) {
         const data = await response.json();
+        window.location.href="/"
+        alert("Post has been editet")
+
         return data;
       }
 
@@ -118,16 +135,27 @@ export default class NoroffAPI {
     },
     delete: async (id) => {
       const { token } = getCurrentUser();
+      const apiKeyData = await this.options.apiKey();
 
-      const response = await fetch(`${this.apiPostPath}/${id}`, {
+      const response = await fetch(`${this.apiSocialPath}/${id}`, {
         method: "delete",
         headers: {
           Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": `${apiKeyData.data.key}`
         },
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const contentType = response.headers.get("content-type")
+        
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json(); 
+          return data;
+        } else {
+          window.location.href = "/";
+          return; 
+        }
+         window.location.href="/"
         return data;
       }
 

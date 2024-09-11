@@ -1,6 +1,7 @@
 import { authGuard } from "../../utilities/authGuard";
 import NoroffAPI from "../../api";
 import { onUpdatePost } from "../../ui/post/update";
+import { onDeletePost } from "../../ui/post/delete";
 
 authGuard();
 
@@ -18,7 +19,6 @@ async function displayEditPost() {
       }
 
     const post = await api.post.read(postId);
-    console.log(post)
     
     if(!post){
         throw new Error("Post not found");
@@ -27,14 +27,13 @@ async function displayEditPost() {
     document.getElementById('titleInput').value = post.data.title;
     document.getElementById('bodyInput').value = post.data.body;
     document.getElementById('tagsInput').value = post.data.tags.join(', ');
-    if(post.media && post.media.url){
+    if(post.data.media || post.data.media.url){
         document.getElementById('mediaInput').value = post.data.media.url;
     }
     
     }
     catch(error){
         alert("Error loading post for edit", error)
-
     }
 }
 
@@ -42,3 +41,8 @@ displayEditPost();
 
 const form = document.forms.editPost;
 form.addEventListener("submit", onUpdatePost);
+
+const formDelete = document.forms.editPost;
+formDelete.addEventListener("click", onDeletePost);
+
+
