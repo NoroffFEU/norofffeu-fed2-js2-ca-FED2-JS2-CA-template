@@ -7,7 +7,6 @@ import { onRegister } from "@ui/auth/register";
 import { onLogin } from "@ui/auth/login";
 import { onCreatePost } from "@ui/post/create";
 import { onUpdatePost } from "@ui/post/update";
-import { fetchAndPopulateForm } from "@/js/router/views/postEdit";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -42,7 +41,6 @@ export default async function router(pathname = window.location.pathname) {
         ) as HTMLInputElement;
         formTitleInput.focus();
         editPostForm.addEventListener("submit", onUpdatePost);
-        fetchAndPopulateForm(editPostForm);
       }
       break;
     case "/post/create/":
