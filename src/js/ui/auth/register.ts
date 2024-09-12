@@ -1,4 +1,4 @@
-import { register } from "@/js/api/auth/register";
+import { register } from "@api/auth/register";
 import { APIRegisterRequest } from "@/types/types";
 
 export async function onRegister(event: Event) {

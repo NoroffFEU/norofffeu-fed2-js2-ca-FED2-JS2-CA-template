@@ -1,1 +1,1 @@
-alert("Auth Index Page");
+export const name = "a";

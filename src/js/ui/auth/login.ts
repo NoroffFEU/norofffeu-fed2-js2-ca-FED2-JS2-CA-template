@@ -1,4 +1,4 @@
-import { login } from "../../api/auth/login";
+import { login } from "@api/auth/login";
 import { APILoginRequest } from "@/types/types";
 
 export async function onLogin(event: Event) {
