@@ -4,14 +4,13 @@
   gap: 2.4rem;
 }
 
-.new-post-button-mobile, .new-post-button-desktop {
+.button-dark {
   font-size: 1.4rem;
   font-weight: 700;
   padding: 1.2rem;
   background-color: #4e4d4d;
   color: #fff;
   border-radius: 3px;
-  display: inline-block;
 }
 
 .new-post-button-mobile {

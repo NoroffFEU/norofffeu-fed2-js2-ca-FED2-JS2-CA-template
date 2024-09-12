@@ -33,6 +33,32 @@
   margin-bottom: 1.6rem;
 }
 
+.comment-list {
+  padding: 0;
+}
+
+.comment-item {
+  border-bottom: 1px solid #797878;
+  padding: 2.4rem 0;
+}
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-username {
+  /* semibold */
+  display: block;
+  font-weight: 700;
+  margin-bottom: .8rem;
+  font-size: 1.2rem;
+  color: blue;
+}
+
+.comment-content {
+  width: 100%;
+  font-size: 1.4rem;
+}
+
 .comment-form {
   gap: 0;
   padding-top: 2.4rem;

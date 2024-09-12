@@ -5,6 +5,7 @@
 @import url(imports/feed.css);
 @import url(imports/create.css);
 @import url(imports/singlePost.css);
+@import url(imports/edit.css);
 
 .auth-info {
   font-size: 1.4rem;
@@ -55,6 +56,6 @@
   .post-main {
     padding-right: 12.8rem;
     padding-left: 12.8rem;
-    margin-top: 20rem;
+    margin-top: 17.6rem;
   }
 }

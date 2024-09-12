@@ -92,10 +92,22 @@ export default class NoroffApp extends NoroffAPI {
         try {
           const params = new URLSearchParams(window.location.search);
           const postId = params.get('id');
-      
           const post = await api.post.readPost(postId);
           const postData = post.data;
-      
+          const postAuthor = postData.author.name;
+          
+          const editButton = document.querySelector(".edit-button");
+          editButton.dataset.id = postId;
+          console.log(editButton);
+          if(postAuthor === NoroffAPI.user) {
+            editButton.style.display = "block";
+          } else {
+            editButton.style.display = "none";
+          }
+          editButton.addEventListener("click", () => {
+            window.location.href = `/post/edit/?id=${postId}`;
+          })
+
           const singlePostFeed = document.querySelector('.single-post');
           singlePostFeed.innerHTML = "";
           const singlePostHTML = generateSinglePostHTML(postData);
@@ -105,7 +117,35 @@ export default class NoroffApp extends NoroffAPI {
         }
       },
 
-      update: () => {},
+      update: async () => {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const postId = params.get('id');
+          const post = await api.post.readPost(postId);
+          const { data } = post;
+          const { title, body, tags, media } = data;
+
+          document.getElementById('title').value = title;
+          document.getElementById('content').value = body;
+          document.getElementById('tags').value = tags.join(',');
+          document.getElementById('img-url').value = media.url;
+          document.getElementById('img-alt').value = media.alt;
+
+          document.forms["editPost"].addEventListener("submit", async (event) => {
+            const updatedData = NoroffApp.form.handleSubmit(event);
+            console.log(updatedData);
+            updatedData.tags = updatedData.tags.split(',').map(tag => tag.trim());
+            updatedData.media = {
+              url: updatedData['media[url]'],
+              alt: updatedData['media[alt]']
+            };
+            await api.post.update(postId, updatedData);
+          });
+      
+        } catch (error) {
+          alert(error.message);
+        }
+      },
     }
   }
 }

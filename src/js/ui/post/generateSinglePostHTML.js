@@ -63,10 +63,17 @@ export function generateSinglePostHTML(post) {
   commentList.classList.add("comment-list");
   const commentsArray = post.comments;
   commentsArray?.forEach(comment => {
-  const commentItem = document.createElement('li');
-  commentItem.classList.add("comment-item");
-  commentItem.textContent = comment;
-  commentList.appendChild(commentItem);
+    const commentItem = document.createElement('li');
+    commentItem.classList.add("comment-item");
+    const commentUser = document.createElement("a");
+    commentUser.classList.add("comment-username");
+    commentUser.href = "#";
+    commentUser.textContent = comment.author.name;
+    const commentContent = document.createElement("p");
+    commentContent.classList.add("comment-content");
+    commentContent.textContent = comment.body;
+    commentItem.append(commentUser, commentContent);
+    commentList.appendChild(commentItem);
   })
 
   const commentForm = document.createElement("form");

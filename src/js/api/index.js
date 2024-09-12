@@ -113,7 +113,18 @@ export default class NoroffAPI {
       return data
     },
 
-    update: async (id, { title, body, tags, media }) => {},
+    update: async (id, { title, body: content, tags, media }) => {
+      const body = JSON.stringify({ title, body: content, tags, media });
+
+      const response = await fetch(`${NoroffAPI.paths.socialPost}/${id}`, {
+        headers: headers(true),
+        method: "PUT",
+        body,
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not update post");
+      window.location.href = `/post/?id=${id}`;
+      return data;
+    },
   }
 
   posts = {
