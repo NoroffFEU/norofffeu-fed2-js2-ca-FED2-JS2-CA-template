@@ -1,8 +1,9 @@
-import { authGuard } from "../../utilities/authGuard";
+import { authGuard } from "@utilities/authGuard";
 import { readPostsByUser } from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
-import { getUser } from "@/js/utilities/getUser";
-import { getDeleteButtons } from "@/js/ui/post/delete";
+import { getUser } from "@utilities/getUser";
+import { getDeleteButtons } from "@ui/post/delete";
+import { getLikeButtons } from "@ui/post/like";
 
 async function loadHomePage() {
   try {
@@ -28,10 +29,22 @@ export async function renderPosts() {
   } else {
     postsToRender.forEach((post) => {
       const li = document.createElement("li");
-      li.innerHTML = `<a href="/post/${post.id}/">${post.title}</a> <button class="delete-btn" data-post-id="${post.id}">Delete</button> <a href="/post/edit/?id=${post.id}">Edit</a>`;
+      li.innerHTML = `
+      <li>
+        <div>
+          <a href="/post/${post.id}/">${post.title}</a>
+        </div>
+        <div>
+          <button class="delete-btn" data-post-id="${post.id}">Delete</button> 
+          <a href="/post/edit/?id=${post.id}">Edit</a>
+          <button class="like-btn" data-post-id="${post.id}">${post._count.reactions} | 👍</button>
+        </div>
+        <hr>
+      </li> `;
       postsContainer.appendChild(li);
     });
 
+    getLikeButtons();
     getDeleteButtons();
   }
 }
