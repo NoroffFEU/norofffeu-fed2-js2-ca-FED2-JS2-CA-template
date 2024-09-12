@@ -9,13 +9,24 @@
   </head>
 
   <body>
-    <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    <header>
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    </header>
+    <section>
+      <h1>Home</h1>
 
-    <h1>Home</h1>
+      <a href="../profile/">My Profile</a>
+      <a href="../auth/login/">Login</a>
+      <a href="../auth/register/">Register</a>
+      <a href="../post/">All post</a>
+      <a href="../post/create/">Create post</a>
 
-    <a href="../profile/">My Profile</a>
-    <a href="../auth/login/">Login</a>
-    <a href="../auth/register/">Register</a>
-    <button>Logout</button>
+      <button id="logout-btn">Logout</button>
+    </section>
+
+    <section>
+      <h2>Latest posts</h2>
+      <ul id="posts"></ul>
+    </section>
   </body>
 </html>

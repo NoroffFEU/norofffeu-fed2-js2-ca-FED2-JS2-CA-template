@@ -28,7 +28,7 @@ type Banner = {
 type VenueManager = boolean;
 type Meta = {};
 type AccessToken = string;
-export type FormNames = "register" | "login";
+export type FormNames = "register" | "login" | "createPost" | "editPost";
 
 // API Error
 export interface APIError {
@@ -177,9 +177,9 @@ export interface SearchPostsResponse {
 
 export interface CreatePostRequest {
   title: string;
-  body: string;
-  tags: string[];
-  media: Media;
+  body?: string;
+  tags?: string[];
+  media?: Media;
 }
 
 export interface UpdatePostRequest {

@@ -12,7 +12,24 @@
     <h1>Edit Post</h1>
 
     <form name="editPost">
+      <div>
+        <label for="title">Title</label>
+        <input id="title" type="text" name="title" required />
+      </div>
+      <div>
+        <label for="body">Body</label>
+        <textarea id="body" name="body"></textarea>
+      </div>
+      <div>
+        <label for="tags">Tags</label>
+        <input id="tags" type="text" name="tags" />
+      </div>
+      <div>
+        <label for="media">Media</label>
+        <input id="media" type="file" name="media" />
+      </div>
       <button>Edit Post</button>
     </form>
+    <a href="/home/">Go back</a>
   </body>
 </html>

@@ -10,6 +10,7 @@ export async function onRegister(event: Event) {
 
   try {
     await register({ name, email, password } as APIRegisterRequest);
+    window.location.href = "/login/";
   } catch (error) {
     console.error(error);
   }
