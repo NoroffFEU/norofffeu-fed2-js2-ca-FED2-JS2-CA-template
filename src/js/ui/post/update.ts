@@ -1,13 +1,10 @@
+import { getId } from "@/js/utilities/getId";
 import { updatePost } from "@api/post/update";
-import { findForm } from "@utilities/findForm";
-import { getInput } from "@utilities/getInput";
 
 export async function onUpdatePost(event: Event) {
   event.preventDefault();
 
-  const postToUpdate = Number(
-    new URL(window.location.href).searchParams.get("id")
-  );
+  const postToUpdate = getId();
 
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);

@@ -1,47 +1,40 @@
-import { PostResponse } from "@/types/types";
 import { authGuard } from "../../utilities/authGuard";
 import { readPostsByUser } from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
-import { deletePost } from "@api/post/delete";
+import { getUser } from "@/js/utilities/getUser";
+import { getDeleteButtons } from "@/js/ui/post/delete";
 
-authGuard();
-const posts = document.getElementById("posts") as HTMLUListElement;
-
-const logoutBtn = document.getElementById("logout-btn") as HTMLButtonElement;
-
-async function renderPosts() {
-  const postsToRender = await readPostsByUser("Thursdayday");
-
-  posts.innerHTML = "";
-
-  if (!postsToRender || postsToRender.length === 0) {
-    const li = document.createElement("li");
-    li.innerHTML = "No posts found";
-    posts.appendChild(li);
-  } else {
-    postsToRender.forEach((post) => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="/post/${post.id}/">${post.title}</a> <button class="delete-btn" data-post-id="${post.id}">Delete</button> <a href="/post/edit/?id=${post.id}">Edit</a>`;
-      posts.appendChild(li);
-    });
-
-    const deleteButtons = posts.querySelectorAll(".delete-btn");
-    deleteButtons.forEach((button) => {
-      const postId = Number(button.getAttribute("data-post-id"));
-      button.addEventListener("click", () => onDeletePost(postId));
-    });
-  }
-}
-
-renderPosts();
-
-logoutBtn.addEventListener("click", onLogout);
-
-async function onDeletePost(postId: number) {
+async function loadHomePage() {
   try {
-    await deletePost(postId);
+    document.getElementById("logout-btn")?.addEventListener("click", onLogout);
     renderPosts();
   } catch (error) {
     console.error(error);
   }
 }
+
+export async function renderPosts() {
+  const user = getUser();
+  const postsContainer = document.getElementById("posts") as HTMLUListElement;
+  const postsToRender = await readPostsByUser(user);
+
+  postsContainer.innerHTML = "";
+
+  if (!postsToRender || postsToRender.length === 0) {
+    const li = document.createElement("li");
+    li.innerHTML =
+      "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
+    postsContainer.appendChild(li);
+  } else {
+    postsToRender.forEach((post) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="/post/${post.id}/">${post.title}</a> <button class="delete-btn" data-post-id="${post.id}">Delete</button> <a href="/post/edit/?id=${post.id}">Edit</a>`;
+      postsContainer.appendChild(li);
+    });
+
+    getDeleteButtons();
+  }
+}
+
+authGuard();
+loadHomePage();
