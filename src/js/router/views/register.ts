@@ -1,7 +1,13 @@
-// import { onRegister } from "@/js/ui/auth/register";
+import { redirectIfAuthenticated } from "@utilities/redirectIfAuthenticated";
+import { findForm } from "@utilities/findForm";
+import { onRegister } from "@ui/auth/register";
 
-// const form = document.forms.namedItem("register");
+async function loadRegisterPage() {
+  redirectIfAuthenticated();
 
-// if (form) {
-//   form.addEventListener("submit", onRegister);
-// }
+  const registerForm = findForm("register");
+  if (registerForm instanceof HTMLFormElement) {
+    registerForm.addEventListener("submit", onRegister);
+  }
+}
+loadRegisterPage();

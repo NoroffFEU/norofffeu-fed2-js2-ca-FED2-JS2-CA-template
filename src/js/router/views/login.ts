@@ -1,7 +1,14 @@
-// import { onLogin } from "@/js/ui/auth/login";
+import { findForm } from "@/js/utilities/findForm";
+import { redirectIfAuthenticated } from "@utilities/redirectIfAuthenticated";
+import { onLogin } from "@ui/auth/login";
 
-// const form = document.forms.namedItem("login");
+async function loadLoginPage() {
+  redirectIfAuthenticated();
 
-// if (form) {
-//   form.addEventListener("submit", onLogin);
-// }
+  const loginForm = findForm("login");
+  if (loginForm instanceof HTMLFormElement) {
+    loginForm.addEventListener("submit", onLogin);
+  }
+}
+
+loadLoginPage();

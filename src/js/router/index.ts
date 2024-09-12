@@ -2,11 +2,6 @@
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose
 
-import { findForm } from "@utilities/findForm";
-import { onRegister } from "@ui/auth/register";
-import { onLogin } from "@ui/auth/login";
-import { onCreatePost } from "@ui/post/create";
-
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
@@ -16,17 +11,10 @@ export default async function router(pathname = window.location.pathname) {
       await import("@/js/router/views/home");
       break;
     case "/login/":
-      const loginForm = findForm("login");
-      if (loginForm instanceof HTMLFormElement) {
-        loginForm.addEventListener("submit", onLogin);
-      }
+      await import("@/js/router/views/login");
       break;
     case "/register/":
-      const registerForm = findForm("register");
-      if (registerForm instanceof HTMLFormElement) {
-        registerForm.addEventListener("submit", onRegister);
-      }
-
+      await import("@/js/router/views/register");
       break;
     case "/post/":
       await import("@/js/router/views/post");

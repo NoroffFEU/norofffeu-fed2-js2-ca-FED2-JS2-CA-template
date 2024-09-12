@@ -9,7 +9,14 @@ export async function onRegister(event: Event) {
   const { name, email, password } = userData;
 
   try {
-    await register({ name, email, password } as APIRegisterRequest);
+    const user = await register({
+      name,
+      email,
+      password,
+    } as APIRegisterRequest);
+    if (!user) {
+      return;
+    }
     window.location.href = "/login/";
   } catch (error) {
     console.error(error);

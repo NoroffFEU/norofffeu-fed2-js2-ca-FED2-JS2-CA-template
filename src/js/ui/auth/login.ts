@@ -10,7 +10,9 @@ export async function onLogin(event: Event) {
 
   try {
     await login({ email, password } as APILoginRequest);
-    window.location.href = "/home/";
+    if (localStorage.token) {
+      window.location.href = "/home/";
+    }
   } catch (error) {
     console.error(error);
   }

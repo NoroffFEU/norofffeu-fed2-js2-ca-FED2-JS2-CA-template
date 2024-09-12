@@ -1,1 +1,3 @@
-export const name = "a";
+import { redirectIfAuthenticated } from "@utilities/redirectIfAuthenticated";
+
+redirectIfAuthenticated();
