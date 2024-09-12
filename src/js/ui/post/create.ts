@@ -3,7 +3,6 @@ import { createPost } from "@api/post/create";
 export async function onCreatePost(event: Event) {
   event.preventDefault();
   const form = event.target as HTMLFormElement;
-  const formTitleInput = form.elements.namedItem("title") as HTMLInputElement;
   const formData = new FormData(form);
   const userData = Object.fromEntries(formData);
 
@@ -17,8 +16,7 @@ export async function onCreatePost(event: Event) {
   try {
     await createPost({ title, body, tags });
     alert("Post created successfully!");
-    form.reset();
-    formTitleInput.focus();
+    window.location.href = `/home/`;
   } catch (error) {
     console.error(error);
   }

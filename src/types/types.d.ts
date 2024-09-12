@@ -184,9 +184,9 @@ export interface CreatePostRequest {
 
 export interface UpdatePostRequest {
   title: string;
-  body: string;
-  tags: string[];
-  media: Media;
+  body?: string;
+  tags?: string[];
+  media?: Media;
 }
 
 // Profiles

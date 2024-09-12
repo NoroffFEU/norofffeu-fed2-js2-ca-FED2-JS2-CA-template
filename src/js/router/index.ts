@@ -6,7 +6,6 @@ import { findForm } from "@utilities/findForm";
 import { onRegister } from "@ui/auth/register";
 import { onLogin } from "@ui/auth/login";
 import { onCreatePost } from "@ui/post/create";
-import { onUpdatePost } from "@ui/post/update";
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -34,24 +33,9 @@ export default async function router(pathname = window.location.pathname) {
       break;
     case "/post/edit/":
       await import("@/js/router/views/postEdit");
-      const editPostForm = findForm("editPost");
-      if (editPostForm instanceof HTMLFormElement) {
-        const formTitleInput = editPostForm.elements.namedItem(
-          "title"
-        ) as HTMLInputElement;
-        formTitleInput.focus();
-        editPostForm.addEventListener("submit", onUpdatePost);
-      }
       break;
     case "/post/create/":
-      const createPostForm = findForm("createPost");
-      if (createPostForm instanceof HTMLFormElement) {
-        const formTitleInput = createPostForm.elements.namedItem(
-          "title"
-        ) as HTMLInputElement;
-        formTitleInput.focus();
-        createPostForm.addEventListener("submit", onCreatePost);
-      }
+      await import("@/js/router/views/postCreate");
       break;
     case "/profile/":
       await import("@/js/router/views/profile");
