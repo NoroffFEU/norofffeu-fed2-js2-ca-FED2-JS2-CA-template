@@ -6,6 +6,7 @@
 @import url(imports/create.css);
 @import url(imports/singlePost.css);
 @import url(imports/edit.css);
+@import url(imports/profile.css);
 
 .auth-info {
   font-size: 1.4rem;
@@ -58,4 +59,5 @@
     padding-left: 12.8rem;
     margin-top: 17.6rem;
   }
+
 }

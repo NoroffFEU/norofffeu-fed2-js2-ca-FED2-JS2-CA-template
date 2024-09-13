@@ -23,7 +23,7 @@ header img {
 
 @media screen and (min-width: 1024px) {
   header {
-    padding: 4rem 6.4rem;
+    padding: 4rem 6.4rem 0 6.4rem;
   }
   
   .post-header {

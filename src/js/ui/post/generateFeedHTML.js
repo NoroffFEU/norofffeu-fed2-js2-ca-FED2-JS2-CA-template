@@ -30,7 +30,7 @@ export function generateFeedHTML(post) {
   const userName = document.createElement("a");
   userName.classList.add("post-author");
   userName.textContent = post.author.name;
-  userName.href = `/profile/?name=${post.author.name}` //to profile page
+  userName.href = `/profile/?name=${post.author.name}`;
   postUserContainer.append(postUserIcon, userName);
 
   const postDateContainer =  document.createElement("div");
