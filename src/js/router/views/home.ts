@@ -32,7 +32,11 @@ export async function renderPosts() {
       li.innerHTML = `
       <li>
         <div>
-          <a href="/post/${post.id}/">${post.title}</a>
+          <span>${post.author.name}</span>
+          <button class="follow-btn" data-post-id="${post.id}">Follow</button>
+        </div>
+        <div>
+          <a href="/post/?id=${post.id}">${post.title}</a>
         </div>
         <div>
           <button class="delete-btn" data-post-id="${post.id}">Delete</button> 
