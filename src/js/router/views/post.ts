@@ -1,3 +1,10 @@
-export const name = "c";
+import { PostMain } from "@/components/post/PostMain";
+import { getId } from "@/js/utilities/getId";
 
-alert("Single Post Page");
+function loadPostPage() {
+  console.log("'hola!");
+  const mainPost = new PostMain(getId());
+  mainPost.init();
+}
+
+loadPostPage();
