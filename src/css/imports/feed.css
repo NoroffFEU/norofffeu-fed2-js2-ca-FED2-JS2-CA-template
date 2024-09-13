@@ -25,19 +25,26 @@
 
 .post-container {
   display: block;
+  overflow: hidden;
+}
+
+.post-container figure {
+  aspect-ratio: 3/2;
+  border-radius: 7px 7px 0 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .post-container img {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 3/2;
   object-fit: fill;
-  border-radius: 7px 7px 0 0;
 }
 
 .post-text-container {
   padding: .8rem .8rem 3.2rem .8rem;
   border-radius: 0 0 7px 7px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgb(248, 244, 238);
 }
 
 .post-user-date, .post-tag-comment {
@@ -45,6 +52,16 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
+}
+
+.post-author {
+  text-decoration: underline;
+  position: relative;
+  z-index: 2;
+}
+
+.post-author:hover {
+  color: blue;
 }
 
 .post-tag-comment {
@@ -102,6 +119,14 @@ p, ul {
 
   .new-post-button-desktop {
     display: block;
+  }
+
+  .post-container img {
+    transition: all 0.5s ease;
+  }
+
+  .post-container:hover img {
+    transform: scale(1.1);
   }
 
 }

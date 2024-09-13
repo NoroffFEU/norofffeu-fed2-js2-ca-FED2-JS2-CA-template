@@ -62,6 +62,11 @@ export default class NoroffAPI {
   static util = {
     handleResponse: async (response, errorMessage, output = "json") => {
       if (response.ok) {
+
+        if (response.status === 204) {
+          return null;
+        }
+        
         return await response[output]();
       }
 
@@ -71,12 +76,6 @@ export default class NoroffAPI {
       throw new Error(`${errorMessage}: ${errorDetail}`);
     },
 
-    handleRequest: async (url, options, output = "json") => {
-      const response = await fetch(url, {
-        ...options,
-        headers: headers(true),
-      });
-    }
   }
 
   post = {
@@ -94,7 +93,16 @@ export default class NoroffAPI {
       return data;
     },
 
-    delete: async (id) => {},
+    delete: async (id) => {
+      const response = await fetch(`${NoroffAPI.paths.socialPost}/${id}`, {
+        headers: headers(),
+        method: "DELETE"
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not delete post");
+      alert("The post was deleted!");
+      window.location.href = "/post/feed/";
+      return data;
+    },
 
     readPost: async (id, tag = null) => {
       const url = new URL(`${NoroffAPI.paths.socialPost}/${id}`);
@@ -123,7 +131,7 @@ export default class NoroffAPI {
       });
       const data = await NoroffAPI.util.handleResponse(response, "Could not update post");
       window.location.href = `/post/?id=${id}`;
-      return data;
+      //return data;
     },
   }
 

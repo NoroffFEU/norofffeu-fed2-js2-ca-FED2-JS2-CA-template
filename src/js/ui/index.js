@@ -1,9 +1,46 @@
 import NoroffAPI from "../api";
 import api from "../api/instance.js";
+import { authGuard } from "../utilities/authGuard.js";
 import { generateFeedHTML } from "./post/generateFeedHTML.js";
 import { generateSinglePostHTML } from "./post/generateSinglePostHTML.js";
 
 export default class NoroffApp extends NoroffAPI {
+
+  constructor() {
+    super()
+    this.router()
+  }
+
+  async router(pathname = window.location.pathname) {
+    switch (pathname) {
+      case "/":
+        await this.views.home()
+        break;
+      case "/auth/login/":
+        await this.views.login();
+        break;
+      case "/auth/register/":
+        await this.views.register();
+        break;
+      case "/post/":
+        await this.views.post();
+        break;
+      case "/post/edit/":
+        await this.views.postEdit();
+        break;
+      case "/post/create/":
+        await this.views.postCreate();
+        break;
+      case "/post/feed/":
+      await this.views.feed();
+      break;
+      case "/profile/":
+        await this.views.profile();
+        break;
+      default:
+        await this.views.notFound();
+    }
+  }
 
   static form = {
     handleSubmit(event) {
@@ -14,7 +51,59 @@ export default class NoroffApp extends NoroffAPI {
     }
   }
 
-  static events = {
+  views = {
+    home: async () => {},
+
+    register: async () => {
+      const form = document.forms["register"];
+      form.addEventListener("submit", this.events.register);
+    },
+
+    login: async () => {
+      const form = document.forms["login"];
+      form.addEventListener("submit", this.events.login);
+    },
+
+    feed: async () => {
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+      this.events.post.displayPosts();
+    },
+
+    postCreate: async () => {
+      authGuard();
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+      const form = document.forms["createPost"];
+      form.addEventListener("submit", this.events.post.create);
+    },
+
+    postEdit: async () => {
+      authGuard();
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+      this.events.post.update();
+      this.events.post.delete();
+    },
+
+    post: async () => {
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+      this.events.post.displaySinglePost();
+    },
+
+    profile: async () => {
+      authGuard();
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+    },
+
+    notFound: async () => {
+      alert("Page cannot be found in /src/views");
+    }
+  }
+
+  events = {
     login: async (event) => {
       const data = NoroffApp.form.handleSubmit(event);
 
@@ -70,13 +159,23 @@ export default class NoroffApp extends NoroffAPI {
         }
       },
 
-      delete: () => {},
+      delete: () => {
+        const deleteButton = document.querySelector(".delete-button");
+        deleteButton.addEventListener("click", async () => {
+          try {
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('id');
+            await api.post.delete(postId)
+          } catch (error) {
+            alert(error.message);
+          }
+        })
+      },
 
       displayPosts: async () => {
         try {
           const posts = await api.posts.getPosts();
           const postData = posts.data;
-          console.log(postData); //delete later
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';
           postData.forEach(post => {
@@ -98,7 +197,6 @@ export default class NoroffApp extends NoroffAPI {
           
           const editButton = document.querySelector(".edit-button");
           editButton.dataset.id = postId;
-          console.log(editButton);
           if(postAuthor === NoroffAPI.user) {
             editButton.style.display = "block";
           } else {
@@ -133,7 +231,6 @@ export default class NoroffApp extends NoroffAPI {
 
           document.forms["editPost"].addEventListener("submit", async (event) => {
             const updatedData = NoroffApp.form.handleSubmit(event);
-            console.log(updatedData);
             updatedData.tags = updatedData.tags.split(',').map(tag => tag.trim());
             updatedData.media = {
               url: updatedData['media[url]'],

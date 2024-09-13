@@ -1,4 +1,4 @@
-import { formatDate } from "../../utilities/authGuard";
+import { formatDate } from "../../utilities/formatDate";
 
 export function generateFeedHTML(post) {
   const postContainer = document.createElement('a');
@@ -6,6 +6,7 @@ export function generateFeedHTML(post) {
   postContainer.id = post.id;
   postContainer.href = `/post/?id=${post.id}`;
 
+  const figure = document.createElement("figure");
   const thumbnail = document.createElement("img");
   thumbnail.classList.add("thumbnail");
   if(post.media?.url) {
@@ -15,6 +16,7 @@ export function generateFeedHTML(post) {
     thumbnail.src = "../../../../public/images/default-thumbnail.jpg";
     thumbnail.alt = "No Media Available";
   }
+  figure.appendChild(thumbnail);
   
   const postTextContainer = document.createElement('div');
   postTextContainer.classList.add('post-text-container');
@@ -26,8 +28,9 @@ export function generateFeedHTML(post) {
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user");
   const userName = document.createElement("a");
+  userName.classList.add("post-author");
   userName.textContent = post.author.name;
-  userName.href = "#" //to profile page
+  userName.href = "/post/feed/" //to profile page
   postUserContainer.append(postUserIcon, userName);
 
   const postDateContainer =  document.createElement("div");
@@ -65,7 +68,7 @@ export function generateFeedHTML(post) {
   postTitle.textContent = post.title;
 
   postTextContainer.append(postUserDate, postTagComment, postTitle);
-  postContainer.append(thumbnail, postTextContainer);
+  postContainer.append(figure, postTextContainer);
 
   return postContainer;
 }

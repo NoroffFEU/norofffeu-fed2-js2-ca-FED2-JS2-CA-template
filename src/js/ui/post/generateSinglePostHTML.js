@@ -1,5 +1,5 @@
 import NoroffAPI from "../../api";
-import { formatDate } from "../../utilities/authGuard";
+import { formatDate } from "../../utilities/formatDate";
 
 export function generateSinglePostHTML(post) {
   const singlePostContainer = document.createElement("div");
