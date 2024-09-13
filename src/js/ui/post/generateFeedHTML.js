@@ -48,7 +48,8 @@ export function generateFeedHTML(post) {
   const tagList = document.createElement('ul');
   tagList.classList.add('tag-list');
   const tagsArray = post.tags;
-  tagsArray?.forEach(tag => {
+  console.log(tagsArray);
+  tagsArray?.filter(tag => tag.trim().length > 0).forEach(tag => {
     const tagItem = document.createElement('li');
     tagItem.classList.add('tag-item');
     tagItem.textContent = tag;

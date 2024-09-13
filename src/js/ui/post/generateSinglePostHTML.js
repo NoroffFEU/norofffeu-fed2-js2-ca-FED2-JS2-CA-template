@@ -40,7 +40,7 @@ export function generateSinglePostHTML(post) {
   const tagList = document.createElement('ul');
   tagList.classList.add('tag-list', "single-post-tag-list");
   const tagsArray = post.tags;
-  tagsArray?.forEach(tag => {
+  tagsArray?.filter(tag => tag.trim().length > 0).forEach(tag => {
     const tagItem = document.createElement('li');
     tagItem.classList.add('tag-item');
     tagItem.textContent = tag;

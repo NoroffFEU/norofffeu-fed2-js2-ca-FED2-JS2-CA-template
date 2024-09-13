@@ -89,7 +89,7 @@ export default class NoroffAPI {
       });
 
       const data = await NoroffAPI.util.handleResponse(response, "Could not create post");
-      window.location.href = "/post/feed/";
+      //window.location.href = "/post/feed/";
       return data;
     },
 
@@ -129,7 +129,7 @@ export default class NoroffAPI {
         method: "PUT",
         body,
       });
-      const data = await NoroffAPI.util.handleResponse(response, "Could not update post");
+      await NoroffAPI.util.handleResponse(response, "Could not update post");
       window.location.href = `/post/?id=${id}`;
       //return data;
     },

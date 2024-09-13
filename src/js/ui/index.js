@@ -145,7 +145,7 @@ export default class NoroffApp extends NoroffAPI {
           alt: data['media[alt]']
         };
         const { title, body, tags } = data;
-        const tagsArray = tags ? tags.split(',').map(tag => tag.trim()) : [];
+        const tagsArray = tags ? tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0) : [];
 
         try {
           await api.post.create({ 
