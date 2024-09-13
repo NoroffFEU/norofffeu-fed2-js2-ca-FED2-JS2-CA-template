@@ -30,7 +30,7 @@ export function generateFeedHTML(post) {
   const userName = document.createElement("a");
   userName.classList.add("post-author");
   userName.textContent = post.author.name;
-  userName.href = "/post/feed/" //to profile page
+  userName.href = `/profile/?name=${post.author.name}` //to profile page
   postUserContainer.append(postUserIcon, userName);
 
   const postDateContainer =  document.createElement("div");
@@ -48,7 +48,6 @@ export function generateFeedHTML(post) {
   const tagList = document.createElement('ul');
   tagList.classList.add('tag-list');
   const tagsArray = post.tags;
-  console.log(tagsArray);
   tagsArray?.filter(tag => tag.trim().length > 0).forEach(tag => {
     const tagItem = document.createElement('li');
     tagItem.classList.add('tag-item');
@@ -62,6 +61,7 @@ export function generateFeedHTML(post) {
   const commentNumber = document.createElement("p");
   commentNumber.textContent = post.comments.length;
   comment.append(commentIcon, commentNumber);
+
   postTagComment.append(tagList, comment);
 
   const postTitle = document.createElement("p");

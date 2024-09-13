@@ -94,8 +94,9 @@ export default class NoroffApp extends NoroffAPI {
 
     profile: async () => {
       authGuard();
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      //const logoutButton = document.querySelector(".logout-button");
+      //logoutButton.addEventListener("click", this.events.logout);
+      this.events.profile.displayProfilePage();
     },
 
     notFound: async () => {
@@ -243,6 +244,27 @@ export default class NoroffApp extends NoroffAPI {
           alert(error.message);
         }
       },
+    },
+
+    profile: {
+      displayProfilePage: async () => {
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+
+        try {
+          console.log("Username:", name);
+          const userPostsData = await api.profile.readUsersPosts(name);
+          const postData = userPostsData.data;
+          const postFeed = document.querySelector('.feed');
+          postFeed.innerHTML = '';
+          postData.forEach(post => {
+            const postHTML = generateFeedHTML(post);
+            postFeed.appendChild(postHTML);
+          })
+        } catch(error) {
+          alert(error.message);
+        }
+      }
     }
   }
 }

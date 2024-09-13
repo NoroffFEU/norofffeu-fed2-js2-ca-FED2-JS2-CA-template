@@ -25,6 +25,7 @@ export default class NoroffAPI {
     login: `${NoroffAPI.apiBase}/auth/login`,
     register: `${NoroffAPI.apiBase}/auth/register`,
     socialPost: `${NoroffAPI.apiBase}/social/posts`,
+    socialProfiles: `${NoroffAPI.apiBase}/social/profiles`
   }
 
   auth = {
@@ -131,7 +132,6 @@ export default class NoroffAPI {
       });
       await NoroffAPI.util.handleResponse(response, "Could not update post");
       window.location.href = `/post/?id=${id}`;
-      //return data;
     },
   }
 
@@ -156,5 +156,23 @@ export default class NoroffAPI {
     },
 
     readPostsByUser: async () => {},
+  }
+
+  profile = {
+    readUsersPosts: async (name) => {
+      const url = new URL(`${NoroffAPI.paths.socialProfiles}/${name}/posts`);
+      url.searchParams.append("_author", true);
+      url.searchParams.append("_comments", true);
+
+      const response = await fetch(url.toString(), {
+        headers: headers(),
+        method: "GET"
+      })
+      const data = await NoroffAPI.util.handleResponse(response, "Could not get profile");
+      console.log("API Response:", data);
+      return data;
+    },
+
+    update: async () => {}
   }
 }

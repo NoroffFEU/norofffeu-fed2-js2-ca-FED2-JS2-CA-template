@@ -1,4 +1,5 @@
 import "./css/style.css";
+//import { API_KEY } from "./js/api/constants.js";
 import NoroffApp from "./js/ui/index.js";
 
 const app = new NoroffApp();

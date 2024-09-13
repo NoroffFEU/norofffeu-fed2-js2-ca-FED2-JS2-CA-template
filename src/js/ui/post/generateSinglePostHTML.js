@@ -24,7 +24,7 @@ export function generateSinglePostHTML(post) {
   postUserIcon.classList.add("fa-regular", "fa-user");
   const userName = document.createElement("a");
   userName.textContent = post.author.name;
-  userName.href = "#" //to profile page
+  userName.href = `/profile/?name=${post.author.name}` //to profile page
   postUserContainer.append(postUserIcon, userName);
 
   const postDateContainer =  document.createElement("div");
