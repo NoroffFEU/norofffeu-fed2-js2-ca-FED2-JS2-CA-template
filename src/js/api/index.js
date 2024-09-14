@@ -201,7 +201,24 @@ export default class NoroffAPI {
   posts = {
     read: async (tag, limit = 12, page = 1) => {
       const user = getCurrentUser();
-      const url = new URL(API_BLOG_USER_POST(user.name));
+      const url = new URL(`${this.apiSocialPath}`);
+
+      if(tag) {
+        url.searchParams.append("_tag", tag)
+      }
+      url.searchParams.append("limit", limit)
+      url.searchParams.append("page", page)
+
+      const response = await fetch(url, {
+     
+      })
+
+      if(response.ok){
+        const {data} = await response.json();
+        return data
+      }
+      
+      throw new Error("Could not fetch posts")
     },
   };
 

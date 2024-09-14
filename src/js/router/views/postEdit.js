@@ -3,6 +3,7 @@ import NoroffAPI from "../../api";
 import { onUpdatePost } from "../../ui/post/update";
 import { onDeletePost } from "../../ui/post/delete";
 
+
 authGuard();
 
 
@@ -37,12 +38,12 @@ async function displayEditPost() {
     }
 }
 
+
 displayEditPost();
 
 const form = document.forms.editPost;
 form.addEventListener("submit", onUpdatePost);
 
-const formDelete = document.forms.editPost;
-formDelete.addEventListener("click", onDeletePost);
+document.getElementById('deletePostBtn').addEventListener("click", onDeletePost);
 
 
