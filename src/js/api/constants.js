@@ -2,7 +2,8 @@
 // In Workflow we will learn how to secure this information
 
 //Remember to not commit if you hard code the API Key
-export const API_KEY = JSON.parse(localStorage.getItem("API KEY"));
+const localStorageKey = JSON.parse(localStorage.getItem("API KEY"));
+export const API_KEY = localStorageKey.data.key;
 
 export const API_BASE = "https://v2.api.noroff.dev";
 

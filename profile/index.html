@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,11 +7,73 @@
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
   </head>
-  <body>
-    <h1>Profile</h1>
+  <body class="flex flex-col items-center">
+    <main>
+      <h1>Tompe Talk</h1>
 
-    <form name="updateProfile">
-      <button>Update Profile</button>
-    </form>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/profile/">Profile</a>
+        <a href="/post/create/">Create Post</a>
+        <button class="logout">Log Out</button>
+      </nav>
+
+      <div class="max-h-400 w-100 position-relative overflow-hidden">
+        <div id="profileBanner"></div>
+      </div>
+
+      <div class="flex w-100 gap-10">
+        <div id="profileImage" class="profileImage"></div>
+        <div class="w-100">
+          <div class="flex justify-between w-100 items-center">
+            <div id="username" class="text-left"></div>
+            <details>
+              <summary class="cursor">Update Profile</summary>
+              <div class="flex flex-col updateProfile">
+                <form name="updateProfile">
+                  <div>
+                    <p>Profile Picture</p>
+                    <div>
+                      <label for="url">url</label>
+                      <input type="url" name="avatarUrl" />
+                    </div>
+                    <div>
+                      <label for="alt">alt</label>
+                      <input type="text" name="avatarAlt" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <p>Cover Picture</p>
+                    <div>
+                      <label for="url">url</label>
+                      <input type="url" name="bannerUrl" />
+                    </div>
+
+                    <div>
+                      <label for="alt">alt</label>
+                      <input type="text" name="bannerAlt" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <p>Bio</p>
+                    <div>
+                      <label for="bio"></label>
+                      <textarea type="text" name="bio"></textarea>
+                    </div>
+                  </div>
+
+                  <button>Update Profile</button>
+                </form>
+              </div>
+            </details>
+          </div>
+          <div id="bio"></div>
+        </div>
+      </div>
+
+      <div id="userPosts" class="userPosts"></div>
+    </main>
   </body>
 </html>

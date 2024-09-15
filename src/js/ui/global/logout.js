@@ -1,7 +1,9 @@
 import { onLogout } from "../auth/logout";
 
 export function setLogoutListener() {
-  const logoutButton = document.getElementById("logout");
+  const logoutButton = document.querySelectorAll(".logout");
 
-  logoutButton.addEventListener("click", onLogout);
+  logoutButton.forEach((button) => {
+    button.addEventListener("click", onLogout);
+  });
 }

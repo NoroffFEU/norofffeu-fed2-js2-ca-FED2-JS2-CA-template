@@ -4,7 +4,6 @@ export async function onCreatePost(event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
-  console.log(event);
 
   const media = {
     url: formData.get("url"),
@@ -12,11 +11,13 @@ export async function onCreatePost(event) {
   };
 
   const createPostData = {
-    title: formData.get("name"),
+    title: formData.get("title"),
     body: formData.get("text"),
     tags: formData.get("tags").split(" "),
     media: media,
   };
+
+  console.log("data:", createPostData);
 
   createPost(createPostData);
 }

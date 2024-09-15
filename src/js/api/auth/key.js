@@ -13,8 +13,6 @@ export async function getKey(name) {
       body: JSON.stringify(body),
     });
 
-    console.log("test: ", response);
-
     if (response.ok) {
       const key = await response.json();
       console.log(key);

@@ -1,6 +1,5 @@
 import { API_AUTH_LOGIN } from "../constants";
 import { headers } from "../headers";
-import { getKey } from "./key";
 
 export async function login({ email, password }) {
   const body = {
@@ -18,7 +17,7 @@ export async function login({ email, password }) {
       alert(`Successfully logged in"`);
       const data = await response.json();
       console.log("Data:", data.data.name);
-      localStorage.setItem("UserInfo", JSON.stringify(data.data));
+      localStorage.setItem("userInfo", JSON.stringify(data.data));
       localStorage.setItem("token", JSON.stringify(data.data.accessToken));
       window.location.href = "/";
     }
