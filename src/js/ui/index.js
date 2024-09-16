@@ -166,7 +166,11 @@ export default class NoroffApp extends NoroffAPI {
           try {
             const params = new URLSearchParams(window.location.search);
             const postId = params.get('id');
-            await api.post.delete(postId)
+
+            const isConfirmed = window.confirm("Are you sure you want to delete this post?");
+            if (isConfirmed) {
+              await api.post.delete(postId)
+            }
           } catch (error) {
             alert(error.message);
           }
