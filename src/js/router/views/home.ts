@@ -17,17 +17,21 @@ async function loadHomePage() {
 export async function renderPosts() {
   const user = getUser();
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
-  const postsToRender = await readPostsByUser(user);
+  const postsByUser = await readPostsByUser(user);
+  // TODO add follow posts
+
+  // TODO add pagination
+  // TODO add search
 
   postsContainer.innerHTML = "";
 
-  if (!postsToRender || postsToRender.length === 0) {
+  if (!postsByUser || postsByUser.length === 0) {
     const li = document.createElement("li");
     li.innerHTML =
       "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
     postsContainer.appendChild(li);
   } else {
-    postsToRender.forEach((post) => {
+    postsByUser.forEach((post) => {
       const li = document.createElement("li");
       li.innerHTML = `
       <li>

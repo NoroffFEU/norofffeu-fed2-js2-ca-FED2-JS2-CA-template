@@ -26,7 +26,15 @@ type Banner = {
   alt: string;
 };
 type VenueManager = boolean;
-type Meta = {};
+type Meta = {
+  currentPage: number;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  nextPage: number | null;
+  pageCount: number;
+  previousPage: number | null;
+  totalCount: number;
+};
 type AccessToken = string;
 export type FormNames = "register" | "login" | "createPost" | "editPost";
 
@@ -91,6 +99,10 @@ export interface Pagination {
 }
 
 // Posts
+export interface AllPostsResponse {
+  data: PostResponse[];
+  meta: Meta;
+}
 export type PostID = number;
 
 export type Media = {
@@ -196,6 +208,8 @@ export interface ProfileResponse {
   email: string;
   bio: string;
   banner: Media;
+  followers: Follower[];
+  following: Follower[];
   avatar: Media;
   _count: {
     posts: number;

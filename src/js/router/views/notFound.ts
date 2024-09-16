@@ -1,3 +1,3 @@
 export const name = "d";
 
-alert("Page cannot be found in /src/views");
+alert("Redirecting to error page. Page cannot be found in /src/views");

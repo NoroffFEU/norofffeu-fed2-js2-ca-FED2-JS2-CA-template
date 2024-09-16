@@ -1,4 +1,4 @@
-import { PostID, APIError, PostResponse, Params } from "@/types/types";
+import { PostID, APIError, PostResponse, Params, Meta } from "@/types/types";
 import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
@@ -45,9 +45,11 @@ export async function readPosts({ limit = 12, page = 1, tag }: Params = {}) {
         errors?.[0]?.message || "Something went wrong reading the posts.";
       throw new Error(errorMessage);
     }
-    const { data }: { data: PostResponse[] } = await response.json();
+
+    const { data, meta }: { data: PostResponse[]; meta: Meta } =
+      await response.json();
     console.log(data);
-    return data;
+    return { data, meta };
   } catch (error) {
     console.error(error);
   }
