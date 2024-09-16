@@ -211,6 +211,13 @@ export default class NoroffApp extends NoroffAPI {
           singlePostFeed.innerHTML = "";
           const singlePostHTML = generateSinglePostHTML(postData);
           singlePostFeed.appendChild(singlePostHTML);
+
+          const backProfileButton = document.querySelector(".back-to-profile-page");
+          backProfileButton.href = `/profile/?name=${postAuthor}`;
+          backProfileButton.textContent = `Back to ${postAuthor}'s page`;
+          const backIcon = document.createElement("i");
+          backIcon.classList.add("fa-solid", "fa-chevron-left");
+          backProfileButton.insertBefore(backIcon, backProfileButton.firstChild);
         } catch(error) {
           alert(error.message)
         }
@@ -260,7 +267,7 @@ export default class NoroffApp extends NoroffAPI {
           postData.forEach(post => {
             const postHTML = generateFeedHTML(post);
             postFeed.appendChild(postHTML);
-          })
+          });
         } catch(error) {
           alert(error.message);
         }
