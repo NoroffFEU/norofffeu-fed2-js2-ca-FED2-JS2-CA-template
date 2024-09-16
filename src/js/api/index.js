@@ -21,10 +21,6 @@ export default class NoroffAPI {
     return `${this.apiBase}/auth/register`;
   }
 
-  // get apiPostPath() {
-  //   return `${this.apiBase}/blog/posts/${this.user.name}`;
-  // }
-
   get apiSocialPath() {
     return `${this.apiBase}/social/posts`;
   }
@@ -198,24 +194,26 @@ export default class NoroffAPI {
     },
   };
 
-  posts = {
-    read: async (tag, limit = 12, page = 1) => {
-      const user = getCurrentUser();
-      const url = new URL(`${this.apiSocialPath}`);
+  search = {
+    read: async (query) => {
+      const {token} = getCurrentUser();
+      const apiKeyData = await this.options.apiKey();
 
-      if(tag) {
-        url.searchParams.append("_tag", tag)
-      }
-      url.searchParams.append("limit", limit)
-      url.searchParams.append("page", page)
+      const url = new URL(`${this.apiSocialPath}/search`);
+      url.searchParams.append('q', query);
 
-      const response = await fetch(url, {
-     
-      })
+      const response = await fetch(url,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+           "X-Noroff-API-Key": `${apiKeyData.data.key}`
+        },method:"get",
+      });
 
       if(response.ok){
-        const {data} = await response.json();
-        return data
+        const data = await response.json();
+        
+        return data;
       }
       
       throw new Error("Could not fetch posts")

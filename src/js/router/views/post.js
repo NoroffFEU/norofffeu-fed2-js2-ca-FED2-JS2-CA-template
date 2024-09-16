@@ -5,12 +5,10 @@ import { readPosts } from "../../api/post/read";
 
 const api = new NoroffAPI();
 
-async function displayPosts(event){
+async function displayPosts(posts){
     
     try
     {
-    const posts = event;
-   
     if (Array.isArray(posts)){
         const postsContainer = document.getElementById("postsContainer");
       
@@ -26,7 +24,6 @@ async function displayPosts(event){
             `
         ).join('');
            
-            
             postsContainer.innerHTML = postsHTML
        
 
@@ -38,6 +35,25 @@ async function displayPosts(event){
     }
 }
 
+async function searchPosts(){
+    const query = document.getElementById('searchQuery').value.trim();
+    if(!query){
+        alert("Emty text box, please search..");
+        return;
+    }
+
+    try{
+        const posts  = await api.search.read(query);
+        const postData = posts.data
+
+        displayPosts(postData); 
+
+    
+    } catch(error){
+        alert("Failed to search Posts", error)
+    }
+}
+
 
 function renderPagination (totalPages, currentPage){
     const paginationCon = document.getElementById("paginationContainer");
@@ -46,7 +62,7 @@ function renderPagination (totalPages, currentPage){
     if (currentPage > 1){
         const prevButton = document.createElement('button');
         prevButton.innerHTML = '&lt;';
-        prevButton.addEventListener('click', () => displayPosts(currentPage -1) );
+        prevButton.addEventListener('click', () => loadPost(currentPage -1) );
         paginationCon.appendChild(prevButton);
     }
 
@@ -57,25 +73,35 @@ function renderPagination (totalPages, currentPage){
         if (page === currentPage){
             pageButton.disabled  = true; 
         }
-        pageButton.addEventListener('click', () => displayPosts(page))
+        pageButton.addEventListener('click', () => loadPost(page))
         paginationCon.appendChild(pageButton)
     }
 
     if (currentPage < totalPages) {
         const nextButton = document.createElement('button')
         nextButton.innerHTML = '&gt;' ;
-        nextButton.addEventListener('click', () => displayPosts(currentPage + 1))
+        nextButton.addEventListener('click', () => loadPost(currentPage + 1))
         paginationCon.appendChild(nextButton)
     }
 }
 
 async function loadPost(page = 1){
-    const {posts, totalPages, currentPage} = await readPosts (12, page,)
 
-    displayPosts(posts);
-    
-    renderPagination (totalPages, currentPage)
+    try{
+        const {posts, currentPage, totalPages} = await readPosts (12, page)
+
+        displayPosts(posts);
+        
+        renderPagination (totalPages, currentPage)
+
+    }catch(error){
+        alert("Error loading posts")
+    }
 }
+
+const searchBtn = document.getElementById('searchSubmitBtn')
+searchBtn.addEventListener('click', searchPosts)
+
 
 loadPost(1);
 

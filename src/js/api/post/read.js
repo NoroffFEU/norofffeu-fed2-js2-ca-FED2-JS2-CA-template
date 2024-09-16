@@ -29,7 +29,6 @@ export async function readPosts(limit = 12, page = 1, tag) {
 
         if(response.ok){
             const {data, meta}= await response.json()
-            console.log(data)
             
             return { posts: data, totalPages: meta.pageCount, currentPage: meta.currentPage };
         }else {

@@ -16,8 +16,12 @@ body {
   flex-direction: column;
   width: 20rem;
 }
-
-#postsContainer {
+#paginationContainer{
+  display: flex;
+  gap: 1rem;
+  margin: 5rem;
+}
+#postsContainer{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
