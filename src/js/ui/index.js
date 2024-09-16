@@ -218,6 +218,9 @@ export default class NoroffApp extends NoroffAPI {
           const backIcon = document.createElement("i");
           backIcon.classList.add("fa-solid", "fa-chevron-left");
           backProfileButton.insertBefore(backIcon, backProfileButton.firstChild);
+
+          const form = document.forms["comment"];
+          form.addEventListener("submit", this.events.post.comment);
         } catch(error) {
           alert(error.message)
         }
@@ -251,6 +254,20 @@ export default class NoroffApp extends NoroffAPI {
           alert(error.message);
         }
       },
+
+      comment: async (event) => {
+        const data = NoroffApp.form.handleSubmit(event);
+        const comment = data.comment
+        
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const postId = params.get('id');
+          await api.post.comment(postId, { body: comment });
+          this.events.post.displaySinglePost();
+        } catch (error) {
+          alert(error.message);
+        }
+      }
     },
 
     profile: {

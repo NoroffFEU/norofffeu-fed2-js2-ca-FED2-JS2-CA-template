@@ -90,7 +90,7 @@ export default class NoroffAPI {
       });
 
       const data = await NoroffAPI.util.handleResponse(response, "Could not create post");
-      //window.location.href = "/post/feed/";
+      window.location.href = "/post/feed/";
       return data;
     },
 
@@ -133,6 +133,17 @@ export default class NoroffAPI {
       await NoroffAPI.util.handleResponse(response, "Could not update post");
       window.location.href = `/post/?id=${id}`;
     },
+
+    comment: async (id, { body: comment }) => {
+      const body = JSON.stringify({ body: comment });
+      const response = await fetch(`${NoroffAPI.paths.socialPost}/${id}/comment`, {
+        headers: headers(true),
+        method: "POST",
+        body
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not comment on the post");
+      return data;
+    }
   }
 
   posts = {
@@ -154,8 +165,6 @@ export default class NoroffAPI {
       const data = await NoroffAPI.util.handleResponse(response, "Could not get posts");
       return data;
     },
-
-    readPostsByUser: async () => {},
   }
 
   profile = {

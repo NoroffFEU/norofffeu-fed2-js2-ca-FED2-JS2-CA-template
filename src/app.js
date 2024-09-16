@@ -4,6 +4,9 @@ import NoroffApp from "./js/ui/index.js";
 
 const app = new NoroffApp();
 
+import NoroffAPI from "./js/api/index.js";
+const api = new NoroffAPI();
+
 // async function allProfiles() {
 //   try {
 //     const response = await fetch("https://v2.api.noroff.dev/social/profiles", {

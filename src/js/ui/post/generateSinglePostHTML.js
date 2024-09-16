@@ -81,13 +81,20 @@ export function generateSinglePostHTML(post) {
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
   myUserName.textContent = NoroffAPI.user;
+  const commentTextAreaLabel = document.createElement("label");
+  commentTextAreaLabel.setAttribute('for', 'comment');
+
   const commentTextArea = document.createElement("textarea");
   commentTextArea.placeholder = "Write comment here";
+  commentTextArea.name = "comment";
+  commentTextArea.id = "comment";
+  commentTextAreaLabel.appendChild(commentTextArea);
+
   const commentButton = document.createElement("button");
-  commentButton.classList.add("submit-type-button");
+  commentButton.classList.add("submit-type-button", "comment-button");
   commentButton.type = "submit";
   commentButton.innerText = "Add comment";
-  commentForm.append(myUserName, commentTextArea, commentButton)
+  commentForm.append(myUserName, commentTextAreaLabel, commentButton)
   commentSection.append(sectionTitle, commentList, commentForm)
 
   singlePostContainer.append(title, thumbnail, postUserDate, tagList, contentContainer, commentSection);
