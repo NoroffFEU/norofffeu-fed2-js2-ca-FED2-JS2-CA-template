@@ -99,7 +99,7 @@ export default class NoroffAPI {
         headers: headers(),
         method: "DELETE"
       });
-      const data = await NoroffAPI.util.handleResponse(response, "Could not delete post");
+      const data = await NoroffAPI.util.handleResponse(response, "Could not delete post.");
       alert("The post was deleted!");
       window.location.href = "/post/feed/";
       return data;
@@ -143,7 +143,17 @@ export default class NoroffAPI {
       });
       const data = await NoroffAPI.util.handleResponse(response, "Could not comment on the post");
       return data;
-    }
+    },
+
+    deleteComment: async (id, commentId) => {
+      const response = await fetch(`${NoroffAPI.paths.socialPost}/${id}/comment/${commentId}`, {
+        headers: headers(),
+        method: "DELETE"
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not delete comment.");
+      alert("The comment was deleted.");
+      return data;
+    },
   }
 
   posts = {

@@ -45,9 +45,23 @@
 .comment-item {
   border-bottom: 1px solid #797878;
   padding: 2.4rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 .comment-item:last-child {
   border-bottom: none;
+}
+
+.comment-delete-button {
+  border: none;
+  background-color: transparent;
+}
+
+.fa-trash-can {
+  margin-right: 0;
+  font-size: 1.4rem;
 }
 
 .comment-username {

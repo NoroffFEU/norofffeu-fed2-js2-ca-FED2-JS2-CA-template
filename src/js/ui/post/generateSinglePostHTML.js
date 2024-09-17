@@ -67,6 +67,8 @@ export function generateSinglePostHTML(post) {
     const commentItem = document.createElement('li');
     commentItem.classList.add("comment-item");
     commentItem.id = comment.id;
+    const commentContainer = document.createElement("div");
+    commentContainer.classList.add("comment-container");
     const commentUser = document.createElement("a");
     commentUser.classList.add("comment-username");
     commentUser.href = `/profile/?name=${comment.author.name}`;
@@ -74,7 +76,13 @@ export function generateSinglePostHTML(post) {
     const commentContent = document.createElement("p");
     commentContent.classList.add("comment-content");
     commentContent.textContent = comment.body;
-    commentItem.append(commentUser, commentContent);
+    commentContainer.append(commentUser, commentContent);
+    const commentDeleteButton = document.createElement("button");
+    commentDeleteButton.classList.add("comment-delete-button");
+    const commentDeleteIcon = document.createElement("i");
+    commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
+    commentDeleteButton.appendChild(commentDeleteIcon);
+    commentItem.append(commentContainer, commentDeleteButton);
     commentList.appendChild(commentItem);
   }
 

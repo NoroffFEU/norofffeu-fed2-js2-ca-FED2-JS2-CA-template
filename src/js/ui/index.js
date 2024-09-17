@@ -225,6 +225,8 @@ export default class NoroffApp extends NoroffAPI {
 
           const form = document.forms["comment"];
           form.addEventListener("submit", this.events.post.comment);
+
+          this.events.post.deleteComment();
         } catch(error) {
           alert(error.message)
         }
@@ -271,6 +273,28 @@ export default class NoroffApp extends NoroffAPI {
         } catch (error) {
           alert(error.message);
         }
+      },
+
+      deleteComment: () => {
+        const commentDeleteButtons = document.querySelectorAll(".comment-delete-button");
+        console.log(commentDeleteButtons);
+        commentDeleteButtons.forEach(button => {
+          button.addEventListener("click", async (event) => {
+            try {
+              const params = new URLSearchParams(window.location.search);
+              const postId = params.get('id');
+              const commentItem = event.target.closest(".comment-item");
+              const commentID = commentItem.id;
+              const isConfirmed = window.confirm("Are you sure you want to delete this comment?");
+              if(isConfirmed) {
+                await api.post.deleteComment(postId, commentID);
+                commentItem.remove();
+              }
+            } catch (error) {
+              alert(error.message);
+            }
+          })
+        })
       }
     },
 
