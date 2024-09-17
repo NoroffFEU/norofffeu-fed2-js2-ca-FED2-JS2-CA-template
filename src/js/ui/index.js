@@ -263,7 +263,12 @@ export default class NoroffApp extends NoroffAPI {
 
       comment: async (event) => {
         const data = NoroffApp.form.handleSubmit(event);
-        const comment = data.comment
+        const comment = data.comment;
+
+        if (!comment || comment.trim() === "") {
+          alert("Comment cannot be empty.");
+          return;
+        }
         
         try {
           const params = new URLSearchParams(window.location.search);
