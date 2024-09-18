@@ -85,7 +85,7 @@ export async function readPostsByUser(
 export async function readPostsFromFollowing() {
   try {
     const response = await fetch(
-      `${API_SOCIAL.POSTS}/following?_author=true&_followers=true`,
+      `${API_SOCIAL.POSTS}/following?_author=true&_followers=true&_comments=true&_reactions=true`,
       {
         method: "GET",
         headers: headers(localStorage.token),

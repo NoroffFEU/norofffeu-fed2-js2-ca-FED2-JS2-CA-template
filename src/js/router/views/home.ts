@@ -6,6 +6,9 @@ import { getDeleteButtons } from "@ui/post/delete";
 import { getLikeButtons } from "@ui/post/like";
 import { toggleFollowUser } from "@/js/api/profile/follow";
 import { readProfile } from "@/js/api/profile/read";
+import { PostResponse } from "@/types/types";
+import { getUserProfile } from "@/js/utilities/getUserProfile";
+import { createPostHTML } from "@/components/cards/PostCard";
 
 async function loadHomePage() {
   try {
@@ -17,52 +20,43 @@ async function loadHomePage() {
 }
 
 export async function renderPosts() {
-  const user = getUser();
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
-  const postsByUser = await readPostsByUser(user);
-  const test = await readPostsFromFollowing();
-  console.log(test);
+  const user = getUser();
+  const postsByUser = (await readPostsByUser(user)) || [];
+  const postsFromFollowing = (await readPostsFromFollowing()) || [];
 
-  const test2 = await readProfile("Juggernaut");
+  const combinedPosts = [...postsByUser, ...postsFromFollowing];
 
-  // test2?.following.forEach((user) => {
-  //   console.log(user);
-  // });
+  const getFollowingUsers = await getUserProfile();
 
-  // console.log(test2);
-
-  // TODO add follow posts
+  console.log(combinedPosts);
 
   // TODO add pagination
   // TODO add search
 
-  postsContainer.innerHTML = "";
-
-  if (!postsByUser || postsByUser.length === 0) {
+  if (!combinedPosts || combinedPosts.length === 0) {
     const li = document.createElement("li");
     li.innerHTML =
       "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
     postsContainer.appendChild(li);
   } else {
-    postsByUser.forEach((post) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-      <li>
-        <div>
-          <span>${post.author.name}</span>
-          <button class="follow-btn" data-post-id="${post.id}">Follow</button>
-        </div>
-        <div>
-          <a href="/post/?id=${post.id}">${post.title}</a>
-        </div>
-        <div>
-          <button class="delete-btn" data-post-id="${post.id}">Delete</button> 
-          <a href="/post/edit/?id=${post.id}">Edit</a>
-          <button class="like-btn" data-post-id="${post.id}">${post._count.reactions} | 👍</button>
-        </div>
-        <hr>
-      </li> `;
-      postsContainer.appendChild(li);
+    combinedPosts.forEach((post) => {
+      const isFollowing = getFollowingUsers?.find(
+        (user) => user.name === post.author.name
+      )
+        ? true
+        : false;
+
+      const isLiked = post.reactions[0]?.reactors.find(
+        (user) => user === getUser()
+      )
+        ? true
+        : false;
+
+      const isUserPost = post.author.name === getUser() ? true : false;
+
+      const postHTML = createPostHTML(post, isFollowing, isLiked, isUserPost);
+      postsContainer.insertAdjacentHTML("beforeend", postHTML);
     });
 
     getLikeButtons();
