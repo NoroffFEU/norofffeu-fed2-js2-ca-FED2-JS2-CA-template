@@ -106,6 +106,39 @@ p, ul {
   font-weight: 500;
 }
 
+.feed-pagination {
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+  margin-top: 5.6rem;
+}
+
+.feed-pagination button {
+  font-size: 1.4rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: solid 1px #efefef;
+}
+
+.feed-pagination span {
+  width: 3.2rem;
+  height: 3.2rem;
+  line-height: 3.2rem;
+  text-align: center;
+}
+
+.feed-pagination i {
+  margin: 0;
+}
+
+.current-page {
+  background-color: #000;
+  color: #efefef;
+}
+
 @media screen and (min-width: 1024px) {
 
   .feed {
@@ -137,5 +170,10 @@ p, ul {
 
   .post-text-container {
     flex-grow: 1;
+  }
+
+  .feed-pagination {
+    gap: .8rem;
+    margin-top: 6.4rem;
   }
 }

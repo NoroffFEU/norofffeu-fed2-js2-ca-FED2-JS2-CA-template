@@ -178,17 +178,27 @@ export default class NoroffAPI {
   }
 
   profile = {
-    readUsersPosts: async (name) => {
+    readUsersPosts: async (name, limit = 12, page = 1) => {
       const url = new URL(`${NoroffAPI.paths.socialProfiles}/${name}/posts`);
       url.searchParams.append("_author", true);
       url.searchParams.append("_comments", true);
+      url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
 
       const response = await fetch(url.toString(), {
         headers: headers(),
         method: "GET"
       })
-      const data = await NoroffAPI.util.handleResponse(response, "Could not get profile");
-      console.log("API Response:", data);
+      const data = await NoroffAPI.util.handleResponse(response, "Could not get user's post.");
+      return data;
+    },
+
+    readProfile: async function readProfile(name) {
+      const response = await fetch(`${NoroffAPI.paths.socialProfiles}/${name}`, {
+        headers: headers(),
+        method: "GET"
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not get profile.");
       return data;
     },
 

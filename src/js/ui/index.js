@@ -177,16 +177,22 @@ export default class NoroffApp extends NoroffAPI {
         })
       },
 
-      displayPosts: async () => {
+      displayPosts: async (page = 1) => {
         try {
-          const posts = await api.posts.getPosts();
-          const postData = posts.data;
+          const posts = await api.posts.getPosts(12, page);
+          const { data, meta } = posts;
+          const { currentPage, pageCount } = meta;
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';
-          postData.forEach(post => {
+          data.forEach(post => {
             const postHTML = generateFeedHTML(post);
             postFeed.appendChild(postHTML);
           })
+          this.pagination.feedPagination(currentPage, pageCount);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         } catch(error) {
           alert(error.message)
         }
@@ -309,9 +315,19 @@ export default class NoroffApp extends NoroffAPI {
         const name = params.get('name');
 
         try {
-          console.log("Username:", name);
           const userPostsData = await api.profile.readUsersPosts(name);
+          const userProfile = await api.profile.readProfile(name);
+          const userData = userProfile.data
           const postData = userPostsData.data;
+
+          const userAvatar = document.querySelector(".avatar");
+          userAvatar.src = userData.avatar.url;
+          const userName = document.querySelector(".username");
+          userName.textContent = userData.name;
+          document.querySelector(".followers").textContent = userData._count.followers;
+          document.querySelector(".following").textContent = userData._count.following;
+          document.querySelector(".posts").textContent = userData._count.posts;
+
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';
           postData.forEach(post => {
@@ -323,5 +339,107 @@ export default class NoroffApp extends NoroffAPI {
         }
       }
     }
+  }
+
+  pagination = {
+    feedPagination: async (currentPage, pageCount) => {
+      const paginationContainer = document.querySelector('.feed-pagination');
+      paginationContainer.innerHTML = '';
+
+      const createButton = (text, page) => {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.dataset.page = page;
+        button.className = 'pagination-button';
+        if(page === currentPage) {
+          button.classList.add("current-page");
+        }
+        button.addEventListener('click', () => {
+          this.events.post.displayPosts(page);
+        });
+        return button;
+      };
+
+      const createEllipsis = () => {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = "...";
+        return ellipsis;
+      }
+      
+      const previousButton = document.createElement('button')
+      const previousButtonIcon = document.createElement("i");
+      previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
+      previousButton.appendChild(previousButtonIcon);
+      paginationContainer.appendChild(previousButton);
+      previousButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+          this.events.post.displayPosts(currentPage -1);
+        }
+      })
+
+      if (currentPage === 1) {
+        previousButton.disabled = true;
+        previousButton.style.cursor = "not-allowed";
+      } else {
+        previousButton.disabled = false;
+      }
+      
+      if (currentPage < 4) {
+        for (let i = 1; i < 4; i++) {
+          const pageButton = createButton(i, i);
+          paginationContainer.appendChild(pageButton);
+        }
+        paginationContainer.appendChild(createEllipsis());
+        const lastPageButton = createButton(pageCount, pageCount);
+        paginationContainer.appendChild(lastPageButton);
+      }
+      
+      if (currentPage >= 4 && currentPage <= pageCount - 3) {
+        const firstPageButton = createButton(1, 1);
+        paginationContainer.appendChild(firstPageButton);
+        
+        paginationContainer.appendChild(createEllipsis());
+
+        const startPage = Math.max(3, currentPage -1);
+        const endPage = Math.min(pageCount -2, currentPage +1);
+        for (let i = startPage; i <= endPage; i++) {
+          const pageButton = createButton(i, i);
+          paginationContainer.appendChild(pageButton);
+        }
+        paginationContainer.appendChild(createEllipsis());
+        const lastPageButton = createButton(pageCount, pageCount);
+        paginationContainer.appendChild(lastPageButton);
+      }
+
+      if (currentPage > pageCount -3) {
+        const firstPageButton = createButton(1,1);
+        paginationContainer.appendChild(firstPageButton)
+        paginationContainer.appendChild(createEllipsis());
+        for(let i = pageCount -2; i <= pageCount; i++) {
+          const pageButton = createButton(i, i);
+          paginationContainer.appendChild(pageButton);
+        }
+      }
+
+      const nextButton = document.createElement('button');
+      const nextButtonIcon = document.createElement("i");
+      nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
+      nextButton.appendChild(nextButtonIcon);
+      paginationContainer.appendChild(nextButton);
+      nextButton.addEventListener("click", () => {
+        if (currentPage < pageCount) {
+          this.events.post.displayPosts(currentPage +1);
+        }
+      })
+
+      if (currentPage === pageCount) {
+        nextButton.disabled = true;
+        nextButton.style.cursor = "not-allowed";
+      } else {
+        nextButton.disabled = false;
+      }
+    },
+
+    singlePostPagination: () => {}
   }
 }
