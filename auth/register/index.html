@@ -2,16 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
   </head>
-
+  
   <body>
     <h1>Register</h1>
-
-    <form name="register">
+    
+    <form id="register-form" name="register">
       <div>
         <label for="name">Name</label>
         <input
@@ -51,5 +50,9 @@
       <a href="/auth/login/">Login</a>
       <button>Register</button>
     </form>
+    <script type="module">
+      import { setupRegisterForm } from '/src/js/ui/auth/register.js';
+      document.addEventListener('DOMContentLoaded', setupRegisterForm);
+    </script>
   </body>
 </html>
