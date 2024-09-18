@@ -72,10 +72,16 @@ export default class NoroffAPI {
   };
 
   post = {
-    read: async (id) => {
-      const { token, user } = getCurrentUser();
+    read: async (id, option = {}) => {
+      const { token} = getCurrentUser();
 
-      const url = `${this.apiSocialPath}/${id}`;
+      let url = `${this.apiSocialPath}/${id}`;
+
+      if (option._author){
+        
+       url += "?_author="+ option._author
+
+       }
       const apiKeyData = await this.options.apiKey();
 
       const response = await fetch(url, {
@@ -94,7 +100,7 @@ export default class NoroffAPI {
       throw new Error("Could not create post");
     },
     update: async (id, {title, body, tags, media }) => {
-      const { token, user } = getCurrentUser();
+      const { token, user} = getCurrentUser();
 
       const apiKeyData = await this.options.apiKey();
       const tagsArray = Array.isArray(tags) ? tags : tags.split (',').map (tag => tag.trim());

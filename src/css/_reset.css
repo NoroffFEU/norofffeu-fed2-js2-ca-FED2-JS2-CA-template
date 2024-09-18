@@ -28,6 +28,21 @@ body {
   gap: 20px;
   width: 100%;
 }
+
+#detailPostCon{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem;
+}
+.singlePost{
+  width: 20rem;
+}
+.editSinglePostBtn{
+  margin: 1rem;
+}
+
+
 .post{
   flex: 1 1 calc(33.333% - 20px); 
   border: 1px solid #ddd; 
@@ -35,7 +50,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-.post img {
+.post img, .singlePost img {
   width: 100%; 
   object-fit: cover;
 }
