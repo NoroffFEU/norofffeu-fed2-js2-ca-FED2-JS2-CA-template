@@ -1,9 +1,11 @@
 import { authGuard } from "@utilities/authGuard";
-import { readPostsByUser } from "@api/post/read";
+import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
 import { getUser } from "@utilities/getUser";
 import { getDeleteButtons } from "@ui/post/delete";
 import { getLikeButtons } from "@ui/post/like";
+import { toggleFollowUser } from "@/js/api/profile/follow";
+import { readProfile } from "@/js/api/profile/read";
 
 async function loadHomePage() {
   try {
@@ -18,6 +20,17 @@ export async function renderPosts() {
   const user = getUser();
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
   const postsByUser = await readPostsByUser(user);
+  const test = await readPostsFromFollowing();
+  console.log(test);
+
+  const test2 = await readProfile("Juggernaut");
+
+  // test2?.following.forEach((user) => {
+  //   console.log(user);
+  // });
+
+  // console.log(test2);
+
   // TODO add follow posts
 
   // TODO add pagination

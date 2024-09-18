@@ -4,8 +4,23 @@ const followButtonTemplate = document.createElement("template");
 
 followButtonTemplate.innerHTML = `
 <style>
-  button { padding: 10px; cursor: pointer; }
-  button.following { background: red; }
+  button {
+        color: #333;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 0.65rem;
+        transition: all 0.2s ease-in-out; cursor: pointer; 
+    }
+  button:hover {
+    background-color: #28a745;
+    color: white;
+  }
+  button.following { 
+    background: #28a745;
+    color: white;
+  }
 </style>
 
 <button>
@@ -17,11 +32,14 @@ followButtonTemplate.innerHTML = `
 export class FollowButton extends HTMLElement {
   // Debouncing state
   private isProcessing: boolean = false;
+  isUserPost: boolean;
 
   constructor() {
     super();
+    this.isUserPost = this.getAttribute("data-is-user-post") === "true";
+
     this.attachShadow({ mode: "open" });
-    if (this.shadowRoot) {
+    if (this.shadowRoot && !this.isUserPost) {
       this.shadowRoot.appendChild(followButtonTemplate.content.cloneNode(true));
     }
     this.addEventListener("click", (e) => this.handleFollow());

@@ -165,7 +165,7 @@ export interface CommentResponse {
 type Reaction = {
   symbol: string;
   count: number;
-  reactors: string[];
+  reactors?: string[];
 };
 
 export interface ReactionResponse {

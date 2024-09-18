@@ -84,10 +84,13 @@ export async function readPostsByUser(
 
 export async function readPostsFromFollowing() {
   try {
-    const response = await fetch(`${API_SOCIAL.POSTS}/following`, {
-      method: "GET",
-      headers: headers(localStorage.token),
-    });
+    const response = await fetch(
+      `${API_SOCIAL.POSTS}/following?_author=true&_followers=true`,
+      {
+        method: "GET",
+        headers: headers(localStorage.token),
+      }
+    );
 
     if (!response.ok) {
       const { errors }: { errors: APIError[] } = await response.json();
