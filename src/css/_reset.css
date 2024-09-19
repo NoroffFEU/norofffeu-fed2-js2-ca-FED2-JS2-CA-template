@@ -21,7 +21,7 @@ body {
   gap: 1rem;
   margin: 5rem;
 }
-#postsContainer{
+#postsContainer, #getAllProfiles{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,14 +43,14 @@ body {
 }
 
 
-.post{
+.post, .profiles{
   flex: 1 1 calc(33.333% - 20px); 
   border: 1px solid #ddd; 
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
 }
-.post img, .singlePost img {
+.post img, .singlePost img, .profiles img {
   width: 100%; 
   object-fit: cover;
 }

@@ -25,6 +25,10 @@ export default class NoroffAPI {
     return `${this.apiBase}/social/posts`;
   }
 
+  get apiProfilesPath (){
+    return `${this.apiBase}/social/profiles`
+  }
+
   auth = {
     login: async ({ email, password }) => {
       const body = JSON.stringify({ email, password });
@@ -225,6 +229,30 @@ export default class NoroffAPI {
       throw new Error("Could not fetch posts")
     },
   };
+
+  profile = {
+    read: async () => {
+      const {token} = this.getCurrentUser
+      const apiKeyData = await this.options.apiKey();
+
+      const response = await fetch (`${this.apiProfilesPath}`,{
+        medthod:"get",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+           "X-Noroff-API-Key": `${apiKeyData.data.key}`
+        }
+      })
+
+      if(response.ok){
+          const data = await response.json()
+          return data;
+      }
+      else {
+        throw new Error("Failed to fetch profiles");
+      }
+    }
+  }
 
   getPosts = async () => {
     const { token } = this.getCurrentUser;
