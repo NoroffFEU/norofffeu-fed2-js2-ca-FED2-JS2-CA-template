@@ -48,6 +48,16 @@ export class DeleteButton extends HTMLElement {
     this.removeEventListener("click", this.handleDelete);
   }
 
+  checkIfUlIsEmpty() {
+    const postsContainer = document.getElementById("posts") as HTMLUListElement;
+    if (postsContainer.children.length === 0) {
+      const li = document.createElement("li");
+      li.innerHTML =
+        "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
+      postsContainer.appendChild(li);
+    }
+  }
+
   async handleDelete() {
     try {
       const confirmed = confirm("Are you sure you want to delete this post?");
@@ -64,6 +74,7 @@ export class DeleteButton extends HTMLElement {
           postElement.remove();
         }
       }
+      this.checkIfUlIsEmpty();
     } catch (error) {
       console.error(error);
     } finally {
