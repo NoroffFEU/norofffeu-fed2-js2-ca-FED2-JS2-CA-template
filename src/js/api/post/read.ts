@@ -61,7 +61,7 @@ export async function readPostsByUser(
 ) {
   try {
     const response = await fetch(
-      `${API_SOCIAL.PROFILES}/${username}/posts?limit=${limit}&page=${page}&_author=true&_comments=true&_reactions=true`,
+      `${API_SOCIAL.PROFILES}/${username}/posts?limit=${limit}&page=${page}&_author=true&_followers=true&_comments=true&_reactions=true`,
       {
         method: "GET",
         headers: headers(localStorage.token),

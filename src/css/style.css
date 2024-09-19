@@ -1,4 +1,7 @@
 @import url(_reset.css);
+@import url(auth.css);
+@import url(variables.css);
+@import url(home.css);
 
 #posts {
   max-width: 600px;
@@ -28,6 +31,18 @@
       & .post__header__user {
         display: flex;
         flex-direction: column;
+        gap: 0.3rem;
+
+        & span {
+          font-weight: bold;
+          font-size: 0.8rem;
+        }
+        & a {
+          font-size: 0.8rem;
+          text-decoration: none;
+          color: var(--text-color-secondary);
+          font-weight: bold;
+        }
       }
     }
 
@@ -37,7 +52,7 @@
       align-items: center;
 
       & .edit-btn {
-        color: #333;
+        color: var(--text-color-primary);
         border: 1px solid #ccc;
         text-decoration: none;
         font-size: 0.8rem;
@@ -46,8 +61,7 @@
         transition: all 0.2s ease-in-out;
 
         &:hover {
-          background-color: #2b6ec5;
-          color: white;
+          background-color: var(--tertiary-color);
         }
       }
     }
@@ -96,7 +110,7 @@
       gap: 0.65rem;
 
       & a {
-        color: #333;
+        color: var(--text-color-primary);
         border: 1px solid #ccc;
         text-decoration: none;
         font-size: 0.8rem;
@@ -105,7 +119,7 @@
         transition: all 0.2s ease-in-out;
 
         &:hover {
-          background-color: #ccc;
+          background-color: var(--tertiary-color);
         }
       }
     }

@@ -5,7 +5,8 @@ const deleteButtonTemplate = document.createElement("template");
 deleteButtonTemplate.innerHTML = `
   <style>
     button {
-        color: #333;
+        background-color: var(--primary-color);
+        color: var(--text-color-primary);
         border: 1px solid #ccc;
         text-decoration: none;
         font-size: 0.8rem;
@@ -14,7 +15,7 @@ deleteButtonTemplate.innerHTML = `
         transition: all 0.2s ease-in-out; cursor: pointer; 
     }
     button:hover {
-      background-color: red;
+      background-color: var(--error-color);
       color: white;
     }
   </style>

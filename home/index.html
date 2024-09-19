@@ -9,23 +9,46 @@
     <script type="module" src="../src/app.ts"></script>
   </head>
 
-  <body>
+  <body class="home-page">
     <header>
-      <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+      <div class="logo__container">
+        <img
+          class="logo"
+          src="/images/noroff-logo-white.png"
+          alt="Noroff Logo"
+        />
+      </div>
+      <div class="nav__container">
+        <a data-is-active="true" href="javascript:void(0)">🏠 Home</a>
+        <a href="../explore/">🔍 Explore</a>
+        <a href="javascript:void(0)">🔔 Notifications</a>
+        <a href="javascript:void(0)">🔖 Bookmarks</a>
+        <a href="javascript:void(0)">❤️ Favorites</a>
+        <a href="javascript:void(0)">📝 Lists</a>
+        <a href="javascript:void(0)">⚙️ Preferences</a>
+      </div>
+      </div>
     </header>
-    <section>
-      <h1>Home</h1>
+    <main>
+      <section>
+        <div class="posts__container__header">
+          <a data-is-active="true" href="javascript:void(0)">🏠 Home</a>
+        </div>
+        <ul id="posts"></ul>
+      </section>
+    </main>
+    <aside>
+      <form name="search">
+        <input type="text" name="search" placeholder="Search" />
+      </form>
 
-      <a href="../profile/">My Profile</a>
-      <a href="../explore/">Explore</a>
-      <a href="../post/create/">Create post</a>
+      <div class="profile__container">
+      </div>
 
-      <button id="logout-btn">Logout</button>
-    </section>
-
-    <section>
-      <h2>Latest posts</h2>
-      <ul id="posts"></ul>
-    </section>
+      <div class="user-actions">
+        <a href="../post/create/">Create post</a>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </aside>
   </body>
 </html>
