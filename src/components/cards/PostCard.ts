@@ -20,6 +20,8 @@ export function createPostHTML(
   if (!customElements.get("delete-button")) {
     customElements.define("delete-button", DeleteButton);
   }
+
+  console.log(post.tags);
   return `
   <li class="post" data-post-id="${post.id}">
     <div class="post__header">
@@ -80,7 +82,7 @@ export function createPostHTML(
                 : ""
             }
             ${
-              post.tags.length > 0
+              post.tags.length > 0 && post.tags[0] !== ""
                 ? `<div class="post__body__tags">${post.tags
                     .map((tag) => `<span>#${tag}</span>`)
                     .join("")}</div>`
@@ -93,12 +95,20 @@ export function createPostHTML(
             <a href="/post/?id=${post.id}">View</a>
             <a href="/post/?id=${post.id}">Reply</a>
         </div>
-        <like-button 
-            data-post-id="${post.id}" 
-            data-reactions="${post._count.reactions}" 
-            data-user-liked="${isLiked}"
-        >
-        </like-button>
+        ${
+          !isUserPost
+            ? `
+            <like-button 
+                data-post-id="${post.id}" 
+                data-reactions="${post._count.reactions}" 
+                data-user-liked="${isLiked}"
+            >
+            </like-button>
+            
+            `
+            : `<span>Likes: ${post._count.reactions}</span>`
+        }
+        
     </div>
         <hr>
   </li>

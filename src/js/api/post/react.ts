@@ -1,3 +1,4 @@
+import { getUser } from "@/js/utilities/getUser";
 import { APIError, ReactionResponse } from "@/types/types";
 import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
@@ -24,7 +25,6 @@ export async function reactToPost(id: number, symbol: string) {
       console.log("No data");
       return;
     } else {
-      console.log(data.postId, data.reactions, data.reactions[0].reactors[0]);
       return data;
     }
   } catch (error) {

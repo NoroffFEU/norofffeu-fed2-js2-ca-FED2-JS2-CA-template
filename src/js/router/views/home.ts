@@ -6,6 +6,7 @@ import { readProfile } from "@/js/api/profile/read";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { HomeProfile } from "@/components/profile/HomeProfile";
+import { reactToPost } from "@/js/api/post/react";
 
 async function loadHomePage() {
   try {
@@ -43,7 +44,7 @@ export async function renderPosts() {
         "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
       postsContainer.appendChild(li);
     } else {
-      combinedPosts.forEach((post) => {
+      combinedPosts.forEach(async (post) => {
         console.log("AQUI ", post);
         console.log("AQUI AHORA", post.reactions[0]?.count);
         const isFollowing = getFollowingUsers?.find(
@@ -52,13 +53,11 @@ export async function renderPosts() {
           ? true
           : false;
 
-        const isLiked =
-          post.reactions[0]?.count &&
-          post.reactions[0].count > 0 &&
-          ((post.author.name === getUser() && !post.reactions[0]?.reactors) ||
-            post.reactions[0]?.reactors?.find((user) => user === getUser()))
-            ? true
-            : false;
+        const isLiked = post.reactions[0]?.reactors?.find(
+          (user) => user === getUser()
+        )
+          ? true
+          : false;
 
         const isUserPost = post.author.name === getUser() ? true : false;
 
