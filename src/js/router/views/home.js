@@ -13,7 +13,7 @@ async function getAllProfiles(){
     try{
         const profilesCon = document.getElementById('getAllProfiles');
     
-        const response = await api.profile.read();
+        const response = await api.getProfiles();
         console.log(response)
 
         const profiles = response.data;
@@ -24,9 +24,9 @@ async function getAllProfiles(){
     
         const profilesHTML = profiles.map(profiles =>
             `
-            <div class="profiles">
+            <div class="profiles" onclick="window.location.href='/profile/detail/?name=${profiles.name}'">
             <img src="${profiles.avatar.url}" alt="${profiles.avatar.alt || 'profile avatar'}></img>
-            <img src="${profiles.banner.url}" alt="alt="${profiles.avatar.alt || 'profile avatar'}></img>
+            <img src="${profiles.banner.url}" alt="alt="${profiles.banner.alt || 'profile banner'}></img>
             <h2>${profiles.name}</h2>
             <h2>${profiles.email}</h2>
             </div>

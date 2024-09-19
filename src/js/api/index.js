@@ -230,12 +230,22 @@ export default class NoroffAPI {
     },
   };
 
-  profile = {
-    read: async () => {
-      const {token} = this.getCurrentUser
+  profileByName = {
+    read: async (name, option = {}) => {
+
+      const { token} = getCurrentUser();
+
+      let url = `${this.apiProfilesPath}/${name}/posts`;
+
+      if (option._posts){
+        
+       url += "?_posts="+ option._posts
+
+       }
+
       const apiKeyData = await this.options.apiKey();
 
-      const response = await fetch (`${this.apiProfilesPath}`,{
+      const response = await fetch (url,{
         medthod:"get",
         headers: {
           "content-type": "application/json",
@@ -249,9 +259,9 @@ export default class NoroffAPI {
           return data;
       }
       else {
-        throw new Error("Failed to fetch profiles");
+        throw new Error("could not read the Profile");
       }
-    }
+    },
   }
 
   getPosts = async () => {
@@ -276,7 +286,25 @@ export default class NoroffAPI {
     }
     throw new Error("could not read the posts");
   };
+  getProfiles= async () => {
+    const { token } = this.getCurrentUser;
+    const apiKeyData = await this.options.apiKey();
 
+    const response = await fetch(`${this.apiProfilesPath}`, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": `${apiKeyData.data.key}`
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+    throw new Error("Failed to fetch profiles");
+  };
   options = {
     apiKey: async () => {
       const { token } = this.getCurrentUser;
