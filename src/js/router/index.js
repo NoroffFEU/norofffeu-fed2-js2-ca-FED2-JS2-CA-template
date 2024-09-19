@@ -4,30 +4,43 @@
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
-      await import("./views/home.js");
+      try {
+        const { default: homeView } = await import("./views/home.js");
+        homeView();
+      } catch (error) {
+        console.error("Error loading home view:", error);
+      }
       break;
     case "/auth/":
-      await import("./views/auth.js");
+      const { default: authView } = await import("./views/auth.js");
+      authView();
       break;
     case "/auth/login/":
-      await import("./views/login.js");
+      const { default: loginView } = await import("./views/login.js");
+      loginView();
       break;
     case "/auth/register/":
-      await import("./views/register.js");
+      const { default: registerView } = await import("./views/register.js");
+      registerView();
       break;
     case "/post/":
-      await import("./views/post.js");
+      const { default: postView } = await import("./views/post.js");
+      postView();
       break;
     case "/post/edit/":
-      await import("./views/postEdit.js");
+      const { default: postEditView } = await import("./views/postEdit.js");
+      postEditView();
       break;
     case "/post/create/":
-      await import("./views/postCreate.js");
+      const { default: postCreateView } = await import("./views/postCreate.js");
+      postCreateView();
       break;
     case "/profile/":
-      await import("./views/profile.js");
+      const { default: profileView } = await import("./views/profile.js");
+      profileView();
       break;
     default:
-      await import("./views/notFound.js");
+      const { default: notFoundView } = await import("./views/notFound.js");
+      notFoundView();
   }
 }
