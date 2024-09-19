@@ -233,6 +233,7 @@ export default class NoroffApp extends NoroffAPI {
           form.addEventListener("submit", this.events.post.comment);
 
           this.events.post.deleteComment();
+          this.pagination.singlePostPagination();
         } catch(error) {
           alert(error.message)
         }
@@ -288,7 +289,6 @@ export default class NoroffApp extends NoroffAPI {
 
       deleteComment: () => {
         const commentDeleteButtons = document.querySelectorAll(".comment-delete-button");
-        console.log(commentDeleteButtons);
         commentDeleteButtons.forEach(button => {
           button.addEventListener("click", async (event) => {
             try {
@@ -310,15 +310,16 @@ export default class NoroffApp extends NoroffAPI {
     },
 
     profile: {
-      displayProfilePage: async () => {
+      displayProfilePage: async (page = 1) => {
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
 
         try {
-          const userPostsData = await api.profile.readUsersPosts(name);
+          const userPostsData = await api.profile.readUsersPosts(name, 12, page);
           const userProfile = await api.profile.readProfile(name);
           const userData = userProfile.data
           const postData = userPostsData.data;
+          console.log(userData);
 
           const userAvatar = document.querySelector(".avatar");
           userAvatar.src = userData.avatar.url;
@@ -400,8 +401,8 @@ export default class NoroffApp extends NoroffAPI {
         
         paginationContainer.appendChild(createEllipsis());
 
-        const startPage = Math.max(3, currentPage -1);
-        const endPage = Math.min(pageCount -2, currentPage +1);
+        const startPage = Math.max(3, currentPage -2);
+        const endPage = Math.min(pageCount -2, currentPage +2);
         for (let i = startPage; i <= endPage; i++) {
           const pageButton = createButton(i, i);
           paginationContainer.appendChild(pageButton);
@@ -416,6 +417,13 @@ export default class NoroffApp extends NoroffAPI {
         paginationContainer.appendChild(firstPageButton)
         paginationContainer.appendChild(createEllipsis());
         for(let i = pageCount -2; i <= pageCount; i++) {
+          const pageButton = createButton(i, i);
+          paginationContainer.appendChild(pageButton);
+        }
+      }
+
+      if (pageCount <= 7) {
+        for (let i = 1; i < 8; i++) {
           const pageButton = createButton(i, i);
           paginationContainer.appendChild(pageButton);
         }
@@ -440,6 +448,71 @@ export default class NoroffApp extends NoroffAPI {
       }
     },
 
-    singlePostPagination: () => {}
+    singlePostPagination: async () => {
+      let postData = await api.posts.getAllPosts();
+      let { data, meta } = postData;
+      const totalCount = meta.totalCount;
+      let currentPage = 1;
+
+      const params = new URLSearchParams(window.location.search);
+      const postId = Number(params.get('id'));
+
+      let currentIndex = data.findIndex(post => post.id === postId);
+
+      while (currentIndex === -1 && currentPage * 100 < totalCount) {
+        currentPage++;
+        let newPostData = await api.posts.getPosts(100, currentPage);
+        data = data.concat(newPostData.data);
+        currentIndex = data.findIndex(post => post.id === postId);
+      }
+      
+      const previousButton = document.getElementById("previous-post");
+      if (previousButton) {
+        if (currentIndex > 0) {
+          const previousPostId = data[currentIndex -1].id;
+          previousButton.addEventListener("click", () => {
+            window.location.href = `/post/?id=${previousPostId}`;
+          })
+        } else {
+          previousButton.disabled = true;
+          previousButton.style.cursor = "not-allowed";
+        }
+      }
+
+      const nextButton = document.getElementById("next-post");
+      if (nextButton) {
+        if (currentIndex < data.length - 1) {
+          const nextPostId = data[currentIndex +1]?.id;
+          nextButton.addEventListener("click", () => {
+            if(nextPostId) {
+              window.location.href = `/post/?id=${nextPostId}`;
+            }
+          })
+        } else if (currentPage * 100 < totalCount) {
+          currentPage++;
+          try {
+            let newPostData = await api.posts.getPosts(100, currentPage);
+            data = data.concat(newPostData.data);
+            currentIndex = data.findIndex(post => post.id === postId);
+            const nextPostId = data[currentIndex +1]?.id;
+            nextButton.addEventListener("click", () => {
+              if(nextPostId) {
+                window.location.href = `/post/?id=${nextPostId}`;
+              } else {
+                nextButton.disabled = true;
+                nextButton.style.cursor = "not-allowed";
+              }
+            })
+          } catch (error) {
+            alert(error.message)
+            nextButton.disabled = true;
+            nextButton.style.cursor = "not-allowed";
+          }
+        } else {
+          nextButton.disabled = true;
+          nextButton.style.cursor = "not-allowed";
+        }
+      }
+    }
   }
 }

@@ -21,6 +21,10 @@
   margin-bottom: .8rem;
 }
 
+.user a {
+  text-decoration: underline;
+}
+
 .single-post-tag-list {
   font-size: 1.4rem;
   margin-top: 1.2rem;
@@ -134,6 +138,10 @@
 
   .single-post-container img  {
     margin-bottom: 1.6rem;
+  }
+
+  .user a:hover {
+    color: blue;
   }
 
   .single-post-tag-list {

@@ -175,6 +175,16 @@ export default class NoroffAPI {
       const data = await NoroffAPI.util.handleResponse(response, "Could not get posts");
       return data;
     },
+
+    getAllPosts: async () => {
+      const response = await fetch(NoroffAPI.paths.socialPost, {
+        headers: headers(),
+        method: "GET"
+      });
+
+      const data = await NoroffAPI.util.handleResponse(response, "Could not get all posts");
+      return data;
+    }
   }
 
   profile = {
