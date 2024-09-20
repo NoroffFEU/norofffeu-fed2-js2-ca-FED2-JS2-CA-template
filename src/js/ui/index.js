@@ -14,7 +14,7 @@ export default class NoroffApp extends NoroffAPI {
   async router(pathname = window.location.pathname) {
     switch (pathname) {
       case "/":
-        await this.views.home()
+        await this.views.login();
         break;
       case "/auth/login/":
         await this.views.login();
@@ -67,7 +67,10 @@ export default class NoroffApp extends NoroffAPI {
     feed: async () => {
       const logoutButton = document.querySelector(".logout-button");
       logoutButton.addEventListener("click", this.events.logout);
-      this.events.post.displayPosts();
+
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page') || localStorage.getItem("page") || 1;
+      this.events.post.displayPosts(Number(page));
     },
 
     postCreate: async () => {
@@ -188,11 +191,23 @@ export default class NoroffApp extends NoroffAPI {
             const postHTML = generateFeedHTML(post);
             postFeed.appendChild(postHTML);
           })
+          const newUrl = `${window.location.pathname}?page=${page}`;
+          window.history.replaceState({}, '', newUrl);
           this.pagination.feedPagination(currentPage, pageCount);
           window.scrollTo({
             top: 0,
             behavior: 'smooth'
           });
+
+          const article = document.querySelectorAll(".post-container");
+          article.forEach(post => {
+            post.addEventListener("click", () => {
+              const params = new URLSearchParams(window.location.search);
+              const pageNumber = params.get('page');
+              localStorage.setItem("page", pageNumber);
+            })
+          });
+
         } catch(error) {
           alert(error.message)
         }
@@ -224,13 +239,17 @@ export default class NoroffApp extends NoroffAPI {
 
           const backProfileButton = document.querySelector(".back-to-profile-page");
           backProfileButton.href = `/profile/?name=${postAuthor}`;
-          backProfileButton.textContent = `Back to ${postAuthor}'s page`;
+          backProfileButton.textContent = `${postAuthor}'s page`;
           const backIcon = document.createElement("i");
-          backIcon.classList.add("fa-solid", "fa-chevron-left");
+          backIcon.classList.add("fa-solid", "fa-chevron-left", "back-to-profile-icon");
           backProfileButton.insertBefore(backIcon, backProfileButton.firstChild);
 
           const form = document.forms["comment"];
           form.addEventListener("submit", this.events.post.comment);
+
+          const backButton = document.querySelector(".back-link-on-single-page");
+          const previousPage = localStorage.getItem("page");
+          backButton.href = `/post/feed/?page=${previousPage}`;
 
           this.events.post.deleteComment();
           this.pagination.singlePostPagination();
@@ -319,8 +338,6 @@ export default class NoroffApp extends NoroffAPI {
           const userProfile = await api.profile.readProfile(name);
           const userData = userProfile.data
           const postData = userPostsData.data;
-          console.log(userData);
-
           const userAvatar = document.querySelector(".avatar");
           userAvatar.src = userData.avatar.url;
           const userName = document.querySelector(".username");
@@ -328,6 +345,16 @@ export default class NoroffApp extends NoroffAPI {
           document.querySelector(".followers").textContent = userData._count.followers;
           document.querySelector(".following").textContent = userData._count.following;
           document.querySelector(".posts").textContent = userData._count.posts;
+          const profileHeader = document.querySelector(".profile-header");
+          const bannerURL = userData.banner.url;
+          profileHeader.style.backgroundImage = `url(${bannerURL})`;
+
+          const form = document.forms["updateProfile"];
+          if(name === NoroffAPI.user) {
+            form.style.display = "block";
+          } else {
+            form.style.display = "none";
+          }
 
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';

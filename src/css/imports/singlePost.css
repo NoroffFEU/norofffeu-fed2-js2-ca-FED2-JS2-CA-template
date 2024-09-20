@@ -126,6 +126,10 @@
     margin: 0 auto 4.8rem auto;
   }
 
+  .back-to-profile-icon {
+    margin-right: .8rem;
+  }
+
   .single-post {
     width: 80%;
     margin: 0 auto 5.6rem auto;

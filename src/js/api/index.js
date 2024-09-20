@@ -101,7 +101,7 @@ export default class NoroffAPI {
       });
       const data = await NoroffAPI.util.handleResponse(response, "Could not delete post.");
       alert("The post was deleted!");
-      window.location.href = "/post/feed/";
+      window.location.href = `/profile/?name=${NoroffAPI.user}`;
       return data;
     },
 

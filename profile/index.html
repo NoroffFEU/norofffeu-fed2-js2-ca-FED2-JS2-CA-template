@@ -12,9 +12,10 @@
     <script type="module" src="/src/app.js" defer></script>
   </head>
   <body class="post-body">
-    <header class="post-header">
-      <a href="/post/feed/">
-        <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+    <header class="post-header profile-header">
+      <a href="/post/feed/" class="back-to-feed-on-profile">
+        <i class="fa-solid fa-chevron-left"></i>
+        Back to Feed
       </a>
       <nav class="header-nav">
         <a href="/post/create/" class="new-post-button-desktop button-dark">
@@ -25,13 +26,7 @@
       </nav>
     </header>
 
-    <main class="post-main">
-      <div class="back-to-feed-on-profile">
-        <a href="/post/feed/">
-          <i class="fa-solid fa-chevron-left"></i>
-          Back to Feed
-        </a>
-      </div>
+    <main class="post-main profile-main">
       <div class="profile">
         <img src="" alt="" class="avatar" />
         <div class="user-information">
@@ -42,12 +37,11 @@
           </ul>
           <p>Posts: <span class="posts"></span></p>
         </div>
+        <form name="updateProfile">
+          <button>Update Profile</button>
+        </form>
       </div>
       <div class="feed"></div>
-
-      <form name="updateProfile">
-        <button>Update Profile</button>
-      </form>
     </main>
 
     <footer>

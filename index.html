@@ -9,13 +9,51 @@
   </head>
 
   <body>
-    <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+    <header>
+      <a href="/">
+        <img src="/images/noroff-logo.png" alt="Logo" class="logo" />
+      </a>
+    </header>
 
-    <h1>Home</h1>
+    <main class="auth-main">
+      <h1 class="page-title">Login</h1>
+      <form name="login">
+        <div>
+          <label for="email">
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+            />
+          </label>
+        </div>
 
-    <a href="/profile/">My Profile</a>
-    <a href="/auth/login/">Login</a>
-    <a href="/auth/register/">Register</a>
-    <button>Logout</button>
+        <div>
+          <label for="password">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+          </label>
+        </div>
+
+        <button type="submit" class="submit-type-button">Log in</button>
+        <p class="auth-info">
+          Don't have an account?<a href="/auth/register/" class="auth-link"
+            >Sign up</a
+          >
+        </p>
+      </form>
+    </main>
+
+    <footer>
+      <a href="#">Terms Of Use</a>
+      <a href="#">Privacy Policy</a>
+    </footer>
   </body>
 </html>

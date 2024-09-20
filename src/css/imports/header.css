@@ -2,6 +2,17 @@ header {
   padding: 1.6rem;
 }
 
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header {
+  align-items: flex-start;
+  padding-bottom: 8rem;
+}
+
 header img {
   width: 10.4rem;
 }
@@ -32,6 +43,14 @@ header img {
     right: 0;
     left: 0;
     z-index: 999;
+  }
+
+  .profile-header {
+    align-items: flex-start;
+    padding-bottom: 18.4rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   header img {

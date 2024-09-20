@@ -42,12 +42,6 @@
   font-size: 1.4rem;
 }
 
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 @media screen and (min-width: 1024px) {
   .submit-type-button {
     padding: 1.6rem 0;
@@ -60,4 +54,8 @@
     margin-top: 17.6rem;
   }
 
+  .profile-main {
+    margin-top: 36rem;
+  }
+  
 }
