@@ -2,11 +2,8 @@ import { authGuard } from "@utilities/authGuard";
 import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
 import { getUser } from "@utilities/getUser";
-import { readProfile } from "@/js/api/profile/read";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
-import { HomeProfile } from "@/components/profile/HomeProfile";
-import { reactToPost } from "@/js/api/post/react";
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
 async function loadHomePage() {

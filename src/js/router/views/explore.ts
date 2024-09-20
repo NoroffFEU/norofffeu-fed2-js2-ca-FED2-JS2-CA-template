@@ -6,16 +6,21 @@ import { authGuard } from "@/js/utilities/authGuard";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
+let page = 1;
+let isLoading = false;
+let isLastPage = false;
+
 async function loadExplorePage() {
   try {
     renderAllPosts();
     renderProfile();
+    loadPagination();
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function renderAllPosts(page: number = 1) {
+export async function renderAllPosts() {
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
 
   const getAllPosts = (await readPosts({ page: page })) as AllPostsResponse;
@@ -23,6 +28,8 @@ export async function renderAllPosts(page: number = 1) {
   const { data, meta } = getAllPosts;
 
   const getFollowingUsers = await getUserProfile();
+
+  isLastPage = meta.isLastPage;
 
   if (!data || data.length === 0) {
     postsContainer.innerHTML = "No posts found";
@@ -45,47 +52,35 @@ export async function renderAllPosts(page: number = 1) {
       const postHTML = createPostHTML(post, isFollowing, isLiked, isUserPost);
       postsContainer.insertAdjacentHTML("beforeend", postHTML);
     });
+
+    if (meta.nextPage !== null) {
+      page = meta.nextPage;
+    }
   }
 }
 
-async function renderPagination(meta: Meta) {
-  const postsContainer = document.getElementById("posts") as HTMLUListElement;
-  const paginationContainer = document.getElementById(
-    "pagination"
-  ) as HTMLUListElement;
-  console.log(meta);
+async function loadPagination() {
+  const scrollSection = document.querySelector(
+    ".scroll-section"
+  ) as HTMLElement;
 
-  let page = meta.currentPage;
-  const li = document.createElement("li");
+  scrollSection.addEventListener("scroll", async (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target as HTMLElement;
 
-  if (meta.previousPage !== null) {
-    li.innerHTML = `
-    <li><button class="previous">Previous</button></li>
-    `;
-    paginationContainer.appendChild(li);
-  }
+    if (
+      scrollTop + clientHeight >= scrollHeight - 100 &&
+      !isLoading &&
+      !isLastPage
+    ) {
+      isLoading = true;
+      console.log(`Loading page ${page}...`);
 
-  if (meta.nextPage !== null) {
-    li.innerHTML = `
-    <li><button class="next">Next</button></li>
-    `;
-    paginationContainer.appendChild(li);
-  }
+      await renderAllPosts();
 
-  const previousBtn = paginationContainer.querySelector(".previous");
-  const nextBtn = paginationContainer.querySelector(".next");
-
-  previousBtn?.addEventListener("click", () => {
-    page--;
-    renderAllPosts(page);
-  });
-
-  nextBtn?.addEventListener("click", () => {
-    page++;
-    renderAllPosts(page);
+      isLoading = false;
+    }
   });
 }
 
 loadExplorePage();
 authGuard();
-// toggleFollowUser("andgram", "follow");

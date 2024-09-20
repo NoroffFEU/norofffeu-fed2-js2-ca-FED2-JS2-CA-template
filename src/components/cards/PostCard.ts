@@ -21,7 +21,6 @@ export function createPostHTML(
     customElements.define("delete-button", DeleteButton);
   }
 
-  console.log(post.tags);
   return `
   <li class="post" data-post-id="${post.id}">
     <div class="post__header">
