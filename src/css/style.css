@@ -7,6 +7,10 @@
   max-width: 600px;
   padding: 1rem;
   border: 1px solid #ccc;
+
+  &:is(article) {
+    padding: 0px;
+  }
 }
 
 .post {

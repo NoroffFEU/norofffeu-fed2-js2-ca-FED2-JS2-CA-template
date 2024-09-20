@@ -1,14 +1,11 @@
 import { authGuard } from "@utilities/authGuard";
-import {
-  readPost,
-  readPostsByUser,
-  readPostsFromFollowing,
-} from "@api/post/read";
+import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
+import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
 async function loadHomePage() {
   try {
@@ -83,12 +80,3 @@ export async function renderPosts() {
 
 authGuard();
 loadHomePage();
-
-readPost(558);
-
-async function creatorLiked(id: number): Promise<boolean> {
-  const post = await readPost(id);
-  return (
-    post?.reactions[0]?.reactors?.some((user) => user === getUser()) || false
-  );
-}
