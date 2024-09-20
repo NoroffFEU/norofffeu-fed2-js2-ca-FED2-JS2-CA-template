@@ -212,6 +212,16 @@ export default class NoroffAPI {
       return data;
     },
 
-    update: async () => {}
+    update: async (name, { bio, avatar, banner }) => {
+      const body = JSON.stringify({ bio, avatar, banner });
+
+      const response = await fetch(`${NoroffAPI.paths.socialProfiles}/${name}`, {
+        headers: headers(true),
+        method: "PUT",
+        body,
+      })
+      await NoroffAPI.util.handleResponse(response, "Could not update profile.");
+      window.location.href = `/profile/?name=${name}`;
+    },
   }
 }

@@ -37,6 +37,9 @@ export default class NoroffApp extends NoroffAPI {
       case "/profile/":
         await this.views.profile();
         break;
+      case "/profile/update/":
+      await this.views.profileUpdate();
+      break;
       default:
         await this.views.notFound();
     }
@@ -100,6 +103,13 @@ export default class NoroffApp extends NoroffAPI {
       const logoutButton = document.querySelector(".logout-button");
       logoutButton.addEventListener("click", this.events.logout);
       this.events.profile.displayProfilePage();
+    },
+
+    profileUpdate: async () => {
+      authGuard();
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
+      this.events.profile.updateProfile();
     },
 
     notFound: async () => {
@@ -343,6 +353,8 @@ export default class NoroffApp extends NoroffAPI {
           userAvatar.src = userData.avatar.url;
           const userName = document.querySelector(".username");
           userName.textContent = userData.name;
+          const bio = document.querySelector(".bio");
+          bio.textContent = userData.bio
           document.querySelector(".followers").textContent = userData._count.followers;
           document.querySelector(".following").textContent = userData._count.following;
           document.querySelector(".posts").textContent = userData._count.posts;
@@ -356,6 +368,9 @@ export default class NoroffApp extends NoroffAPI {
           } else {
             updateButton.style.display = "none";
           }
+          updateButton.addEventListener("click", () => {
+            window.location.href = "/profile/update/"
+          })
 
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';
@@ -365,6 +380,43 @@ export default class NoroffApp extends NoroffAPI {
           });
         } catch(error) {
           alert(error.message);
+        }
+      },
+
+      updateProfile: async () => {
+        try {
+          const userName = NoroffAPI.user;
+          const userData = await api.profile.readProfile(userName);
+          const { data } = userData;
+          const { bio, avatar, banner } = data;
+
+          document.getElementById("bio").value = bio || '';
+          document.getElementById("banner").value = banner.url || '';
+          document.getElementById("banner-alt").value = banner.alt || '';
+          document.getElementById("avatar").value = avatar.url || '';
+          document.getElementById("avatar-alt").value = avatar.alt || '';
+          document.forms["updateProfile"].addEventListener("submit", async(event) => {
+            event.preventDefault();
+            const updatedProfile = NoroffApp.form.handleSubmit(event);
+            updatedProfile.banner = {
+              url: updatedProfile["banner[url]"],
+              alt: updatedProfile["banner[alt]"]
+            };
+            updatedProfile.avatar = {
+              url: updatedProfile["avatar[url]"],
+              alt: updatedProfile["avatar[alt]"]
+            };
+            await api.profile.update(userName, updatedProfile);
+          });
+
+          const backProfileButton = document.querySelector(".back-to-profile-page");
+          backProfileButton.href = `/profile/?name=${NoroffAPI.user}`;
+          backProfileButton.textContent = "My profile page";
+          const backIcon = document.createElement("i");
+          backIcon.classList.add("fa-solid", "fa-chevron-left", "back-to-profile-icon");
+          backProfileButton.insertBefore(backIcon, backProfileButton.firstChild);
+        } catch (error) {
+          alert(error.message)
         }
       }
     }

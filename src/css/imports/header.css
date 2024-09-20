@@ -10,7 +10,10 @@ header {
 
 .profile-header {
   align-items: flex-start;
-  padding-bottom: 8rem;
+  padding-bottom: 12.8rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 header img {
@@ -47,9 +50,6 @@ header img {
   .profile-header {
     align-items: flex-start;
     padding-bottom: 18.4rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
   }
 
   header img {

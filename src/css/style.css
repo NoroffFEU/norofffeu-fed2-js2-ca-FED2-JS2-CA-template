@@ -7,6 +7,7 @@
 @import url(imports/singlePost.css);
 @import url(imports/edit.css);
 @import url(imports/profile.css);
+@import url(imports/updateProfile.css);
 
 .auth-info {
   font-size: 1.4rem;
