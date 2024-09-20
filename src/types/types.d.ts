@@ -211,6 +211,7 @@ export interface ProfileResponse {
   followers: Follower[];
   following: Follower[];
   avatar: Media;
+  posts: PostResponse[];
   _count: {
     posts: number;
     followers: number;

@@ -2,6 +2,7 @@
 @import url(auth.css);
 @import url(variables.css);
 @import url(home.css);
+@import url(profile.css);
 
 #posts {
   max-width: 600px;

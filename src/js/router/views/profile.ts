@@ -41,7 +41,7 @@ async function loadProfile() {
       isUserProfile
     );
 
-    profileContainer.insertAdjacentHTML("beforeend", profileToRender);
+    profileContainer.insertAdjacentHTML("beforeend", await profileToRender);
   }
 }
 

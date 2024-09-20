@@ -2,6 +2,7 @@ import { PostResponse } from "@/types/types";
 import { FollowButton } from "@/components/buttons/FollowButton";
 import { LikeButton } from "@/components/buttons/LikeButton";
 import { DeleteButton } from "@/components/buttons/DeleteButton";
+import { getUser } from "@/js/utilities/getUser";
 
 export function createPostHTML(
   post: PostResponse,
@@ -41,7 +42,7 @@ export function createPostHTML(
 
             </div>
             ${
-              isUserPost
+              isUserPost && post.author.name === getUser()
                 ? `
                 <div class="user-buttons">
                     <delete-button 

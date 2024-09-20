@@ -1,3 +1,1 @@
-export async function renderProfile(username: string) {
-  const;
-}
+export async function renderProfile(username: string) {}
