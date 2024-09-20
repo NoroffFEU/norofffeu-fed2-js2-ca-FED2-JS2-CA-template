@@ -2,7 +2,7 @@
   font-size: 1.4rem;
 }
 
-.update-button {
+.update-button, .follow-button {
   font-size: 1.4rem;
   padding: .6rem 1rem;
   border: 1px solid #000;
@@ -56,8 +56,8 @@
 
 @media screen and (min-width: 1024px) {
 
-  .update-button {
-    padding: 1.2rem 1rem;
+  .update-button, .follow-button {
+    padding: 1.2rem 3.2rem;
   }
 
   .profile {

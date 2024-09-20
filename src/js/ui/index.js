@@ -363,10 +363,13 @@ export default class NoroffApp extends NoroffAPI {
           profileHeader.style.backgroundImage = `url(${bannerURL})`;
 
           const updateButton = document.querySelector(".update-button");
+          const followButton = document.querySelector(".follow-button");
           if(name === NoroffAPI.user) {
             updateButton.style.display = "block";
+            followButton.style.display = "none"
           } else {
             updateButton.style.display = "none";
+            followButton.style.display = "block"
           }
           updateButton.addEventListener("click", () => {
             window.location.href = "/profile/update/"
