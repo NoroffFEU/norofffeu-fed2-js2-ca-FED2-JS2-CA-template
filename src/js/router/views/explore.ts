@@ -4,10 +4,12 @@ import { getUser } from "@/js/utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { authGuard } from "@/js/utilities/authGuard";
 import { createPostHTML } from "@/components/cards/PostCard";
+import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
 async function loadExplorePage() {
   try {
     renderAllPosts();
+    renderProfile();
   } catch (error) {
     console.error(error);
   }

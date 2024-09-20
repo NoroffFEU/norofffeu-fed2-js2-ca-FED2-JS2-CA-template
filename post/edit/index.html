@@ -5,31 +5,70 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
+    <link rel="stylesheet" href="../../src/css/style.css" />
     <script type="module" src="../../src/app.ts"></script>
   </head>
 
-  <body>
-    <h1>Edit Post</h1>
+  <body class="home-page">
+    <header>
+      <div class="logo__container">
+        <img
+          class="logo"
+          src="/images/noroff-logo-white.png"
+          alt="Noroff Logo"
+        />
+      </div>
+      <div class="nav__container">
+        <a href="../../home/">🏠 Home</a>
+        <a href="../../explore/">🔍 Explore</a>
+        <a href="javascript:void(0)">🔔 Notifications</a>
+        <a href="javascript:void(0)">🔖 Bookmarks</a>
+        <a href="javascript:void(0)">❤️ Favorites</a>
+        <a href="javascript:void(0)">📝 Lists</a>
+        <a href="javascript:void(0)">⚙️ Preferences</a>
+      </div>
+      </div>
+    </header>
+    <main>
+      <section class="scroll-section">
+        <div class="posts__container__header">
+          <a data-is-active="true" href="javascript:void(0)">✏️ Update post</a>
+        </div>
+        <ul id="posts">
+          <form name="editPost">
+            <div>
+              <label for="title">Title</label>
+              <input id="title" type="text" name="title" required />
+            </div>
+            <div>
+              <label for="body">Body</label>
+              <textarea id="body" name="body"></textarea>
+            </div>
+            <div>
+              <label for="tags">Tags</label>
+              <input id="tags" type="text" name="tags" />
+            </div>
+            <div>
+              <label for="media">Media</label>
+              <input id="media" type="file" name="media" />
+            </div>
+            <button>Edit Post</button>
+          </form>
+        </ul>
+      </section>
+    </main>
+    <aside>
+      <form name="search">
+        <input type="text" name="search" placeholder="Search" />
+      </form>
 
-    <form name="editPost">
-      <div>
-        <label for="title">Title</label>
-        <input id="title" type="text" name="title" required />
+      <div class="profile__container">
       </div>
-      <div>
-        <label for="body">Body</label>
-        <textarea id="body" name="body"></textarea>
+
+      <div class="user-actions">
+        <a href="javascript:void(0)">Create post</a>
+        <button id="logout-btn">Logout</button>
       </div>
-      <div>
-        <label for="tags">Tags</label>
-        <input id="tags" type="text" name="tags" />
-      </div>
-      <div>
-        <label for="media">Media</label>
-        <input id="media" type="file" name="media" />
-      </div>
-      <button>Edit Post</button>
-    </form>
-    <a href="/home/">Go back</a>
+    </aside>
   </body>
 </html>

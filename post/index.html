@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,74 +13,132 @@
       <a href="/home/">Go back</a>
     </div>
     <section style="max-width: 600px">
-      <article id="main-post">
-        <div
-          id="main-post__header"
-          style="display: flex; justify-content: space-between"
-        >
-          <div style="display: flex; justify-items: center">
+      
+    </section>
+  </body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noroff FED2 JS2 CA</title>
+    <link rel="stylesheet" href="../../src/css/style.css" />
+    <script type="module" src="../../src/app.ts"></script>
+  </head>
+
+  <body class="home-page">
+    <header>
+      <div class="logo__container">
+        <img
+          class="logo"
+          src="/images/noroff-logo-white.png"
+          alt="Noroff Logo"
+        />
+      </div>
+      <div class="nav__container">
+        <a href="../../home/">🏠 Home</a>
+        <a href="../../explore/">🔍 Explore</a>
+        <a href="javascript:void(0)">🔔 Notifications</a>
+        <a href="javascript:void(0)">🔖 Bookmarks</a>
+        <a href="javascript:void(0)">❤️ Favorites</a>
+        <a href="javascript:void(0)">📝 Lists</a>
+        <a href="javascript:void(0)">⚙️ Preferences</a>
+      </div>
+      </div>
+    </header>
+    <main>
+      <section class="scroll-section">
+        <div class="posts__container__header">
+          <a data-is-active="true" href="javascript:void(0)">👤 Profile</a>
+        </div>
+        <ul id="posts">
+          <article id="main-post">
+            <div
+              id="main-post__header"
+              style="display: flex; justify-content: space-between"
+            >
+              <div style="display: flex; justify-items: center">
+                <div>
+                  <img
+                    id="main-post__header__avatar"
+                    style="
+                      aspect-ratio: 1;
+                      width: 50px;
+                      object-fit: cover;
+                      border-radius: 50%;
+                      object-position: center;
+                    "
+                  />
+                </div>
+                <div
+                  style="display: flex; flex-direction: column; margin-left: 10px"
+                >
+                  <span id="main-post__header__nickname"></span>
+                  <a id="main-post__header__profile" href="#"></a>
+                </div>
+              </div>
+    
+              <div><span id="main-post__header__time"></span></div>
+            </div>
+            <div id="main-post__body">
+              <p id="main-post__body__text"></p>
+            </div>
             <div>
               <img
-                id="main-post__header__avatar"
-                style="
-                  aspect-ratio: 1;
-                  width: 50px;
-                  object-fit: cover;
-                  border-radius: 50%;
-                  object-position: center;
-                "
+                id="main-post__body__media"
+                style="max-width: fit-content; width: 100%"
               />
             </div>
-            <div
-              style="display: flex; flex-direction: column; margin-left: 10px"
-            >
-              <span id="main-post__header__nickname"></span>
-              <a id="main-post__header__profile" href="#"></a>
+            <div id="main-post__footer">
+              <hr />
+              <div
+                id="main-post__footer__tags"
+                style="display: flex; gap: 10px"
+              ></div>
+              <hr />
+              <div style="display: flex; justify-content: space-between">
+                <div style="margin: auto 0">
+                  <span id="main-post__footer_date"></span>
+                </div>
+                <div style="display: flex; gap: 10px">
+                  <p><span id="main-post__footer__likes"></span> Likes</p>
+                  <p><span id="main-post__footer__boosts">0</span> Boost</p>
+                </div>
+              </div>
+    
+              <hr />
+    
+              <div
+                id="main-post__footer__buttons"
+                style="display: flex; justify-content: space-around"
+              >
+                <button id="main-post__footer__buttons__comment">Comment</button>
+                <button id="main-post__footer__buttons__boost">Boost</button>
+                <button id="main-post__footer__buttons__like">0 | Like</button>
+                <button id="main-post__footer__buttons__share">Share</button>
+                <button id="main-post__footer__buttons__bookmark">Bookmark</button>
+              </div>
             </div>
-          </div>
+          </article>
+        </ul>
+      </section>
+    </main>
+    <aside>
+      <form name="search">
+        <input type="text" name="search" placeholder="Search" />
+      </form>
 
-          <div><span id="main-post__header__time"></span></div>
-        </div>
-        <div id="main-post__body">
-          <p id="main-post__body__text"></p>
-        </div>
-        <div>
-          <img
-            id="main-post__body__media"
-            style="max-width: fit-content; width: 100%"
-          />
-        </div>
-        <div id="main-post__footer">
-          <hr />
-          <div
-            id="main-post__footer__tags"
-            style="display: flex; gap: 10px"
-          ></div>
-          <hr />
-          <div style="display: flex; justify-content: space-between">
-            <div style="margin: auto 0">
-              <span id="main-post__footer_date"></span>
-            </div>
-            <div style="display: flex; gap: 10px">
-              <p><span id="main-post__footer__likes"></span> Likes</p>
-              <p><span id="main-post__footer__boosts">0</span> Boost</p>
-            </div>
-          </div>
+      <div class="profile__container">
+      </div>
 
-          <hr />
-
-          <div
-            id="main-post__footer__buttons"
-            style="display: flex; justify-content: space-around"
-          >
-            <button id="main-post__footer__buttons__comment">Comment</button>
-            <button id="main-post__footer__buttons__boost">Boost</button>
-            <button id="main-post__footer__buttons__like">0 | Like</button>
-            <button id="main-post__footer__buttons__share">Share</button>
-            <button id="main-post__footer__buttons__bookmark">Bookmark</button>
-          </div>
-        </div>
-      </article>
-    </section>
+      <div class="user-actions">
+        <a href="../../post/create/">Create post</a>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </aside>
   </body>
 </html>

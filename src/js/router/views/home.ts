@@ -7,6 +7,7 @@ import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { HomeProfile } from "@/components/profile/HomeProfile";
 import { reactToPost } from "@/js/api/post/react";
+import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
 async function loadHomePage() {
   try {
@@ -71,21 +72,6 @@ export async function renderPosts() {
     li.innerHTML =
       "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
     postsContainer.appendChild(li);
-  }
-}
-
-export async function renderProfile() {
-  const user = getUser();
-  const profileContainer = document.querySelector(
-    ".profile__container"
-  ) as HTMLElement;
-
-  const profileData = await readProfile(user);
-
-  if (profileData) {
-    const profile = new HomeProfile();
-    profile.data = profileData;
-    profileContainer.appendChild(profile);
   }
 }
 
