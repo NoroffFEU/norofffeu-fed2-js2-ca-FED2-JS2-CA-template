@@ -16,10 +16,11 @@ body {
   flex-direction: column;
   width: 20rem;
 }
-#paginationContainer{
+#paginationContainer, #paginationProfileCon{
   display: flex;
   gap: 1rem;
   margin: 5rem;
+  flex-wrap: wrap;
 }
 #postsContainer, #getAllProfiles{
   display: flex;

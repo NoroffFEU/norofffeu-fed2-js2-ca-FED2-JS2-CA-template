@@ -2,8 +2,11 @@ alert("Single Post Page");
 
 import NoroffAPI from "../../api";
 import { readPosts } from "../../api/post/read";
+import { renderPagination } from "../../utilities/pagination";
+
 
 const api = new NoroffAPI();
+
 
 async function displayPosts(posts){
     
@@ -55,38 +58,7 @@ async function searchPosts(){
     }
 }
 
-
-function renderPagination (totalPages, currentPage){
-    const paginationCon = document.getElementById("paginationContainer");
-    paginationCon.innerHTML = '';
-
-    if (currentPage > 1){
-        const prevButton = document.createElement('button');
-        prevButton.innerHTML = '&lt;';
-        prevButton.addEventListener('click', () => loadPost(currentPage -1) );
-        paginationCon.appendChild(prevButton);
-    }
-
-    for (let page = 1; page <= totalPages; page++){
-        const pageButton = document.createElement('button');
-        pageButton.innerText = page
-
-        if (page === currentPage){
-            pageButton.disabled  = true; 
-        }
-        pageButton.addEventListener('click', () => loadPost(page))
-        paginationCon.appendChild(pageButton)
-    }
-
-    if (currentPage < totalPages) {
-        const nextButton = document.createElement('button')
-        nextButton.innerHTML = '&gt;' ;
-        nextButton.addEventListener('click', () => loadPost(currentPage + 1))
-        paginationCon.appendChild(nextButton)
-    }
-}
-
-async function loadPost(page = 1){
+export async function loadPost(page = 1){
 
     try{
         const {posts, currentPage, totalPages} = await readPosts (12, page)
@@ -100,9 +72,9 @@ async function loadPost(page = 1){
     }
 }
 
-const searchBtn = document.getElementById('searchSubmitBtn')
-searchBtn.addEventListener('click', searchPosts)
+// const searchBtn = document.getElementById('searchSubmitBtn')
+// searchBtn.addEventListener('click', searchPosts)
 
 
-loadPost(1);
+loadPost();
 
