@@ -42,7 +42,7 @@ export default class NoroffAPI {
       const { accessToken: token, ...user } = data;
       NoroffAPI.token = token;
       NoroffAPI.user = user;
-      window.location.href = "/post/feed/";
+      window.location.href = "/post/feed/?page=1";
       return data;
     },
 
@@ -90,7 +90,7 @@ export default class NoroffAPI {
       });
 
       const data = await NoroffAPI.util.handleResponse(response, "Could not create post");
-      window.location.href = "/post/feed/";
+      window.location.href = "/post/feed/?page=1";
       return data;
     },
 

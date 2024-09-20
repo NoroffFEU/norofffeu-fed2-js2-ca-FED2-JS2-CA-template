@@ -97,8 +97,8 @@ export default class NoroffApp extends NoroffAPI {
 
     profile: async () => {
       authGuard();
-      //const logoutButton = document.querySelector(".logout-button");
-      //logoutButton.addEventListener("click", this.events.logout);
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", this.events.logout);
       this.events.profile.displayProfilePage();
     },
 
@@ -136,6 +136,7 @@ export default class NoroffApp extends NoroffAPI {
 
       NoroffAPI.user = null;
       NoroffAPI.token = null;
+      localStorage.page = null;
     
       alert("You have successfully logged out.");
       window.location.href = "/";
@@ -349,11 +350,11 @@ export default class NoroffApp extends NoroffAPI {
           const bannerURL = userData.banner.url;
           profileHeader.style.backgroundImage = `url(${bannerURL})`;
 
-          const form = document.forms["updateProfile"];
+          const updateButton = document.querySelector(".update-button");
           if(name === NoroffAPI.user) {
-            form.style.display = "block";
+            updateButton.style.display = "block";
           } else {
-            form.style.display = "none";
+            updateButton.style.display = "none";
           }
 
           const postFeed = document.querySelector('.feed');
