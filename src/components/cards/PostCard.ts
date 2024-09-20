@@ -94,20 +94,13 @@ export function createPostHTML(
             <a href="/post/?id=${post.id}">View</a>
             <a href="/post/?id=${post.id}">Reply</a>
         </div>
-        ${
-          !isUserPost
-            ? `
+      
             <like-button 
                 data-post-id="${post.id}" 
                 data-reactions="${post._count.reactions}" 
                 data-user-liked="${isLiked}"
             >
             </like-button>
-            
-            `
-            : `<span>Likes: ${post._count.reactions}</span>`
-        }
-        
     </div>
         <hr>
   </li>

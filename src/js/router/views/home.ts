@@ -1,5 +1,9 @@
 import { authGuard } from "@utilities/authGuard";
-import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
+import {
+  readPost,
+  readPostsByUser,
+  readPostsFromFollowing,
+} from "@api/post/read";
 import { onLogout } from "@ui/auth/logout";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
@@ -32,7 +36,6 @@ export async function renderPosts() {
 
   console.log("COMBINED", postsByUser);
 
-  // TODO add pagination
   // TODO add search
 
   try {
@@ -43,13 +46,16 @@ export async function renderPosts() {
       postsContainer.appendChild(li);
     } else {
       combinedPosts.forEach(async (post) => {
-        console.log("AQUI ", post);
-        console.log("AQUI AHORA", post.reactions[0]?.count);
         const isFollowing = getFollowingUsers?.find(
           (user) => user.name === post.author.name
         )
           ? true
           : false;
+
+        const isUserPost = post.author.name === getUser() ? true : false;
+
+        const test = isUserPost ? await creatorLiked(post.id) : false;
+        console.log(post.id, test);
 
         const isLiked = post.reactions[0]?.reactors?.find(
           (user) => user === getUser()
@@ -57,9 +63,12 @@ export async function renderPosts() {
           ? true
           : false;
 
-        const isUserPost = post.author.name === getUser() ? true : false;
-
-        const postHTML = createPostHTML(post, isFollowing, isLiked, isUserPost);
+        const postHTML = createPostHTML(
+          post,
+          isFollowing,
+          isLiked || test,
+          isUserPost
+        );
         postsContainer.insertAdjacentHTML("beforeend", postHTML);
       });
     }
@@ -74,3 +83,12 @@ export async function renderPosts() {
 
 authGuard();
 loadHomePage();
+
+readPost(558);
+
+async function creatorLiked(id: number): Promise<boolean> {
+  const post = await readPost(id);
+  return (
+    post?.reactions[0]?.reactors?.some((user) => user === getUser()) || false
+  );
+}
