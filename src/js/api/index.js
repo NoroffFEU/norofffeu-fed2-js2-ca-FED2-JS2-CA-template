@@ -258,7 +258,7 @@ export default class NoroffAPI {
 
       const { token} = getCurrentUser();
 
-      let url = `${this.apiProfilesPath}/${name}/posts`;
+      let url = `${this.apiProfilesPath}/${name}`;
 
       if (option._posts){
         
