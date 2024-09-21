@@ -362,8 +362,14 @@ export default class NoroffApp extends NoroffAPI {
           const bannerURL = userData.banner.url;
           profileHeader.style.backgroundImage = `url(${bannerURL})`;
 
-          const updateButton = document.querySelector(".update-button");
-          const followButton = document.querySelector(".follow-button");
+          const buttonArea = document.querySelector(".button-area");
+          const updateButton= document.createElement("button");
+          updateButton.classList.add("update-button");
+          updateButton.textContent = "Update Profile";
+          const followButton= document.createElement("button");
+          followButton.classList.add("follow-button");
+          followButton.textContent = "Follow";
+          buttonArea.append(updateButton, followButton)
           if(name === NoroffAPI.user) {
             updateButton.style.display = "block";
             followButton.style.display = "none"

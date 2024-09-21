@@ -2,13 +2,18 @@
   font-size: 1.4rem;
 }
 
+.button-area {
+  margin: 0 0 1.6rem auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .update-button, .follow-button {
   font-size: 1.4rem;
   padding: .6rem 1rem;
   border: 1px solid #000;
   border-radius: 3px;
   box-sizing: border-box;
-  margin: 0 0 1.6rem auto;
 }
 
 .profile {
