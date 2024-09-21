@@ -55,8 +55,6 @@ export default class NoroffApp extends NoroffAPI {
   }
 
   views = {
-    home: async () => {},
-
     register: async () => {
       const form = document.forms["register"];
       form.addEventListener("submit", this.events.register);
@@ -68,9 +66,8 @@ export default class NoroffApp extends NoroffAPI {
     },
 
     feed: async () => {
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
-
+      this.events.logout();
+      this.events.myPage();
       const params = new URLSearchParams(window.location.search);
       const page = params.get('page') || localStorage.getItem("page") || 1;
       this.events.post.displayPosts(Number(page));
@@ -78,37 +75,36 @@ export default class NoroffApp extends NoroffAPI {
 
     postCreate: async () => {
       authGuard();
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      this.events.logout();
+      this.events.myPage();
       const form = document.forms["createPost"];
       form.addEventListener("submit", this.events.post.create);
     },
 
     postEdit: async () => {
       authGuard();
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      this.events.logout();
+      this.events.myPage();
       this.events.post.update();
       this.events.post.delete();
     },
 
     post: async () => {
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      this.events.logout();
+      this.events.myPage();
       this.events.post.displaySinglePost();
     },
 
     profile: async () => {
       authGuard();
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      this.events.logout();
+      this.events.myPage();
       this.events.profile.displayProfilePage();
     },
 
     profileUpdate: async () => {
       authGuard();
-      const logoutButton = document.querySelector(".logout-button");
-      logoutButton.addEventListener("click", this.events.logout);
+      this.events.logout();
       this.events.profile.updateProfile();
     },
 
@@ -141,15 +137,23 @@ export default class NoroffApp extends NoroffAPI {
       }
     },
 
-    logout: (event) => {
-      event.preventDefault();
+    logout: () => {
+      const logoutButton = document.querySelector(".logout-button");
+      logoutButton.addEventListener("click", (event) => {
+        event.preventDefault();
+  
+        NoroffAPI.user = null;
+        NoroffAPI.token = null;
+        localStorage.page = null;
+      
+        alert("You have successfully logged out.");
+        window.location.href = "/";
+      });
+    },
 
-      NoroffAPI.user = null;
-      NoroffAPI.token = null;
-      localStorage.page = null;
-    
-      alert("You have successfully logged out.");
-      window.location.href = "/";
+    myPage: () => {
+      const myPageLink = document.querySelector(".my-page");
+      myPageLink.href = `/profile/?name=${NoroffAPI.user}`;
     },
 
     post: {
@@ -231,14 +235,21 @@ export default class NoroffApp extends NoroffAPI {
           const post = await api.post.readPost(postId);
           const postData = post.data;
           const postAuthor = postData.author.name;
-          
-          const editButton = document.querySelector(".edit-button");
+
+          const editButton = document.createElement("button");
+          editButton.classList.add("edit-button", "button-dark");
+          editButton.textContent = "Edit";
+          const editIcon = document.createElement("i");
+          editIcon.classList.add("fa-regular", "fa-pen-to-square");
+          editButton.insertBefore(editIcon, editButton.firstChild);
           editButton.dataset.id = postId;
           if(postAuthor === NoroffAPI.user) {
             editButton.style.display = "block";
           } else {
             editButton.style.display = "none";
           }
+          const headerNav = document.querySelector(".header-nav");
+          headerNav.insertBefore(editButton, headerNav.firstChild);
           editButton.addEventListener("click", () => {
             window.location.href = `/post/edit/?id=${postId}`;
           })
