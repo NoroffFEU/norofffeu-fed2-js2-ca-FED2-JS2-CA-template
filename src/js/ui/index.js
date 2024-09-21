@@ -368,6 +368,7 @@ export default class NoroffApp extends NoroffAPI {
           updateButton.textContent = "Update Profile";
           const followButton= document.createElement("button");
           followButton.classList.add("follow-button");
+          followButton.id = "toggle-button";
           followButton.textContent = "Follow";
           buttonArea.append(updateButton, followButton)
           if(name === NoroffAPI.user) {
@@ -387,6 +388,7 @@ export default class NoroffApp extends NoroffAPI {
             const postHTML = generateFeedHTML(post);
             postFeed.appendChild(postHTML);
           });
+          this.events.profile.follow();
         } catch(error) {
           alert(error.message);
         }
@@ -427,7 +429,32 @@ export default class NoroffApp extends NoroffAPI {
         } catch (error) {
           alert(error.message)
         }
-      }
+      },
+
+      follow: () => {
+        const toggleButton = document.getElementById("toggle-button");
+        toggleButton.addEventListener("click", async () => {
+          try {
+            const params = new URLSearchParams(window.location.search);
+            const userName = params.get('name');
+            toggleButton.disabled = true;
+            if (toggleButton.textContent === "Follow") {
+              await api.profile.follow(userName);
+              toggleButton.textContent = "Unfollow";
+            } else {
+              await api.profile.unfollow(userName);
+              toggleButton.textContent = "Follow";
+            }
+            const userProfile = await api.profile.readProfile(userName);
+            const userData = userProfile.data;
+            const followers = userData._count.followers;
+            document.querySelector(".followers").textContent = followers;
+          } catch (error) {
+            alert(error.message);
+          }
+          toggleButton.disabled = false;
+        })
+      },
     }
   }
 

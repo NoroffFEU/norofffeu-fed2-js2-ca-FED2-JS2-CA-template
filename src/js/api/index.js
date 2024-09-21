@@ -223,5 +223,23 @@ export default class NoroffAPI {
       await NoroffAPI.util.handleResponse(response, "Could not update profile.");
       window.location.href = `/profile/?name=${name}`;
     },
+
+    follow: async (name) => {
+      const response = await fetch(`${NoroffAPI.paths.socialProfiles}/${name}/follow`, {
+        headers: headers(),
+        method: "PUT"
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not follow the user.");
+      return data;
+    },
+
+    unfollow: async (name) => {
+      const response = await fetch(`${NoroffAPI.paths.socialProfiles}/${name}/unfollow`, {
+        headers: headers(),
+        method: "PUT"
+      });
+      const data = await NoroffAPI.util.handleResponse(response, "Could not unfollow the user.");
+      return data;
+    },
   }
 }
