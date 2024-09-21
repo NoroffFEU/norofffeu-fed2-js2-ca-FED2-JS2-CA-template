@@ -1,6 +1,17 @@
 // Use Postman, or JavaScript to get your API key
 // In Workflow we will learn how to secure this information
-export const API_KEY = "";
+import NoroffAPI from ".";
+export async function initializeAPI() {
+  const api = new NoroffAPI();
+  try {
+    const API_KEY = await api.options.apiKey();
+    console.log(API_KEY); // Use the API key here
+  } catch (error) {
+    console.error("Error fetching API key:", error);
+  }
+}
+
+// export const API_KEY = await api.options.apiKey();
 
 export const API_BASE = "https://v2.api.noroff.dev";
 

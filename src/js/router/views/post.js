@@ -3,40 +3,41 @@ alert("Single Post Page");
 import NoroffAPI from "../../api";
 import { readPosts } from "../../api/post/read";
 import { renderPagination } from "../../utilities/pagination";
+import { displayPosts } from "../../utilities/displayHTML";
 
 
 const api = new NoroffAPI();
 
 
-async function displayPosts(posts){
+// async function displayPosts(posts){
     
-    try
-    {
+//     try
+//     {
 
-    if (Array.isArray(posts)){
-        const postsContainer = document.getElementById("postsContainer");
+//     if (Array.isArray(posts)){
+//         const postsContainer = document.getElementById("postsContainer");
     
-        const postsHTML = posts.map(post =>
-            `
-            <div class="post" onclick="window.location.href='/post/detail/?id=${post.id}'">
-                 <h2>${post.title}</h2>
-                 <p>${post.body}</p>
-                 <p><strong>Tags:</strong> ${post.tags.join(", ")}</p>
-                 ${post.media && post.media.url ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post Media'}">` : ""}
-            </div>
-             `
-         ).join('');
+//         const postsHTML = posts.map(post =>
+//             `
+//             <div class="post" onclick="window.location.href='/post/detail/?id=${post.id}'">
+//                  <h2>${post.title}</h2>
+//                  <p>${post.body}</p>
+//                  <p><strong>Tags:</strong> ${post.tags.join(", ")}</p>
+//                  ${post.media && post.media.url ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post Media'}">` : ""}
+//             </div>
+//              `
+//          ).join('');
            
-            postsContainer.innerHTML = postsHTML
+//             postsContainer.innerHTML = postsHTML
        
 
-    }else {
-        alert("Error: Data is not in the expected format");
-    }
-    }catch (error){
-        alert(`Error displaying posts: ${error.message}`);
-    }
-}
+//     }else {
+//         alert("Error: Data is not in the expected format");
+//     }
+//     }catch (error){
+//         alert(`Error displaying posts: ${error.message}`);
+//     }
+// }
 
 
 async function searchPosts(){
@@ -58,10 +59,10 @@ async function searchPosts(){
     }
 }
 
-export async function loadPost(page = 1){
+export async function loadPost(limit=12,page = 1){
 
     try{
-        const {posts, currentPage, totalPages} = await readPosts (12, page)
+        const {posts, currentPage, totalPages} = await readPosts (limit, page)
 
         displayPosts(posts);
         
@@ -72,8 +73,16 @@ export async function loadPost(page = 1){
     }
 }
 
-// const searchBtn = document.getElementById('searchSubmitBtn')
-// searchBtn.addEventListener('click', searchPosts)
+document.addEventListener("DOMContentLoaded", () => {
+    const searchBtn = document.getElementById('searchSubmitBtn');
+    
+    // Check if the element exists before adding the event listener
+    if (searchBtn) {
+        searchBtn.addEventListener('click', searchPosts);
+    } else {
+        console.error('Search button not found');
+    }
+});
 
 
 loadPost();
