@@ -64,7 +64,8 @@ export async function renderPosts() {
           post,
           isFollowing,
           isLiked || test,
-          isUserPost
+          isUserPost,
+          false
         );
         postsContainer.insertAdjacentHTML("beforeend", postHTML);
       });

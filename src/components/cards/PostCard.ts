@@ -8,7 +8,8 @@ export function createPostHTML(
   post: PostResponse,
   isFollowing: boolean,
   isLiked: boolean,
-  isUserPost: boolean
+  isUserPost: boolean,
+  isViewPost: boolean
 ) {
   if (!customElements.get("follow-button")) {
     customElements.define("follow-button", FollowButton);
@@ -89,12 +90,15 @@ export function createPostHTML(
                 : ""
             }
     </div>
-        
-    <div class="post__footer">
-        <div>
-            <a href="/post/?id=${post.id}">View</a>
-            <a href="/post/?id=${post.id}">Reply</a>
-        </div>
+
+    ${
+      !isViewPost
+        ? `
+        <div class="post__footer">
+            <div>
+                <a href="/post/?id=${post.id}">View</a>
+                <a href="/post/?id=${post.id}">Reply</a>
+            </div>
       
             <like-button 
                 data-post-id="${post.id}" 
@@ -102,8 +106,26 @@ export function createPostHTML(
                 data-user-liked="${isLiked}"
             >
             </like-button>
-    </div>
+        </div>
+        
+        `
+        : `
         <hr>
+            <div
+                id="main-post__footer__buttons"
+                style="display: flex; justify-content: space-around"
+            >
+                <button id="main-post__footer__buttons__comment">Comment</button>
+                <button id="main-post__footer__buttons__boost">Boost</button>
+                <button id="main-post__footer__buttons__like">0 | Like</button>
+                <button id="main-post__footer__buttons__share">Share</button>
+                <button id="main-post__footer__buttons__bookmark">Bookmark</button>
+              </div>
+            </div>
+        `
+    }
+          <hr>
+    
   </li>
     `;
 }

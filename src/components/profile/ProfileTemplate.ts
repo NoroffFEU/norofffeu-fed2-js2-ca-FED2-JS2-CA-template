@@ -29,7 +29,7 @@ export async function createProfileHTML(
               ? true
               : false;
 
-            return createPostHTML(getPost, isFollowing, isLiked, true);
+            return createPostHTML(getPost, isFollowing, isLiked, true, false);
           })
         )
       ).join("")
@@ -74,7 +74,7 @@ export async function createProfileHTML(
 
     <div class="profile__header__stats">
         <div>
-            <p><i>"${profile.bio || "<i>User has no bio.</i>"}"</i></p>
+            <p><i>${profile.bio || "<i>User has no bio.</i>"}</i></p>
         </div>
 
         <div>
