@@ -9,7 +9,7 @@ export async function onLogin(event) {
     const response = await login({ email, password });
 
     if (response.ok) {
-        const { accessToken, name } = response.data;
+        const { accessToken, name } = response.data.data;
 
         if (accessToken) {
             localStorage.setItem("accessToken", accessToken);
