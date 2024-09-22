@@ -234,6 +234,7 @@ export default class NoroffApp extends NoroffAPI {
           const postId = params.get('id');
           const post = await api.post.readPost(postId);
           const postData = post.data;
+          console.log(postData);
           const postAuthor = postData.author.name;
 
           const editButton = document.createElement("button");
@@ -322,7 +323,36 @@ export default class NoroffApp extends NoroffAPI {
           const params = new URLSearchParams(window.location.search);
           const postId = params.get('id');
           await api.post.comment(postId, { body: comment });
-          this.events.post.displaySinglePost();
+          const post = await api.post.readPost(postId);
+          const commentList = document.querySelector('.comment-list');
+          commentList.innerHTML = "";
+          const commentsArray = post.data.comments;
+          for (let i = 0; i < commentsArray.length; i++) {
+            const comment = commentsArray[i];
+            const commentItem = document.createElement('li');
+            commentItem.classList.add("comment-item");
+            commentItem.id = comment.id;
+            const commentContainer = document.createElement("div");
+            commentContainer.classList.add("comment-container");
+            const commentUser = document.createElement("a");
+            commentUser.classList.add("comment-username");
+            commentUser.href = `/profile/?name=${comment.author.name}`;
+            commentUser.textContent = comment.author.name;
+            const commentContent = document.createElement("p");
+            commentContent.classList.add("comment-content");
+            commentContent.textContent = comment.body;
+            commentContainer.append(commentUser, commentContent);
+            const commentDeleteButton = document.createElement("button");
+            commentDeleteButton.classList.add("comment-delete-button");
+            const commentDeleteIcon = document.createElement("i");
+            commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
+            commentDeleteButton.appendChild(commentDeleteIcon);
+            commentItem.append(commentContainer, commentDeleteButton);
+            commentList.appendChild(commentItem);
+          }
+          document.getElementById("comment").value = "";
+          this.events.post.deleteComment();
+
         } catch (error) {
           alert(error.message);
         }

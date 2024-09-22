@@ -134,12 +134,16 @@ export default class NoroffAPI {
       window.location.href = `/post/?id=${id}`;
     },
 
-    comment: async (id, { body: comment }) => {
-      const body = JSON.stringify({ body: comment });
+    comment: async (id, { body: comment, replyToId }) => {
+      const body = { body: comment };
+      if (replyToId !== undefined) {
+        body.replyToId = replyToId;
+      }
+      const responseBody = JSON.stringify(body);
       const response = await fetch(`${NoroffAPI.paths.socialPost}/${id}/comment`, {
         headers: headers(true),
         method: "POST",
-        body
+        body: responseBody,
       });
       const data = await NoroffAPI.util.handleResponse(response, "Could not comment on the post");
       return data;
