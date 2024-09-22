@@ -17,7 +17,7 @@ export async function onUpdatePost(event) {
     try{
         await api.post.update(postId, data);
     }catch(error){
-        alert("Could not destructure property ",error)
+       console.log("Could not destructure property ",error)
     }
 }
 

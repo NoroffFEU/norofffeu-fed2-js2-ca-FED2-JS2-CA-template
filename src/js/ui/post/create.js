@@ -14,6 +14,6 @@ export async function onCreatePost(event) {
     await api.post.create(data);
     window.location.href = "/post/";
   } catch (error) {
-    alert(error);
+    console.log(error);
   }
 }

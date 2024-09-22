@@ -11,6 +11,6 @@ export async function onLogin(event) {
         await api.auth.login(data)
         window.location.href = "/"
     } catch (error){
-        alert(error);
+        console.log("Could not send Login data",error);
     }
 }   

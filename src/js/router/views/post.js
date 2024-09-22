@@ -5,24 +5,36 @@ import { readPosts } from "../../api/post/read";
 import { renderPagination } from "../../utilities/pagination";
 import { displayPosts } from "../../utilities/displayHTML";
 import { searchPosts } from "../../utilities/search";
-
+import { getCachedPosts } from "../../api/post/read";
 
 const api = new NoroffAPI();
 
 
 export async function loadPost(limit=12,page = 1){
+    const cacheKey = `_posts_${limit}_${page}`;
+    const cachedPosts = getCachedPosts(cacheKey);
 
+    if (cachedPosts) {
+      
+        const { currentPage, totalPages } = cachedPosts;
+        displayPosts(cachedPosts.posts); 
+        renderPagination(totalPages, currentPage);
+
+        return; 
+    }
     try{
         const {posts, currentPage, totalPages} = await readPosts (limit, page)
 
-        displayPosts();
+        displayPosts(posts);
         
         renderPagination (totalPages, currentPage)
 
     }catch(error){
-        alert("Error loading posts")
+        console.log("Error loading posts",error)
     }
 }
+// const searchBtn = document.getElementById('searchSubmitBtn');
+// searchBtn.addEventListener('click', searchPosts);
 
 document.addEventListener("DOMContentLoaded", () => {
     const searchBtn = document.getElementById('searchSubmitBtn');

@@ -10,8 +10,8 @@ export async function readPost(id) {}
 export async function readPosts(limit = 12, page = 1, tag) {
 
     const url = new URL(API_SOCIAL_POSTS)
-    const {token} = getCurrentUser()
 
+    const {token} = getCurrentUser()
     const apiKeyData = await api.options.apiKey();
     
     url.searchParams.append("limit", limit)
@@ -45,8 +45,6 @@ export async function readPosts(limit = 12, page = 1, tag) {
         }
     }catch (error){
         console.error("Error fetching posts:", error);
-        alert(`Error fetching posts: ${error.message}`);
-
     }
 }
 
@@ -92,12 +90,10 @@ export async function readPostsByUser(username, limit = 12, page = 1, tag) {
         }
     }catch (error){
         console.error("Error fetching posts:", error);
-        alert(`Error fetching posts: ${error.message}`);
-
     }
 }
 
-function getCachedPosts(cacheKey, expiryMinutes = 30) {
+export function getCachedPosts(cacheKey, expiryMinutes = 5) {
     const cachedItem = localStorage.getItem(cacheKey);
     if (!cachedItem) return null;
 
@@ -116,6 +112,7 @@ function getCachedPosts(cacheKey, expiryMinutes = 30) {
         return null;
     }
 }
+
 function setCachedPosts(cacheKey, { data, meta }) {
     const cachedItem = JSON.stringify({ data, meta, timestamp: Date.now() });
     localStorage.setItem(cacheKey, cachedItem);

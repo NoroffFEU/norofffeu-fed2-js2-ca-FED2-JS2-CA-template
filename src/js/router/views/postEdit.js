@@ -34,7 +34,7 @@ async function displayEditPost() {
     
     }
     catch(error){
-        alert("Error loading post for edit", error)
+        console.log("Error loading post for edit", error)
     }
 }
 

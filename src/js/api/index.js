@@ -1,5 +1,7 @@
 import { getCurrentUser } from "../utilities/currentUser.js";
 import { API_AUTH_KEY } from "./constants.js";
+import { headers } from "./headers.js";
+import { initializeAPI } from "./constants.js";
 
 
 export default class NoroffAPI {
@@ -77,8 +79,9 @@ export default class NoroffAPI {
 
   post = {
     read: async (id, option = {}) => {
-      const { token} = getCurrentUser();
-
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+  
       let url = `${this.apiSocialPath}/${id}`;
 
       if (option._author){
@@ -86,14 +89,8 @@ export default class NoroffAPI {
        url += "?_author="+ option._author
 
        }
-      const apiKeyData = await this.options.apiKey();
-
       const response = await fetch(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-           "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },
+        headers: customHeaders,
       });
 
       if (response.ok) {
@@ -104,9 +101,9 @@ export default class NoroffAPI {
       throw new Error("Could not create post");
     },
     update: async (id, {title, body, tags, media }) => {
-      const { token, user} = getCurrentUser();
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
 
-      const apiKeyData = await this.options.apiKey();
       const tagsArray = Array.isArray(tags) ? tags : tags.split (',').map (tag => tag.trim());
       const formattedMedia = {
         url: media || '',
@@ -120,11 +117,7 @@ export default class NoroffAPI {
       };
 
       const response = await fetch(`${this.apiSocialPath}/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },
+        headers: customHeaders,
         method: "put",
         body: JSON.stringify(requestBody),
       });
@@ -140,15 +133,12 @@ export default class NoroffAPI {
       throw new Error("Could not update post" + id);
     },
     delete: async (id) => {
-      const { token } = getCurrentUser();
-      const apiKeyData = await this.options.apiKey();
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
 
       const response = await fetch(`${this.apiSocialPath}/${id}`, {
         method: "delete",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },
+        headers: customHeaders,
       });
 
       if (response.ok) {
@@ -166,12 +156,11 @@ export default class NoroffAPI {
       throw new Error("Could not delete post" + id);
     },
     create: async ({ title, body, tags, media }) => {
-      const { token } = this.getCurrentUser;
+      
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
 
       const tagsArray = Array.isArray(tags) ? tags : tags.split (',').map (tag => tag.trim())
-
-      const apiKeyData = await this.options.apiKey();
-      
       const formattedMedia = {
         url: media || '',
         alt: media.alt || ''
@@ -186,11 +175,7 @@ export default class NoroffAPI {
 
       const response = await fetch(this.apiSocialPath, {
         method: "post",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-          "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },
+        headers: customHeaders,
         body: JSON.stringify(requestBody),
       });
 
@@ -206,26 +191,21 @@ export default class NoroffAPI {
 
   search = {
     read: async (query) => {
-      const {token} = getCurrentUser();
-      const apiKeyData = await this.options.apiKey();
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
 
       const url = new URL(`${this.apiSocialPath}/search`);
       url.searchParams.append('q', query);
 
       const response = await fetch(url,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-           "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },method:"get",
+        headers: customHeaders(apiKey),
+        method:"get",
       });
 
       if(response.ok){
         const data = await response.json();
-        
         return data;
       }
-      
       throw new Error("Could not fetch posts")
     },
     readProfile: async (query) => {

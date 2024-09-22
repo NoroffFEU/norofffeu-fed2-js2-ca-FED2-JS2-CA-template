@@ -19,7 +19,6 @@ export async function onDeletePost(event) {
         }
 
     }catch(error){
-        console.log(error)
-        alert("failed to delete",error.message)
+        console.log("failed to delete",error)
     }
 }

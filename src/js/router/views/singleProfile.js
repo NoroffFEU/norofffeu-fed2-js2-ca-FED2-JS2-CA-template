@@ -9,7 +9,7 @@ export async function getSingleProfile(){
         const urlParams = new URLSearchParams(window.location.search);
         const profileName = urlParams.get('name');
         if (!profileName) {
-            alert("Error: Profile Name not found in the URL");
+            console.log("Error: Profile Name not found in the URL", profileName);
             return;
         }
 

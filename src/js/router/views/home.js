@@ -11,18 +11,49 @@ const api = new NoroffAPI();
 
 
 export async function loadProfiles(limit=12,page = 1){
-    
-    try{
-        const {profiles, currentPage, totalPages} = await  readPostsByUser (limit, page)
-        
-        getAllProfiles();
-        
-        renderProfilesPagination (totalPages, currentPage)
-        
-    }catch(error){
-        alert("Error loading profiles", error.message)
+    const cacheKey = `profiles_${limit}_${page}`;
+    const cachedProfiles = localStorage.getItem(cacheKey);
+    let currentPage, totalPages, profiles;
+
+    if (cachedProfiles) {
+        try {
+            const parsedProfiles = JSON.parse(cachedProfiles);
+            profiles = parsedProfiles.data; // Extract profiles
+            currentPage = parsedProfiles.meta.currentPage; // Get current page
+            totalPages = parsedProfiles.meta.pageCount; // Get total pages
+            console.log('Loaded profiles from localStorage');
+        } catch (error) {
+            console.error('Error parsing cached profiles:', error);
+            localStorage.removeItem(cacheKey); // Remove corrupted data
+        }
     }
+
+    if (!profiles) {
+        try {
+            const result = await readPostsByUser(limit, page); // Make sure to pass the username
+            profiles = result.profiles;
+            currentPage = result.currentPage;
+            totalPages = result.totalPages;
+
+            // Cache the fetched profiles
+            localStorage.setItem(cacheKey, JSON.stringify({ data: profiles, meta: { currentPage, totalPages } }));
+        } catch (error) {
+            console.log("Error loading profiles", error);
+            return; 
+        }
+    }
+
+        getAllProfiles(profiles);
+        renderProfilesPagination (totalPages, currentPage)    
 }
+
+// const searchBtn = document.getElementById('searchProfileSubmitBtn');
+// const logoutButton = document.getElementById("logoutButton");
+// searchBtn.addEventListener('click', searchProfile);
+// searchBtn.addEventListener('click', onLogout);
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const searchBtn = document.getElementById('searchProfileSubmitBtn');
     const logoutButton = document.getElementById("logoutButton");

@@ -9,7 +9,7 @@ export async function displaySinglePost(){
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get('id');
         if (!postId) {
-            alert("Error: Post ID not found in the URL");
+            console.log("Error: Post ID not found in the URL", postId);
             return;
         }
 

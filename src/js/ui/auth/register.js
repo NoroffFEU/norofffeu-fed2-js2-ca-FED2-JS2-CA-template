@@ -12,6 +12,6 @@ export async function onRegister(event) {
         await api.auth.register(data)
         window.location.href = "/"
     } catch (error){
-        alert(error)
+        console.log("Could not send resgister data",error)
     }
 }

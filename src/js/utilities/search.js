@@ -18,7 +18,7 @@ export async function searchPosts(){
 
     
     } catch(error){
-        alert("Failed to search Posts", error)
+        console.log("Failed to search Posts", error)
     }
 }
 
@@ -37,6 +37,6 @@ export async function searchProfile(){
         
         
     } catch(error){
-        alert("Failed to search Profile", error)
+        console.log("Failed to search Profile", error)
     }
 }
