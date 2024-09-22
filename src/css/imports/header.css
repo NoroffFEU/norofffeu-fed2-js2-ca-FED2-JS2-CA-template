@@ -50,6 +50,7 @@ header img {
   .profile-header {
     align-items: flex-start;
     padding-bottom: 18.4rem;
+    transition: padding-bottom 0.4s ease;
   }
 
   header img {

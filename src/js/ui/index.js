@@ -99,6 +99,7 @@ export default class NoroffApp extends NoroffAPI {
       authGuard();
       this.events.logout();
       this.events.myPage();
+      this.animation.headerPadding();
       this.events.profile.displayProfilePage();
     },
 
@@ -671,5 +672,26 @@ export default class NoroffApp extends NoroffAPI {
         }
       }
     }
+  }
+
+  animation = {
+    headerPadding: () => {
+      const header = document.querySelector(".profile-header");
+      const originalPaddingBottom = 18.4;
+      const scrollPaddingBottom = 4;
+      const minWidth = window.matchMedia('(min-width: 1024px)');
+
+      window.addEventListener("scroll", () => {
+        if(minWidth.matches) {
+          if (window.scrollY > 0) {
+            header.style.paddingBottom = `${scrollPaddingBottom}rem`;
+          } else {
+            header.style.paddingBottom = `${originalPaddingBottom}rem`;
+          }
+        } else {
+          header.style.paddingBottom = "12.8rem";
+        }
+      })
+    },
   }
 }
