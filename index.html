@@ -9,15 +9,17 @@
     </head>
 
     <body>
-        <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+        <div class="navBar">
+            <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+            <h1>Home</h1>
 
-        <h1>Home</h1>
+            <a href="/profile/">My Profile</a>
 
-        <a href="/profile/">My Profile</a>
-
-        <!-- this is scuffed. maybe remove if needed -->
-        <a href="/auth/login/">Login</a>
-        <a href="/auth/register/">Register</a>
-        <button>Logout</button>
+            <!-- this is scuffed. maybe remove if needed -->
+            <a href="/auth/login/">Login</a>
+            <a href="/auth/register/">Register</a>
+            <button class="logoutBtn">Logout</button>
+        </div>
+        <div id="postContainer"></div>
     </body>
 </html>
