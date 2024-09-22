@@ -100,7 +100,9 @@ export default class NoroffApp extends NoroffAPI {
       this.events.logout();
       this.events.myPage();
       this.animation.headerPadding();
-      this.events.profile.displayProfilePage();
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page') || 1;
+      this.events.profile.displayProfilePage(Number(page));
     },
 
     profileUpdate: async () => {
@@ -113,6 +115,8 @@ export default class NoroffApp extends NoroffAPI {
       alert("Page cannot be found in /src/views");
     }
   }
+
+  currentPage = 1;
 
   events = {
     login: async (event) => {
@@ -389,8 +393,8 @@ export default class NoroffApp extends NoroffAPI {
         try {
           const userPostsData = await api.profile.readUsersPosts(name, 12, page);
           const userProfile = await api.profile.readProfile(name);
-          const userData = userProfile.data
           const postData = userPostsData.data;
+          const userData = userProfile.data
           const userAvatar = document.querySelector(".avatar");
           userAvatar.src = userData.avatar.url;
           const userName = document.querySelector(".username");
@@ -423,12 +427,21 @@ export default class NoroffApp extends NoroffAPI {
           updateButton.addEventListener("click", () => {
             window.location.href = "/profile/update/"
           })
-
           const postFeed = document.querySelector('.feed');
           postFeed.innerHTML = '';
           postData.forEach(post => {
             const postHTML = generateFeedHTML(post);
             postFeed.appendChild(postHTML);
+          });
+          const totalPosts = userData._count.posts;
+          const pageCount = Math.ceil(totalPosts / 12);
+          const newUrl = `${window.location.pathname}?name=${name}&page=${page}`;
+          window.history.replaceState({}, '', newUrl);
+          this.currentPage = page;
+          this.pagination.profilePagination(this.currentPage, pageCount);
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
           });
           this.events.profile.follow();
         } catch(error) {
@@ -671,7 +684,75 @@ export default class NoroffApp extends NoroffAPI {
           nextButton.style.cursor = "not-allowed";
         }
       }
-    }
+    },
+
+    profilePagination: async (currentPage, pageCount) => {
+      this.currentPage = currentPage;
+      const paginationContainer = document.querySelector('.feed-pagination');
+      paginationContainer.innerHTML = '';
+
+      const createButton = (text, page) => {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.dataset.page = page;
+        button.className = 'pagination-button';
+        if(page === this.currentPage) {
+          button.classList.add("current-page");
+        }
+        button.addEventListener('click', () => {
+          this.currentPage = page;
+          this.events.profile.displayProfilePage(page);
+        });
+        return button;
+      };
+
+      const createEllipsis = () => {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = "...";
+        return ellipsis;
+      }
+      
+      const previousButton = document.createElement('button')
+      const previousButtonIcon = document.createElement("i");
+      previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
+      previousButton.appendChild(previousButtonIcon);
+      paginationContainer.appendChild(previousButton);
+      previousButton.addEventListener("click", () => {
+        if (this.currentPage > 1) {
+          this.events.profile.displayProfilePage(this.currentPage -1);
+        }
+      })
+
+      if (this.currentPage === 1) {
+        previousButton.disabled = true;
+        previousButton.style.cursor = "not-allowed";
+      } else {
+        previousButton.disabled = false;
+      }
+      
+      for( let i = 1; i <= pageCount; i++) {
+        const pageButton = createButton(i, i);
+        paginationContainer.appendChild(pageButton);
+      }
+
+      const nextButton = document.createElement('button');
+      const nextButtonIcon = document.createElement("i");
+      nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
+      nextButton.appendChild(nextButtonIcon);
+      paginationContainer.appendChild(nextButton);
+      nextButton.addEventListener("click", () => {
+        if (this.currentPage < pageCount) {
+          this.events.profile.displayProfilePage(this.currentPage +1);
+        }
+      })
+
+      if (this.currentPage === pageCount) {
+        nextButton.disabled = true;
+        nextButton.style.cursor = "not-allowed";
+      } else {
+        nextButton.disabled = false;
+      }
+    },
   }
 
   animation = {

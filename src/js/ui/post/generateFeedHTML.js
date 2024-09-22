@@ -13,7 +13,7 @@ export function generateFeedHTML(post) {
     thumbnail.src = post.media.url;
     thumbnail.alt = post.media.alt;
   } else {
-    thumbnail.src = "../../../../public/images/default-thumbnail.jpg";
+    thumbnail.src = "../../../../images/default-thumbnail.jpg";
     thumbnail.alt = "No Media Available";
   }
   figure.appendChild(thumbnail);
