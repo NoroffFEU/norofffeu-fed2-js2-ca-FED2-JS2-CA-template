@@ -40,7 +40,13 @@ export default async function router(pathname = window.location.pathname) {
       profileView();
       break;
     default:
-      const { default: notFoundView } = await import("./views/notFound.js");
-      notFoundView();
+      try {
+        const { default: notFoundView } = await import("./views/notFound.js");
+        notFoundView();
+      } catch (error) {
+        console.error("Error loading not found view:", error);
+        // Fallback if the notFound view fails to load
+        document.querySelector('main').innerHTML = '<h1>404 - Page Not Found</h1>';
+      }
   }
 }
