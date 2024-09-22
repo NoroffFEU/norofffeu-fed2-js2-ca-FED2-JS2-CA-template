@@ -1,8 +1,10 @@
-import { onCreatePost } from "../../ui/post/create";
-import { authGuard } from "../../utilities/authGuard";
+import { onCreatePost } from "../../ui/post/create.js";
 
-authGuard();
-
-const form = document.forms.createPost;
-
-form.addEventListener("submit", onCreatePost);
+export default function postCreateView() {
+  const form = document.querySelector('form[name="createPost"]');
+  if (form) {
+    form.addEventListener('submit', onCreatePost);
+  } else {
+    console.error("Create post form not found");
+  }
+}
