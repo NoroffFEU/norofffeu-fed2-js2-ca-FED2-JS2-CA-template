@@ -1,6 +1,4 @@
-import { API_SOCIAL_POSTS } from '../../api/constants.js';
-
-const API_KEY = 'ba9d30d1-0826-485a-8392-e121c9410188'; // Make sure this is your actual API key
+import { API_SOCIAL_POSTS, API_KEY } from '../../api/constants.js';
 
 function isTokenExpired(token) {
   if (!token) return true;
