@@ -9,7 +9,7 @@ import { onViewPost } from "../ui/post/viewPost.js";
 import NoroffAPI from '../api/index.js';
 import { currentPostId } from "../utilities/currentPostId.js";
 
-const api = new NoroffAPI('https://v2.api.noroff.dev')
+
 
 const postId = currentPostId();
 

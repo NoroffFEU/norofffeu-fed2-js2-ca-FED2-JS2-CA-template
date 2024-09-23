@@ -1,13 +1,13 @@
-import { currentUser } from "../utilities/currentUser.js";
+
 
 export default class NoroffAPI {
   static apiBase = "https://v2.api.noroff.dev";
 
-  static loginPath = '$(NoroffAPI.apiBase).login';
+  static loginPath = `${NoroffAPI.apiBase}/auth/login`;
 
-  static registerPath = '$(NoroffAPI.apiBase).register';
+  static registerPath = `${NoroffAPI.apiBase}/auth/register`;
 
-  static postPath = (name) => '$(NoroffAPI.apiBase)/social/posts/${name}';
+  static postPath = (name) => `${NoroffAPI.apiBase}/social/posts/${name}`;
   
   get apiPostPath() {
     return NoroffAPI.postPath(this.user.name);
@@ -34,12 +34,12 @@ export default class NoroffAPI {
 
       const response = await fetch(NoroffAPI.loginPath, {
         method: "POST",
-        headers: this.util.setupHeaders(true),
+        headers: NoroffAPI.util.setupHeaders(true),
         body,
       });
 
       if (response.ok) {
-        const { data } = await this.util.handleResponse(response);
+        const { data } = await NoroffAPI.util.handleResponse(response);
         const { accessToken: token, ...user } = data;
         localStorage.token = token;
         localStorage.user = JSON.stringify(user);
@@ -61,7 +61,7 @@ export default class NoroffAPI {
       });
 
       if (response.ok) {
-        const { data } = await this.util.handleResponse(response);
+        const { data } = await NoroffAPI.util.handleResponse(response);
         const { accessToken: token, ...user } = data;
         localStorage.token = token;
         localStorage.user = JSON.stringify(user);
@@ -78,8 +78,8 @@ export default class NoroffAPI {
     },
   };
 
-  util = {
-    setupHeaders: () => {
+  static util = {
+    setupHeaders: (body) => {
         const headers = new Headers();
         if (localStorage.token) {
           headers.append("Authorization", `Bearer ${localStorage.token}`);
@@ -99,44 +99,39 @@ export default class NoroffAPI {
         } else {
             return response;
         }
+    },
+    handleRequest: async (request, output = 'json') => {
+        const response = await fetch(request.url, {
+          method: request.method,
+          headers: NoroffAPI.util.setupHeaders(request.body),
+          body: request.body? JSON.stringify(request.body) : null,
+        });
+        return NoroffAPI.util.handleResponse(response, output);
     }
   }
 
   post = {
     read: async (id) => {
-        const response = await fetch(`${apiPostPath}/${id}`, {
-          headers: this.util.setupHeaders(),
-        });
-        const {data} = await this.util.handleResponse(response)
+        const { data } = await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`)
         return data
     },
     update: async (id,{ title, body, tags, media}) => {
-        const response = await fetch(`${apiPostPath}/${id}`, {
+        const data = await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`, {
           method: "PUT",
-          headers: this.util.setupHeaders(),
           body: JSON.stringify({ title, body, tags, media }),
         });
-        const {data} = await this.util.handleResponse(response)
         return data
     },
     delete: async (id) => {
-        const response = await fetch(`${apiPostPath}/${id}`, {
-          method: "DELETE",
-          headers: this.util.setupHeaders(),
-        });
-
-        const text = this.util.handleResponse(response, 'text')
-        return text
+        await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`, 'text')
     },
     create: async ({ title, body, tags, media }) => {
-        const response = await fetch(apiPostPath, {
-          method: "POST",
-          headers: this.util.setupHeaders(),
-          body: JSON.stringify({ title, body, tags, media }),
-        });
-        const {data} = await this.util.handleResponse(response)
-        return data
-    }
+        const data = await NoroffAPI.util.handleRequest(`${this.apiPostPath}`, {
+            method: "POST",
+            body: JSON.stringify({ title, body, tags, media }),
+          });
+          return data
+        }
   }
 
   posts = {
