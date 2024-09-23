@@ -2,6 +2,7 @@ import { PostResponse } from "@/types/types";
 import { FollowButton } from "@/components/buttons/FollowButton";
 import { LikeButton } from "@/components/buttons/LikeButton";
 import { DeleteButton } from "@/components/buttons/DeleteButton";
+import { FormattedDate } from "@/components/post/FormattedDate";
 import { getUser } from "@/js/utilities/getUser";
 
 export function createPostHTML(
@@ -21,6 +22,10 @@ export function createPostHTML(
 
   if (!customElements.get("delete-button")) {
     customElements.define("delete-button", DeleteButton);
+  }
+
+  if (!customElements.get("formatted-date")) {
+    customElements.define("formatted-date", FormattedDate);
   }
 
   return `
@@ -110,6 +115,12 @@ export function createPostHTML(
         
         `
         : `
+        
+        <formatted-date 
+            data-created="${post.created}" 
+            data-updated="${post.updated}"
+        ></formatted-date>
+
         <hr>
             <div
                 id="main-post__footer__buttons"
