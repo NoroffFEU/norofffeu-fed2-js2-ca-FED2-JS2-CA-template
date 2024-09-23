@@ -1,55 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzNet - Register</title>
+    <link rel="stylesheet" href="../../src/css/style.css">
+</head>
+<body>
+    <div class="loginRegistration-main">
+        <div class="form-container" >
+            <h2>Create a BuzzNet Account</h2>
+            <form action="register.php" method="POST">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="../login/index.html">Login here</a></p>
+        </div>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
-
-  <body>
-    <h1>Register</h1>
-
-    <form name="register">
-      <div>
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          required
-          maxlength="20"
-          pattern="^[\w]+$"
-          title="Please enter a username using only letters and numbers"
-        />
-      </div>
-
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          required
-          pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-          title="Please enter a valid noroff.no or stud.noroff.no address"
-        />
-      </div>
-
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          minlength="8"
-        />
-      </div>
-
-      <a href="/auth/login/">Login</a>
-      <button>Register</button>
-    </form>
-  </body>
+    </div> 
+    
+</body>
 </html>

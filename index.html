@@ -1,22 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noroff FED2 JS2 CA</title>
-  <script type="module" src="/src/app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzNet - Home</title>
+    <script src="./src/app.js"></script>
+    <link rel="stylesheet" href="./src/css/style.css">
+  
 </head>
-
 <body>
-  <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    <nav>
+        <div class="logo-section">
+            <img src="images/LOgoBuzzNut.jpg" alt="BuzzNet Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search BuzzNet...">
+            <button>Search</button>
+        </div>
 
-  <h1>Home</h1>
+        <div class="button-container">
+            <a href="./auth/login/index.html" class="login-btn">Login</a>
+            <a href="./auth/register/index.html" class="register-btn">Register</a>
+        </div>
+    </nav>
 
-  <a href="/profile/">My Profile</a>
-  <a href="/auth/login/">Login</a>
-  <a href="/auth/register/">Register</a>
-  <button>Logout</button>
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <h1>Welcome to BuzzNet</h1>
+        <p>Discover, connect, and share your ideas!</p>
+
+        <!-- Example Post Card with Image -->
+        <div class="post-card">
+           <a href="posts/page.html">
+            <div class="post-header">
+                <img src="images/photo-1515021477923-4d707a1cd1ba.avif" alt="User Profile">
+                <div class="username">John Doe</div>
+            </div>
+           </a>
+            <div class="post-content">
+                which method is the best when going to the gym
+            </div>
+            <!-- Single Image -->
+            <div class="post-image">
+                <img src="images/photo-1534438327276-14e5300c3a48.avif" alt="Post Image">
+            </div>
+        </div>
+
+        <!-- Example Post with Multiple Images -->
+        <div class="post-card">
+            <div class="post-header">
+                <img src="images/shirwacProfile.avif" alt="User Profile">
+                <div class="username">Shirwac</div>
+            </div>
+            <div class="post-content">
+                Just got back from Japan and I’m still buzzing from how incredible it was! Here’s a quick breakdown of some of the things that really stood out to me:
+
+                The balance of old and new: One minute you’re in the middle of Tokyo with its futuristic skyscrapers and tech, then you take a short ride and find yourself at a peaceful shrine or wandering through a bamboo forest. The mix of ancient traditions with modern life is so seamless.
+                Food!!: Honestly, the food alone is worth the trip. Even a basic meal at a train station or convenience store was delicious. Ramen, sushi, yakitori… every meal was a winner.
+                Public transport is next-level: The trains are incredibly punctual (like, down to the second) and the Shinkansen is wild. Traveling long distances in comfort and speed – the U.S. could really learn something from this. Plus, everything was organized, easy to navigate even as a tourist.
+
+
+            </div>
+            <!-- Multiple Images -->
+            <div class="post-image-grid">
+                <img src="images/weather.avif" alt="Image 1">
+                <img src="images/transportation japan.avif" alt="Image 2">
+                <img src="images/japan food.avif" alt="Image 3">
+            </div>
+        </div>
+    </main>
 </body>
 </html>
