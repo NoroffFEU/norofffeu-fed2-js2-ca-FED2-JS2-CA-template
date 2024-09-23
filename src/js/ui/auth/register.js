@@ -49,3 +49,6 @@ async function handleSubmit(event) {
     alert('Registration failed. Please try again.');
   }
 }
+
+// Add this line at the end of the file
+export default setupRegisterForm;

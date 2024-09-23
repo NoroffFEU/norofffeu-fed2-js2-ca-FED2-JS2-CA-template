@@ -1,7 +1,5 @@
-// This function controls which JavaScript file is loaded on which page
-// In order to add additional pages, you will need to implement them below
-// You may change the behaviour or approach of this file if you choose
-export default async function router(pathname = window.location.pathname) {
+  
+  export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
       try {
@@ -12,40 +10,47 @@ export default async function router(pathname = window.location.pathname) {
       }
       break;
     case "/auth/":
-      const { default: authView } = await import("./views/auth.js");
+      const { default: authView } = await import("../ui/auth/index.js");
       authView();
       break;
-    case "/auth/login/":
-      const { default: loginView } = await import("./views/login.js");
-      loginView();
-      break;
-    case "/auth/register/":
-      const { default: registerView } = await import("./views/register.js");
-      registerView();
-      break;
+      case "/auth/login/":
+        try {
+          const { default: setupLoginForm } = await import("../ui/auth/login.js");
+          setupLoginForm();
+        } catch (error) {
+          console.error("Error loading login view:", error);
+        }
+        break;
+      case "/auth/register/":
+        try {
+          const { default: setupRegisterForm } = await import("../ui/auth/register.js");
+          setupRegisterForm();
+        } catch (error) {
+          console.error("Error loading register view:", error);
+        }
+        break;
     case "/post/":
-      const { default: postView } = await import("./views/post.js");
+      const { default: postView } = await import("../ui/post/index.js");
       postView();
       break;
     case "/post/edit/":
-      const { default: postEditView } = await import("./views/postEdit.js");
+      const { default: postEditView } = await import("../ui/post/edit.js");
       postEditView();
       break;
     case "/post/create/":
-      const { default: postCreateView } = await import("./views/postCreate.js");
+      const { default: postCreateView } = await import("../ui/post/create.js");
       postCreateView();
       break;
     case "/profile/":
-      const { default: profileView } = await import("./views/profile.js");
+      const { default: profileView } = await import("../ui/profile/index.js");
       profileView();
       break;
     default:
       try {
-        const { default: notFoundView } = await import("./views/notFound.js");
+        const { default: notFoundView } = await import("../ui/notFound.js");
         notFoundView();
       } catch (error) {
         console.error("Error loading not found view:", error);
-        // Fallback if the notFound view fails to load
         document.querySelector('main').innerHTML = '<h1>404 - Page Not Found</h1>';
       }
   }
