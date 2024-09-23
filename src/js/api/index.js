@@ -1,17 +1,6 @@
 
 
 export default class NoroffAPI {
-  static apiBase = "https://v2.api.noroff.dev";
-
-  static loginPath = `${NoroffAPI.apiBase}/auth/login`;
-
-  static registerPath = `${NoroffAPI.apiBase}/auth/register`;
-
-  static postPath = (name) => `${NoroffAPI.apiBase}/social/posts/${name}`;
-  
-  get apiPostPath() {
-    return NoroffAPI.postPath(this.user.name);
-  }
 
   get user() {
     try {
@@ -21,62 +10,17 @@ export default class NoroffAPI {
     }
   }
 
-  auth = {
-    /**
-     *  @param {Object} user - The login parameters.
-     *  @param {String} user.email - The email of the user.
-     *  @param {String} user.password - The password of the user.
-     *  @returns {Promise<Object>} The logged-in user data.
-     */
-
-    login: async ({ email, password }) => {
-      const body = JSON.stringify({ email, password });
-
-      const response = await fetch(NoroffAPI.loginPath, {
-        method: "POST",
-        headers: NoroffAPI.util.setupHeaders(true),
-        body,
-      });
-
-      if (response.ok) {
-        const { data } = await NoroffAPI.util.handleResponse(response);
-        const { accessToken: token, ...user } = data;
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
-        return user;
-      }
-
-      throw new Error("Couldn't login");
-    },
-
-    register: async ({ email, password, name }) => {
-      const body = JSON.stringify({ email, password, name });
-
-      const response = await fetch(NoroffAPI.registerPath, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
-
-      if (response.ok) {
-        const { data } = await NoroffAPI.util.handleResponse(response);
-        const { accessToken: token, ...user } = data;
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
-        return data;
-      }
-
-      throw new Error("Couldn't register");
-    },
-
-    logout: () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/auth/login";
-    },
-  };
+ 
+  static paths = {
+    base: "https://v2.api.noroff.dev",
+    login: `${NoroffAPI.apiBase}/auth/login`,
+    register: `${NoroffAPI.apiBase}/auth/register`,
+    posts: (name) => `${NoroffAPI.apiBase}/social/posts/${name}`,
+    post: (name, id) => `${NoroffAPI.postsPath(name)}/social/post/${name}/${id}`,
+    createPost: (name) => `${NoroffAPI.postsPath(name)}`,
+    updatePost: (name, id) => `${NoroffAPI.postPath(name, id)}`,
+    deletePost: (name, id) => `${NoroffAPI.postPath(name, id)}`,
+  }
 
   static util = {
     setupHeaders: (body) => {
@@ -110,23 +54,80 @@ export default class NoroffAPI {
     }
   }
 
-  post = {
+  auth = {
+    /**
+     *  @param {Object} user - The login parameters.
+     *  @param {String} user.email - The email of the user.
+     *  @param {String} user.password - The password of the user.
+     *  @returns {Promise<Object>} The logged-in user data.
+     */
+
+    login: async ({ email, password }) => {
+      const body = JSON.stringify({ email, password });
+
+      const response = await fetch(NoroffAPI.paths.login, {
+        method: "POST",
+        headers: NoroffAPI.util.setupHeaders(true),
+        body,
+      });
+
+      if (response.ok) {
+        const { data } = await NoroffAPI.util.handleResponse(response);
+        const { accessToken: token, ...user } = data;
+        localStorage.token = token;
+        localStorage.user = JSON.stringify(user);
+        return user;
+      }
+
+      throw new Error("Couldn't login");
+    },
+
+    register: async ({ email, password, name }) => {
+      const body = JSON.stringify({ email, password, name });
+
+      const response = await fetch(NoroffAPI.paths.register, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      if (response.ok) {
+        const { data } = await NoroffAPI.util.handleResponse(response);
+        const { accessToken: token, ...user } = data;
+        localStorage.token = token;
+        localStorage.user = JSON.stringify(user);
+        return data;
+      }
+
+      throw new Error("Couldn't register");
+    },
+
+    logout: () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/auth/login";
+    },
+  };
+
+    post = {
     read: async (id) => {
-        const { data } = await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`)
+        const { data } = await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id));
         return data
     },
     update: async (id,{ title, body, tags, media}) => {
-        const data = await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`, {
+        const data = await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), {
           method: "PUT",
           body: JSON.stringify({ title, body, tags, media }),
         });
         return data
     },
     delete: async (id) => {
-        await NoroffAPI.util.handleRequest(`${this.apiPostPath}/${id}`, 'text')
+        await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), 'text')
     },
     create: async ({ title, body, tags, media }) => {
-        const data = await NoroffAPI.util.handleRequest(`${this.apiPostPath}`, {
+        const data = await NoroffAPI.util.handleRequest(NoroffAPI.paths.posts(this.user.name), {
             method: "POST",
             body: JSON.stringify({ title, body, tags, media }),
           });
@@ -136,19 +137,30 @@ export default class NoroffAPI {
 
   posts = {
     read: async (page = 1, limit = 12, tag) => {
-        const response = await fetch(`${apiPostPath}?page=${page}&limit=${limit}&tag=${tag}`, {
-          headers: this.util.setupHeaders(),
+        const url = new URL(NoroffAPI.paths.posts(this.user.name));
+        
+        if (tag) {
+            url.searchParams.append("tag", tag);
+        }
+
+        url.searchParams.append("page", page);
+        url.searchParams.append("limit", limit);
+
+        const response = await fetch(url, {
+            headers: NoroffAPI.util.setupHeaders(),
         });
-        const {data} = await this.util.handleResponse(response)
-        return data
+
+        const { data } = await NoroffAPI.util.handleResponse(response);
+        return data;
     },
     create: async ({ title, body, tags, media }) => {
-        const response = await fetch(apiPostPath, {
-          method: "POST",
-          headers: this.util.setupHeaders(),
-          body: JSON.stringify({ title, body, tags, media }),
+        const url = new URL(NoroffAPI.paths.posts(this.user.name)), {
+          
         });
-        const {data} = await this.util.handleResponse(response)
+        const response = await fetch
+        headers: NoroffAPI.util.setupHeaders(),
+          body: JSON.stringify({ title, body, tags, media })
+        const { data } = await NoroffAPI.util.handleResponse(response)
         return data
     }
   }
