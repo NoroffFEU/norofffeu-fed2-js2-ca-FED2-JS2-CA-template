@@ -1,1 +1,40 @@
 @import url(_reset.css);
+
+#postContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.post-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.post-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.post-card .title {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.post-card .tags {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.post-card .body {
+    margin-top: 10px;
+    color: #333;
+    font-size: 1rem;
+}
