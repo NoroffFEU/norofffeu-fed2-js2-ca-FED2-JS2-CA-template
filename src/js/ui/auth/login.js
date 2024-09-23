@@ -1,6 +1,18 @@
 import { login } from '../../api/auth/login.js';
 
-export async function onLogin(event) {
+export function setupLoginForm() {
+  console.log('Setting up login form');
+  const form = document.querySelector('#login-form');
+  
+  if (form) {
+    console.log('Login form found');
+    form.addEventListener('submit', onLogin);
+  } else {
+    console.error('Login form not found');
+  }
+}
+
+async function onLogin(event) {
     console.log('onLogin function called');
     event.preventDefault();
     console.log('Login form submitted');
@@ -31,3 +43,5 @@ export async function onLogin(event) {
         alert(`Login failed: ${error.message}`);
     }
 }
+
+export default setupLoginForm;
