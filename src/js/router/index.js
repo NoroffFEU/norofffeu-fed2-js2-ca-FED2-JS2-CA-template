@@ -3,7 +3,7 @@
   switch (pathname) {
     case "/":
       try {
-        const { default: homeView } = await import("./views/home.js");
+       const { default: homeView } = await import("./views/home.js");
         homeView();
       } catch (error) {
         console.error("Error loading home view:", error);
@@ -38,9 +38,13 @@
       postEditView();
       break;
     case "/post/create/":
-      const { default: postCreateView } = await import("../ui/post/create.js");
-      postCreateView();
-      break;
+        try {
+          const postCreateModule = await import("../ui/post/create.js");
+          postCreateModule.default();
+        } catch (error) {
+          console.error("Error loading create post view:", error);
+        }
+        break;
     case "/profile/":
       const { default: profileView } = await import("../ui/profile/index.js");
       profileView();

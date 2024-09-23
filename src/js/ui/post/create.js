@@ -1,5 +1,15 @@
 import { API_SOCIAL_POSTS, API_KEY } from '../../api/constants.js';
 
+// Add this new function
+export default function postCreateView() {
+  const form = document.querySelector('form[name="createPost"]');
+  if (form) {
+    form.addEventListener('submit', onCreatePost);
+  } else {
+    console.error("Create post form not found");
+  }
+} 
+
 function isTokenExpired(token) {
   if (!token) return true;
   const payloadBase64 = token.split('.')[1];
@@ -7,7 +17,7 @@ function isTokenExpired(token) {
   const decoded = JSON.parse(decodedJson);
   const exp = decoded.exp;
   return Date.now() >= exp * 1000;
-}
+}  
 
 export async function onCreatePost(event) {
   event.preventDefault();
@@ -16,6 +26,7 @@ export async function onCreatePost(event) {
   const form = event.target;
   const submitButton = form.querySelector('button[type="submit"]');
   const formData = new FormData(form);
+
 
   // Basic form validation
   if (!formData.get('title').trim()) {
