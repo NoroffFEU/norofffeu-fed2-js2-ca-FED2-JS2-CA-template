@@ -1,23 +1,16 @@
+import api from '../../api/instance.js';
 
-import { API_AUTH_LOGIN } from "../constants";
-export async function login({ email, password }) {
-    const body = JSON.stringify ({ email, password });
+const api = new NoroffAPI();
 
-    const response = await fetch(API_AUTH_LOGIN, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body,
-    });
+export async function onLogin(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
-    if (response.ok) {
-        const { data } = await response.json();
-        const { accessToken: token, ...user } = data;
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
-        return data;
+    try {
+        await api.auth.login(data);
+    } catch (error) {
+        alert(error);
     }
-
-    throw new Error('Couldn\'t login');
 }

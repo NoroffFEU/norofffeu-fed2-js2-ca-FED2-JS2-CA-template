@@ -1,3 +1,18 @@
+
+import { onCreatePost } from "../ui/post/createPost.js";
+import { onViewPosts } from "../ui/post/viewPosts.js";
+import { onDeletePost } from "../ui/post/deletePost.js";
+import { onLogin } from "../ui/auth/login.js";
+import { onRegister } from "../ui/auth/register.js";
+import { onUpdatePost } from "../ui/post/updatePost.js";
+import { onViewPost } from "../ui/post/viewPost.js";
+import NoroffAPI from '../api/index.js';
+import { currentPostId } from "../utilities/currentPostId.js";
+
+const api = new NoroffAPI('https://v2.api.noroff.dev')
+
+const postId = currentPostId();
+
 // This function controls which JavaScript file is loaded on which page
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose

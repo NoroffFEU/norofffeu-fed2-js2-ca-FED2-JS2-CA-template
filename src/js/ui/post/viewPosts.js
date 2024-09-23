@@ -1,9 +1,9 @@
-import { readPosts } from '../../api/post/read.js';
+import api from '../../api/instance.js';
 
 
 export async function onViewPosts(id) {
     try {
-        const posts = await readPosts(id);
+        const posts = await api.posts.read(id);
         
         const list = posts.map((post) => {
             const li = document.createElement('li');

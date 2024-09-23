@@ -1,1 +1,5 @@
 @import url(_reset.css);
+
+#noroff-logo img {
+    width: 100px;;
+}

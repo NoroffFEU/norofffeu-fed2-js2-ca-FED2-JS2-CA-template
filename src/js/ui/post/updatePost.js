@@ -1,30 +1,36 @@
-import { updatePost } from '../../api/post/update.js';
-import { currentUser } from '../../api/user/currentUser.js';
+import api from '../../api/instance.js';
+import { currentPostId } from '../../utilities/currentPostId.js';
 
 export async function onUpdatePost(event) {
-    const post = await readPost(id);
+    const id = currentPostId;
 
-    document.querySelector('#title').value = post.title;
-    document.querySelector('#body').value = post.body;
-    document.querySelector('#tags').value = post.tags.join(', ');
+    try {
+        const post = await api.post.read(id);
 
-    document.forms.updatePost.addeventListener('submit', async (event) => {
-        event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        document.querySelector('#title').value = post.title;
+        document.querySelector('#body').value = post.body;
+        document.querySelector('#tags').value = post.tags.join(', ');
 
-        data.tags = data.tags
-        .split(',')
-        .map((tag) => tag.trim())
-        .filter(Boolean);
+        document.forms.updatePost.addeventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-        try {
-            await updatePost(id, data);
-            window.location.href = `/post/?id=${id}`;
-        } catch (error) {
-            console.error(error);
-            alert('Failed to update post');
-        }
-    });
+            data.tags = data.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean);
+
+            try {
+                await api.post.update(id, data);
+                window.location.href = `/post/?id=${id}`;
+            } catch (error) {
+                console.error(error);
+                alert('Failed to update post');
+            }
+        });
+    } catch (error) {
+        alert(error);
+    }
 }

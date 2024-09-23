@@ -1,9 +1,9 @@
-import { readPost } from '../../api/post/read.js';
+import api from '../../api/instance.js';
 import { onDeletePost } from './deletePost.js';
 
 export async function onViewPost(id) {
     try {
-        const post = await readPost(id);
+        const post = await api.post.read(id);
         document.querySelector('#title').textContent = post.title;
         document.querySelector('#body').textContent = post.body;
         document.querySelector('#tags').textContent = post.tags.join(', ');

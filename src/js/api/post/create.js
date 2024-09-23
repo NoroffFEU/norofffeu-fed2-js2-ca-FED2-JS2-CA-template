@@ -1,5 +1,6 @@
 import { currentUser } from '../../utilities/currentUser';
 import { API_SOCIAL_POSTS } from '../constants.js';
+
 export async function createPost({ title, body, tags, media }) {
     const user = currentUser();
 
