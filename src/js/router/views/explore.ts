@@ -49,7 +49,13 @@ export async function renderAllPosts() {
 
       const isUserPost = post.author.name === getUser() ? true : false;
 
-      const postHTML = createPostHTML(post, isFollowing, isLiked, isUserPost);
+      const postHTML = createPostHTML(
+        post,
+        isFollowing,
+        isLiked,
+        isUserPost,
+        false
+      );
       postsContainer.insertAdjacentHTML("beforeend", postHTML);
     });
 

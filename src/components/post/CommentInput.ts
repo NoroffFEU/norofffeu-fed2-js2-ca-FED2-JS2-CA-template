@@ -1,4 +1,8 @@
 import { CommentTemplate } from "@/components/post/CommentTemplate";
+import { createComment } from "@/js/api/post/create";
+import { readProfile } from "@/js/api/profile/read";
+import { CommentResponse, ProfileResponse } from "@/types/types";
+import { getUser } from "@/js/utilities/getUser";
 
 const commentInputTemplate = document.createElement("template");
 
@@ -96,24 +100,46 @@ export class CommentInput extends HTMLElement {
     this.form.removeEventListener("submit", (e) => this.handleSubmit(e));
   }
 
-  handleSubmit(e: Event) {
+  async handleSubmit(e: Event) {
     e.preventDefault();
 
     if (this.textarea.value.length > 250) {
       alert("Comment cannot be longer than 250 characters");
       return;
+    } else if (this.textarea.value.length === 0) {
+      alert("Comment cannot be empty");
+      return;
     } else {
-      const comment = document.createElement(
-        "comment-template"
-      ) as CommentTemplate;
+      try {
+        const commentFetch = await createComment({
+          body: this.textarea.value,
+          id: this.postId,
+        });
+        const user = await readProfile(getUser());
 
-      comment.commentText = this.textarea.value;
-
-      this.commentsContainer.appendChild(comment);
-
-      this.form.reset();
-      this.textarea.focus();
+        if (commentFetch && user) {
+          this.render(commentFetch, user);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
+  }
+
+  render(commentFetch: CommentResponse, user: ProfileResponse) {
+    const comment = document.createElement(
+      "comment-template"
+    ) as CommentTemplate;
+
+    comment.commentData = commentFetch;
+    comment.commentUser = user;
+    comment.setAttribute("data-comment-id", commentFetch.id.toString());
+    comment.setAttribute("data-post-id", commentFetch.postId.toString());
+
+    this.commentsContainer.appendChild(comment);
+
+    this.form.reset();
+    this.textarea.focus();
   }
 
   chartCounterListener(e: Event) {

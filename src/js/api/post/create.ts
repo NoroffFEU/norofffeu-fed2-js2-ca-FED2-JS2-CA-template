@@ -4,6 +4,7 @@ import {
   PostResponse,
   PostID,
   CommentResponse,
+  CommentRequest,
 } from "@/types/types";
 import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
@@ -40,11 +41,7 @@ export async function createPost({
   }
 }
 
-export async function createComment(
-  body: string,
-  id: PostID,
-  replyToId: number
-) {
+export async function createComment({ body, id, replyToId }: CommentRequest) {
   try {
     const response = await fetch(`${API_SOCIAL.POSTS}/${id}/comment`, {
       method: "POST",

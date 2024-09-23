@@ -6,6 +6,7 @@ import { FormattedDate } from "@/components/post/FormattedDate";
 import { PostButtons } from "@/components/post/PostButtons";
 import { CommentInput } from "@/components/post/CommentInput";
 import { CommentTemplate } from "@/components/post/CommentTemplate";
+import { getTime } from "@/js/utilities/getTime";
 
 import { getUser } from "@/js/utilities/getUser";
 
@@ -120,14 +121,20 @@ export function createPostHTML(
                 <a href="/post/?id=${post.id}">View</a>
                 <a href="/post/?id=${post.id}">Reply</a>
             </div>
+
+            <div>
+              <span>${post._count.comments} Comments</span>
+            
+              <like-button 
+                  data-post-id="${post.id}" 
+                  data-reactions="${post._count.reactions}" 
+                  data-user-liked="${isLiked}"
+              >
+              </like-button>
+            </div>
       
-            <like-button 
-                data-post-id="${post.id}" 
-                data-reactions="${post._count.reactions}" 
-                data-user-liked="${isLiked}"
-            >
-            </like-button>
         </div>
+        <hr>
         
         `
         : `
@@ -141,6 +148,41 @@ export function createPostHTML(
         <comment-input data-post-id="${post.id}"></comment-input>
 
         <div id="post-comments">
+         ${
+           post.comments.length > 0
+             ? post.comments
+                 .map((comment) => {
+                   console.log(comment);
+                   return `
+                   <comment-template data-comment-id="${
+                     comment.id
+                   }" data-post-id="${comment.postId}">
+                        <img 
+                            class="avatar"
+                            slot="avatar" 
+                            src="${
+                              comment.author.avatar.url ||
+                              "/images/placeholder-avatar.jpg"
+                            }" 
+                            alt="${
+                              comment.author.name || "Placeholder"
+                            } avatar" 
+                        />
+                        <p class="name" slot="name">${
+                          comment.author.name || ""
+                        }</p>
+                        <p class="profile" slot="profile">@${
+                          comment.author.name || ""
+                        }</p>
+                        <span class="time" slot="time">${getTime(
+                          comment.created
+                        )}</span>
+                        <p slot="body">${comment.body || ""}</p>
+                   </comment-template>`;
+                 })
+                 .join("")
+             : ""
+         }
         </div>
    
         `

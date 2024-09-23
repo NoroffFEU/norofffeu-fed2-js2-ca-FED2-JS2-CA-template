@@ -153,6 +153,12 @@ export interface PostResponse {
   _count: Count;
 }
 
+export interface CommentRequest {
+  body: string;
+  id: PostID;
+  replyToId?: number;
+}
+
 export interface CommentResponse {
   body: string;
   replyToId: number | null;
