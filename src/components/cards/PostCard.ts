@@ -3,6 +3,10 @@ import { FollowButton } from "@/components/buttons/FollowButton";
 import { LikeButton } from "@/components/buttons/LikeButton";
 import { DeleteButton } from "@/components/buttons/DeleteButton";
 import { FormattedDate } from "@/components/post/FormattedDate";
+import { PostButtons } from "@/components/post/PostButtons";
+import { CommentInput } from "@/components/post/CommentInput";
+import { CommentTemplate } from "@/components/post/CommentTemplate";
+
 import { getUser } from "@/js/utilities/getUser";
 
 export function createPostHTML(
@@ -26,6 +30,18 @@ export function createPostHTML(
 
   if (!customElements.get("formatted-date")) {
     customElements.define("formatted-date", FormattedDate);
+  }
+
+  if (!customElements.get("post-buttons")) {
+    customElements.define("post-buttons", PostButtons);
+  }
+
+  if (!customElements.get("comment-input")) {
+    customElements.define("comment-input", CommentInput);
+  }
+
+  if (!customElements.get("comment-template")) {
+    customElements.define("comment-template", CommentTemplate);
   }
 
   return `
@@ -121,21 +137,14 @@ export function createPostHTML(
             data-updated="${post.updated}"
         ></formatted-date>
 
-        <hr>
-            <div
-                id="main-post__footer__buttons"
-                style="display: flex; justify-content: space-around"
-            >
-                <button id="main-post__footer__buttons__comment">Comment</button>
-                <button id="main-post__footer__buttons__boost">Boost</button>
-                <button id="main-post__footer__buttons__like">0 | Like</button>
-                <button id="main-post__footer__buttons__share">Share</button>
-                <button id="main-post__footer__buttons__bookmark">Bookmark</button>
-              </div>
-            </div>
+
+        <comment-input data-post-id="${post.id}"></comment-input>
+
+        <div id="post-comments">
+        </div>
+   
         `
     }
-          <hr>
     
   </li>
     `;
