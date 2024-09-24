@@ -10,6 +10,18 @@ export default class NoroffAPI {
     }
   }
 
+  set user(userData) {
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+
+  get token() {
+    return localStorage.token;
+  }
+
+  set token(accessToken) {
+    localStorage.setItem('token', accessToken);
+  }
+
  
   static paths = {
     base: "https://v2.api.noroff.dev",
@@ -74,8 +86,10 @@ export default class NoroffAPI {
       if (response.ok) {
         const { data } = await NoroffAPI.util.handleResponse(response);
         const { accessToken: token, ...user } = data;
-        localStorage.token = token;
-        localStorage.user = JSON.stringify(user);
+        
+        this.user = user;
+        this.token = token;
+
         return user;
       }
 
@@ -105,9 +119,10 @@ export default class NoroffAPI {
     },
 
     logout: () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      window.location.href = "/auth/login";
+      this.user = null;
+      this.token = null;
+     
+      window.location.href = "/auth/login.html";
     },
   };
 
@@ -154,13 +169,15 @@ export default class NoroffAPI {
         return data;
     },
     create: async ({ title, body, tags, media }) => {
-        const url = new URL(NoroffAPI.paths.posts(this.user.name)), {
+        const url = new URL(NoroffAPI.paths.posts(this.user.name), {
           
         });
-        const response = await fetch
-        headers: NoroffAPI.util.setupHeaders(),
-          body: JSON.stringify({ title, body, tags, media })
-        const { data } = await NoroffAPI.util.handleResponse(response)
+        const response = await fetch(url, {
+            method: "POST",
+            headers: NoroffAPI.util.setupHeaders(),
+            body: JSON.stringify({ title, body, tags, media })
+        })
+        const { data } = await NoroffAPI.util.handleResponse(response);
         return data
     }
   }
