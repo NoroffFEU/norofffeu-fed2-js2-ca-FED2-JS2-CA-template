@@ -1,13 +1,12 @@
-// export async function onCreatePost(event) {}
+import { createPost as apiCreatePost } from "../../api/post/create.js";
 
-// src/ui/post/create.js
-import { createPost as apiCreatePost } from "../../api/post/create.js"; // Import API function
-
-// Function to dynamically populate the create post form
 export function populateCreatePostForm() {
-    const form = document.forms.createPost; // Get the form element
+    const form = document.forms.createPost;
 
-    // Create input fields and labels
+    if (form.querySelector("input[name='title']")) {
+        return;
+    }
+
     const fields = [
         { name: "title", type: "text", placeholder: "Title", required: true },
         { name: "body", type: "textarea", placeholder: "Post Content", required: true },
@@ -17,48 +16,52 @@ export function populateCreatePostForm() {
 
     fields.forEach(field => {
         const label = document.createElement("label");
-        label.textContent = field.placeholder; // Set label text
-        form.appendChild(label); // Append label to form
+        label.textContent = field.placeholder;
+        form.appendChild(label);
 
         let input;
         if (field.type === "textarea") {
             input = document.createElement("textarea");
         } else {
             input = document.createElement("input");
-            input.type = field.type; // Set input type
+            input.type = field.type;
         }
-        input.name = field.name; // Set input name
-        input.placeholder = field.placeholder; // Set input placeholder
+        input.name = field.name;
+        input.placeholder = field.placeholder;
         if (field.required) {
-            input.required = true; // Set required attribute if needed
+            input.required = true;
         }
 
-        form.appendChild(input); // Append input to form
+        form.appendChild(input);
     });
 }
 
-// Function to handle form submission
 export async function onCreatePost(event) {
-    event.preventDefault(); // Prevent default form submission behavior
-    const form = event.target; // Get the form that triggered the event
+    event.preventDefault();
+    const form = event.target;
 
     // Collect input values
     const title = form.title.value;
     const body = form.body.value;
-    const tags = form.tags.value.split(",").map(tag => tag.trim()); // Split tags into an array
-    const media = form.media.value; // Get media URL
+    const tags = form.tags.value.split(",").map(tag => tag.trim());
+    const media = form.media.value;
 
-    // Call the API function to create the post
-    const response = await apiCreatePost({ title, body, tags, media });
+    console.log("Post data:", { title, body, tags, media });
 
-    // Handle the response (display success/error messages, etc.)
-    if (response.ok) {
-        console.log("Post created successfully!");
-        form.reset(); // Reset form after successful submission
-    } else {
-        console.error("Failed to create post:", response.statusText);
+    try {
+        const response = await apiCreatePost({ title, body, tags, media });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log("Post created successfully!", responseData);
+            form.reset();
+        } else {
+            const errorText = await response.text();
+            console.error("Failed to create post:", response.status, errorText);
+        }
+    } catch (error) {
+        console.error("Error creating post:", error);
     }
 }
 
-// Populate the form when this module is loaded
 populateCreatePostForm();

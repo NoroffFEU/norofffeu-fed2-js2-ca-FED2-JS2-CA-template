@@ -1,24 +1,27 @@
-// export async function createPost({ title, body, tags, media }) {}
-// src/api/post/create.js
-import { API_SOCIAL_POSTS } from "../constants.js"; // Import the API endpoint
-import { headers } from "../headers.js"; // Import headers function
+import {API_KEY, API_SOCIAL_POSTS} from "../constants.js"; // Import the API endpoint
 
 export async function createPost({ title, body, tags, media }) {
-    const postData = { title, body, tags, media }; // Prepare post data
+    const postData = {
+        title,
+        body,
+        tags,
+        media : {url : media}
+    };
 
     try {
         const response = await fetch(API_SOCIAL_POSTS, {
             method: "POST",
             headers: {
-                ...headers(), // Add any additional headers if necessary
                 "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                "X-Noroff-API-Key": API_KEY,
             },
-            body: JSON.stringify(postData), // Send post data as JSON
+            body: JSON.stringify(postData),
         });
 
-        return response; // Return the response
+        return response;
     } catch (error) {
         console.error("Error creating post:", error);
-        throw error; // Rethrow the error for further handling
+        throw error;
     }
 }
