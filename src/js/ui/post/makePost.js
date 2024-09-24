@@ -18,13 +18,21 @@ export const makePost = (userPosts, id) => {
 
     const text = document.createElement("p");
     text.innerText = post.body;
-
     const imageDiv = document.createElement("div");
     imageDiv.className = "overflow-hidden postImageContainer";
+    if (post.media) {
+      const image = document.createElement("img");
+      image.src = post.media.url;
+      image.alt = post.media.alt;
+      image.className = "postImage";
 
-    const image = document.createElement("img");
-    image.src = post.media.url;
-    image.alt = post.media.alt;
+      imageDiv.appendChild(image);
+    } else {
+      const image = document.createElement("p");
+      image.innerText = "*Image Not Found*";
+
+      imageDiv.appendChild(image);
+    }
 
     const editSection = document.createElement("div");
     editSection.className = "flex gap-10";
@@ -46,10 +54,17 @@ export const makePost = (userPosts, id) => {
     reactionDiv.innerHTML = `
         <p>Reactions: ${post._count.reactions}</p>`;
 
+    const seePost = document.createElement("button");
+    seePost.innerText = "See Post";
+
+    seePost.addEventListener("click", () => {
+      window.location.href = "/post/";
+      localStorage.setItem("postID", JSON.stringify(post.id));
+    });
+
     countDiv.append(reactionSection, editSection);
     reactionSection.append(commentsDiv, reactionDiv);
-    imageDiv.appendChild(image);
-    container.append(title, text, imageDiv, countDiv);
+    container.append(title, text, imageDiv, seePost, countDiv);
     outerContainer.append(container);
     if (username === post.author.name) {
       editSection.append(editButton, deleteButton);

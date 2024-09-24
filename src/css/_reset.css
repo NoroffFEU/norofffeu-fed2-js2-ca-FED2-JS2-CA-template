@@ -47,10 +47,23 @@ main {
   border-radius: 5px;
   background: #d9d9d9;
   color: black;
+  margin-bottom: 20px;
+}
+
+.postCommentContainer {
+  margin-bottom: 20px;
 }
 
 .postImageContainer {
   max-height: 300px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.postImage {
+  objejt-fit: cover;
+  width: 100%;
 }
 
 .userPosts {
@@ -131,4 +144,16 @@ main {
 
 .gap-10 {
   column-gap: 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+}
+
+nav {
+  display: flex;
+  column-gap: 20px;
+  margin: 20px 0px 20px 0px;
 }

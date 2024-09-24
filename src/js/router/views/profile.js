@@ -23,7 +23,6 @@ const readProfileInfo = async () => {
   const profileImageDiv = document.getElementById("profileImage");
   const nameDiv = document.getElementById("username");
   const bioDiv = document.getElementById("bio");
-  // const userPostsDiv = document.getElementById("userPosts");
 
   const banner = document.createElement("img");
   banner.src = data.banner.url;

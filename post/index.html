@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,33 @@
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <h1>Post Page</h1>
+    <h1>Tompe Talk</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/profile/">Profile</a>
+      <a href="/post/create/">Create Post</a>
+      <button class="logout">Log Out</button>
+    </nav>
+
+    <div id="postContainer" class="postContainer">
+      <div id="postTitleContainer"></div>
+      <div id="postTextContainer"></div>
+      <div
+        id="postImageContainer"
+        class="postImageContainer overflow-hidden"
+      ></div>
+      <div id="postTagsContainer" class="flex gap-10">
+        <p>Tags:</p>
+      </div>
+      <div class="flex justify-between items-center">
+        <div id="postReactionContainer" class="flex gap-10"></div>
+        <div id="postSettingsContainer" class="flex gap-10"></div>
+      </div>
+    </div>
+
+    <div
+      id="postCommentContainer"
+      class="w-100 flex flex-col items-center"
+    ></div>
   </body>
 </html>
