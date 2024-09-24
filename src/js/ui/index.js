@@ -58,13 +58,13 @@ export default class NoroffApp extends NoroffAPI {
   setReplyToId(event) {
     const originalComment = event.target.closest(".comment-item");
     this.replyToId = Number(originalComment.id);
+    console.log(this.replyToId);
     const originalCommentUser = originalComment.dataset.username;
     originalComment.style.backgroundColor = "#dedede";
     const replyMessage = document.querySelector(".reply-message");
     replyMessage.innerHTML = `<button class="cancel" type="button"><i class="fa-solid fa-circle-xmark"></i></button>Replying to <span class="reply-to">${originalCommentUser}</span>`;
     const cancelButton = document.querySelector(".cancel");
     cancelButton.addEventListener("click", () => {
-      console.log("clicked");
       replyMessage.innerHTML = "";
       this.replyToId = null;
       originalComment.style.backgroundColor = "transparent";
@@ -353,49 +353,6 @@ export default class NoroffApp extends NoroffAPI {
         if(this.replyToId) {
           try {
             await api.post.comment(postId, { body: comment, replyToId: this.replyToId });
-            // const { body, owner } = data;
-            // const parentComment = document.getElementById(this.replyToId);
-            // const userProfile = await api.profile.readProfile(owner);
-
-            // const replyCommentContainer = document.createElement("div");
-            // replyCommentContainer.classList.add("comment-container", "reply-comment-container");
-            // const userInfo = document.createElement("div");
-            // userInfo.classList.add("user-info");
-            // const userAvatar = document.createElement("img");
-            // userAvatar.src = userProfile.data.avatar.url;
-            // const commentUser = document.createElement("a");
-            // commentUser.classList.add("comment-username");
-            // commentUser.href = `/profile/?name=${owner}`;
-            // commentUser.textContent = owner;
-            // userInfo.append(userAvatar, commentUser);
-            // const commentContent = document.createElement("div");
-            // commentContent.classList.add("comment-content");
-            // const commentText = document.createElement("p");
-            // commentText.classList.add("comment-text");
-            // commentText.textContent = body;
-            // const commentDeleteButton = document.createElement("button");
-            // commentDeleteButton.classList.add("comment-delete-button");
-            // const commentDeleteIcon = document.createElement("i");
-            // commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
-            // commentDeleteButton.appendChild(commentDeleteIcon);
-            // commentContent.append(commentText, commentDeleteButton);
-            // const replyButton = document.createElement("button");
-            // replyButton.classList.add("reply-button");
-            // replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
-            // replyCommentContainer.append(userInfo, commentContent, replyButton);
-            // const parentReplyList = parentComment.querySelector('.reply-list');
-            // parentReplyList.appendChild(replyCommentContainer);
-            // document.getElementById("comment").value = "";
-            // document.querySelector(".reply-message").innerHTML = "";
-            // parentComment.style.backgroundColor = "transparent";
-            // this.setupReplyButtons();
-            // this.events.post.deleteComment();
-            // this.replyToId = null;
-
-            // const postData = await api.post.readPost(postId);
-            // const updatedCommentNumber = postData.data.comments.length;
-            // const commentNumber = document.querySelector(".section-title");
-            // commentNumber.textContent = `Comment (${updatedCommentNumber})`;
             location.reload();
           } catch (error) {
             alert(error.message);
@@ -403,97 +360,6 @@ export default class NoroffApp extends NoroffAPI {
         } else {
           try {
             await api.post.comment(postId, { body: comment });
-            // const post = await api.post.readPost(postId);
-            // const commentList = document.querySelector('.comment-list');
-            // commentList.innerHTML = "";
-            // const commentsArray = post.data.comments;
-            // const originalCommentsArray = commentsArray.filter((comment) => comment.replyToId === null);
-            // for (let i = 0; i < originalCommentsArray.length; i++) {
-            //   const comment = originalCommentsArray[i];
-            //   const commentItem = document.createElement('li');
-            //   commentItem.classList.add("comment-item");
-            //   commentItem.id = comment.id;
-            //   const commentContainer = document.createElement("div");
-            //   commentContainer.classList.add("comment-container");
-            //   const userInfo = document.createElement("div");
-            //   userInfo.classList.add("user-info");
-            //   const userAvatar = document.createElement("img");
-            //   userAvatar.src = comment.author.avatar.url;
-            //   const commentUser = document.createElement("a");
-            //   commentUser.classList.add("comment-username");
-            //   commentUser.href = `/profile/?name=${comment.author.name}`;
-            //   commentUser.textContent = comment.author.name;
-            //   userInfo.append(userAvatar, commentUser);
-            //   const commentContent = document.createElement("div");
-            //   commentContent.classList.add("comment-content");
-            //   const commentText = document.createElement("p");
-            //   commentText.classList.add("comment-text");
-            //   commentText.textContent = comment.body;
-            //   const commentDeleteButton = document.createElement("button");
-            //   commentDeleteButton.classList.add("comment-delete-button");
-            //   const commentDeleteIcon = document.createElement("i");
-            //   commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
-            //   commentDeleteButton.appendChild(commentDeleteIcon);
-            //   commentContent.append(commentText, commentDeleteButton);
-            //   const replyButton = document.createElement("button");
-            //   replyButton.classList.add("reply-button");
-            //   replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
-            //   commentContainer.append(userInfo, commentContent, replyButton);
-            //   const replyList = document.createElement("ul");
-            //   replyList.classList.add("reply-list");
-            //   commentItem.append(commentContainer, replyList);
-            //   commentList.appendChild(commentItem);
-            // }
-            // const replyCommentsArray = commentsArray.filter((comment) => comment.replyToId !== null);
-            // const commentItems = commentList.children;
-            // const commentItemsArray = Array.from(commentItems);
-            // for (let i = 0; i < replyCommentsArray.length; i++) {
-            //   const replyCommentItem = document.createElement('li');
-            //   replyCommentItem.classList.add("reply-comment-item");
-            //   const comment = replyCommentsArray[i];
-            //   replyCommentItem.id = comment.id;
-            //   replyCommentItem.dataset.username = comment.author.name;
-            //   const commentContainer = document.createElement("div");
-            //   commentContainer.classList.add("comment-container");
-            //   const userInfo = document.createElement("div");
-            //   userInfo.classList.add("user-info");
-            //   const userAvatar = document.createElement("img");
-            //   userAvatar.src = comment.author.avatar.url;
-            //   const commentUser = document.createElement("a");
-            //   commentUser.classList.add("comment-username");
-            //   commentUser.href = `/profile/?name=${comment.author.name}`;
-            //   commentUser.textContent = comment.author.name;
-            //   userInfo.append(userAvatar, commentUser);
-            //   const commentContent = document.createElement("div");
-            //   commentContent.classList.add("comment-content");
-            //   const commentText = document.createElement("p");
-            //   commentText.classList.add("comment-text");
-            //   commentText.textContent = comment.body;
-            //   const commentDeleteButton = document.createElement("button");
-            //   commentDeleteButton.classList.add("comment-delete-button");
-            //   const commentDeleteIcon = document.createElement("i");
-            //   commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
-            //   commentDeleteButton.appendChild(commentDeleteIcon);
-            //   commentContent.append(commentText, commentDeleteButton);
-            //   const replyButton = document.createElement("button");
-            //   replyButton.classList.add("reply-button");
-            //   replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
-            //   commentContainer.append(userInfo, commentContent, replyButton);
-            //   const replyList = document.createElement("ul");
-            //   replyList.classList.add("reply-list");
-            //   replyCommentItem.append(commentContainer, replyList);
-            //   const parentComment = commentItemsArray.find(commentItem => Number(commentItem.id) === comment.replyToId);
-            //   const parentReplyList = parentComment.querySelector('.reply-list');
-            //   parentReplyList.appendChild(replyCommentItem);
-            // }
-
-            // const postData = await api.post.readPost(postId);
-            // const updatedCommentNumber = postData.data.comments.length;
-            // const commentNumber = document.querySelector(".section-title");
-            // commentNumber.textContent = `Comment (${updatedCommentNumber})`;
-            // document.getElementById("comment").value = "";
-            // this.setupReplyButtons();
-            // this.events.post.deleteComment();
             location.reload();
           } catch (error) {
             alert(error.message);

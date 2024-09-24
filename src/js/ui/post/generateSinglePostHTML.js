@@ -61,14 +61,13 @@ export function generateSinglePostHTML(post) {
   sectionTitle.classList.add("section-title");
   sectionTitle.textContent = `Comment (${post.comments.length})`;
 
-
   const commentList = document.createElement('ul');
   commentList.classList.add("comment-list");
   const commentsArray = post.comments;
   const originalCommentsArray = commentsArray.filter((comment) => comment.replyToId === null);
   for (let i = 0; i < originalCommentsArray.length; i++) {
     const commentItem = document.createElement('li');
-    commentItem.classList.add("comment-item");
+    commentItem.classList.add("comment-item", "original-comment-item");
     const comment = originalCommentsArray[i];
     commentItem.id = comment.id;
     commentItem.dataset.username = comment.author.name;
@@ -99,17 +98,16 @@ export function generateSinglePostHTML(post) {
     replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
     const replyList = document.createElement("ul");
-    replyList.classList.add("reply-list");
+    replyList.classList.add("reply-list", "ul-padding-left");
     commentItem.append(commentContainer, replyList);
     commentList.appendChild(commentItem);
   }
+
   const replyCommentsArray = commentsArray.filter((comment) => comment.replyToId !== null);
-  const commentItems = commentList.children;
-  const commentItemsArray = Array.from(commentItems);
-  
+  const commentItemsArray = post.comments;
   for (let i = 0; i < replyCommentsArray.length; i++) {
     const replyCommentItem = document.createElement('li');
-    replyCommentItem.classList.add("reply-comment-item");
+    replyCommentItem.classList.add("comment-item", "reply-comment-item");
     const comment = replyCommentsArray[i];
     replyCommentItem.id = comment.id;
     replyCommentItem.dataset.username = comment.author.name;
@@ -139,10 +137,24 @@ export function generateSinglePostHTML(post) {
     replyButton.classList.add("reply-button");
     replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
-    replyCommentItem.appendChild(commentContainer);
+    const replyList = document.createElement("ul");
+    replyList.classList.add("reply-list");
+    replyCommentItem.append(commentContainer, replyList);
     const parentComment = commentItemsArray.find(commentItem => Number(commentItem.id) === comment.replyToId);
-    const parentReplyList = parentComment.querySelector('.reply-list');
-    parentReplyList.appendChild(replyCommentItem);
+    if (parentComment) {
+      const allCommentItems = Array.from(commentList.querySelectorAll('li.comment-item'));
+    const allReplyList = Array.from(commentList.querySelectorAll('ul.reply-list'));
+    allReplyList.forEach((replyList, index) => {
+      
+    });
+      const parentReplyItem = allCommentItems.find(commentItem => Number(commentItem.id) === comment.replyToId);
+      if (parentReplyItem) {
+          const parentItemReplyList = parentReplyItem.querySelector(".reply-list");
+          parentItemReplyList.appendChild(replyCommentItem);
+      } else {
+          console.error("Parent reply item not found");
+      }
+  }
   }
 
   const commentForm = document.createElement("form");

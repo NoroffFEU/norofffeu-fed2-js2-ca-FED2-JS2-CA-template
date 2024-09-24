@@ -46,32 +46,40 @@
 }
 
 .comment-list {
-  padding: 0;
-}
-
-.comment-item {
-  border-bottom: 1px solid #797878;
   padding: 2.4rem 0;
 }
 
-.comment-item:last-child {
+.original-comment-item {
+  border-bottom: 1px solid #797878;
+  margin-top: 1rem;
+}
+
+.original-comment-item:first-child{
+  margin-top: 0;
+}
+
+.original-comment-item:last-child {
   border-bottom: none;
 }
 
 .comment-container {
   width: 100%;
+  padding: 1rem;
 }
 
 .reply-list {
   display: flex;
   flex-direction: column;
-  margin-top: 1.6rem;
+  padding: 0;
+}
+
+.ul-padding-left {
+  padding-left: 2.4rem;
 }
 
 .reply-comment-item {
-  background-color: #f0f0f0;
-  padding: 1rem;
   margin-top: 1rem;
+  border-top: solid 1px #c4c4c4;
 }
 
 .reply-comment-item:first-child {
@@ -112,6 +120,7 @@
   border: none;
   padding: 0;
   margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
   color: #939393;
   font-size: 1.2rem;
 }
@@ -225,7 +234,7 @@
     margin-bottom: 2.4rem;
   }
 
-  .comment-item {
+  .comment-list {
     padding: 2.4rem 1.6rem;
   }
 
