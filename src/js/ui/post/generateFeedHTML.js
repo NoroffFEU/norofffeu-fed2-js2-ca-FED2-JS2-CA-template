@@ -12,6 +12,11 @@ export function generateFeedHTML(post) {
   if(post.media?.url) {
     thumbnail.src = post.media.url;
     thumbnail.alt = post.media.alt;
+
+    thumbnail.onerror = () => {
+      thumbnail.src = "../../../../images/default-thumbnail.jpg";
+      thumbnail.alt = "Default Thumbnail";
+    };
   } else {
     thumbnail.src = "../../../../images/default-thumbnail.jpg";
     thumbnail.alt = "No Media Available";
