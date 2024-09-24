@@ -6,12 +6,14 @@ import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
+import { searchInputLoader } from "@/js/ui/search/searchInputLoader";
 
 async function loadHomePage() {
   try {
     document.getElementById("logout-btn")?.addEventListener("click", onLogout);
     renderPosts();
     renderProfile();
+    searchInputLoader();
   } catch (error) {
     console.error(error);
   }

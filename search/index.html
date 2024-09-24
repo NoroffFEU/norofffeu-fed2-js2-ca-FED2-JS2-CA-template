@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noroff FED2 JS2 CA</title>
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <script type="module" src="../src/app.ts"></script>
+  </head>
+
+  <body class="home-page">
+    <header>
+      <div class="logo__container">
+        <img
+          class="logo"
+          src="/images/noroff-logo-white.png"
+          alt="Noroff Logo"
+        />
+      </div>
+      <div class="nav__container">
+        <a href="../../home/">🏠 Home</a>
+        <a href="../../explore/">🔍 Explore</a>
+        <a href="javascript:void(0)">🔔 Notifications</a>
+        <a href="javascript:void(0)">🔖 Bookmarks</a>
+        <a href="javascript:void(0)">❤️ Favorites</a>
+        <a href="javascript:void(0)">📝 Lists</a>
+        <a href="javascript:void(0)">⚙️ Preferences</a>
+      </div>
+      </div>
+    </header>
+    <main>
+      <section class="scroll-section">
+        <div class="posts__container__header">
+          <a data-is-active="true" href="javascript:void(0)">🔍 Search results</a>
+        </div>
+        <article id="posts">
+          
+        </article>
+      </section>
+    </main>
+    <aside>
+      <form name="search">
+        <input type="text" name="search" placeholder="Search" />
+      </form>
+
+      <div class="profile__container">
+      </div>
+
+      <div class="user-actions">
+        <a href="../../post/create/">Create post</a>
+        <button id="logout-btn">Logout</button>
+      </div>
+    </aside>
+  </body>
+</html>

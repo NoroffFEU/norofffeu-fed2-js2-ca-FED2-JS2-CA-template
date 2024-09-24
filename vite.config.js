@@ -18,6 +18,7 @@ export default defineConfig({
         createPost: resolve(__dirname, "./post/create/index.html"),
         home: resolve(__dirname, "./home/index.html"),
         explore: resolve(__dirname, "./explore/index.html"),
+        search: resolve(__dirname, "./search/index.html"),
       },
     },
   },
