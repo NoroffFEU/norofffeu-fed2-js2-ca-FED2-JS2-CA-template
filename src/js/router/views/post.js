@@ -1,5 +1,5 @@
-import { comment } from "postcss";
 import { readPost } from "../../api/post/read";
+import { onDeletePost } from "../../ui/post/delete";
 
 const id = JSON.parse(localStorage.getItem("postID"));
 const userinfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -45,6 +45,10 @@ const showPost = async () => {
 
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
+  deleteButton.id = post.id;
+  console.log("blob", post.id);
+
+  deleteButton.addEventListener("click", onDeletePost);
 
   const reactionDiv = document.createElement("div");
   reactionDiv.innerHTML = `

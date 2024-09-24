@@ -1,3 +1,5 @@
+import { onDeletePost } from "./delete";
+
 export const makePost = (userPosts, id) => {
   const outerContainer = document.getElementById(id);
   const userinfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -42,6 +44,7 @@ export const makePost = (userPosts, id) => {
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
+    deleteButton.addEventListener("click", onDeletePost);
 
     const reactionSection = document.createElement("div");
     reactionSection.className = "flex gap-10";
