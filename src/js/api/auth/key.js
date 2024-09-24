@@ -3,7 +3,9 @@ export async function getKey() {
     if (accessToken) {
         return accessToken;
     } else {
-        console.error("Access denied");
+        console.error("Access denied: No access token found.");
+
+        window.location.href = "/login";
         return null;
     }
 }
