@@ -1,9 +1,5 @@
-export function setLogoutListener() {
-    const logoutBtn = document.querySelector(".logoutBtn");
+import { onLogout } from "../auth/logout";
 
-    logoutBtn.addEventListener("click", function () {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("userID");
-        window.location.href = "/auth/login/";
-    });
+export function setLogoutListener() {
+    onLogout();
 }

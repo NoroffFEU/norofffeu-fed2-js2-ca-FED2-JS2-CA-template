@@ -38,3 +38,26 @@
     color: #333;
     font-size: 1rem;
 }
+
+#postContainer .media img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+#postContainer.title {
+    font-size: 1.5em;
+    margin: 16px 0;
+}
+#postContainer .tags {
+    margin: 8px 0;
+    color: #555;
+}
+#postContainer .body {
+    font-size: 1em;
+    color: #333;
+}
+#postContainer .created {
+    font-size: 0.875em;
+    color: #999;
+    text-align: right;
+}
