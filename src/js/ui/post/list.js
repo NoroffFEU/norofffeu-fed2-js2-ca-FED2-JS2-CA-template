@@ -9,6 +9,7 @@ export async function displayPosts() {
     }
 
     const { data: posts } = await readPosts();
+    console.log('Posts data:', posts); // Add this line for debugging
     
     if (posts.length === 0) {
       postsContainer.innerHTML = "<p>No posts found.</p>";
@@ -23,12 +24,12 @@ export async function displayPosts() {
 }
 
 function createPostElement(post) {
-  // This is where we'll make our changes
   return `
     <article class="post">
       <h2>${post.title}</h2>
+      ${post.author ? `<p>Posted by: ${post.author.name}</p>` : ''}
       <p>${post.body}</p>
-      ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}">` : ''}
+      ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
       <p>Tags: ${post.tags.join(', ')}</p>
       <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
     </article>
