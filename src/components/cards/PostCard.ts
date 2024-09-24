@@ -151,12 +151,20 @@ export function createPostHTML(
          ${
            post.comments.length > 0
              ? post.comments
+                 .sort(
+                   (a, b) =>
+                     new Date(a.created).getTime() -
+                     new Date(b.created).getTime()
+                 )
                  .map((comment) => {
                    console.log(comment);
                    return `
-                   <comment-template data-comment-id="${
-                     comment.id
-                   }" data-post-id="${comment.postId}">
+                   <comment-template 
+                      data-comment-id="${comment.id}" 
+                      data-post-id="${comment.postId}"
+                      data-owner="${comment.author.name}"
+                      data-created="${comment.created}"
+                      >
                         <img 
                             class="avatar"
                             slot="avatar" 

@@ -1,7 +1,4 @@
 import { deleteComment } from "@/js/api/post/delete";
-import { readProfile } from "@/js/api/profile/read";
-import { name } from "@/js/router/views/notFound";
-import { getTime } from "@/js/utilities/getTime";
 import { getUser } from "@/js/utilities/getUser";
 import { CommentResponse, ProfileResponse } from "@/types/types";
 
@@ -85,6 +82,7 @@ commentTemplate.innerHTML = `
 export class CommentTemplate extends HTMLElement {
   commentId: number;
   postId: number;
+  profileContainer: HTMLDivElement;
 
   constructor() {
     super();
@@ -103,6 +101,9 @@ export class CommentTemplate extends HTMLElement {
 
     this.commentId = Number(this.getAttribute("data-comment-id"));
     this.postId = Number(this.getAttribute("data-post-id"));
+    this.profileContainer = this.shadowRoot?.querySelector(
+      ".user-profile"
+    ) as HTMLDivElement;
 
     if (replyBtn && deleteBtn) {
       replyBtn.addEventListener("click", (e) => this.handleReplyComment(e));
@@ -142,6 +143,14 @@ export class CommentTemplate extends HTMLElement {
     img.alt = user.name;
     img.classList.add("avatar");
     this.appendChild(img);
+    this.setAttribute("data-owner", user.name);
+  }
+
+  connectedCallback() {
+    this.checkIfUserIsOwner();
+    this.profileContainer.addEventListener("click", (e) =>
+      this.navigateToProfile(e)
+    );
   }
 
   async handleDeleteComment(e: Event) {
@@ -160,6 +169,19 @@ export class CommentTemplate extends HTMLElement {
         console.error(error);
       }
     }
+  }
+
+  checkIfUserIsOwner() {
+    const commentOwner = this.getAttribute("data-owner");
+    const user = getUser();
+    if (commentOwner !== user) {
+      this.shadowRoot?.querySelector(".delete-btn")?.remove();
+    }
+  }
+
+  navigateToProfile(e: Event) {
+    const user = this.getAttribute("data-owner");
+    window.location.href = `/profile/?username=${user}`;
   }
 
   handleReplyComment(e: Event) {
