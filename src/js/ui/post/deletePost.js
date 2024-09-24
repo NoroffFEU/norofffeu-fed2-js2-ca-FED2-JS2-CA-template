@@ -1,7 +1,7 @@
 import api from '../../api/instance.js';
 import { currentPostId } from "../../utilities/currentPostId.js";
 
-export async function onDeletePost() {
+export async function onDeletePost(event) {
     const id = currentPostId();
     
     try {

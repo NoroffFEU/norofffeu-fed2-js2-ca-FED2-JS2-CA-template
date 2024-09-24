@@ -139,7 +139,9 @@ export default class NoroffAPI {
         return data
     },
     delete: async (id) => {
-        await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), 'text')
+        await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), {
+          method: "DELETE"
+        }, 'text')
     },
     create: async ({ title, body, tags, media }) => {
         const data = await NoroffAPI.util.handleRequest(NoroffAPI.paths.posts(this.user.name), {
