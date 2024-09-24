@@ -27,6 +27,7 @@
 
 .user a {
   text-decoration: underline;
+  margin-right: 4px;
 }
 
 .single-post-tag-list {
