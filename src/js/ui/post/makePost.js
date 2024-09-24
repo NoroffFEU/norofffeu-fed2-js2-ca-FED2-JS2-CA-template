@@ -41,6 +41,10 @@ export const makePost = (userPosts, id) => {
 
     const editButton = document.createElement("button");
     editButton.innerText = "Edit";
+    editButton.addEventListener("click", () => {
+      window.location.href = "/post/edit/";
+      localStorage.setItem("postID", JSON.stringify(post.id));
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
