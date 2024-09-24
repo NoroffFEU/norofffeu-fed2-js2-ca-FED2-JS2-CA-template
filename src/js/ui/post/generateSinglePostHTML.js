@@ -4,6 +4,8 @@ import { formatDate } from "../../utilities/formatDate";
 export function generateSinglePostHTML(post) {
   const singlePostContainer = document.createElement("div");
   singlePostContainer.classList.add("single-post-container");
+  const postContent = document.createElement("div");
+  postContent.classList.add("content-upper");
 
   const title = document.createElement("h1");
   title.textContent = post.title;
@@ -59,38 +61,98 @@ export function generateSinglePostHTML(post) {
   sectionTitle.classList.add("section-title");
   sectionTitle.textContent = `Comment (${post.comments.length})`;
 
+
   const commentList = document.createElement('ul');
   commentList.classList.add("comment-list");
   const commentsArray = post.comments;
-  for (let i = 0; i < commentsArray.length; i++) {
-    const comment = commentsArray[i];
+  const originalCommentsArray = commentsArray.filter((comment) => comment.replyToId === null);
+  for (let i = 0; i < originalCommentsArray.length; i++) {
     const commentItem = document.createElement('li');
     commentItem.classList.add("comment-item");
+    const comment = originalCommentsArray[i];
     commentItem.id = comment.id;
+    commentItem.dataset.username = comment.author.name;
     const commentContainer = document.createElement("div");
     commentContainer.classList.add("comment-container");
+    const userInfo = document.createElement("div");
+    userInfo.classList.add("user-info");
+    const userAvatar = document.createElement("img");
+    userAvatar.src = comment.author.avatar.url;
     const commentUser = document.createElement("a");
     commentUser.classList.add("comment-username");
     commentUser.href = `/profile/?name=${comment.author.name}`;
     commentUser.textContent = comment.author.name;
-    const commentContent = document.createElement("p");
+    userInfo.append(userAvatar, commentUser);
+    const commentContent = document.createElement("div");
     commentContent.classList.add("comment-content");
-    commentContent.textContent = comment.body;
-    commentContainer.append(commentUser, commentContent);
+    const commentText = document.createElement("p");
+    commentText.classList.add("comment-text");
+    commentText.textContent = comment.body;
     const commentDeleteButton = document.createElement("button");
     commentDeleteButton.classList.add("comment-delete-button");
     const commentDeleteIcon = document.createElement("i");
     commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
     commentDeleteButton.appendChild(commentDeleteIcon);
-    commentItem.append(commentContainer, commentDeleteButton);
+    commentContent.append(commentText, commentDeleteButton);
+    const replyButton = document.createElement("button");
+    replyButton.classList.add("reply-button");
+    replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
+    commentContainer.append(userInfo, commentContent, replyButton);
+    const replyList = document.createElement("ul");
+    replyList.classList.add("reply-list");
+    commentItem.append(commentContainer, replyList);
     commentList.appendChild(commentItem);
+  }
+  const replyCommentsArray = commentsArray.filter((comment) => comment.replyToId !== null);
+  const commentItems = commentList.children;
+  const commentItemsArray = Array.from(commentItems);
+  
+  for (let i = 0; i < replyCommentsArray.length; i++) {
+    const replyCommentItem = document.createElement('li');
+    replyCommentItem.classList.add("reply-comment-item");
+    const comment = replyCommentsArray[i];
+    replyCommentItem.id = comment.id;
+    replyCommentItem.dataset.username = comment.author.name;
+    const commentContainer = document.createElement("div");
+    commentContainer.classList.add("comment-container");
+    const userInfo = document.createElement("div");
+    userInfo.classList.add("user-info");
+    const userAvatar = document.createElement("img");
+    userAvatar.src = comment.author.avatar.url;
+    const commentUser = document.createElement("a");
+    commentUser.classList.add("comment-username");
+    commentUser.href = `/profile/?name=${comment.author.name}`;
+    commentUser.textContent = comment.author.name;
+    userInfo.append(userAvatar, commentUser);
+    const commentContent = document.createElement("div");
+    commentContent.classList.add("comment-content");
+    const commentText = document.createElement("p");
+    commentText.classList.add("comment-text");
+    commentText.textContent = comment.body;
+    const commentDeleteButton = document.createElement("button");
+    commentDeleteButton.classList.add("comment-delete-button");
+    const commentDeleteIcon = document.createElement("i");
+    commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
+    commentDeleteButton.appendChild(commentDeleteIcon);
+    commentContent.append(commentText, commentDeleteButton);
+    const replyButton = document.createElement("button");
+    replyButton.classList.add("reply-button");
+    replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
+    commentContainer.append(userInfo, commentContent, replyButton);
+    replyCommentItem.appendChild(commentContainer);
+    const parentComment = commentItemsArray.find(commentItem => Number(commentItem.id) === comment.replyToId);
+    const parentReplyList = parentComment.querySelector('.reply-list');
+    parentReplyList.appendChild(replyCommentItem);
   }
 
   const commentForm = document.createElement("form");
   commentForm.classList.add("comment-form");
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
+  myUserName.classList.add("my-username");
   myUserName.textContent = NoroffAPI.user;
+  const replyMessage = document.createElement("p");
+  replyMessage.classList.add("reply-message");
   const commentTextAreaLabel = document.createElement("label");
   commentTextAreaLabel.setAttribute('for', 'comment');
 
@@ -104,9 +166,10 @@ export function generateSinglePostHTML(post) {
   commentButton.classList.add("submit-type-button", "comment-button");
   commentButton.type = "submit";
   commentButton.innerText = "Add comment";
-  commentForm.append(myUserName, commentTextAreaLabel, commentButton)
+  commentForm.append(myUserName, replyMessage, commentTextAreaLabel, commentButton)
   commentSection.append(sectionTitle, commentList, commentForm)
 
-  singlePostContainer.append(title, thumbnail, postUserDate, tagList, contentContainer, commentSection);
+  postContent.append(title, thumbnail, postUserDate, tagList, contentContainer);
+  singlePostContainer.append(postContent, commentSection);
   return singlePostContainer;
 }
