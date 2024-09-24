@@ -44,6 +44,7 @@ export const makePost = (userPosts, id) => {
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
+    deleteButton.id = post.id;
     deleteButton.addEventListener("click", onDeletePost);
 
     const reactionSection = document.createElement("div");
