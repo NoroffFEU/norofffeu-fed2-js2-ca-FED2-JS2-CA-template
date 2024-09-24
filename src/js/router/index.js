@@ -9,9 +9,15 @@ import { onViewPost } from "../ui/post/viewPost.js";
 import NoroffAPI from '../api/index.js';
 import { currentPostId } from "../utilities/currentPostId.js";
 
-
+const api = new NoroffAPI();
 
 const postId = currentPostId();
+
+document.querySelectorAll("[data-auth=logout]").forEach(button => {
+  button.addEventListener("click", event => {
+    api.auth.logout();
+  });
+});
 
 // This function controls which JavaScript file is loaded on which page
 // In order to add additional pages, you will need to implement them below
