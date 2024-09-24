@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   appType: "mpa",
-  base: "/fed2-js2-ca-H-chai/",
+  base: "/",
   build: {
     target: "esnext",
     rollupOptions: {
