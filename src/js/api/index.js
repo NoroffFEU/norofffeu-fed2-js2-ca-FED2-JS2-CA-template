@@ -1,5 +1,5 @@
 import { API_BASE } from "./constants";
-import { headers } from "./headers";
+import headers from "./headers";
 
 export default class NoroffAPI {
   
