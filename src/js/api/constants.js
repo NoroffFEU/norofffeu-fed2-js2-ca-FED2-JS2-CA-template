@@ -13,6 +13,7 @@ export async function initializeAPI() {
     throw error;
   }
 }
+export const API_KEY = 'f57a803f-3207-48e6-ab86-9fea1dfea2a0';
 
 export const API_BASE = "https://v2.api.noroff.dev";
 
@@ -29,5 +30,4 @@ export const API_SOCIAL = `${API_BASE}/social`;
 export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
 
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
-
 

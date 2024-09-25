@@ -1,159 +1,206 @@
-import { loadPost } from "../router/views/post";
-import { loadProfiles } from "../router/views/home";
+// import NoroffAPI from "../../api";
+// const api = new NoroffAPI();
 
-export function renderPagination(totalPages, currentPage) {
-  const paginationCon = document.getElementById("paginationContainer");
-  paginationCon.innerHTML = "";
+/**
+ * Render pagination buttons and handle page changes.
+ * @param {number} totalPages - Total number of pages.
+ * @param {number} currentPage - The current active page.
+ * @param {function} onPageChange - Callback function to handle page change.
+ */
+export function renderPagination(totalPages, currentPage, onPageChange) {
+  const paginationContainer = document.getElementById("paginationContainer");
+  paginationContainer.innerHTML = ""; // Clear any existing buttons
 
-  const debounce = (func, delay) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), delay);
-    };
-  };
-  const debouncedLoadPost = debounce(loadPost, 300);
-
-  // Function to create and append a page button
+  // Helper function to create and append page buttons
   const createPageButton = (page, isCurrent = false) => {
-    const pageButton = document.createElement("button");
-    pageButton.innerText = page;
-    pageButton.disabled = isCurrent; // Disable button if it's the current page
-    pageButton.addEventListener("click", () => debouncedLoadPost(page));
-    paginationCon.appendChild(pageButton);
+      const pageButton = document.createElement("button");
+      pageButton.innerText = page;
+      pageButton.disabled = isCurrent; // Disable the button if it's the current page
+      pageButton.addEventListener("click", () => onPageChange(page)); // Handle page click
+      paginationContainer.appendChild(pageButton);
   };
 
-  // Function to append ellipsis
+  // Helper to add an ellipsis
   const appendEllipsis = () => {
-    const ellipsis = document.createElement("span");
-    ellipsis.innerText = "...";
-    paginationCon.appendChild(ellipsis);
+      const ellipsis = document.createElement("span");
+      ellipsis.innerText = "...";
+      paginationContainer.appendChild(ellipsis);
   };
 
   // Previous button
   if (currentPage > 1) {
-    const prevButton = document.createElement("button");
-    prevButton.innerHTML = "&lt;";
-    prevButton.addEventListener("click", () =>
-      debouncedLoadPost(currentPage - 1)
-    );
-    paginationCon.appendChild(prevButton);
+      const prevButton = document.createElement("button");
+      prevButton.innerHTML = "&lt;";
+      prevButton.addEventListener("click", () => onPageChange(currentPage - 1));
+      paginationContainer.appendChild(prevButton);
   }
 
   // First few pages
   for (let page = 1; page <= Math.min(3, totalPages); page++) {
-    createPageButton(page, page === currentPage);
+      createPageButton(page, page === currentPage);
   }
 
   // Ellipsis before middle pages
   if (currentPage > 5) {
-    appendEllipsis();
+      appendEllipsis();
   }
 
   // Pages around the current page
   const startPage = Math.max(currentPage - 2, 4);
   const endPage = Math.min(currentPage + 2, totalPages - 3);
   for (let page = startPage; page <= endPage; page++) {
-    createPageButton(page, page === currentPage);
+      createPageButton(page, page === currentPage);
   }
 
   // Ellipsis after middle pages
   if (currentPage < totalPages - 4) {
-    appendEllipsis();
+      appendEllipsis();
   }
 
   // Last few pages
-  for (
-    let page = Math.max(totalPages - 2, endPage + 1);
-    page <= totalPages;
-    page++
-  ) {
-    createPageButton(page, page === currentPage);
+  for (let page = Math.max(totalPages - 2, endPage + 1); page <= totalPages; page++) {
+      createPageButton(page, page === currentPage);
   }
 
   // Next button
   if (currentPage < totalPages) {
-    const nextButton = document.createElement("button");
-    nextButton.innerHTML = "&gt;";
-    nextButton.addEventListener("click", () =>
-      debouncedLoadPost(currentPage + 1)
-    );
-    paginationCon.appendChild(nextButton);
+      const nextButton = document.createElement("button");
+      nextButton.innerHTML = "&gt;";
+      nextButton.addEventListener("click", () => onPageChange(currentPage + 1));
+      paginationContainer.appendChild(nextButton);
   }
 }
 
-export function renderProfilesPagination(totalPages, currentPage) {
-    const paginationCon = document.getElementById("paginationProfileCon");
-    paginationCon.innerHTML = "";
-  
-    // Utility function to debounce calls to loadProfiles
-    const debounce = (func, delay) => {
-      let timeout;
-      return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), delay);
-      };
-    };
-  
-    const debouncedLoadProfiles = debounce(loadProfiles, 300);
-  
-    // Function to create and append a page button
-    const createPageButton = (page, isCurrent = false) => {
-      const pageButton = document.createElement("button");
-      pageButton.innerText = page;
-      pageButton.disabled = isCurrent; // Disable button if it's the current page
-      pageButton.addEventListener("click", () => debouncedLoadProfiles(page));
-      paginationCon.appendChild(pageButton);
-    };
-  
-    // Function to append ellipsis
-    const appendEllipsis = () => {
-      const ellipsis = document.createElement("span");
-      ellipsis.innerText = "...";
-      paginationCon.appendChild(ellipsis);
-    };
-  
-    // Append Previous button if not on the first page
-    if (currentPage > 1) {
-      const prevButton = document.createElement("button");
-      prevButton.innerHTML = "&lt;";
-      prevButton.addEventListener("click", () => debouncedLoadProfiles(currentPage - 1));
-      paginationCon.appendChild(prevButton);
-    }
-  
-    // First few pages (always shown)
-    for (let page = 1; page <= Math.min(3, totalPages); page++) {
-      createPageButton(page, page === currentPage);
-    }
-  
-    // Ellipsis before the middle range of pages
-    if (currentPage > 5) {
-      appendEllipsis();
-    }
-  
-    // Pages around the current page (dynamic range)
-    const startPage = Math.max(currentPage - 2, 4);
-    const endPage = Math.min(currentPage + 2, totalPages - 3);
-    for (let page = startPage; page <= endPage; page++) {
-      createPageButton(page, page === currentPage);
-    }
-  
-    // Ellipsis after the middle range of pages
-    if (currentPage < totalPages - 4) {
-      appendEllipsis();
-    }
-  
-    // Last few pages (always shown)
-    for (let page = Math.max(totalPages - 2, endPage + 1); page <= totalPages; page++) {
-      createPageButton(page, page === currentPage);
-    }
-  
-    // Append Next button if not on the last page
-    if (currentPage < totalPages) {
-      const nextButton = document.createElement("button");
-      nextButton.innerHTML = "&gt;";
-      nextButton.addEventListener("click", () => debouncedLoadProfiles(currentPage + 1));
-      paginationCon.appendChild(nextButton);
-    }
-  }
-  
+// /**
+// * Callback function to handle page change
+// * @param {number} page - Page number to load
+// */
+// function handlePageChange(page) {
+//   console.log("Loading posts for page:", page);
+//   // Add your logic to fetch and update the content for the selected page.
+// }
+
+
+
+// // Utility function to create a debounce function
+// const debounce = (func, delay) => {
+//   let timeout;
+//   return (...args) => {
+//     clearTimeout(timeout);
+//     timeout = setTimeout(() => func(...args), delay);
+//   };
+// };
+
+// // Function to create and append a page button
+// const createPageButton = (
+//   paginationContainer,
+//   page,
+//   isCurrent,
+//   onPageChange
+// ) => {
+//   const pageButton = document.createElement("button");
+//   pageButton.innerText = page;
+//   pageButton.disabled = isCurrent; // Disable button if it's the current page
+//   pageButton.addEventListener("click", () => onPageChange(page));
+//   paginationContainer.appendChild(pageButton);
+// };
+
+// // Function to append ellipsis
+// const appendEllipsis = (paginationContainer) => {
+//   const ellipsis = document.createElement("span");
+//   ellipsis.innerText = "...";
+//   paginationContainer.appendChild(ellipsis);
+// };
+
+// // Main pagination rendering function
+// export function renderPagination(
+//   totalPages,
+//   currentPage,
+//   onPageChange,
+//   containerId
+// ) {
+//   const paginationContainer = document.getElementById(containerId);
+//   paginationContainer.innerHTML = ""; // Clear existing pagination buttons
+
+//   // Previous button
+//   if (currentPage > 1) {
+//     const prevButton = document.createElement("button");
+//     prevButton.innerHTML = "&lt;";
+//     prevButton.addEventListener("click", () => onPageChange(currentPage - 1));
+//     paginationContainer.appendChild(prevButton);
+//   }
+
+//   // First few pages
+//   for (let page = 1; page <= Math.min(3, totalPages); page++) {
+//     createPageButton(
+//       paginationContainer,
+//       page,
+//       page === currentPage,
+//       onPageChange
+//     );
+//   }
+
+//   // Ellipsis before middle pages
+//   if (currentPage > 5) {
+//     appendEllipsis(paginationContainer);
+//   }
+
+//   // Pages around the current page
+//   const startPage = Math.max(currentPage - 2, 4);
+//   const endPage = Math.min(currentPage + 2, totalPages - 3);
+//   for (let page = startPage; page <= endPage; page++) {
+//     createPageButton(
+//       paginationContainer,
+//       page,
+//       page === currentPage,
+//       onPageChange
+//     );
+//   }
+
+//   // Ellipsis after middle pages
+//   if (currentPage < totalPages - 4) {
+//     appendEllipsis(paginationContainer);
+//   }
+
+//   // Last few pages
+//   for (
+//     let page = Math.max(totalPages - 2, endPage + 1);
+//     page <= totalPages;
+//     page++
+//   ) {
+//     createPageButton(
+//       paginationContainer,
+//       page,
+//       page === currentPage,
+//       onPageChange
+//     );
+//   }
+
+//   // Next button
+//   if (currentPage < totalPages) {
+//     const nextButton = document.createElement("button");
+//     nextButton.innerHTML = "&gt;";
+//     nextButton.addEventListener("click", () => onPageChange(currentPage + 1));
+//     paginationContainer.appendChild(nextButton);
+//   }
+// }
+
+// // // Initialize pagination with debounce
+// // const debouncedUpdatePosts = debounce(updatePostsForPage, 300);
+
+// // // Example function to render pagination
+// // export function renderPostsPagination(totalPages, currentPage) {
+// //   renderPagination(totalPages, currentPage, debouncedUpdatePosts, "paginationContainer");
+// // }
+
+// // // Example for rendering profiles (you can reuse this)
+// // export function renderProfilesPagination(totalPages, currentPage) {
+// //   renderPagination(totalPages, currentPage, debouncedUpdateProfiles, "paginationProfileCon");
+// // }
+
+// // // Mock function to simulate updating profiles
+// // const debouncedUpdateProfiles = debounce((page) => {
+// //   console.log("Fetching and displaying profiles for page:", page);
+// //   // Implement your logic for fetching and displaying profiles for the current page
+
+// // }, 300);

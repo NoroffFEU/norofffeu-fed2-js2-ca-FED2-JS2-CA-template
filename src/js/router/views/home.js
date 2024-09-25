@@ -1,77 +1,94 @@
 import { authGuard } from "../../utilities/authGuard";
-import { onLogout } from "../../ui/auth/logout";
+// import { onLogout } from "../../ui/auth/logout";
 authGuard();
 import NoroffAPI from "../../api";
-import { readPostsByUser } from "../../api/post/read";
-import { renderProfilesPagination } from "../../utilities/pagination";
-import { getAllProfiles } from "../../utilities/displayHTML";
-import { searchProfile } from "../../utilities/search";
-
+import { renderPagination } from "../../utilities/pagination";
 const api = new NoroffAPI();
 
+async function fetchProfiles() {
+  const profiles = await api.getProfiles();
+  return profiles;
+} // corrected
 
-export async function loadProfiles(limit=12,page = 1){
-    const cacheKey = `profiles_${limit}_${page}`;
-    const cachedProfiles = localStorage.getItem(cacheKey);
-    let currentPage, totalPages, profiles;
+async function displayAllProfiels(profiles) {
+  const profileContainer = document.getElementById("getAllProfiles");
+  const profilesHTML = profiles.data
+    .map(
+      (profile) => `
+        <div class="profiles" onclick="window.location.href='/profile/detail/?name=${
+          profile.name
+        }'">
+            <img src="${profile.avatar.url}" alt="${
+        profile.avatar.alt || "profile avatar"
+      }">
+            <img src="${profile.banner.url}" alt="${
+        profile.banner.alt || "profile banner"
+      }">
+            <h2>${profile.name}</h2>
+            <h2>${profile.email}</h2>
+        </div>
+    `
+    )
+    .join("");
 
-    if (cachedProfiles) {
-        try {
-            const parsedProfiles = JSON.parse(cachedProfiles);
-            profiles = parsedProfiles.data; // Extract profiles
-            currentPage = parsedProfiles.meta.currentPage; // Get current page
-            totalPages = parsedProfiles.meta.pageCount; // Get total pages
-            console.log('Loaded profiles from localStorage');
-        } catch (error) {
-            console.error('Error parsing cached profiles:', error);
-            localStorage.removeItem(cacheKey); // Remove corrupted data
-        }
-    }
-
-    if (!profiles) {
-        try {
-            const result = await readPostsByUser(limit, page); // Make sure to pass the username
-            profiles = result.profiles;
-            currentPage = result.currentPage;
-            totalPages = result.totalPages;
-
-            // Cache the fetched profiles
-            localStorage.setItem(cacheKey, JSON.stringify({ data: profiles, meta: { currentPage, totalPages } }));
-        } catch (error) {
-            console.log("Error loading profiles", error);
-            return; 
-        }
-    }
-
-        getAllProfiles(profiles);
-        renderProfilesPagination (totalPages, currentPage)    
+  profileContainer.innerHTML = profilesHTML;
 }
 
-// const searchBtn = document.getElementById('searchProfileSubmitBtn');
-// const logoutButton = document.getElementById("logoutButton");
-// searchBtn.addEventListener('click', searchProfile);
-// searchBtn.addEventListener('click', onLogout);
+const data = await fetchProfiles();
+displayAllProfiels(data);
+
+// fetch data for specific page
+async function fetchData(page) {
+    cpnst token = localStorage.getItem('token');
+    console.log(token)
+    // Example: Fetching posts with a query string for pagination
+    // You can replace this with an actual API call
+    const response = await fetch(`${api.apiSocialPath}?page=${page}&limit=10`,
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+         "X-Noroff-API-Key": 'f57a803f-3207-48e6-ab86-9fea1dfea2a0'
+      },method:"get",); // Adjust URL and query params as needed
+    const data = await response.json();
+    return data; // Return the posts (or profiles) data
+}
+
+/**
+ * Callback function to handle page change
+ * @param {number} page - Page number to load
+ */
+async function handlePageChange(page) {
+    console.log("Loading posts for page:", page);
+
+    // Fetch data for the new page
+    const data = await fetchData(page);
+
+    // Update the posts (or profiles) container with the new content
+    renderPosts(data.posts);
+
+    // Optionally, re-render the pagination buttons to reflect the current page
+    renderPagination(data.totalPages, page, handlePageChange);
+}
+
+async function displayPagination(data) {
+  // เอา totalPages = pageCount กับ currentPage = currentPage
+  console.log(data);
+  const { pageCount, currentPage } = data.meta;
+  console.log(pageCount, currentPage);
+  renderPagination(pageCount, currentPage, handlePageChange);
+}
+
+  // Example usage
+// const totalPages = 10;
+// const currentPage = 1;
 
 
+// Example usage for posts
+// ขอลองก่อนนะ
+export function updatePostsForPage(page) {
+  console.log("Fetching and displaying posts for page:", page);
+  // Implement your logic for fetching and displaying posts for the current page
+  return page;
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-    const searchBtn = document.getElementById('searchProfileSubmitBtn');
-    const logoutButton = document.getElementById("logoutButton");
-
-    // Check if the element exists before adding the event listener
-    if (searchBtn) {
-        searchBtn.addEventListener('click', searchProfile);
-    } else {
-        console.error('Search button not found');
-    }
-
-    if (logoutButton) {
-        searchBtn.addEventListener('click', onLogout);
-    } else {
-        console.error('onLogout button not found');
-    }
-});
-
-
-loadProfiles()
-
+displayPagination(data);

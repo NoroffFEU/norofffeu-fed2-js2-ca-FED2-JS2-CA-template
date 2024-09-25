@@ -22,7 +22,7 @@ body {
   margin: 5rem;
   flex-wrap: wrap;
 }
-#postsContainer, #getAllProfiles{
+#getAllPosts, #getAllProfiles{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -1,69 +1,69 @@
 import NoroffAPI from "../api";
 const api = new NoroffAPI()
 
-async function fetchProfilesAndCache() {
-    try {
-        const response = await api.getProfiles();
-        const profiles = response.data;
+// async function fetchProfilesAndCache() {
+//     try {
+//         const response = await api.getProfiles();
+//         const profiles = response.data;
         
-        // Cache profiles data in localStorage
-        localStorage.setItem('profiles', JSON.stringify(profiles));
+//         // Cache profiles data in localStorage
+//         localStorage.setItem('profiles', JSON.stringify(profiles));
         
-        return profiles;
-    } catch (error) {
-        console.error('Error fetching profiles:', error);
-        throw new Error(`Failed to fetch profiles: ${error.message}`);
-    }
-}
+//         return profiles;
+//     } catch (error) {
+//         console.error('Error fetching profiles:', error);
+//         throw new Error(`Failed to fetch profiles: ${error.message}`);
+//     }
+// }
 
-async function getProfilesFromCache() {
-    const cachedProfiles = localStorage.getItem('profiles');
+// async function getProfilesFromCache() {
+//     const cachedProfiles = localStorage.getItem('profiles');
 
-    if (cachedProfiles) {
-        try {
-            // Parse and return cached profiles
-            return JSON.parse(cachedProfiles);
-        } catch (error) {
-            console.error('Error parsing profiles from localStorage:', error);
-            localStorage.removeItem('profiles'); // Remove corrupted data
-        }
-    }
+//     if (cachedProfiles) {
+//         try {
+//             // Parse and return cached profiles
+//             return JSON.parse(cachedProfiles);
+//         } catch (error) {
+//             console.error('Error parsing profiles from localStorage:', error);
+//             localStorage.removeItem('profiles'); // Remove corrupted data
+//         }
+//     }
 
-    // Fetch profiles from API and cache them if not in localStorage
-    return await fetchProfilesAndCache();
-}
+//     // Fetch profiles from API and cache them if not in localStorage
+//     return await fetchProfilesAndCache();
+// }
 
-function renderProfiles(profiles) {
-    const profilesCon = document.getElementById('getAllProfiles');
-    if (!profilesCon) {
-        console.error('Error: Element with id "getAllProfiles" not found in the DOM.');
-        return;
-    }
+// function renderProfiles(profiles) {
+//     const profilesCon = document.getElementById('getAllProfiles');
+//     if (!profilesCon) {
+//         console.error('Error: Element with id "getAllProfiles" not found in the DOM.');
+//         return;
+//     }
 
-    if (!Array.isArray(profiles)) {
-        console.error("Error: Profiles data is not an array");
-        return;
-    }
+//     if (!Array.isArray(profiles)) {
+//         console.error("Error: Profiles data is not an array");
+//         return;
+//     }
 
-    const profilesHTML = profiles.map(profile => `
-        <div class="profiles" onclick="window.location.href='/profile/detail/?name=${profile.name}'">
-            <img src="${profile.avatar.url}" alt="${profile.avatar.alt || 'profile avatar'}">
-            <img src="${profile.banner.url}" alt="${profile.banner.alt || 'profile banner'}">
-            <h2>${profile.name}</h2>
-            <h2>${profile.email}</h2>
-        </div>
-    `).join('');
+//     const profilesHTML = profiles.map(profile => `
+//         <div class="profiles" onclick="window.location.href='/profile/detail/?name=${profile.name}'">
+//             <img src="${profile.avatar.url}" alt="${profile.avatar.alt || 'profile avatar'}">
+//             <img src="${profile.banner.url}" alt="${profile.banner.alt || 'profile banner'}">
+//             <h2>${profile.name}</h2>
+//             <h2>${profile.email}</h2>
+//         </div>
+//     `).join('');
 
-    profilesCon.innerHTML = profilesHTML;
-}
-export async function getAllProfiles(profiles) {
-    try {
-        const profiles = await getProfilesFromCache();
-        renderProfiles(profiles);
-    } catch (error) {
-        console.error(`Error displaying profile: ${error.message}`);
-    }
-}
+//     profilesCon.innerHTML = profilesHTML;
+// }
+// export async function getAllProfiles(profiles) {
+//     try {
+//         const profiles = await getProfilesFromCache();
+//         renderProfiles(profiles);
+//     } catch (error) {
+//         console.error(`Error displaying profile: ${error.message}`);
+//     }
+// }
 
 
 async function fetchPostsAndCache() {
@@ -98,38 +98,38 @@ async function getPostsFromCache() {
 }
 
 
-function renderPosts(posts) {
-    const postsContainer = document.getElementById("postsContainer");
-    if (!postsContainer) {
-        console.error('Error: Element with id "postsContainer" not found in the DOM.');
-        return;
-    }
+// function renderPosts(posts) {
+//     const postsContainer = document.getElementById("postsContainer");
+//     if (!postsContainer) {
+//         console.error('Error: Element with id "postsContainer" not found in the DOM.');
+//         return;
+//     }
 
-    if (!Array.isArray(posts)) {
-        console.error("Error: posts data is not an array");
-        return;
-    }
+//     if (!Array.isArray(posts)) {
+//         console.error("Error: posts data is not an array");
+//         return;
+//     }
 
-    const postsHTML = posts.map(post =>
-        `
-        <div class="post" onclick="window.location.href='/post/detail/?id=${post.id}'">
-             <h2>${post.title}</h2>
-             <p>${post.body}</p>
-             <p><strong>Tags:</strong> ${post.tags.join(", ")}</p>
-             ${post.media && post.media.url ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post Media'}">` : ""}
-        </div>
-        `
-    ).join('');
+//     const postsHTML = posts.map(post =>
+//         `
+//         <div class="post" onclick="window.location.href='/post/detail/?id=${post.id}'">
+//              <h2>${post.title}</h2>
+//              <p>${post.body}</p>
+//              <p><strong>Tags:</strong> ${post.tags.join(", ")}</p>
+//              ${post.media && post.media.url ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post Media'}">` : ""}
+//         </div>
+//         `
+//     ).join('');
 
-    postsContainer.innerHTML = postsHTML;
-}
+//     postsContainer.innerHTML = postsHTML;
+// }
 
 
-export async function displayPosts() {
-    try {
-        const posts = await getPostsFromCache();
-        renderPosts(posts);
-    } catch (error) {
-        console.log(`Error displaying posts: ${error.message}`);
-    }
-}
+// export async function displayPosts() {
+//     try {
+//         const posts = await getPostsFromCache();
+//         renderPosts(posts);
+//     } catch (error) {
+//         console.log(`Error displaying posts: ${error.message}`);
+//     }
+// }
