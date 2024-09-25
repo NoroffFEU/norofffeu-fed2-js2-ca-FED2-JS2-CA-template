@@ -56,19 +56,39 @@ export default class NoroffApp extends NoroffAPI {
   }
 
   setReplyToId(event) {
+    const existingReplyMessage = document.querySelector(".reply-message");
+    const originalCommentToReset = document.querySelector(".comment-item[data-replying='true']");
+    
+    if (originalCommentToReset) {
+      originalCommentToReset.style.backgroundColor = "transparent";
+      existingReplyMessage.innerHTML = "";
+      originalCommentToReset.dataset.replying = "false";
+    }
+
     const originalComment = event.target.closest(".comment-item");
     this.replyToId = Number(originalComment.id);
     const originalCommentUser = originalComment.dataset.username;
     originalComment.style.backgroundColor = "#dedede";
-    const replyMessage = document.querySelector(".reply-message");
-    replyMessage.innerHTML = `<button class="cancel" type="button"><i class="fa-solid fa-circle-xmark"></i></button>Replying to <span class="reply-to">${originalCommentUser}</span>`;
+    
+    existingReplyMessage.innerHTML = `<button class="cancel" type="button"><i class="fa-solid fa-circle-xmark"></i></button>Replying to <span class="reply-to">${originalCommentUser}</span>`;
+    originalComment.dataset.replying = "true";
+    
     const cancelButton = document.querySelector(".cancel");
     cancelButton.addEventListener("click", () => {
-      replyMessage.innerHTML = "";
+      existingReplyMessage.innerHTML = "";
       this.replyToId = null;
       originalComment.style.backgroundColor = "transparent";
-    })
+      originalComment.dataset.replying = "false";
+    });
   }
+  
+  setupReplyButtons() {
+    const replyButtons = document.querySelectorAll(".reply-button");
+    replyButtons.forEach(button => {
+      button.addEventListener("click", (event) => this.setReplyToId(event));
+    });
+  }
+  
 
   setupReplyButtons() {
     const replyButtons = document.querySelectorAll(".reply-button");
