@@ -1,4 +1,4 @@
-const CLIENT_ID = "a0af399aae11d62";
+const CLIENT_ID = import.meta.env.VITE_IMGUR_CLIENT_ID;
 
 export async function uploadImage(image: File) {
   try {
