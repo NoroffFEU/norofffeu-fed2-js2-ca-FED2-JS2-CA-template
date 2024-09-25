@@ -2,6 +2,8 @@ import { currentPostId } from "../utilities/currentPostId.js";
 import NoroffAPI from '../api/index.js';
 import NoroffApp from '../ui/index.js';
 
+// Initialize NoroffAPI and NoroffApp classes and set up API instance and app instance
+
 const api = new NoroffAPI();
 const app = new NoroffApp();
 
