@@ -6,6 +6,8 @@ import { searchParams } from "@/js/utilities/searchParams";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { SectionHeader } from "@/components/search/SectionHeader";
+import { searchPosts } from "@/js/api/post/search";
+import { createPostHTML } from "@/components/cards/PostCard";
 
 async function loadSearchPage() {
   try {
@@ -27,11 +29,11 @@ async function renderSearch(query: string) {
     customElements.define("section-header", SectionHeader);
   }
 
-  const test = true;
-  const test2 = true;
+  // const test2 = true;
 
   try {
     const profiles = await searchProfiles(query, { limit: 5, page: 1 });
+
     if (profiles && profiles.length > 0) {
       const profilesSection = document.createElement("section");
       profilesSection.classList.add("profiles");
@@ -59,26 +61,52 @@ async function renderSearch(query: string) {
         profilesSection.insertAdjacentHTML("beforeend", profileHTML);
       });
     }
-    if (test) {
-      const testSection = document.createElement("section");
-      searchContainer.appendChild(testSection);
 
-      const testSectionHeader = document.createElement("section-header");
-      testSectionHeader.setAttribute("data-title", "tags");
-      testSection.appendChild(testSectionHeader);
+    const posts = await searchPosts(query, { limit: 5, page: 1 });
 
-      testSection.insertAdjacentHTML("beforeend", "<p>Test</p>");
+    if (posts && posts.length > 0) {
+      const postsSection = document.createElement("section");
+      postsSection.classList.add("posts");
+
+      const postsSectionHeader = document.createElement("section-header");
+      postsSectionHeader.setAttribute("data-title", "posts");
+      postsSection.appendChild(postsSectionHeader);
+
+      searchContainer.appendChild(postsSection);
+
+      posts.forEach(async (post) => {
+        const isFollowing = getFollowingUsers?.find(
+          (user) => user.name === post.author.name
+        )
+          ? true
+          : false;
+
+        const isLiked = post.reactions[0]?.reactors.find(
+          (user) => user === getUser()
+        )
+          ? true
+          : false;
+
+        const isUserPost = post.author.name === getUser() ? true : false;
+
+        const postHTML = createPostHTML(
+          post,
+          isFollowing,
+          isLiked,
+          isUserPost,
+          false
+        );
+
+        postsSection.insertAdjacentHTML("beforeend", postHTML);
+      });
     }
-
-    if (test2) {
-      const testSection = document.createElement("section");
-      searchContainer.appendChild(testSection);
-
-      const testSectionHeader = document.createElement("section-header");
-      testSectionHeader.setAttribute("data-title", "posts");
-      testSection.appendChild(testSectionHeader);
-
-      testSection.insertAdjacentHTML("beforeend", "<p>Test</p>");
+    if (
+      (!profiles || profiles.length === 0) &&
+      (!posts || posts.length === 0)
+    ) {
+      const div = document.createElement("div");
+      div.innerHTML = "No results found";
+      searchContainer.appendChild(div);
     }
   } catch (error) {
     console.error(error);

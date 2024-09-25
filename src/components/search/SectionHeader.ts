@@ -57,10 +57,7 @@ export class SectionHeader extends HTMLElement {
       const title = this.shadowRoot?.querySelector(".title") as HTMLElement;
       title.textContent = "👤 Profiles";
     }
-    if (component === "tags") {
-      const title = this.shadowRoot?.querySelector(".title") as HTMLElement;
-      title.textContent = "🏷️ Tags";
-    }
+
     if (component === "posts") {
       const title = this.shadowRoot?.querySelector(".title") as HTMLElement;
       title.textContent = "📝 Posts";
