@@ -12,8 +12,6 @@ async function loadPostEditPage() {
   try {
     if (editPostForm instanceof HTMLFormElement) {
       fetchAndPopulateForm(editPostForm);
-      const formTitleInput = getInput(editPostForm, "title");
-      formTitleInput.focus();
       editPostForm.addEventListener("submit", onUpdatePost);
     }
   } catch (error) {
@@ -30,6 +28,7 @@ async function fetchAndPopulateForm(editPostForm: HTMLFormElement) {
 
   try {
     const post = await readPost(id);
+
     if (!post) {
       return;
     } else {
