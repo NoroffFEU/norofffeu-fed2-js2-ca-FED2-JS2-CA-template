@@ -31,7 +31,7 @@ export function generateFeedHTML(post) {
   const postUserContainer = document.createElement("div");
   postUserContainer.classList.add("user");
   const postUserIcon = document.createElement("i");
-  postUserIcon.classList.add("fa-regular", "fa-user");
+  postUserIcon.classList.add("fa-regular", "fa-user", "user-icon");
   const userName = document.createElement("a");
   userName.classList.add("post-author");
   userName.textContent = post.author.name;
