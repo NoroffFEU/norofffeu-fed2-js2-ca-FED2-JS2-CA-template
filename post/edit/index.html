@@ -34,10 +34,10 @@
         <div class="posts__container__header">
           <a data-is-active="true" href="javascript:void(0)">✏️ Update post</a>
         </div>
-        <ul id="posts">
+        <article id="create">
           <form name="editPost">
             <div>
-              <label for="title">Title</label>
+              <label for="title">Title <span class="required">*</span></label>
               <input id="title" type="text" name="title" required />
             </div>
             <div>
@@ -45,16 +45,19 @@
               <textarea id="body" name="body"></textarea>
             </div>
             <div>
-              <label for="tags">Tags</label>
+              <label for="tags">Tags <span class="commas">(separated by commas)</span></label>
               <input id="tags" type="text" name="tags" />
             </div>
             <div>
               <label for="media">Media</label>
               <input id="media" type="file" name="media" />
             </div>
-            <button>Edit Post</button>
+            <div>
+              <a href="/home/">Go back</a>
+              <button>Edit Post</button>
+            </div>
           </form>
-        </ul>
+        </article>
       </section>
     </main>
     <aside>

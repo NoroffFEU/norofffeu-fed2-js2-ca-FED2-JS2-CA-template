@@ -7,6 +7,7 @@ import { createPostHTML } from "@/components/cards/PostCard";
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 import { searchInputLoader } from "@/js/ui/search/searchInputLoader";
+import { uploadImage } from "@/js/api/imgur/imgur";
 
 async function loadHomePage() {
   try {
@@ -32,10 +33,6 @@ export async function renderPosts() {
   });
 
   const getFollowingUsers = await getUserProfile();
-
-  console.log("COMBINED", postsByUser);
-
-  // TODO add search
 
   try {
     if (!combinedPosts || combinedPosts.length === 0) {

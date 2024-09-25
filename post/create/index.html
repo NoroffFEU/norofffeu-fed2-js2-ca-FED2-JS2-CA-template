@@ -34,11 +34,10 @@
         <div class="posts__container__header">
           <a data-is-active="true" href="javascript:void(0)">📝 Create post</a>
         </div>
-        <ul id="posts">
-          <form name="createPost">
+        <article id="create">
             <form name="createPost">
               <div>
-                <label for="title">Title</label>
+                <label for="title">Title <span class="required">*</span></label>
                 <input id="title" type="text" name="title" required />
               </div>
 
@@ -48,7 +47,7 @@
               </div>
 
               <div>
-                <label for="tags">Tags</label>
+                <label for="tags">Tags <span class="commas">(separated by commas)</span></label>
                 <input id="tags" type="text" name="tags" />
               </div>
 
@@ -56,11 +55,13 @@
                 <label for="media">Media</label>
                 <input id="media" type="file" name="media" />
               </div>
-              <button>Create Post</button>
+              <div>
+                <a href="/home/">Go back</a>
+                <button>Create Post</button>
+              </div>
             </form>
-            <a href="/home/">Go back</a>
           </form>
-        </ul>
+        </article>
       </section>
     </main>
     <aside>
