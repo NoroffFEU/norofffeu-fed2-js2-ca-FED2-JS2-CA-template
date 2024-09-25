@@ -1,5 +1,6 @@
 import { ProfileResponse } from "@/types/types";
 import { FollowButton } from "@/components/buttons/FollowButton";
+import { EditProfile } from "@/components/buttons/EditProfile";
 import { createPostHTML } from "../cards/PostCard";
 import { readPost } from "@/js/api/post/read";
 import { getUser } from "@/js/utilities/getUser";
@@ -11,6 +12,10 @@ export async function createProfileHTML(
 ) {
   if (!customElements.get("follow-button")) {
     customElements.define("follow-button", FollowButton);
+  }
+
+  if (!customElements.get("edit-profile")) {
+    customElements.define("edit-profile", EditProfile);
   }
 
   const postsFromUser = profile.posts;
@@ -62,7 +67,7 @@ export async function createProfileHTML(
                             data-is-following="${isFollowing}"
                         ></follow-button>
                         `
-                      : ""
+                      : `<edit-profile data-user-name="${profile.name}">Edit profile</edit-profile>`
                   }
             </div>
         </div>

@@ -4,7 +4,7 @@ import { headers } from "@api/headers";
 
 export async function updateProfile(
   username: string,
-  { bio, avatar, banner }: { bio: string; avatar: Media; banner: Media }
+  { bio, avatar, banner }: { bio: string; avatar?: Media; banner?: Media }
 ) {
   try {
     const response = await fetch(`${API_SOCIAL.PROFILES}/${username}`, {

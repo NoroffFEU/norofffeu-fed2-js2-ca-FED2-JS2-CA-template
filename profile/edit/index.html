@@ -5,8 +5,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
-    <link rel="stylesheet" href="../src/css/style.css" />
-    <script type="module" src="../src/app.ts"></script>
+    <link rel="stylesheet" href="../../src/css/style.css" />
+    <script type="module" src="../../src/app.ts"></script>
   </head>
 
   <body class="home-page">
@@ -32,9 +32,27 @@
     <main>
       <section class="scroll-section">
         <div class="posts__container__header">
-          <a data-is-active="true" href="javascript:void(0)">👤 Profile</a>
+          <a data-is-active="true" href="javascript:void(0)">✏️ Edit profile</a>
         </div>
-        <article id="posts">
+        <article id="edit-profile">
+          <form name="editProfile">
+            <div>
+              <label for="bio">Bio</label>
+              <textarea id="bio" name="bio"></textarea>
+            </div>
+            <div>
+              <label for="profile-avatar">Avatar</label>
+              <input id="profile-avatar" type="file" name="profile-avatar" />
+            </div>
+            <div>
+              <label for="profile-banner">Banner</label>
+              <input id="profile-banner" type="file" name="profile-banner" />
+            </div>
+            <div>
+              <a href="/home/">Go back</a>
+              <button>Update profile</button>
+            </div>
+          </form>
         </article>
       </section>
     </main>
@@ -47,7 +65,7 @@
       </div>
 
       <div class="user-actions">
-        <a href="../../post/create/">Create post</a>
+        <a href="javascript:void(0)">Create post</a>
         <button id="logout-btn">Logout</button>
       </div>
     </aside>
