@@ -73,7 +73,7 @@ export async function renderPosts() {
     console.error(error);
     const li = document.createElement("li");
     li.innerHTML =
-      "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
+      "Your home timeline is empty! Create a post to get started, or follow some users to see their posts";
     postsContainer.appendChild(li);
   }
 }
