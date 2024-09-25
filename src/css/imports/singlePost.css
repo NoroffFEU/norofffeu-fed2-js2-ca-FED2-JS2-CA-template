@@ -25,9 +25,12 @@
   margin-bottom: .8rem;
 }
 
+.user-icon {
+  margin-right: 4px;
+}
+
 .user a {
   text-decoration: underline;
-  margin-right: 4px;
 }
 
 .single-post-tag-list {
