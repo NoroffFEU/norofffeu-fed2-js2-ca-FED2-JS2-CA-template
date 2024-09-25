@@ -58,7 +58,6 @@ export default class NoroffApp extends NoroffAPI {
   setReplyToId(event) {
     const originalComment = event.target.closest(".comment-item");
     this.replyToId = Number(originalComment.id);
-    console.log(this.replyToId);
     const originalCommentUser = originalComment.dataset.username;
     originalComment.style.backgroundColor = "#dedede";
     const replyMessage = document.querySelector(".reply-message");
@@ -159,7 +158,6 @@ export default class NoroffApp extends NoroffAPI {
       try {
         await api.auth.register(data);
         alert(`Registration successful!\nUsername: ${name}\nEmail: ${email}`);
-        console.log(data);
         window.location.href = "/auth/login/";
       } catch(error) {
         alert(`${error.message}.\nPlease try again.`);
