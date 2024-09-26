@@ -8,6 +8,7 @@ import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 import { searchInputLoader } from "@/js/ui/search/searchInputLoader";
 import { uploadImage } from "@/js/api/imgur/imgur";
+import { Logo } from "@/components/logo";
 
 async function loadHomePage() {
   try {

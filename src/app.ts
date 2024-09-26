@@ -13,5 +13,11 @@ import { readPostsByUser } from "./js/api/post/read";
 import { toggleFollowUser } from "./js/api/profile/follow";
 import { searchProfiles } from "./js/api/profile/search";
 import { onLogout } from "./js/ui/auth/logout";
+import { loadLogo } from "./components/logo";
 
-await router(window.location.pathname);
+async function loadApp() {
+  await router(window.location.pathname);
+  loadLogo();
+}
+
+loadApp();
