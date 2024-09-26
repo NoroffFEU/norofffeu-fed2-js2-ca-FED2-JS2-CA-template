@@ -86,7 +86,7 @@ export async function createProfileHTML(
             <p><strong>Following:</strong> <span>${
               profile._count.following
             }</span></p>
-            <p><strong>Followers:</strong> <span>${
+            <p><strong>Followers:</strong> <span class="followers">${
               profile._count.followers
             }</span></p>
             <p><strong>Posts:</strong> <span>${profile._count.posts}</span></p>

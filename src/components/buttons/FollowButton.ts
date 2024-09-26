@@ -61,12 +61,24 @@ export class FollowButton extends HTMLElement {
     const userToFollow = this.getAttribute("data-user-name");
     const isFollowing = this.getAttribute("data-is-following");
 
+    const followersSpan = document.querySelector(
+      ".followers"
+    ) as HTMLSpanElement;
+
     try {
       if (userToFollow) {
         if (isFollowing === "true") {
+          if (followersSpan) {
+            let followersValue = Number(followersSpan.textContent) - 1;
+            followersSpan.innerText = followersValue.toString();
+          }
           await toggleFollowUser(userToFollow, "unfollow");
           this.updateAllButtons(userToFollow, "false");
         } else if (isFollowing === "false") {
+          if (followersSpan) {
+            let followersValue = Number(followersSpan.textContent) + 1;
+            followersSpan.innerText = followersValue.toString();
+          }
           await toggleFollowUser(userToFollow, "follow");
           this.updateAllButtons(userToFollow, "true");
         }
