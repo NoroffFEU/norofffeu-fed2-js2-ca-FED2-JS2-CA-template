@@ -14,10 +14,12 @@ import { toggleFollowUser } from "./js/api/profile/follow";
 import { searchProfiles } from "./js/api/profile/search";
 import { onLogout } from "./js/ui/auth/logout";
 import { loadLogo } from "./components/logo";
+import { loadSearchInput } from "./js/ui/search/searchInputLoader";
 
 async function loadApp() {
   await router(window.location.pathname);
   loadLogo();
+  loadSearchInput();
 }
 
 loadApp();

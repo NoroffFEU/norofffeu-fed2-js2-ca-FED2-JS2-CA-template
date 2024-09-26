@@ -1,4 +1,4 @@
-export function searchInputLoader() {
+export function loadSearchInput() {
   const form = document.forms.namedItem("search");
   if (!form) return;
 
