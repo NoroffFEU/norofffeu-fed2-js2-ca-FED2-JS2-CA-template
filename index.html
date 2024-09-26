@@ -3,25 +3,25 @@
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noroff FED2 JS2 CA</title>
-  <script type="module" src="/src/app.js"></script>
-  <link rel="stylesheet" href="/src/css/style.css">
+  <title>FitConnect</title>
+  <script type="module" src="./src/app.js"></script>
+  <link rel="stylesheet" href="./src/css/style.css">
 </head>
-
 <body>
   <header>
-    <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    <a href="/index.html" class="logo"> FitConnect</a>
     <nav>
-      <a href="/">Home</a>
-      <a href="/profile/">My Profile</a>
-      <a href="/auth/login/">Login</a>
-      <a href="/auth/register/">Register</a>
-      <button id="logout-btn">Logout</button>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./profile/index.html">My Profile</a></li>
+        <li><a href="./auth/login/index.html">Login</a></li>
+        <li><a href="./auth/register/index.html">Register</a></li>
+        <li><button id="logout-btn">Logout</button></li>
+      </ul>
     </nav>
   </header>
-  <main>
+  <main id="main-content">
     <div id="posts-container"></div>
   </main>
 </body>
