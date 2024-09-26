@@ -57,13 +57,7 @@ commentTemplate.innerHTML = `
   <article class="comment">
     <div class="comment__header">
       <div class="user-profile">
-        <div>
-          <slot name="avatar"></slot>
-        </div>
-        <div class="profile-info">
-          <slot name="name"></slot>
-          <slot name="profile"></slot>
-        </div>
+        <slot name="card-profile"></slot>
       </div>
       <div>
         <slot name="time"></slot>
@@ -101,6 +95,7 @@ export class CommentTemplate extends HTMLElement {
 
     this.commentId = Number(this.getAttribute("data-comment-id"));
     this.postId = Number(this.getAttribute("data-post-id"));
+
     this.profileContainer = this.shadowRoot?.querySelector(
       ".user-profile"
     ) as HTMLDivElement;
@@ -112,18 +107,6 @@ export class CommentTemplate extends HTMLElement {
   }
 
   set commentData(commentData: CommentResponse) {
-    const nameElement = document.createElement("p");
-    nameElement.slot = "name";
-    nameElement.innerText = commentData.owner;
-    nameElement.classList.add("name");
-    this.appendChild(nameElement);
-
-    const profileElement = document.createElement("p");
-    profileElement.slot = "profile";
-    profileElement.classList.add("profile");
-    profileElement.innerText = `@${commentData.owner}`;
-    this.appendChild(profileElement);
-
     const timeElement = document.createElement("span");
     timeElement.slot = "time";
     timeElement.classList.add("time");
@@ -137,20 +120,16 @@ export class CommentTemplate extends HTMLElement {
   }
 
   set commentUser(user: ProfileResponse) {
-    const img = document.createElement("img");
-    img.slot = "avatar";
-    img.src = user.avatar.url;
-    img.alt = user.name;
-    img.classList.add("avatar");
-    this.appendChild(img);
+    const cardProfile = document.createElement("card-profile");
+    cardProfile.setAttribute("data-username", user.name);
+    cardProfile.setAttribute("data-avatar-url", user.avatar.url);
+    this.profileContainer.appendChild(cardProfile);
+
     this.setAttribute("data-owner", user.name);
   }
 
   connectedCallback() {
     this.checkIfUserIsOwner();
-    this.profileContainer.addEventListener("click", (e) =>
-      this.navigateToProfile(e)
-    );
   }
 
   async handleDeleteComment(e: Event) {
@@ -179,12 +158,8 @@ export class CommentTemplate extends HTMLElement {
     }
   }
 
-  navigateToProfile(e: Event) {
-    const user = this.getAttribute("data-owner");
-    window.location.href = `/profile/?username=${user}`;
-  }
-
   handleReplyComment(e: Event) {
-    console.log("hola, reply button");
+    const idReply = this.getAttribute("data-comment-id");
+    console.log(`Reply button to comment with id: ${idReply}`);
   }
 }

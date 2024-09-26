@@ -1,4 +1,3 @@
-import { HomeProfile } from "@/components/profile/HomeProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { readProfile } from "@/js/api/profile/read";
 import { UserLoggedProfile } from "@/components/profile/UserLoggedProfile";
@@ -26,7 +25,7 @@ export async function loadUserLoggedProfile() {
   if (profileData) {
     const profile = document.createElement(
       "user-logged-profile"
-    ) as HomeProfile;
+    ) as UserLoggedProfile;
     profile.data = profileData;
     profileContainer.append(profile);
   }

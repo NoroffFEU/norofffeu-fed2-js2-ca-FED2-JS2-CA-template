@@ -7,6 +7,7 @@ import { PostButtons } from "@/components/post/PostButtons";
 import { CommentInput } from "@/components/post/CommentInput";
 import { CommentTemplate } from "@/components/post/CommentTemplate";
 import { getTime } from "@/js/utilities/getTime";
+import { CardProfile } from "@/components/profile/CardProfiles";
 
 import { getUser } from "@/js/utilities/getUser";
 
@@ -45,28 +46,20 @@ export function createPostHTML(
     customElements.define("comment-template", CommentTemplate);
   }
 
+  if (!customElements.get("card-profile")) {
+    customElements.define("card-profile", CardProfile);
+  }
+
   return `
   <li class="post" data-post-id="${post.id}">
     <div class="post__header">
         <div>
-            <div>
-               
-            </div>
-            <div class="post__header__avatar">
-                <img 
-                    src="${post.author.avatar.url}" 
-                    alt="${post.author.name} avatar" 
-                />
-            </div>
+            <card-profile 
+              data-username="${post.author.name}" 
+              data-avatar-url="${post.author.avatar.url}"
+            ></card-profile>
+        </div>
 
-            <div class="post__header__user">
-                <span>${post.author.name}</span>
-                <a href="/profile/?username=${post.author.name}">
-                    @${post.author.name}
-                </a>
-            </div>
-
-            </div>
             ${
               isUserPost && post.author.name === getUser()
                 ? `
@@ -167,24 +160,13 @@ export function createPostHTML(
                       data-post-id="${comment.postId}"
                       data-owner="${comment.author.name}"
                       data-created="${comment.created}"
-                      >
-                        <img 
-                            class="avatar"
-                            slot="avatar" 
-                            src="${
-                              comment.author.avatar.url ||
-                              "/images/placeholder-avatar.jpg"
-                            }" 
-                            alt="${
-                              comment.author.name || "Placeholder"
-                            } avatar" 
-                        />
-                        <p class="name" slot="name">${
-                          comment.author.name || ""
-                        }</p>
-                        <p class="profile" slot="profile">@${
-                          comment.author.name || ""
-                        }</p>
+                      >  
+                        <div class="card-profile" slot="card-profile">
+                          <card-profile 
+                            data-username="${comment.author.name}" 
+                            data-avatar-url="${comment.author.avatar.url}"
+                          ></card-profile>
+                        </div>
                         <span class="time" slot="time">${getTime(
                           comment.created
                         )}</span>
