@@ -4,6 +4,11 @@ import { getUser } from "@/js/utilities/getUser";
 
 export async function onUpdateProfile(event: Event) {
   event.preventDefault();
+  const updateProfileBtn = document.querySelector(
+    ".update-profile-btn"
+  ) as HTMLButtonElement;
+
+  updateProfileBtn.disabled = true;
 
   const user = getUser();
 
@@ -50,6 +55,7 @@ export async function onUpdateProfile(event: Event) {
       alert("There was an issue uploading the avatar. Please try again.");
       progressBar.value = 0;
       progressBar.style.display = "none";
+      updateProfileBtn.disabled = false;
       return;
     }
   }
@@ -72,6 +78,7 @@ export async function onUpdateProfile(event: Event) {
       alert("There was an issue uploading the banner. Please try again.");
       progressBar.value = 0;
       progressBar.style.display = "none";
+      updateProfileBtn.disabled = false;
       return;
     }
   }
@@ -86,5 +93,6 @@ export async function onUpdateProfile(event: Event) {
   } finally {
     progressBar.value = 100;
     progressBar.style.display = "none";
+    updateProfileBtn.disabled = false;
   }
 }
