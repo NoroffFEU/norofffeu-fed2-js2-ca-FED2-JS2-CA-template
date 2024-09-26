@@ -11,10 +11,21 @@
   max-width: 600px;
   padding: 1rem;
   border: 1px solid #ccc;
+  border-block: none;
 
   &:is(article) {
     padding: 0px;
   }
+}
+
+.logo__container {
+  aspect-ratio: 200/88;
+  width: 100%;
+}
+
+.profile__container {
+  aspect-ratio: 200/54;
+  width: 100%;
 }
 
 .post {

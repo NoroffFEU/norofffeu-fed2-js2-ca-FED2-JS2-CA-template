@@ -8,6 +8,7 @@ homeProfileTemplate.innerHTML = `
       border-radius: 0.65rem;
       aspect-ratio: 1;
       width: 50px;
+      object-fit: cover;
     }
     .post__header__user {
       display: flex;
