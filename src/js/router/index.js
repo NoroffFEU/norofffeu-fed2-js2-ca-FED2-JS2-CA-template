@@ -37,22 +37,24 @@
               console.error("Error loading register view:", error);
             }
             break;
-      case "/post/":
+            case "/post/":
               try {
-                const { default: postView } = await import("../ui/post/list.js");
-                postView();
+                const { default: displayPosts } = await import("../ui/post/list.js");
+                displayPosts();
               } catch (error) {
                 console.error("Error loading post view:", error);
               }
               break;
-    case "/post/edit/":
-      try {
-        const { default: postEditView } = await import("../ui/post/update.js");
-        postEditView();
-      } catch (error) {
-        console.error("Error loading post edit view:", error);
-      }
-      break;
+              case "/post/edit/":
+              case "/post/edit/index.html":
+                console.log("Attempting to load post edit view");
+                try {
+                  const { default: postEditView } = await import("../ui/post/update.js");
+                  postEditView();
+                } catch (error) {
+                  console.error("Error loading post edit view:", error);
+                }
+                break;
       case "/post/create/":
         case "/post/create/index.html":
           console.log("Attempting to load create post view");
