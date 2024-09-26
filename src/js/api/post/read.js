@@ -18,7 +18,8 @@ export async function readPosts(limit = 12, page = 1, tag) {
     return await response.json();
   }
 
-export async function readPost(id) {
+ export async function readPost(id) {
+  console.log(`Fetching post with ID: ${id}`);
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
     headers: headers(),
   });
@@ -27,7 +28,9 @@ export async function readPost(id) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+  console.log("Received post data:", data);
+  return data;
 }
 
 export async function readPostsByUser(username, limit = 12, page = 1, tag) {
