@@ -34,7 +34,7 @@ homeProfileTemplate.innerHTML = `
   </div>
 `;
 
-export class HomeProfile extends HTMLElement {
+export class UserLoggedProfile extends HTMLElement {
   private post: ProfileResponse | null = null;
 
   constructor() {
@@ -92,4 +92,4 @@ export class HomeProfile extends HTMLElement {
   }
 }
 
-customElements.define("home-profile", HomeProfile);
+customElements.define("user-logged-profile", UserLoggedProfile);

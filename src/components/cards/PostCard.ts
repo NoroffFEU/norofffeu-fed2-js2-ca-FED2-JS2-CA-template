@@ -49,6 +49,9 @@ export function createPostHTML(
   <li class="post" data-post-id="${post.id}">
     <div class="post__header">
         <div>
+            <div>
+               
+            </div>
             <div class="post__header__avatar">
                 <img 
                     src="${post.author.avatar.url}" 

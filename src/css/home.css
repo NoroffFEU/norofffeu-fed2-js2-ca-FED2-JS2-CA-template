@@ -94,7 +94,7 @@
       }
     }
 
-    & home-profile {
+    & user-logged-profile {
       display: flex;
       align-items: center;
       gap: 0.65rem;

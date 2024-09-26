@@ -1,6 +1,7 @@
 import { HomeProfile } from "@/components/profile/HomeProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { readProfile } from "@/js/api/profile/read";
+import { UserLoggedProfile } from "@/components/profile/UserLoggedProfile";
 
 export async function loadUserLoggedProfile() {
   if (
@@ -16,14 +17,16 @@ export async function loadUserLoggedProfile() {
     ".profile__container"
   ) as HTMLElement;
 
-  if (!customElements.get("home-profile")) {
-    customElements.define("home-profile", HomeProfile);
+  if (!customElements.get("user-logged-profile")) {
+    customElements.define("user-logged-profile", UserLoggedProfile);
   }
 
   const profileData = await readProfile(user);
 
   if (profileData) {
-    const profile = document.createElement("home-profile") as HomeProfile;
+    const profile = document.createElement(
+      "user-logged-profile"
+    ) as HomeProfile;
     profile.data = profileData;
     profileContainer.append(profile);
   }
