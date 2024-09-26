@@ -7,6 +7,8 @@ setLogoutListener();
 
 const postContainer = document.getElementById("postContainer");
 
+let currentPage = 1;
+
 async function displayPosts(page = 1) {
     const { ok, data } = await readPosts(12, page);
 
@@ -21,21 +23,15 @@ async function displayPosts(page = 1) {
         const card = document.createElement("div");
         card.classList.add("postCard");
 
-        const mediaUrl =
-            post.media?.url ||
-            "https://upload.wikimedia.org/wikipedia/commons/f/f9/No-image-available.jpg";
-        const mediaAlt = post.media?.alt || "Post Image";
-
-        const tags = post.tags?.length
-            ? `<p class="tags">${post.tags.join(", ")}</p>`
-            : "";
-
         card.innerHTML = `
-            <div class="media">
-                <img src="${mediaUrl}" alt="${mediaAlt}" />
+                <div class="media">
+                <img src="${
+                    post.media?.url ||
+                    "https://upload.wikimedia.org/wikipedia/commons/f/f9/No-image-available.jpg"
+                }" alt="${post.media?.alt || "Post Image"}">
             </div>
             <h2 class="title">${post.title}</h2>
-            ${tags}
+            <p class="tags">${post.tags.join(", ")}</p>
             <p class="body">${post.body}</p>
         `;
 
@@ -46,7 +42,22 @@ async function displayPosts(page = 1) {
 
         postContainer.appendChild(card);
     });
+    globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 }
 
-// Call the function to display posts when the page loads
-displayPosts();
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+
+nextBtn.addEventListener("click", () => {
+    currentPage++;
+    displayPosts(currentPage);
+});
+
+prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        displayPosts(currentPage);
+    }
+});
+
+displayPosts(currentPage);

@@ -38,10 +38,11 @@ export async function readPost(id) {
 
 // multiple posts
 export async function readPosts(limit = 12, page = 1, tag) {
-    const accessToken = await getKey(); // Await the token retrieval
+    const accessToken = await getKey();
+
     if (!accessToken) {
-        console.error("No access token. Cannot fetch posts.");
-        return { ok: false, error: "No access token" }; // Stop execution if no token is present
+        console.error("No accessToken. Cannot fetch posts.");
+        return { ok: false, error: "No access token" };
     }
 
     const url = new URL(API_SOCIAL_POSTS);
@@ -58,7 +59,6 @@ export async function readPosts(limit = 12, page = 1, tag) {
             "Content-Type": "application/json",
         },
     };
-
     try {
         const response = await fetch(url.toString(), options);
         const data = await response.json();
