@@ -2,7 +2,6 @@ import { readPosts } from "@/js/api/post/read";
 import { AllPostsResponse, Meta } from "@/types/types";
 import { getUser } from "@/js/utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
-import { authGuard } from "@/js/utilities/authGuard";
 import { createPostHTML } from "@/components/cards/PostCard";
 
 let page = 1;
@@ -87,4 +86,3 @@ async function loadPagination() {
 }
 
 loadExplorePage();
-authGuard();

@@ -1,5 +1,4 @@
 import { readPost } from "@/js/api/post/read";
-import { authGuard } from "@utilities/authGuard";
 import { findForm } from "@utilities/findForm";
 import { getInput } from "@utilities/getInput";
 import { onUpdatePost } from "@ui/post/update";
@@ -51,5 +50,4 @@ async function fetchAndPopulateForm(editPostForm: HTMLFormElement) {
   }
 }
 
-authGuard();
 loadPostEditPage();

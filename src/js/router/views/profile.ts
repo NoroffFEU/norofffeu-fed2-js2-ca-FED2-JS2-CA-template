@@ -1,4 +1,3 @@
-import { authGuard } from "../../utilities/authGuard";
 import { createProfileHTML } from "@/components/profile/ProfileTemplate";
 import { searchParams } from "@/js/utilities/searchParams";
 import { readProfile } from "@/js/api/profile/read";
@@ -43,5 +42,4 @@ async function loadProfile() {
   }
 }
 
-authGuard();
 loadProfilePage();

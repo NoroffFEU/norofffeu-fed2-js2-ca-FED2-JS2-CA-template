@@ -1,4 +1,3 @@
-import { authGuard } from "@utilities/authGuard";
 import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
@@ -110,5 +109,4 @@ async function loadPagination() {
   });
 }
 
-authGuard();
 loadHomePage();

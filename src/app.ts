@@ -3,6 +3,7 @@ import { loadLogo } from "./components/Logo";
 import { loadSearchInput } from "./js/ui/search/searchInputLoader";
 import { loadLogoutButton } from "./components/buttons/LogoutButton";
 import { loadUserLoggedProfile } from "./js/ui/profile/renderUserLoggedProfile";
+import { authGuard } from "./js/utilities/authGuard";
 
 async function loadApp() {
   await router(window.location.pathname);
@@ -10,6 +11,7 @@ async function loadApp() {
   loadLogo();
   loadSearchInput();
   loadLogoutButton();
+  authGuard();
 }
 
 loadApp();

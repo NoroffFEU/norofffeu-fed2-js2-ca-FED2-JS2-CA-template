@@ -1,5 +1,4 @@
 import { onCreatePost } from "@ui/post/create";
-import { authGuard } from "@utilities/authGuard";
 import { findForm } from "@utilities/findForm";
 import { checkValidTypes } from "@utilities/checkValidTypes";
 
@@ -25,5 +24,4 @@ function setValidTypes() {
   input.addEventListener("change", checkValidTypes);
 }
 
-authGuard();
 loadPostCreatePage();
