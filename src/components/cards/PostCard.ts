@@ -149,8 +149,8 @@ export function createPostHTML(
              ? post.comments
                  .sort(
                    (a, b) =>
-                     new Date(a.created).getTime() -
-                     new Date(b.created).getTime()
+                     new Date(b.created).getTime() -
+                     new Date(a.created).getTime()
                  )
                  .map((comment) => {
                    console.log(comment);

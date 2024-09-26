@@ -50,7 +50,12 @@ export class DeleteButton extends HTMLElement {
 
   checkIfUlIsEmpty() {
     const postsContainer = document.getElementById("posts") as HTMLUListElement;
-    if (postsContainer.children.length === 0) {
+    if (
+      postsContainer.children.length === 0 &&
+      window.location.pathname === "/post/"
+    ) {
+      window.location.href = "/home/";
+    } else if (postsContainer.children.length === 0) {
       const li = document.createElement("li");
       li.innerHTML =
         "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";

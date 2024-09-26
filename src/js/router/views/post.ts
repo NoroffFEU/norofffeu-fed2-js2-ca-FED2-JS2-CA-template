@@ -53,8 +53,6 @@ export async function getPostToRender() {
     true
   );
   postContainer.insertAdjacentHTML("beforeend", postHTML);
-  // const test = "<div>hola</div>";
-  // postContainer.insertAdjacentHTML("beforeend", test);
 }
 
 loadPostPage();

@@ -136,7 +136,12 @@ export class CommentInput extends HTMLElement {
     comment.setAttribute("data-comment-id", commentFetch.id.toString());
     comment.setAttribute("data-post-id", commentFetch.postId.toString());
 
-    this.commentsContainer.appendChild(comment);
+    this.commentsContainer.insertBefore(
+      comment,
+      this.commentsContainer.firstChild
+    );
+
+    comment.scrollIntoView({ behavior: "smooth", block: "end" });
 
     this.form.reset();
     this.textarea.focus();
