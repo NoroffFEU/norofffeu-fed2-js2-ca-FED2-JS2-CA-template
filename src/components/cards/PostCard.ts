@@ -51,14 +51,13 @@ export function createPostHTML(
   }
 
   return `
-  <li class="post" data-post-id="${post.id}">
+  <li class="post" data-post-id="${post.id}" >
     <div class="post__header">
-        <div>
+        <div class="post__header__info" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <card-profile 
               data-username="${post.author.name}" 
               data-avatar-url="${post.author.avatar.url}"
             ></card-profile>
-        </div>
 
             ${
               isUserPost && post.author.name === getUser()
@@ -76,6 +75,7 @@ export function createPostHTML(
                     >
                         Edit
                     </a>
+                </div>
                 </div>`
                 : `
                 <div>
@@ -84,6 +84,7 @@ export function createPostHTML(
                         data-is-following="${isFollowing}" 
                         data-is-user-post="${isUserPost}"
                     ></follow-button>
+                </div>
                 </div>
             `
             }

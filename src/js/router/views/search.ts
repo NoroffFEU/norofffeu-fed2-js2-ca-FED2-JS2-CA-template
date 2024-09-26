@@ -18,14 +18,12 @@ async function loadSearchPage() {
 }
 
 async function renderSearch(query: string) {
-  const searchContainer = document.querySelector("#posts") as HTMLElement;
+  const searchContainer = document.querySelector("#search") as HTMLElement;
   const getFollowingUsers = await getUserProfile();
 
   if (!customElements.get("section-header")) {
     customElements.define("section-header", SectionHeader);
   }
-
-  // const test2 = true;
 
   try {
     const profiles = await searchProfiles(query, { limit: 5, page: 1 });
@@ -61,7 +59,7 @@ async function renderSearch(query: string) {
     const posts = await searchPosts(query, { limit: 5, page: 1 });
 
     if (posts && posts.length > 0) {
-      const postsSection = document.createElement("section");
+      const postsSection = document.createElement("ul");
       postsSection.classList.add("posts");
 
       const postsSectionHeader = document.createElement("section-header");
