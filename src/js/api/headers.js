@@ -7,5 +7,7 @@ export function headers() {
     headers.append("X-Noroff-API-Key", API_KEY);
   }
 
+  headers.append("Content-Type", "application/json");
+
   return headers;
 }
