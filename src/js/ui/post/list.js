@@ -9,7 +9,7 @@ export async function displayPosts() {
     }
 
     const { data: posts } = await readPosts();
-    console.log('Posts data:', posts); // Add this line for debugging
+    console.log('Posts data:', posts);
     
     if (posts.length === 0) {
       postsContainer.innerHTML = "<p>No posts found.</p>";
@@ -32,6 +32,10 @@ function createPostElement(post) {
       ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
       <p>Tags: ${post.tags.join(', ')}</p>
       <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
+      <a href="/post/edit/index.html?id=${post.id}" class="edit-post-button">Edit</a>
     </article>
   `;
 }
+
+// Export displayPosts as the default
+export default displayPosts;
