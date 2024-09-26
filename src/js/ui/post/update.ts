@@ -5,6 +5,12 @@ import { uploadImage } from "@/js/api/imgur/imgur";
 export async function onUpdatePost(event: Event) {
   event.preventDefault();
 
+  const createUpdatePostBtn = document.querySelector(
+    ".create-update-post-btn"
+  ) as HTMLButtonElement;
+
+  createUpdatePostBtn.disabled = true;
+
   const postToUpdate = getId();
 
   const form = event.target as HTMLFormElement;
@@ -44,6 +50,7 @@ export async function onUpdatePost(event: Event) {
       alert("There was an issue uploading the image. Please try again.");
       progressBar.value = 0;
       progressBar.style.display = "none";
+      createUpdatePostBtn.disabled = false;
       return;
     }
   }
@@ -74,5 +81,6 @@ export async function onUpdatePost(event: Event) {
   } finally {
     progressBar.value = 100;
     progressBar.style.display = "none";
+    createUpdatePostBtn.disabled = false;
   }
 }

@@ -4,6 +4,12 @@ import { createPost } from "@api/post/create";
 export async function onCreatePost(event: Event) {
   event.preventDefault();
 
+  const createPostBtn = document.querySelector(
+    ".create-update-post-btn"
+  ) as HTMLButtonElement;
+
+  createPostBtn.disabled = true;
+
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
   const userData = Object.fromEntries(formData);
@@ -41,6 +47,7 @@ export async function onCreatePost(event: Event) {
       alert("There was an issue uploading the image. Please try again.");
       progressBar.value = 0;
       progressBar.style.display = "none";
+      createPostBtn.disabled = false;
       return;
     }
   }
@@ -71,5 +78,6 @@ export async function onCreatePost(event: Event) {
   } finally {
     progressBar.value = 100;
     progressBar.style.display = "none";
+    createPostBtn.disabled = false;
   }
 }
