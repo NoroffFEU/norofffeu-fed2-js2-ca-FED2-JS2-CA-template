@@ -210,8 +210,8 @@ export default class NoroffAPI {
       const apiKey = await initializeAPI();
       const customHeaders = headers(apiKey);
 
-      const url = new URL(`${this.apiSocialPath}/search`);
-      url.searchParams.append('q', query);
+      const url = new URL(`${this.apiSocialPath}/search?limit=12&q=${query}`);
+    
 
       const response = await fetch(url,{
         headers: customHeaders,
@@ -225,18 +225,15 @@ export default class NoroffAPI {
       throw new Error("Could not fetch posts")
     },
     readProfile: async (query) => {
-      const {token} = getCurrentUser();
-      const apiKeyData = await this.options.apiKey();
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
 
-      const url = new URL(`${this.apiSocialPath}/search`);
+      const url = new URL(`${this.apiProfilesPath}/search`);
       url.searchParams.append('q', query);
 
       const response = await fetch(url,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-           "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        },method:"get",
+        headers:customHeaders
+        ,method:"get",
       });
 
       if(response.ok){

@@ -17,7 +17,7 @@ export async function displaySinglePost(){
 
         const {user} = getCurrentUser();
         const isAuthor = post.data.author && post.data.author.name === user.name;
-        console.log(isAuthor)
+    
         
         const singlePostCon = document.getElementById('detailPostCon');
     

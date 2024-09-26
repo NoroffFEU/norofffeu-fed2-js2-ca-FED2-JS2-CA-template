@@ -1,4 +1,6 @@
 import NoroffAPI from "../api";
+import { displayAllPost } from "../router/views/post";
+import { displayAllProfiles } from "../router/views/home";
 const api = new NoroffAPI()
 
 export async function searchPosts(){
@@ -7,13 +9,12 @@ export async function searchPosts(){
         alert("Emty text box, please search..");
         return;
     }
-
     try{
         const response   = await api.search.read(query);
-        const postData = response .data
+        console.log(response)
+        const postData = response.data
 
-        if (postData && postData.length > 0) {
-            
+    if (postData && postData.length > 0) {
             displayAllPost(postData);
           } else {
             document.getElementById("getAllPosts").innerHTML = "<p>No posts found matching your search query.</p>";
@@ -23,21 +24,20 @@ export async function searchPosts(){
     }
 }
 
-// export async function searchProfile(){
-//     const query = document.getElementById('searchQueryProfile').value.trim();
-//     if(!query){
-//         alert("Emty text box, please search..");
-//         return;
-//     }
+export async function searchProfile(){
+    const query = document.getElementById('searchQueryProfile').value.trim();
+    if(!query){
+        alert("Emty text box, please search..");
+        return;
+    }
     
-//     try{
-//         const profiles  = await api.search.readProfile(query);
-//         const profileData = profiles.data
+    try{
+        const profiles  = await api.search.readProfile(query);
+        const profileData = profiles.data
+        displayAllProfiles(profileData); 
         
-//         getAllProfiles(profileData); 
         
-        
-//     } catch(error){
-//         console.log("Failed to search Profile", error)
-//     }
-// }
+    } catch(error){
+        console.log("Failed to search Profile", error)
+    }
+}

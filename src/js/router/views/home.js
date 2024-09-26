@@ -3,17 +3,13 @@ authGuard();
 
 import NoroffAPI from "../../api";
 import { renderPagination } from "../../utilities/pagination";
+import { searchProfile } from "../../utilities/search";
+import { onLogout } from "../../ui/auth/logout";
 
 
 const api = new NoroffAPI();
 
-async function fetchProfiles() {
-  const profiles = await api.profile.readProfiles();
-  return profiles;
-}
-const data = await fetchProfiles();
-
-async function displayAllProfiles(profiles) {
+export async function displayAllProfiles(profiles) {
   const profileContainer = document.getElementById("getAllProfiles");
   profileContainer.innerHTML = "";
   const profilesHTML = profiles
@@ -26,6 +22,11 @@ async function displayAllProfiles(profiles) {
         `
     )
     .join("");
+
+  if (!profileContainer) {
+    console.error("The profiles container was not found.");
+    return; // Exit the function if the container isn't found
+  }
 
   profileContainer.innerHTML = profilesHTML;
 }
@@ -41,7 +42,14 @@ async function displayPagination(page= 1) {
   
   try{
     const data = await api.Pagination.readProfiles(12, page); 
-    const {profiles, totalPages, currentPage } =data;
+    const {profiles, totalPages, currentPage } = data;
+   
+    const seachProfileBtn = document.getElementById('searchProfileSubmitBtn');
+    if (!seachProfileBtn){
+      return
+    }
+    seachProfileBtn.addEventListener('click', searchProfile)
+    document.getElementById('logoutButton').addEventListener('click', onLogout);
     
     displayAllProfiles(profiles);
     renderPagination(totalPages, currentPage, onPageChange);
@@ -51,15 +59,4 @@ async function displayPagination(page= 1) {
   }
 }
 
-async function onLogout() {
-  alert ("You are now logged out")
-  const data = await api.auth.logout()
-  return data; 
-}
-
-const logoutButton = document.getElementById('logoutButton');
-console.log(logoutButton)
-logoutButton.addEventListener('click', onLogout);
-
 displayPagination();
-
