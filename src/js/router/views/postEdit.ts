@@ -3,9 +3,11 @@ import { authGuard } from "@utilities/authGuard";
 import { findForm } from "@utilities/findForm";
 import { getInput } from "@utilities/getInput";
 import { onUpdatePost } from "@ui/post/update";
+import { checkValidTypes } from "@utilities/checkValidTypes";
 
 async function loadPostEditPage() {
   const editPostForm = findForm("editPost");
+  setValidTypes();
 
   try {
     if (editPostForm instanceof HTMLFormElement) {
@@ -15,6 +17,16 @@ async function loadPostEditPage() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function setValidTypes() {
+  const input = document.querySelector(
+    "input[type='file']"
+  ) as HTMLInputElement;
+
+  if (!(input instanceof HTMLInputElement)) return;
+
+  input.addEventListener("change", checkValidTypes);
 }
 
 async function fetchAndPopulateForm(editPostForm: HTMLFormElement) {
