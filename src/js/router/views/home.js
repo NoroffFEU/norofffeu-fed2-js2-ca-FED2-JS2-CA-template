@@ -19,7 +19,7 @@ async function displayPosts(page = 1) {
 
     data.data.forEach((post) => {
         const card = document.createElement("div");
-        card.classList.add("post-card");
+        card.classList.add("postCard");
 
         const mediaUrl =
             post.media?.url ||

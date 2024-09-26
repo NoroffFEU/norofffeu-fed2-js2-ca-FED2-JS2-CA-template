@@ -6,7 +6,7 @@
     gap: 20px;
 }
 
-.post-card {
+.postCard {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 20px;
@@ -16,24 +16,24 @@
     text-align: center;
 }
 
-.post-card img {
+.postCard img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-.post-card .title {
+.postCard .title {
     font-size: 1.5rem;
     margin-top: 10px;
 }
 
-.post-card .tags {
+.postCard .tags {
     color: #555;
     font-size: 0.9rem;
     margin-top: 5px;
 }
 
-.post-card .body {
+.postCard .body {
     margin-top: 10px;
     color: #333;
     font-size: 1rem;
