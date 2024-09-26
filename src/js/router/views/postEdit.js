@@ -19,7 +19,7 @@ async function displayEditPost() {
         throw new Error("Post ID not found in the URL");
       }
 
-    const post = await api.post.read(postId);
+    const post = await api.post.readSinglePost(postId);
     
     if(!post){
         throw new Error("Post not found");

@@ -13,7 +13,7 @@ export async function displaySinglePost(){
             return;
         }
 
-        const post = await api.post.read(postId, { _author: true })
+        const post = await api.post.readSinglePost(postId, { _author: true })
 
         const {user} = getCurrentUser();
         const isAuthor = post.data.author && post.data.author.name === user.name;

@@ -78,7 +78,23 @@ export default class NoroffAPI {
   };
 
   post = {
-    read: async (id, option = {}) => {
+    getPosts: async () => {
+
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+  
+      const response = await fetch(`${this.apiSocialPath}`, {
+        method: "get",
+        headers: customHeaders,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+      throw new Error("could not read the posts");
+    },
+    readSinglePost: async (id, option = {}) => {
       const apiKey = await initializeAPI();
       const customHeaders = headers(apiKey);
   
@@ -198,7 +214,7 @@ export default class NoroffAPI {
       url.searchParams.append('q', query);
 
       const response = await fetch(url,{
-        headers: customHeaders(apiKey),
+        headers: customHeaders,
         method:"get",
       });
 
@@ -233,8 +249,8 @@ export default class NoroffAPI {
     }
   };
 
-  profileByName = {
-    read: async (name, option = {}) => {
+  profile= {
+    readSingleProfile: async (name, option = {}) => {
 
       const { token} = getCurrentUser();
 
@@ -265,49 +281,26 @@ export default class NoroffAPI {
         throw new Error("could not read the Profile");
       }
     },
+    readProfiles: async () => {
+      const { token } = this.getCurrentUser;
+      const apiKeyData = await this.options.apiKey();
+  
+      const response = await fetch(`${this.apiProfilesPath}`, {
+        method: "get",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": `${apiKeyData.data.key}`
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+      throw new Error("Failed to fetch profiles");
+    }
   }
-
-  getPosts = async () => {
-    const { token } = this.getCurrentUser;
-
-    
-    const apiKeyData = await this.options.apiKey();
-
-    const response = await fetch(`${this.apiSocialPath}`, {
-      method: "get",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "X-Noroff-API-Key": `${apiKeyData.data.key}`
-        
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    }
-    throw new Error("could not read the posts");
-  };
-  getProfiles= async () => {
-    const { token } = this.getCurrentUser;
-    const apiKeyData = await this.options.apiKey();
-
-    const response = await fetch(`${this.apiProfilesPath}`, {
-      method: "get",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-        "X-Noroff-API-Key": `${apiKeyData.data.key}`
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    }
-    throw new Error("Failed to fetch profiles");
-  };
   options = {
     apiKey: async () => {
       const { token } = this.getCurrentUser;
@@ -331,4 +324,59 @@ export default class NoroffAPI {
       }
     },
   };
+  Pagination = {
+    readPosts: async (limit = 12, page = 1, tag) => {
+      const url = new URL(this.apiSocialPath)
+
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+    
+    url.searchParams.append("limit", limit)
+    url.searchParams.append("page", page)
+    if (tag) {
+        url.searchParams.append("_tag", tag);
+    }
+
+    try{
+        const response = await fetch(url,{
+            headers: customHeaders,
+        });
+
+        if(response.ok){
+            const {data, meta}= await response.json()
+            return { posts: data, totalPages: meta.pageCount, currentPage: meta.currentPage };
+        }else {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+    }catch (error){
+        console.error("Error fetching posts:", error);
+    }
+},
+    readProfiles: async (limit, page) => {
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+    
+    const url = new URL(this.apiProfilesPath)
+    url.searchParams.append("limit", limit)
+    url.searchParams.append("page", page)
+    // url.searchParams.append("name", username)
+
+    try{
+        const response = await fetch(url,{
+            headers: customHeaders,
+        });
+
+        if(response.ok){
+            const {data, meta}= await response.json()
+          
+            return { profiles: data, totalPages: meta.pageCount, currentPage: meta.currentPage };
+        }else {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+    }catch (error){
+        console.error("Error fetching posts:", error);
+    }
+  },
+
+}
 }

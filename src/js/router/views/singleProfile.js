@@ -13,7 +13,7 @@ export async function getSingleProfile(){
             return;
         }
 
-        const profile = await api.profileByName.read(profileName, {_posts:true})
+        const profile = await api.profile.readSingleProfile(profileName, {_posts:true})
         console.log(profile)
 
 
