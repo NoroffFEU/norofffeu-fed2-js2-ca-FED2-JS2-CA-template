@@ -1,7 +1,6 @@
 // import { PostMain } from "@/components/post/PostMain";
 // import { PostView } from "@/components/post/PostView";
 // import { renderPostHTML } from "@/components/post/PostView";
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { getId } from "@/js/utilities/getId";
 import { searchParams } from "@/js/utilities/searchParams";
 import { readPost } from "@/js/api/post/read";
@@ -11,7 +10,6 @@ import { getUserProfile } from "@/js/utilities/getUserProfile";
 
 function loadPostPage() {
   try {
-    renderProfile();
     getPostToRender();
   } catch (error) {
     console.error(error);

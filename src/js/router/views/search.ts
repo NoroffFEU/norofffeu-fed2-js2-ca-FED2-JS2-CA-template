@@ -1,4 +1,3 @@
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { createSearchHTML } from "@/components/search/SearchRender";
 import { searchProfiles } from "@/js/api/profile/search";
 import { searchParams } from "@/js/utilities/searchParams";
@@ -10,7 +9,6 @@ import { createPostHTML } from "@/components/cards/PostCard";
 
 async function loadSearchPage() {
   try {
-    renderProfile();
     const query = searchParams("q");
     if (!query) return;
     renderSearch(query);

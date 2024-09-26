@@ -3,13 +3,11 @@ import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
 async function loadHomePage() {
   try {
     renderPosts();
-    renderProfile();
   } catch (error) {
     console.error(error);
   }

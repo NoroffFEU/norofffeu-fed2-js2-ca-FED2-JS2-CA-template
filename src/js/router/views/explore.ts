@@ -4,7 +4,6 @@ import { getUser } from "@/js/utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { authGuard } from "@/js/utilities/authGuard";
 import { createPostHTML } from "@/components/cards/PostCard";
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
 let page = 1;
 let isLoading = false;
@@ -13,7 +12,6 @@ let isLastPage = false;
 async function loadExplorePage() {
   try {
     renderAllPosts();
-    renderProfile();
     loadPagination();
   } catch (error) {
     console.error(error);

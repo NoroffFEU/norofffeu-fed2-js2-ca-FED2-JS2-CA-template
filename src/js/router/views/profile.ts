@@ -1,4 +1,3 @@
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { authGuard } from "../../utilities/authGuard";
 import { createProfileHTML } from "@/components/profile/ProfileTemplate";
 import { searchParams } from "@/js/utilities/searchParams";
@@ -9,7 +8,6 @@ import { getUser } from "@/js/utilities/getUser";
 async function loadProfilePage() {
   try {
     loadProfile();
-    renderProfile();
   } catch (error) {
     console.error(error);
   }

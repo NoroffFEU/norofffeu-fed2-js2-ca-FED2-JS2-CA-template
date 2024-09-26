@@ -1,12 +1,9 @@
 import { readProfile } from "@/js/api/profile/read";
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { onUpdateProfile } from "@/js/ui/profile/update";
 
 async function loadProfileEditPage() {
   try {
-    renderProfile();
-
     const editProfileForm = document.forms.namedItem("editProfile");
 
     if (editProfileForm instanceof HTMLFormElement) {

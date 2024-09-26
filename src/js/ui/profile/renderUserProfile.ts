@@ -2,7 +2,15 @@ import { HomeProfile } from "@/components/profile/HomeProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { readProfile } from "@/js/api/profile/read";
 
-export async function renderProfile() {
+export async function loadUserLoggedProfile() {
+  if (
+    window.location.pathname === "/" ||
+    window.location.pathname === "/login/" ||
+    window.location.pathname === "/register/"
+  ) {
+    return;
+  }
+
   const user = getUser();
   const profileContainer = document.querySelector(
     ".profile__container"

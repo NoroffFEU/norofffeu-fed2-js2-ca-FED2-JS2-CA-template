@@ -3,10 +3,8 @@ import { authGuard } from "@utilities/authGuard";
 import { findForm } from "@utilities/findForm";
 import { getInput } from "@utilities/getInput";
 import { onUpdatePost } from "@ui/post/update";
-import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 
 async function loadPostEditPage() {
-  renderProfile();
   const editPostForm = findForm("editPost");
 
   try {
