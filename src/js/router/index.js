@@ -1,22 +1,30 @@
   
    export default async function router(pathname = window.location.pathname) {
     switch (pathname) {
-    case "/":
+      case "/":
+      case "/index.html":
+        console.log("Attempting to load home view");
+        try {
+          const { default: homeView } = await import("./views/home.js");
+          homeView();
+        } catch (error) {
+          console.error("Error loading home view:", error);
+        }
+        break;  
+      case "/auth/":
       try {
-       const { default: homeView } = await import("./views/home.js");
-        homeView();
-      } catch (error) {
-        console.error("Error loading home view:", error);
-      }
-      break;
-    case "/auth/":
-        const { default: authView } = await import("../ui/auth/index.js");
-        authView();
-        break;
-        case "/auth/login/":
+      const { default: authView } = await import("./views/auth.js");
+     authView();
+     } catch (error) {
+      console.error("Error loading auth view:", error);
+     }
+       break;
+       case "/auth/login/":
+        case "/auth/login/index.html":
+          console.log("Attempting to load login view");
           try {
-            const { default: setupLoginForm } = await import("../ui/auth/login.js");
-            setupLoginForm();
+            const { default: loginView } = await import("../ui/auth/login.js");
+            loginView();
           } catch (error) {
             console.error("Error loading login view:", error);
           }
@@ -29,45 +37,53 @@
               console.error("Error loading register view:", error);
             }
             break;
-    case "/post/":
-      try {
-        const { default: postView } = await import("../ui/post/index.js");
-        postView();
-      } catch (error) {
-        console.error("Error loading post view:", error);
-      }
-      break;
+      case "/post/":
+              try {
+                const { default: postView } = await import("../ui/post/list.js");
+                postView();
+              } catch (error) {
+                console.error("Error loading post view:", error);
+              }
+              break;
     case "/post/edit/":
       try {
-        const { default: postEditView } = await import("../ui/post/edit.js");
+        const { default: postEditView } = await import("../ui/post/update.js");
         postEditView();
       } catch (error) {
         console.error("Error loading post edit view:", error);
       }
       break;
-    case "/post/create/":
-      try {
-        const { default: postCreateView } = await import("../ui/post/create.js");
-        postCreateView();
-      } catch (error) {
-        console.error("Error loading create post view:", error);
-      }
-      break;
+      case "/post/create/":
+        case "/post/create/index.html":
+          console.log("Attempting to load create post view");
+          try {
+            const { default: createPostView } = await import("../ui/post/create.js");
+            createPostView();
+          } catch (error) {
+            console.error("Error loading create post view:", error);
+          }
+          break;
     case "/profile/":
       try {
-        const { default: profileView } = await import("../ui/profile/index.js");
+        const { default: profileView } = await import("../api/profile/read.js");
         profileView();
       } catch (error) {
         console.error("Error loading profile view:", error);
       }
       break;
-    default:
-      try {
-        const { default: notFoundView } = await import("../ui/notFound.js");
-        notFoundView();
-      } catch (error) {
-        console.error("Error loading not found view:", error);
-        document.querySelector('main').innerHTML = '<h1>404 - Page Not Found</h1>';
-      }
+      default:
+        console.log("Attempting to load not found view");
+        try {
+          const { default: notFoundView } = await import("../router/views/notFound.js");
+          notFoundView();
+        } catch (error) {
+          console.error("Error loading not found view:", error);
+          const main = document.querySelector('main');
+          if (main) {
+            main.innerHTML = '<h1>404 - Page Not Found</h1>';
+          } else {
+            console.error("Main element not found");
+          }
+        }
+    }
   }
-}
