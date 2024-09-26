@@ -50,5 +50,16 @@ async function displayPagination(page= 1) {
     console.error("Error fetching profiles or rendering pagination:", error);
   }
 }
+
+async function onLogout() {
+  alert ("You are now logged out")
+  const data = await api.auth.logout()
+  return data; 
+}
+
+const logoutButton = document.getElementById('logoutButton');
+console.log(logoutButton)
+logoutButton.addEventListener('click', onLogout);
+
 displayPagination();
 
