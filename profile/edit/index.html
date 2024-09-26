@@ -38,11 +38,14 @@
             </div>
             <div>
               <label for="profile-avatar">Avatar</label>
-              <input id="profile-avatar" type="file" name="profile-avatar" />
+              <input id="profile-avatar" type="file" name="profile-avatar" accept=".jpg, .jpeg"/>
             </div>
             <div>
               <label for="profile-banner">Banner</label>
-              <input id="profile-banner" type="file" name="profile-banner" />
+              <input id="profile-banner" type="file" name="profile-banner" accept=".jpg, .jpeg"/>
+            </div>
+            <div>
+              <progress id="progress-bar" value="0" max="100" style="display:none;"></progress>
             </div>
             <div>
               <a href="javascript:void(0)" onClick="window.history.back()">Go back</a>
