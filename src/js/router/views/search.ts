@@ -1,7 +1,6 @@
 import { renderProfile } from "@/js/ui/profile/renderUserProfile";
 import { createSearchHTML } from "@/components/search/SearchRender";
 import { searchProfiles } from "@/js/api/profile/search";
-import { loadSearchInput } from "@/js/ui/search/searchInputLoader";
 import { searchParams } from "@/js/utilities/searchParams";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { getUser } from "@/js/utilities/getUser";
@@ -11,7 +10,6 @@ import { createPostHTML } from "@/components/cards/PostCard";
 
 async function loadSearchPage() {
   try {
-    loadSearchInput();
     renderProfile();
     const query = searchParams("q");
     if (!query) return;

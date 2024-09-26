@@ -1,6 +1,5 @@
 import { authGuard } from "@utilities/authGuard";
 import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
-import { onLogout } from "@ui/auth/logout";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
@@ -9,7 +8,6 @@ import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
 async function loadHomePage() {
   try {
-    document.getElementById("logout-btn")?.addEventListener("click", onLogout);
     renderPosts();
     renderProfile();
   } catch (error) {
