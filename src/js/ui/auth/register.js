@@ -16,6 +16,7 @@ export async function onRegister(event) {
   try {
     const response = await register(registerData);
     console.log(response);
+    window.location.href = '/'; // Redirect to home page
   } catch (error) {
     console.error("An error occurred during registration:", error);
     alert(error.message);

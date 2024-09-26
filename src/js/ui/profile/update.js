@@ -1,1 +1,3 @@
-export async function onUpdateProfile(event) {}
+export async function onUpdateProfile(event) {
+    
+}
