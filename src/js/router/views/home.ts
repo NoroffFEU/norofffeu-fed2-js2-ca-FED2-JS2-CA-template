@@ -7,34 +7,50 @@ import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
 async function loadHomePage() {
   try {
-    renderPosts();
+    renderPosts(page);
+    loadPagination();
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function renderPosts() {
+let page = 1;
+let isLoading = false;
+let isLastPage = false;
+
+export async function renderPosts(page: number) {
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
   const user = getUser();
   const postsByUser = (await readPostsByUser(user)) || [];
   const postsFromFollowing = (await readPostsFromFollowing()) || [];
 
   const combinedPosts = [...postsByUser, ...postsFromFollowing];
-
-  combinedPosts.sort((a, b) => {
+  const orderedPosts = combinedPosts.sort((a, b) => {
     return new Date(b.created).getTime() - new Date(a.created).getTime();
   });
+
+  const postsPerPage = 12;
+  const start = (page - 1) * postsPerPage;
+  const end = page * postsPerPage;
+
+  const postsToRender = orderedPosts.slice(start, end);
+
+  console.log("postsToRender", postsToRender);
+
+  isLastPage = postsToRender.length < postsPerPage;
 
   const getFollowingUsers = await getUserProfile();
 
   try {
-    if (!combinedPosts || combinedPosts.length === 0) {
-      const li = document.createElement("li");
-      li.innerHTML =
-        "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
-      postsContainer.appendChild(li);
+    if (!postsToRender || postsToRender.length === 0) {
+      if (page === 1) {
+        const li = document.createElement("li");
+        li.innerHTML =
+          "Your home timeline is empty! Create a post to get started, or follow some users to see their posts.";
+        postsContainer.appendChild(li);
+      }
     } else {
-      combinedPosts.forEach(async (post) => {
+      for (const post of postsToRender) {
         const isFollowing = getFollowingUsers?.find(
           (user) => user.name === post.author.name
         )
@@ -44,7 +60,6 @@ export async function renderPosts() {
         const isUserPost = post.author.name === getUser() ? true : false;
 
         const test = isUserPost ? await creatorLiked(post.id) : false;
-        console.log(post.id, test);
 
         const isLiked = post.reactions[0]?.reactors?.find(
           (user) => user === getUser()
@@ -60,7 +75,7 @@ export async function renderPosts() {
           false
         );
         postsContainer.insertAdjacentHTML("beforeend", postHTML);
-      });
+      }
     }
   } catch (error) {
     console.error(error);
@@ -69,6 +84,30 @@ export async function renderPosts() {
       "Your home timeline is empty! Create a post to get started, or follow some users to see their posts";
     postsContainer.appendChild(li);
   }
+}
+
+async function loadPagination() {
+  const scrollSection = document.querySelector(
+    ".scroll-section"
+  ) as HTMLElement;
+
+  scrollSection.addEventListener("scroll", async (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target as HTMLElement;
+
+    if (
+      scrollTop + clientHeight >= scrollHeight - 100 &&
+      !isLoading &&
+      !isLastPage
+    ) {
+      isLoading = true;
+      page += 1;
+      console.log(`Loading page ${page}...`);
+
+      await renderPosts(page);
+
+      isLoading = false;
+    }
+  });
 }
 
 authGuard();
