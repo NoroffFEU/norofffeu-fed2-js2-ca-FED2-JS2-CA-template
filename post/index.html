@@ -6,8 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href=".././src/css/style.css" />
   </head>
   <body>
     <h1>Post Page</h1>
+    <main class="main-content">
+      <h1>Welcome to BuzzNet</h1>
+      <p>Discover, connect, and share your ideas!</p>
+
+      <!-- Example Post Card with Image -->
+      <div class="post-card">
+         <a href="posts/page.html">
+          <div class="post-header">
+              <img src="./public/images/photo-1515021477923-4d707a1cd1ba.avif" alt="User Profile">
+              <div class="username">John Doe</div>
+          </div>
+         </a>
+         <h2>GYm tips</h2>
+          <div class="post-content">
+              which method is the best when going to the gym
+          </div>
+          <!-- Single Image -->
+          <div class="post-image">
+              <img src="./public/images/photo-1534438327276-14e5300c3a48.avif" alt="Post Image">
+          </div>
+          <!-- Like Button and Comment Section -->
+          <div class="post-actions">
+              <button class="like-button">👍 Like</button>
+              <button class="like-button">Edit</button>
+              <button class="like-button">Delete</button>
+          </div>
+          <div class="comment-section">
+              <input type="text" class="comment-input" placeholder="Add a comment...">
+              <button class="comment-button">Comment</button>
+              <div class="comments-list">
+                  <div class="comment-item">User1: Great post!</div>
+                  <div class="comment-item">User2: I agree with you!</div>
+              </div>
+          </div>
+      </div>
+
+    
+  </main>
   </body>
 </html>

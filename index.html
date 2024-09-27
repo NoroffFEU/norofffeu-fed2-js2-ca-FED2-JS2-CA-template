@@ -78,10 +78,10 @@
         </div>
 
         <div class="button-container">
-            <a href="./post/create/index.html" class="create-btn" id="newpost-btn" title="add a post">➕  Post</a>
-            <a href="./auth/login/index.html" class="login-btn">Login</a>
-            <a href="./auth/register/index.html" class="register-btn">Register</a>
-            <a href="#" class="register-btn">Log out</a>
+            <a href="./post/create/" class="create-btn" id="newpost-btn" title="add a post">➕  Post</a>
+            <a href="./auth/login/" class="login-btn">Login</a>
+            <a href="./auth/register/" class="register-btn">Register</a>
+            <a href="#" class="register-btn" id="logOut">Log out</a>
         </div>
     </nav>
 
@@ -109,6 +109,8 @@
             <!-- Like Button and Comment Section -->
             <div class="post-actions">
                 <button class="like-button">👍 Like</button>
+                <button class="like-button">Edit</button>
+                <button class="like-button">Delete</button>
             </div>
             <div class="comment-section">
                 <input type="text" class="comment-input" placeholder="Add a comment...">
@@ -119,42 +121,8 @@
                 </div>
             </div>
         </div>
-
-        <!-- Example Post with Multiple Images -->
-        <div class="post-card">
-            <div class="post-header">
-                <img src="./public/images/shirwacProfile.avif" alt="User Profile">
-                <div class="username">Shirwac</div>
-            </div>
-            <h2>My expriences in Japan</h2>
-            <div class="post-content">
-                Just got back from Japan and I’m still buzzing from how incredible it was! Here’s a quick breakdown of some of the things that really stood out to me:
-                <br><br>
-                The balance of old and new: One minute you’re in the middle of Tokyo with its futuristic skyscrapers and tech, then you take a short ride and find yourself at a peaceful shrine or wandering through a bamboo forest. The mix of ancient traditions with modern life is so seamless.
-                <br><br>
-                Food!!: Honestly, the food alone is worth the trip. Even a basic meal at a train station or convenience store was delicious. Ramen, sushi, yakitori… every meal was a winner.
-                <br><br>
-                Public transport is next-level: The trains are incredibly punctual (like, down to the second) and the Shinkansen is wild. Traveling long distances in comfort and speed – the U.S. could really learn something from this. Plus, everything was organized, easy to navigate even as a tourist.
-            </div>
-            <!-- Multiple Images -->
-            <div class="post-image-grid">
-                <img src="./public/images/weather.avif" alt="Image 1">
-                <img src="./public/images/transportation japan.avif" alt="Image 2">
-                <img src="./public/images/japan food.avif" alt="Image 3">
-            </div>
-            <!-- Like Button and Comment Section -->
-            <div class="post-actions">
-                <button class="like-button">👍 Like</button>
-            </div>
-            <div class="comment-section">
-                <input type="text" class="comment-input" placeholder="Add a comment...">
-                <button class="comment-button">Comment</button>
-                <div class="comments-list">
-                    <div class="comment-item">User3: Sounds amazing!</div>
-                    <div class="comment-item">User4: I want to visit Japan!</div>
-                </div>
-            </div>
-        </div>
+        <a href="/post/"> <button style="margin-left: 50%;">View more posts</button>  </a>
+      
     </main>
 </body>
 </html>

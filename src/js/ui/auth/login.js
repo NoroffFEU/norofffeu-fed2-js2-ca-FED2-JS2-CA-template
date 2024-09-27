@@ -9,7 +9,7 @@ export async function onLogin(event) {
     try {
         const result = await login({ email, password });
         alert('Login successful');
-        window.location.href = "../../index";
+        window.location.href = "../../";
         // Handle successful login (e.g., redirect, store token, etc.)
     } catch (error) {
         alert('Login failed: ' + error.message);
