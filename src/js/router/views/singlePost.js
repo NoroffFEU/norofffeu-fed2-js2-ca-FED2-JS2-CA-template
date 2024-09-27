@@ -34,34 +34,60 @@ export async function displaySinglePost(){
 async function submitComment (postId){
     const commentBody = document.getElementById("commentInput").value.trim();
     if(!commentBody){
-        console.log("Comment acannot be empty");
+        console.log("Comment cannot be empty");
         return;
     }
     try{
         const response = await api.post.CommentOnPost(postId, commentBody)
         if(response){
-            console.log("comment successfully posted");
-            displayComments(postId);
+            return
         }
     }catch(error){
         console.log(`failed to post comment: ${error.message}`);
     }
 }
+
+const urlParams = new URLSearchParams(window.location.search)
+const postId =urlParams.get('id')
 document.getElementById("commentForm").addEventListener("submit", (event) => {
     event.preventDefault()
-    const urlParams = new URLSearchParams(window.location.search)
-    const postId =urlParams.get('id')
-    submitComment(postId)
     displayComments(postId)
+    submitComment(postId)
 })
-async function displayComments(postId){
-    try{
-        const response = await api.post.CommentOnPost(postId)
+let currentPage = 1;
+const commentsPerPage = 10;
+let totalCommentsLoaded = 0;
+let totalComments;
+let totalPages = 1;
+let isLoading = false;
+
+const fetchComments = async (postId, page = 1, limit = 10) => {
+    try {
+        const response = await api.post.getComments(postId, { page, limit });
         console.log(response)
-        const comments = response.comments
+        return response.data.comments
+    } catch (error) {
+        console.error("Error fetching comments:", error);
+        return [];
+    }
+};
+
+async function displayComments(postId, page = 1){
+    try{
+        if (isLoading || page > totalPages) {
+            isLoading = true;
+            return;
+        }
+        const comments = await fetchComments(postId, page, commentsPerPage);
+        console.log(comments)
+        if (comments.length === 0) {
+            isLoading = false;
+            return;
+        }
+         totalComments = comments.data._count.comments
         const commentsList = document.getElementById('commentsList')
-        commentsList.innerHTML = ""
-    
+        // commentsList.innerHTML = ""
+
         comments.forEach((comment) => {
             const commentElement = document.createElement('div')
             commentElement.classList.add("comment")
@@ -70,9 +96,19 @@ async function displayComments(postId){
             `
             commentsList.appendChild(commentElement);
         })
+        totalCommentsLoaded += comments.length;
+        totalPages = Math.ceil(comments.data/ commentsPerPage);
+        isLoading = false;
     }catch(error){
-        console.error("Error fetching comments:", error);
+        console.error("Error fetching comments:", error.message);
         commentsList.innerHTML = "<p>Failed to load comments.</p>";
+        isLoading = false;
     }
 }
+window.addEventListener("scroll", () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoading) { 
+        currentPage++;
+        displayComments(postId, currentPage);
+    }
+});
 displaySinglePost()

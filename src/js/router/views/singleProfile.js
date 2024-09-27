@@ -12,17 +12,8 @@ export async function getSingleProfile(){
             console.log("Error: Profile Name not found in the URL", profileName);
             return;
         }
-
         const profile = await api.profile.readSingleProfile(profileName, {_posts:true})
-        console.log(profile)
-
-
-        // const {user} = getCurrentUser();
-        // const isAuthor = profileName.data.author && profileName.data.author.name === user.name;
-        // console.log(isAuthor)
-        
         const singleProfileCon = document.getElementById('detailProfileCon');
-
         const profileNameHTML = `
         <div class="singleprofileName">
             <h2>${profile.data.posts}</h2>

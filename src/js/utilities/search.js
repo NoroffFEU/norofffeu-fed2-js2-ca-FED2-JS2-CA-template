@@ -11,7 +11,6 @@ export async function searchPosts(){
     }
     try{
         const response   = await api.search.read(query);
-        console.log(response)
         const postData = response.data
 
     if (postData && postData.length > 0) {

@@ -212,7 +212,7 @@ export default class NoroffAPI {
         requestBody.replyToId = replyToId;
       }
 
-      const response = await fetch(`${this.apiSocialPath}/${id}/?_comments=true`,{
+      const response = await fetch(`${this.apiSocialPath}/${id}/comment`,{
         headers: customHeaders,
         method: "post",
         body: JSON.stringify(requestBody)
@@ -223,10 +223,22 @@ export default class NoroffAPI {
         return data 
       }
       throw new Error("Could not comment post");
+    },
+    getComments: async (id) => {
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+      const response = await fetch(`${this.apiSocialPath}/${id}/?_comments=true`,{
+        headers: customHeaders,
+        method: "get",
+      })
+      if(response){
+        const data= await response.json()
+        return data 
+      }
+      throw new Error("Could not comment post");
     }
-
   };
-
+ 
   search = {
     read: async (query) => {
       const apiKey = await initializeAPI();

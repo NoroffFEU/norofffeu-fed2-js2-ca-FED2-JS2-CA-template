@@ -30,11 +30,17 @@ body {
   width: 100%;
 }
 
-#detailPostCon{
+#detailPostCon, #commentSection{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 1rem;
+}
+#commentForm textarea{
+  display: flex;
+  width: 200px;
+  height: 60px;
+
 }
 .singlePost{
   width: 20rem;
