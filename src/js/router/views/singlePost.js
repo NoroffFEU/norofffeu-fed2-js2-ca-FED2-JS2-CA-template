@@ -64,7 +64,7 @@ let isLoading = false;
 const fetchComments = async (postId, page = 1, limit = 10) => {
     try {
         const response = await api.post.getComments(postId, { page, limit });
-        console.log(response)
+        totalComments = response.data._count.comments
         return response.data.comments
     } catch (error) {
         console.error("Error fetching comments:", error);
@@ -84,9 +84,8 @@ async function displayComments(postId, page = 1){
             isLoading = false;
             return;
         }
-         totalComments = comments.data._count.comments
         const commentsList = document.getElementById('commentsList')
-        // commentsList.innerHTML = ""
+        commentsList.innerHTML = ""
 
         comments.forEach((comment) => {
             const commentElement = document.createElement('div')
@@ -97,7 +96,7 @@ async function displayComments(postId, page = 1){
             commentsList.appendChild(commentElement);
         })
         totalCommentsLoaded += comments.length;
-        totalPages = Math.ceil(comments.data/ commentsPerPage);
+        totalPages = Math.ceil(totalComments/ commentsPerPage);
         isLoading = false;
     }catch(error){
         console.error("Error fetching comments:", error.message);
