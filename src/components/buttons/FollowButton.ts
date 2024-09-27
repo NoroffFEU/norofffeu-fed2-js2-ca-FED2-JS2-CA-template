@@ -1,3 +1,5 @@
+// This component is a button that allows the user to follow or unfollow a user
+
 import { toggleFollowUser } from "@api/profile/follow";
 
 const followButtonTemplate = document.createElement("template");

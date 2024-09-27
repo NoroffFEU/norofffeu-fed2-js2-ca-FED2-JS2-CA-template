@@ -2,7 +2,7 @@ import { readPosts } from "@/js/api/post/read";
 import { AllPostsResponse, Meta } from "@/types/types";
 import { getUser } from "@/js/utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
-import { createPostHTML } from "@/components/cards/PostCard";
+import { createPostHTML } from "@/components/cards/PostCardTemplate";
 
 let page = 1;
 let isLoading = false;

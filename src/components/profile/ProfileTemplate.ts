@@ -1,7 +1,7 @@
 import { ProfileResponse } from "@/types/types";
 import { FollowButton } from "@/components/buttons/FollowButton";
 import { EditProfile } from "@/components/buttons/EditProfile";
-import { createPostHTML } from "../cards/PostCard";
+import { createPostHTML } from "../cards/PostCardTemplate";
 import { readPost } from "@/js/api/post/read";
 import { getUser } from "@/js/utilities/getUser";
 

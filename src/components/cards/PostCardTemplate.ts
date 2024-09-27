@@ -3,7 +3,6 @@ import { FollowButton } from "@/components/buttons/FollowButton";
 import { LikeButton } from "@/components/buttons/LikeButton";
 import { DeleteButton } from "@/components/buttons/DeleteButton";
 import { FormattedDate } from "@/components/post/FormattedDate";
-import { PostButtons } from "@/components/post/PostButtons";
 import { CommentInput } from "@/components/post/CommentInput";
 import { CommentTemplate } from "@/components/post/CommentTemplate";
 import { getTime } from "@/js/utilities/getTime";
@@ -32,10 +31,6 @@ export function createPostHTML(
 
   if (!customElements.get("formatted-date")) {
     customElements.define("formatted-date", FormattedDate);
-  }
-
-  if (!customElements.get("post-buttons")) {
-    customElements.define("post-buttons", PostButtons);
   }
 
   if (!customElements.get("comment-input")) {
@@ -154,7 +149,6 @@ export function createPostHTML(
                      new Date(a.created).getTime()
                  )
                  .map((comment) => {
-                   console.log(comment);
                    return `
                    <comment-template 
                       data-comment-id="${comment.id}" 

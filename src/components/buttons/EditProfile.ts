@@ -1,3 +1,5 @@
+// This component is a button that allows the user to edit their profile
+
 const editProfileTemplate = document.createElement("template");
 
 editProfileTemplate.innerHTML = `

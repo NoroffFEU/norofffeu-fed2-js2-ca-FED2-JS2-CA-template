@@ -1,3 +1,5 @@
+// This component is a button that allows the user to logout
+
 const logoutButtonTemplate = document.createElement("template");
 
 logoutButtonTemplate.innerHTML = `

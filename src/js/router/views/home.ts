@@ -1,7 +1,7 @@
 import { readPostsByUser, readPostsFromFollowing } from "@api/post/read";
 import { getUser } from "@utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
-import { createPostHTML } from "@/components/cards/PostCard";
+import { createPostHTML } from "@/components/cards/PostCardTemplate";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
 let page = 1;

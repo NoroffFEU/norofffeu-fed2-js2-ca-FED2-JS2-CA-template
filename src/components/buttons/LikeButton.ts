@@ -1,3 +1,5 @@
+// This component is a button that allows the user to like or unlike a post
+
 import { reactToPost } from "@/js/api/post/react";
 
 const likeButtonTemplate = document.createElement("template");

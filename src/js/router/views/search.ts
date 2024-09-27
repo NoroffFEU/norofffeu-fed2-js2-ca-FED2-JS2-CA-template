@@ -5,7 +5,7 @@ import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { getUser } from "@/js/utilities/getUser";
 import { SectionHeader } from "@/components/search/SectionHeader";
 import { searchPosts } from "@/js/api/post/search";
-import { createPostHTML } from "@/components/cards/PostCard";
+import { createPostHTML } from "@/components/cards/PostCardTemplate";
 
 async function loadSearchPage() {
   try {

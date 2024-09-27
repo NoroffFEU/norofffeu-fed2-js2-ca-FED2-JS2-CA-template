@@ -1,6 +1,6 @@
 import { searchParams } from "@/js/utilities/searchParams";
 import { readPost } from "@/js/api/post/read";
-import { createPostHTML } from "@/components/cards/PostCard";
+import { createPostHTML } from "@/components/cards/PostCardTemplate";
 import { getUser } from "@/js/utilities/getUser";
 import { getUserProfile } from "@/js/utilities/getUserProfile";
 

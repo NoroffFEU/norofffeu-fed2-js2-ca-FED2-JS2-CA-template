@@ -1,3 +1,5 @@
+// This component is a button that allows the user to delete a post
+
 import { deletePost } from "@/js/api/post/delete";
 
 const deleteButtonTemplate = document.createElement("template");
