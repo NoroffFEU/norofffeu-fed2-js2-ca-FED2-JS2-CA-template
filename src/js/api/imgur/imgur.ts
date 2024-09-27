@@ -13,6 +13,10 @@ export async function uploadImage(image: File) {
       body: formData,
     });
 
+    if (!response.ok) {
+      throw new Error("Error uploading image");
+    }
+
     const data = await response.json();
 
     return data.data.link;

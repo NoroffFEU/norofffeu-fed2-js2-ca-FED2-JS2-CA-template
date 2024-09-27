@@ -2,7 +2,6 @@ import {
   CreatePostRequest,
   APIError,
   PostResponse,
-  PostID,
   CommentResponse,
   CommentRequest,
 } from "@/types/types";
@@ -34,6 +33,11 @@ export async function createPost({
       throw new Error(errorMessage);
     }
     const { data }: { data: PostResponse } = await response.json();
+
+    if (!data) {
+      throw new Error("Error creating post");
+    }
+
     console.log(data);
     return data;
   } catch (error) {
@@ -59,6 +63,11 @@ export async function createComment({ body, id, replyToId }: CommentRequest) {
       throw new Error(errorMessage);
     }
     const { data }: { data: CommentResponse } = await response.json();
+
+    if (!data) {
+      throw new Error("Error creating comment");
+    }
+
     console.log(data);
     return data;
   } catch (error) {

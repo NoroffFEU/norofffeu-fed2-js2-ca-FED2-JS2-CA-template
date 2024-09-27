@@ -1,9 +1,4 @@
-import {
-  APIError,
-  Params,
-  PostResponse,
-  SearchPostsResponse,
-} from "@/types/types";
+import { APIError, Params, PostResponse } from "@/types/types";
 import { API_SOCIAL } from "@api/constants";
 import { headers } from "@api/headers";
 
@@ -28,6 +23,7 @@ export async function searchPosts(
     }
 
     const { data }: { data: PostResponse[] } = await response.json();
+
     console.log(data);
     return data;
   } catch (error) {

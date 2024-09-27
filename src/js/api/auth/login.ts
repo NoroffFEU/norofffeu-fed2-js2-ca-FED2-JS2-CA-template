@@ -21,6 +21,11 @@ export async function login({ email, password }: APILoginRequest) {
       throw new Error(errorMessage);
     }
     const { data }: { data: APILoginResponse } = await response.json();
+
+    if (!data) {
+      throw new Error("Error logging in user");
+    }
+
     const { accessToken: token, name } = data;
     localStorage.token = token;
     localStorage.userName = name;

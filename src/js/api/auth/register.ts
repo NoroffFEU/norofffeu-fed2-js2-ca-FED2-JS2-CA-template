@@ -26,6 +26,11 @@ export async function register({ name, email, password }: APIRegisterRequest) {
       throw new Error(errorMessage);
     }
     const { data }: { data: APIRegisterResponse } = await response.json();
+
+    if (!data) {
+      throw new Error("Error registering user");
+    }
+
     return data;
   } catch (error) {
     if (error instanceof Error) {
