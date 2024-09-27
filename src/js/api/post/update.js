@@ -6,18 +6,18 @@ export async function updatePost(id, { title, content }) {
     
     try {
         const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
-        headers: headers(),
-        method: "PUT",
-        body: postBody,
+            headers: headers(),
+            method: "PUT",
+            body: postBody,
         });
     
         if (response.ok) {
-        const responseBody = await response.json();
-        return responseBody.data;
+            const responseBody = await response.json();
+            return responseBody.data;
 
         } else {
-        const errorData = await response.json(); // Handle error response from API
-        throw new Error(errorData.message || "Uh oh, something went wrong");
+            const errorData = await response.json(); // Handle error response from API
+            throw new Error(errorData.message || "Uh oh, something went wrong");
         }
     
     } catch (error) {

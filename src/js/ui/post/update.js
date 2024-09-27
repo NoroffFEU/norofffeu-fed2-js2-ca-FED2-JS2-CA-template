@@ -1,9 +1,10 @@
 import { updatePost } from "../../api/post/update.js";
-import { fetchPostById } from "../../api/post/getPost.js";
+import { readPost } from "../../api/post/read.js";
 
-const postId = new URLSearchParams(window.location.search).get("id");
+const urlParams = new URLSearchParams(window.location.search);
+const postIdString = urlParams.get("id");
 
-export async function onUpdatePost(event) {
+async function onSubmit(event) {
     event.preventDefault();
 
     const title = document.getElementById("title").value;
@@ -15,11 +16,21 @@ export async function onUpdatePost(event) {
     };
     
     try {
-        const response = await updatePost(postId, postData);
+        const response = await updatePost(postIdString, postData);
         console.log(response);
         window.location.href = "/post/?id=" + response.id;
     } catch (error) {
         console.error("An error occurred during post update:", error);
         alert(error.message);
     }
+}
+
+export async function onUpdatePost(event) {
+
+    const fetchPost = await readPost(postIdString);
+    document.getElementById("content").textContent = fetchPost.body;
+    document.getElementById("title").value = fetchPost.title;
+
+    const form = document.forms.editPost;
+    form.addEventListener("submit", onSubmit);
 }

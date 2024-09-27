@@ -1,10 +1,5 @@
-import { fetchPostById, displayPost } from "../../api/post/getPost.js";
+import { onReadPost } from "../../ui/post/read";
+
+onReadPost()
 
 alert("Single Post Page");
-
-async function initPostPage() {
-    fetchPostById()
-    displayPost()
-}
-
-initPostPage();
