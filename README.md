@@ -1,6 +1,6 @@
 ## Popwall
 
-<img src="./src/assets/logo.png" ait="Popwall" style="width: 80%;">
+<img src="./src/assets/logo.png" ait="Popwall" style="width: 50%;">
 
 This project presents a client-side social media application that allows users to perform core CRUD (Create, Read, Update, Delete) operations on their posts.
   [Live site](https://fed2-js2-ca-ukonuidika.netlify.app/)
