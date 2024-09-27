@@ -187,8 +187,6 @@ export default class NoroffAPI {
         tags: tagsArray,
         media: formattedMedia
       };
-
-
       const response = await fetch(this.apiSocialPath, {
         method: "post",
         headers: customHeaders,
@@ -203,6 +201,30 @@ export default class NoroffAPI {
 
       throw new Error("Could not create post");
     },
+    CommentOnPost: async (id, commentBody, replyToId = null) => {
+      const apiKey = await initializeAPI();
+      const customHeaders = headers(apiKey);
+
+      const requestBody = {
+        body: commentBody,
+      };
+      if(replyToId){
+        requestBody.replyToId = replyToId;
+      }
+
+      const response = await fetch(`${this.apiSocialPath}/${id}/?_comments=true`,{
+        headers: customHeaders,
+        method: "post",
+        body: JSON.stringify(requestBody)
+      })
+
+      if(response){
+        const data= await response.json()
+        return data 
+      }
+      throw new Error("Could not comment post");
+    }
+
   };
 
   search = {

@@ -6,7 +6,3 @@ export async function onLogout() {
     const data = await api.auth.logout()
     return data;
 }
-
-// const logoutButton = document.getElementById('logoutButton');
-// console.log(logoutButton)
-// logoutButton.addEventListener('click', onLogout);
