@@ -1,12 +1,16 @@
 import { onLogout } from "../auth/logout";
 
 export function setLogoutListener() {
-  const logoutButtons = document.querySelectorAll("#logout");
+  const logoutButton1 = document.querySelector("#logout");
+  const logoutButton2 = document.querySelector("#mobileLogout");
 
-  logoutButtons.forEach((button) => {
-    button.addEventListener("click", function (event) {
-      event.preventDefault();
-      onLogout();
-    });
+  logoutButton1.addEventListener("click", function (event) {
+    event.preventDefault();
+    onLogout();
+  });
+
+  logoutButton2.addEventListener("click", function (event) {
+    event.preventDefault();
+    onLogout();
   });
 }
