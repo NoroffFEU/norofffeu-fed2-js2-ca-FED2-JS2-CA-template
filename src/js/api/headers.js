@@ -13,6 +13,5 @@ export function headers() {
     headers.append("Authorization", "Bearer " + localStorage.getItem("token"));
   }
 
-
   return headers;
 }

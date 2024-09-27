@@ -1,7 +1,8 @@
-import { API_SOCIAL_POSTS } from "../../config/api";
+import { API_SOCIAL_POSTS } from "../constants";
+import { headers } from "../headers";
 
-export async function updatePost(id, { title, body, tags, media }) {
-    const postBody = JSON.stringify({ title, body, tags, media });
+export async function updatePost(id, { title, content }) {
+    const postBody = JSON.stringify({ title, body: content });
     
     try {
         const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
@@ -13,6 +14,7 @@ export async function updatePost(id, { title, body, tags, media }) {
         if (response.ok) {
         const responseBody = await response.json();
         return responseBody.data;
+
         } else {
         const errorData = await response.json(); // Handle error response from API
         throw new Error(errorData.message || "Uh oh, something went wrong");
