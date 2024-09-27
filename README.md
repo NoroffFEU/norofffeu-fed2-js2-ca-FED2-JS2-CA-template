@@ -8,7 +8,7 @@ This project presents a client-side social media application that allows users t
 ##  Description:
 This project presents a client-side social media application that allows users to perform core CRUD (Create, Read, Update, Delete) operations on their posts. Along with these essential features, the app includes user authentication and interactive functionalities like following/unfollowing users, commenting, and reacting to posts using emojis. 
 ##  Overall:
-The website effectively showcases my skills and profeciency with Frontend technologies in a professional and engaging manner.
+The website effectively showcases my skills and profeciency with Front-end technologies in a professional and engaging manner.
 
 ## Built With
 - [HTML](https://html.com)
