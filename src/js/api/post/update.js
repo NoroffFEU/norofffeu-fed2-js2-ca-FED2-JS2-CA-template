@@ -1,6 +1,20 @@
 import { API_SOCIAL_POSTS } from "../constants";
 import { headers } from "../headers";
 
+/**
+ *
+ * @param {string} id - id of the posts that will be updated
+ * @param {object} postInfo - object, that contains the post info {title, body, tags, media}
+ * @param {string} postInfo.title - title of the post
+ * @param {string} postInfo.body - text of the post
+ * @param {Array} postInfo.tags - array of strings with the tags of the posts - ["tagOne", "tagTwo"]
+ * @param {object} postInfo.media  - object with image information in it - {url: "string", alt: "string"}
+ * @example
+ * ```js
+ * updatePost("709", {"Title", "Text of post", ["tagOne", "TagTwo"], {url: "string", alt: "string"}})
+ * ```
+ */
+
 export async function updatePost(id, { title, body, tags, media }) {
   const bodyElement = {
     title: title,

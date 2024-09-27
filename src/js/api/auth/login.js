@@ -1,5 +1,15 @@
 import { API_AUTH_LOGIN } from "../constants";
 import { headers } from "../headers";
+/**
+ * Will login user - and store information in local storage - if email and password are correct.
+ * @param {object} userinfo = object that contains email and password.
+ * @param {string} email - user email for login.
+ * @param {string} password - user password for login.
+ * @example
+ * ```js
+ * login({email:"email@gmail.com", password:"password123"})
+ * ```
+ */
 
 export async function login({ email, password }) {
   const body = {

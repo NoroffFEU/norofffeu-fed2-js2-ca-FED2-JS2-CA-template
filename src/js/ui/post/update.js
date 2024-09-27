@@ -1,5 +1,13 @@
 import { updatePost } from "../../api/post/update";
 
+/**
+ * Gets form data - then sends the information to the API function
+ * @param {object} event
+ * @example
+ * ```js
+ * form.addEventListener("submit", onUpdatePost)
+ * ```
+ */
 export async function onUpdatePost(event) {
   event.preventDefault();
   const id = JSON.parse(localStorage.getItem("postID"));

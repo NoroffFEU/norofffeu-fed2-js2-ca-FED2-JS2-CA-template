@@ -1,5 +1,14 @@
 import { login } from "../../api/auth/login";
 
+/**
+ * Fetch login form data and run the fetch call aka. login
+ * @param {object} event
+ * @example
+ * ```js
+ * form.addEventListener("submit", onLogin)
+ * ```
+ */
+
 export async function onLogin(event) {
   console.log(event);
 

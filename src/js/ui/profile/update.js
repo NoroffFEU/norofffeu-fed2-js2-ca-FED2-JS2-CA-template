@@ -1,5 +1,13 @@
 import { updateProfile } from "../../api/profile/update";
 
+/**
+ * Gets form data - then sends the information to the API function
+ * @param {object} event
+ * @example
+ * ```js
+ * form.addEventListener("submit", onUpdateProfile)
+ * ```
+ */
 export async function onUpdateProfile(event) {
   event.preventDefault();
 

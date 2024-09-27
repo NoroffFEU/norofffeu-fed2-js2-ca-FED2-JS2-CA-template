@@ -6,6 +6,13 @@ import { authGuard } from "../../utilities/authGuard";
 authGuard();
 setLogoutListener();
 
+/**
+ * fetches the posts form the front page and creates the HTML for it.
+ * @example
+ * ```js
+ * readHomePagePosts()
+ * ```
+ */
 const readHomePagePosts = async () => {
   const posts = await readPosts();
   console.log("All posts: ", posts);

@@ -5,6 +5,14 @@ const id = JSON.parse(localStorage.getItem("postID"));
 const userinfo = JSON.parse(localStorage.getItem("userInfo"));
 const username = userinfo.name;
 
+/**
+ * fetches the single post - and creates the html for it.
+ *
+ * @example
+ * ```js
+ * showPost()
+ * ```
+ */
 const showPost = async () => {
   const post = await readPost(id);
   const tags = post.tags;

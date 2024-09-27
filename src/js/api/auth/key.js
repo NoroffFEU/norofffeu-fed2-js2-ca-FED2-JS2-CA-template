@@ -1,11 +1,20 @@
 import { API_AUTH_KEY } from "../constants";
 import { headers } from "../headers";
 
-export async function getKey(name) {
+/**
+ * This will get the API KEY - and store it in local storage
+ * @example
+ * ```js
+ * //use this function to fetch API KEY
+ * getKey()
+ * const key = JSON.parse(localStorage.getItem("API KEY"))
+ * ```
+ */
+
+export async function getKey() {
   const body = {
     name: "Tompe Talk",
   };
-
   try {
     const response = await fetch(API_AUTH_KEY, {
       method: "POST",

@@ -1,5 +1,12 @@
 import { register } from "../../api/auth/register";
-
+/**
+ * Fetch Register form data and run the fetch call aka. Register a user
+ * @param {object} event
+ * @example
+ * ```js
+ * form.addEventListener("submit", onRegister)
+ * ```
+ */
 export async function onRegister(event) {
   event.preventDefault();
 

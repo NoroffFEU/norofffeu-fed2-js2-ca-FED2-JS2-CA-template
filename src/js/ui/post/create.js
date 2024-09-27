@@ -1,5 +1,13 @@
 import { createPost } from "../../api/post/create";
 
+/**
+ * gets the form data - and sends in the data to create a post.
+ * @param {object} event
+ * @example
+ * ```js
+ * form.addEventListener("submit", onCreatePost)
+ * ```
+ */
 export async function onCreatePost(event) {
   event.preventDefault();
 

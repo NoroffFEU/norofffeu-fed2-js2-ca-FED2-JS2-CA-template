@@ -13,6 +13,14 @@ authGuard();
 
 setLogoutListener();
 
+/**
+ * Fetches the logged in user info and Creates the HTML for profile page
+ *
+ * @example
+ * ```js
+ * readProfileInfo()
+ * ```
+ */
 const readProfileInfo = async () => {
   const username = JSON.parse(localStorage.getItem("userInfo"));
   const data = await readProfile(username.name);
