@@ -1,10 +1,14 @@
 import { readPosts } from "../../api/post/read.js";
+import { deletePost } from "../../api/post/delete.js"; // Add this import
 
 export async function displayPosts() {
+  console.log("displayPosts function called");
   try {
     const postsContainer = document.querySelector("#posts-container");
+    console.log("Posts container element:", postsContainer);
+    
     if (!postsContainer) {
-      console.error("Posts container not found");
+      console.error("Posts container not found. Make sure your HTML has an element with id 'posts-container'");
       return;
     }
 
@@ -18,6 +22,9 @@ export async function displayPosts() {
 
     const postsHTML = posts.map(createPostElement).join('');
     postsContainer.innerHTML = postsHTML;
+
+    // Add event listener for delete buttons
+    postsContainer.addEventListener('click', handleDelete);
   } catch (error) {
     console.error("Error displaying posts:", error);
   }
@@ -33,9 +40,24 @@ function createPostElement(post) {
       <p>Tags: ${post.tags.join(', ')}</p>
       <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
       <a href="/post/edit/index.html?id=${post.id}" class="edit-post-button">Edit</a>
+      <button class="delete-post-button" data-post-id="${post.id}">Delete</button>
     </article>
   `;
 }
 
-// Export displayPosts as the default
+async function handleDelete(event) {
+  if (event.target.classList.contains('delete-post-button')) {
+    const postId = event.target.dataset.postId;
+    if (confirm('Are you sure you want to delete this post?')) {
+      try {
+        await deletePost(postId);
+        await displayPosts(); // Refresh the post list
+      } catch (error) {
+        console.error('Error deleting post:', error);
+        alert('Failed to delete post. Please try again.');
+      }
+    }
+  }
+}
+
 export default displayPosts;
