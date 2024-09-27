@@ -51,7 +51,7 @@ export function createPostHTML(
   }
 
   return `
-  <article class="post" data-post-id="${post.id}" >
+  <li class="post" data-post-id="${post.id}" >
     <div class="post__header">
         <div class="post__header__info" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <card-profile 
@@ -182,6 +182,6 @@ export function createPostHTML(
         `
     }
     
-  </article>
+  </li>
     `;
 }
