@@ -1,6 +1,7 @@
 import { ProfileResponse } from "@/types/types";
 import { ProfileSearch } from "@/components/search/ProfileSearch";
 import { FollowButton } from "@/components/buttons/FollowButton";
+
 export function createSearchHTML(
   profile: ProfileResponse,
   isFollowing: boolean,
