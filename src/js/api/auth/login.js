@@ -1,4 +1,5 @@
 import { API_AUTH_LOGIN } from "../constants.js";
+// import { API_AUTH_KEY } from "../constants.js"; ??
 import { headers } from "../headers.js";
 
 export async function login({ email, password }) {
@@ -10,8 +11,8 @@ export async function login({ email, password }) {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      const { accessToken: token, ...user } = data;
+      const body = await response.json();
+      const { accessToken: token, ...user } = body.data;
 
       console.log(token);
 
@@ -19,7 +20,7 @@ export async function login({ email, password }) {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      return data;
+      return body.data;
     } else {
       const errorData = await response.json(); // Handle error response from API
       throw new Error(errorData.message || "Uh oh, something went wrong");

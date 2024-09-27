@@ -2,8 +2,8 @@ import { API_SOCIAL_POSTS } from "../constants.js";
 import { headers } from "../headers.js";
 
 
-export async function createPost({ title, body }) {
-    const postBody = JSON.stringify({ title, body });
+export async function createPost({ title, content }) {
+    const postBody = JSON.stringify({ title, body: content });
     
     try {
         const response = await fetch(API_SOCIAL_POSTS, {
@@ -13,8 +13,8 @@ export async function createPost({ title, body }) {
         });
     
         if (response.ok) {
-        const data = await response.json();
-        return data;
+        const responseBody = await response.json();
+        return responseBody.data;
         } else {
         const errorData = await response.json(); // Handle error response from API
         throw new Error(errorData.message || "Uh oh, something went wrong");

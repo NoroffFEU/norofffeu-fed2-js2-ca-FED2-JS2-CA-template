@@ -9,5 +9,10 @@ export function headers() {
 
   headers.append("Content-Type", "application/json");
 
+  if (localStorage.getItem("token")) {
+    headers.append("Authorization", "Bearer " + localStorage.getItem("token"));
+  }
+
+
   return headers;
 }

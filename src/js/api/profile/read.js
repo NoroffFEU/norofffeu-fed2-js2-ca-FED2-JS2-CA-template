@@ -3,9 +3,6 @@ import { headers } from "../headers";
 
 
 export async function readProfile(username) {
-
-    const username = localStorage.getItem('name');
-
     try {
         const response = await fetch(`${API_SOCIAL_PROFILES}/${username}`, {
             method: 'GET',

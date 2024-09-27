@@ -5,20 +5,16 @@ export async function onCreatePost(event) {
 
   const title = document.getElementById('title').value;
   const content = document.getElementById('content').value;
-//   const tags = document.getElementById('tags').value;
-//   const media = document.getElementById('media').value;
 
   const postData = {
     title: title,
     content: content,
-    // tags: tags,
-    // media: media,
   };
 
   try {
     const response = await createPost(postData);
     console.log(response);
-    window.location.href = '/';
+    window.location.href = '/post/?id=' + response.id;
   } catch (error) {
     console.error('An error occurred during post creation:', error);
     alert(error.message);
