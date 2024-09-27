@@ -19,7 +19,6 @@ async function loadExplorePage() {
 
 export async function renderAllPosts() {
   const postsContainer = document.getElementById("posts") as HTMLUListElement;
-
   const getAllPosts = (await readPosts({ page: page })) as AllPostsResponse;
 
   const { data, meta } = getAllPosts;

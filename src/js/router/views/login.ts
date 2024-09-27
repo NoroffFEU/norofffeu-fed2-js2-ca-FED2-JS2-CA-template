@@ -6,6 +6,7 @@ async function loadLoginPage() {
   redirectIfAuthenticated();
 
   const loginForm = findForm("login");
+
   if (loginForm instanceof HTMLFormElement) {
     loginForm.addEventListener("submit", onLogin);
   }

@@ -4,6 +4,10 @@ import { getUserProfile } from "@/js/utilities/getUserProfile";
 import { createPostHTML } from "@/components/cards/PostCard";
 import { creatorLiked } from "@/js/utilities/checkIfCreatorLiked";
 
+let page = 1;
+let isLoading = false;
+let isLastPage = false;
+
 async function loadHomePage() {
   try {
     renderPosts(page);
@@ -12,10 +16,6 @@ async function loadHomePage() {
     console.error(error);
   }
 }
-
-let page = 1;
-let isLoading = false;
-let isLastPage = false;
 
 export async function renderPosts(page: number) {
   const postsContainer = document.getElementById("posts") as HTMLUListElement;

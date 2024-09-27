@@ -3,6 +3,7 @@ import { APILoginRequest } from "@/types/types";
 
 export async function onLogin(event: Event) {
   event.preventDefault();
+
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
   const userData = Object.fromEntries(formData);

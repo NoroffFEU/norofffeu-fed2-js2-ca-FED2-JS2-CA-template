@@ -1,3 +1,5 @@
+// Function to redirect to login page if user is not authenticated
+
 export function authGuard() {
   if (
     window.location.pathname === "/" ||

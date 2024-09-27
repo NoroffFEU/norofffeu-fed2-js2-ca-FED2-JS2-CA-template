@@ -1,3 +1,5 @@
+// Function to check if the file type is valid
+
 export function checkValidTypes(e: Event) {
   const input = e.target as HTMLInputElement;
   const file = input.files?.[0];

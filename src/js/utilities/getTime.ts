@@ -1,3 +1,5 @@
+// Function to get time difference between two dates and return it in a readable format
+
 export function getTime(date: Date) {
   const dateNow = new Date();
   const targetDate = new Date(date);

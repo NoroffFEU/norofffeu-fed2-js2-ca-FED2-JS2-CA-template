@@ -6,7 +6,8 @@ export async function loadUserLoggedProfile() {
   if (
     window.location.pathname === "/" ||
     window.location.pathname === "/login/" ||
-    window.location.pathname === "/register/"
+    window.location.pathname === "/register/" ||
+    window.location.pathname === "/404/"
   ) {
     return;
   }

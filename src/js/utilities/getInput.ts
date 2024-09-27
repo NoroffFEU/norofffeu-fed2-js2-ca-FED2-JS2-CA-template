@@ -1,3 +1,5 @@
+// Function to get an input element from a form
+
 export function getInput(
   formName: HTMLFormElement,
   inputName: string

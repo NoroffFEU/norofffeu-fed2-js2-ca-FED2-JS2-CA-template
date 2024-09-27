@@ -1,9 +1,9 @@
 import router from "@router/index";
-import { loadLogo } from "./components/Logo";
-import { loadSearchInput } from "./js/ui/search/searchInputLoader";
-import { loadLogoutButton } from "./components/buttons/LogoutButton";
-import { loadUserLoggedProfile } from "./js/ui/profile/renderUserLoggedProfile";
-import { authGuard } from "./js/utilities/authGuard";
+import { loadLogo } from "@/components/Logo";
+import { loadSearchInput } from "@ui/search/searchInputLoader";
+import { loadLogoutButton } from "@/components/buttons/LogoutButton";
+import { loadUserLoggedProfile } from "@ui/profile/renderUserLoggedProfile";
+import { authGuard } from "@utilities/authGuard";
 
 async function loadApp() {
   authGuard();
