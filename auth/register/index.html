@@ -18,14 +18,14 @@
     <div class="reg">
       <div class="logosection">
         <div class="logodiv">
-          <image src="../../src/assets/logo.png" class="logo">
+          <img src="../../src/assets/logo.png" alt="logo" class="logo">
           <h3 class="logoText">Popwall</h3>
         </div>
         <div class="rightSection">
           <p class="regText">Already have an account?</p>
           <div>
             <a href="/auth/login/"
-              ><button class="logoSectionBtn">Login</button></a
+              ><div class="logoSectionBtn">Login</div></a
             >
           </div>
         </div>
@@ -57,7 +57,7 @@
                 required
                 maxlength="20"
                 pattern="^[\w]+$"
-              />
+              >
             </div>
             <div class="input-container">
               <i class="icon fa-regular fa-envelope"></i>
@@ -67,7 +67,7 @@
                 id="email"
                 required
                 pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-              />
+              >
             </div>
             <div class="input-container">
               <textarea
@@ -84,7 +84,7 @@
                 required
                 minlength="8"
                 id="password"
-              />
+              >
               <span type="button" id="toggle-password" class="toggleBtn">
                 <i class="toggle-password fas fa-eye-slash"></i
               ></span>
