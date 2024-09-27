@@ -13,8 +13,8 @@ The website effectively showcases my skills and profeciency with Front-end techn
 ## Built With
 - [HTML](https://html.com)
 - [CSS](https://html.com)
-- [Javascript]
-- [Vite]
+- [JAVASCRIPT](https://javascript.com)
+- [VITE](https://vite.com)
 
 ##  Contact:
 - [My linkedin page](https://www.linkedin.com/in/ukonu-idika-367a00254?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
