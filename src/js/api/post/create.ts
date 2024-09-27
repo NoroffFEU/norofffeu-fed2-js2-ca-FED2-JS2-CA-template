@@ -38,7 +38,6 @@ export async function createPost({
       throw new Error("Error creating post");
     }
 
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -68,7 +67,6 @@ export async function createComment({ body, id, replyToId }: CommentRequest) {
       throw new Error("Error creating comment");
     }
 
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

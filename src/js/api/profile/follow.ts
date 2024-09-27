@@ -20,7 +20,6 @@ export async function toggleFollowUser(username: string, action: ToggleFollow) {
     }
 
     const { data }: { data: FollowResponse } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

@@ -23,7 +23,6 @@ export async function searchProfiles(
     }
 
     const { data }: { data: ProfileResponse[] } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

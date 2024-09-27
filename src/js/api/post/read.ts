@@ -19,7 +19,6 @@ export async function readPost(id: PostID) {
     }
 
     const { data }: { data: PostResponse } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -48,7 +47,6 @@ export async function readPosts({ limit = 12, page = 1, tag }: Params = {}) {
 
     const { data, meta }: { data: PostResponse[]; meta: Meta } =
       await response.json();
-    console.log(data);
     return { data, meta };
   } catch (error) {
     console.error(error);
@@ -75,7 +73,6 @@ export async function readPostsByUser(
       throw new Error(errorMessage);
     }
     const { data }: { data: PostResponse[] } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -99,7 +96,6 @@ export async function readPostsFromFollowing() {
       throw new Error(errorMessage);
     }
     const { data }: { data: PostResponse[] } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

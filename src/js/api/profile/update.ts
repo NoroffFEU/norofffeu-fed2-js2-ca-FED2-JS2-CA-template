@@ -23,7 +23,6 @@ export async function updateProfile(
         errors?.[0]?.message || "Something went wrong updating the profile.";
       throw new Error(errorMessage);
     }
-    console.log(response.ok);
     return response.ok;
   } catch (error) {
     console.error(error);

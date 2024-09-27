@@ -34,8 +34,6 @@ export async function renderPosts(page: number) {
 
   const postsToRender = orderedPosts.slice(start, end);
 
-  console.log("postsToRender", postsToRender);
-
   isLastPage = postsToRender.length < postsPerPage;
 
   const getFollowingUsers = await getUserProfile();

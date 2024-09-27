@@ -20,7 +20,6 @@ export async function readProfile(username: string) {
     }
 
     const { data }: { data: ProfileResponse } = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

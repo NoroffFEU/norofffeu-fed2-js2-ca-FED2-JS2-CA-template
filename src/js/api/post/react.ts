@@ -22,7 +22,6 @@ export async function reactToPost(id: number, symbol: string) {
 
     const { data }: { data?: ReactionResponse } = await response.json();
     if (!data || !data.reactions || data.reactions.length === 0) {
-      console.log("No data");
       return;
     } else {
       return data;

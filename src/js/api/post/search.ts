@@ -24,7 +24,6 @@ export async function searchPosts(
 
     const { data }: { data: PostResponse[] } = await response.json();
 
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
