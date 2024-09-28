@@ -40,7 +40,11 @@ async function submitComment (postId){
     try{
         const response = await api.post.CommentOnPost(postId, commentBody)
         if(response){
-            return
+            document.getElementById('commentInput').value = ""
+
+            currentPage = 1 
+            totalCommentsLoaded = 0
+            displayComments(postId, currentPage);
         }
     }catch(error){
         console.log(`failed to post comment: ${error.message}`);
@@ -55,13 +59,13 @@ document.getElementById("commentForm").addEventListener("submit", (event) => {
     submitComment(postId)
 })
 let currentPage = 1;
-const commentsPerPage = 10;
+const commentsPerPage = 5;
 let totalCommentsLoaded = 0;
 let totalComments;
 let totalPages = 1;
 let isLoading = false;
 
-const fetchComments = async (postId, page = 1, limit = 10) => {
+const fetchComments = async (postId, page = 1, limit = 5) => {
     try {
         const response = await api.post.getComments(postId, { page, limit });
         totalComments = response.data._count.comments
@@ -75,18 +79,20 @@ const fetchComments = async (postId, page = 1, limit = 10) => {
 async function displayComments(postId, page = 1){
     try{
         if (isLoading || page > totalPages) {
-            isLoading = true;
             return;
         }
+        isLoading = true;
+
         const comments = await fetchComments(postId, page, commentsPerPage);
-        console.log(comments)
-        if (comments.length === 0) {
+        const commentsList = document.getElementById('commentsList')
+        console.log("data of fetch comments",comments)
+         commentsList.innerHTML = ""
+
+        if (comments.length === 0 && totalCommentsLoaded === 0) {
+            commentsList.innerHTML = "<p>No comment at the moment</p>"
             isLoading = false;
             return;
         }
-        const commentsList = document.getElementById('commentsList')
-        commentsList.innerHTML = ""
-
         comments.forEach((comment) => {
             const commentElement = document.createElement('div')
             commentElement.classList.add("comment")
@@ -97,6 +103,7 @@ async function displayComments(postId, page = 1){
         })
         totalCommentsLoaded += comments.length;
         totalPages = Math.ceil(totalComments/ commentsPerPage);
+
         isLoading = false;
     }catch(error){
         console.error("Error fetching comments:", error.message);
@@ -104,10 +111,12 @@ async function displayComments(postId, page = 1){
         isLoading = false;
     }
 }
+displaySinglePost()
+displayComments(postId, currentPage);
+
 window.addEventListener("scroll", () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoading) { 
         currentPage++;
         displayComments(postId, currentPage);
     }
 });
-displaySinglePost()
