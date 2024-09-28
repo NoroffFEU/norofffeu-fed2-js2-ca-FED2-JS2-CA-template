@@ -28,6 +28,18 @@
       <button id="create-post-button">Create Post</button>
     </div>
     <div id="posts-container"></div>
+    
+    <!-- Section for displaying a single post -->
+    <div id="single-post-container" style="display: none;">
+      <div id="post-content"></div>
+      <div id="post-reactions"></div>
+      <form id="commentForm">
+        <textarea name="commentBody" required></textarea>
+        <input type="hidden" name="replyToId" value="null">
+        <button type="submit">Add Comment</button>
+      </form>
+      <div id="commentsList"></div>
+    </div>
   </main>
   <footer>
     <div class="container">
