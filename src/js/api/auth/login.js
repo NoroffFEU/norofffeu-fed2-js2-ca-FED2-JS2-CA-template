@@ -22,6 +22,7 @@ export async function login(email, password) {
 
         const data = await response.json();
         console.log('Login successful, received data:', data);
+        
 
         return data;
     } catch (error) {
