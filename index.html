@@ -1,29 +1,38 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FitConnect</title>
+  <title>LinkUp</title>
   <script type="module" src="./src/app.js"></script>
   <link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
-  <header>
-    <a href="/index.html" class="logo"> FitConnect</a>
-    <nav>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./profile/index.html">My Profile</a></li>
-        <li><a href="./auth/login/index.html">Login</a></li>
-        <li><a href="./auth/register/index.html">Register</a></li>
-        <li><button id="logout-btn">Logout</button></li>
-        <a href="/post/create/index.html" id="createPostLink" style="display: none;">Create Post</a>
-      </ul>
-    </nav>
+  <header class="main-header">
+    <div class="container">
+      <a href="/index.html" class="logo">LinkUp</a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./profile/index.html">My Profile</a></li>
+          <li><a href="./auth/login/index.html" id="login-link">Login</a></li>
+          <li><a href="./auth/register/index.html" id="register-link">Register</a></li>
+          <li><button id="logout-btn" style="display: none;">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
   </header>
+
   <main id="main-content">
+    <div id="create-post-section">
+      <button id="create-post-button">Create Post</button>
+    </div>
     <div id="posts-container"></div>
   </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 FitConnect. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
