@@ -14,7 +14,6 @@ async function onSubmit(event) {
         title: title,
         content: content,
     };
-    
     try {
         const response = await updatePost(postIdString, postData);
         console.log(response);
@@ -26,7 +25,6 @@ async function onSubmit(event) {
 }
 
 export async function onUpdatePost(event) {
-
     const fetchPost = await readPost(postIdString);
     document.getElementById("content").textContent = fetchPost.body;
     document.getElementById("title").value = fetchPost.title;

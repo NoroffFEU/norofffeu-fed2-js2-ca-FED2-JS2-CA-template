@@ -1,4 +1,5 @@
 import { readPost } from "../../api/post/read.js";
+import { onDeletePost } from "../../ui/post/delete.js";
 import { getLoggedInUser } from "../../utilities/getLoggedInUser.js";
 
 export async function onReadPost() {
@@ -15,7 +16,11 @@ export async function onReadPost() {
         if (loggedInUser && loggedInUser.email === fetchPost.author.email) {
             const editButton = document.getElementById("edit-post-btn");
             editButton.href = `/post/edit/?id=${fetchPost.id}`;
-            editButton.style.display = "block";
+            editButton.classList.remove("hidden");
+            
+            const deleteButton = document.getElementById("delete-post-btn");
+            deleteButton.addEventListener("click", onDeletePost);
+            deleteButton.classList.remove("hidden");
         }
 
     } catch (error) {

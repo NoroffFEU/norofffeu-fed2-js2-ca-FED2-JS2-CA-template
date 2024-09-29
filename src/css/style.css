@@ -1,7 +1,7 @@
 @import url(_reset.css);
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .button-style {
