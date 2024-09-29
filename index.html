@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuzzNet - Home</title>
-    <script type="module" src="./src/app.js"></script>
     <link rel="stylesheet" href="./src/css/style.css">
   
     <style>
@@ -109,8 +108,8 @@
             <!-- Like Button and Comment Section -->
             <div class="post-actions">
                 <button class="like-button">👍 Like</button>
-                <button class="like-button">Edit</button>
-                <button class="like-button">Delete</button>
+                <a href="./post/edit/index.html"><button class="like-button">Edit</button></a>
+                <button class="like-button delete-btn">Delete</button>
             </div>
             <div class="comment-section">
                 <input type="text" class="comment-input" placeholder="Add a comment...">
@@ -124,5 +123,7 @@
         <a href="/post/"> <button style="margin-left: 50%;">View more posts</button>  </a>
       
     </main>
+    <script type="module" src="./src/app.js"></script>
+    
 </body>
 </html>
