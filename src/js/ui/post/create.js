@@ -1,5 +1,21 @@
 import { API_SOCIAL_POSTS, API_KEY } from '../../api/constants.js';
 
+/**
+ * Sets up the create post form event listener and handles form submission.
+ * 
+ * This function attaches a submit event listener to the create post form.
+ * When the form is submitted, it prevents the default form submission,
+ * collects post data, sends a POST request to the social posts API,
+ * and handles the response.
+ * 
+ * @function setupCreatePostFunctionality
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function when the create post form is available
+ * setupCreatePostFunctionality();
+ */
+
 export function setupCreatePostFunctionality() {
   console.log('Setting up create post functionality');
   const form = document.querySelector('form[name="createPost"]');
@@ -11,12 +27,38 @@ export function setupCreatePostFunctionality() {
   }
 }
 
+/**
+ * Shows the create post form.
+ * 
+ * This function finds the create post form and sets its display style to 'block'.
+ * 
+ * @function showCreatePostForm
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function to show the create post form
+ * showCreatePostForm();
+ */
+
 export function showCreatePostForm() {
   const form = document.querySelector('form[name="createPost"]');
   if (form) {
     form.style.display = 'block';
   }
 }
+
+/**
+ * Hides the create post form.
+ * 
+ * This function finds the create post form and sets its display style to 'none'.
+ * 
+ * @function hideCreatePostForm
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function to hide the create post form
+ * hideCreatePostForm();
+ */
 
 export function hideCreatePostForm() {
   const form = document.querySelector('form[name="createPost"]');
@@ -25,6 +67,13 @@ export function hideCreatePostForm() {
   }
 }
 
+/**
+ * Checks if the given JWT token is expired.
+ * 
+ * @function isTokenExpired
+ * @param {string} token - The JWT token to check.
+ * @returns {boolean} True if the token is expired or invalid, false otherwise.
+ */
 
 function isTokenExpired(token) {
   if (!token) return true;
@@ -34,6 +83,19 @@ function isTokenExpired(token) {
   const exp = decoded.exp;
   return Date.now() >= exp * 1000;
 }
+
+/**
+ * Handles the creation of a new post.
+ * 
+ * This function is called when the create post form is submitted. It prevents
+ * the default form submission, collects the post data, sends a POST request
+ * to the API, and handles the response.
+ * 
+ * @async
+ * @function onCreatePost
+ * @param {Event} event - The form submission event.
+ * @returns {Promise<void>}
+ */
 
 export async function onCreatePost(event) {
   event.preventDefault();
@@ -130,6 +192,15 @@ export async function onCreatePost(event) {
     submitButton.textContent = 'Create Post';
   }
 }
+
+/**
+ * Displays a message on the form.
+ * 
+ * @function displayMessage
+ * @param {HTMLFormElement} form - The form element to display the message on.
+ * @param {string} message - The message to display.
+ * @param {string} color - The color of the message text.
+ */
 
 function displayMessage(form, message, color) {
   const messageElement = document.createElement('div');

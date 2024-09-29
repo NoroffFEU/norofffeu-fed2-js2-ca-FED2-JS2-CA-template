@@ -1,5 +1,23 @@
 import { displayPosts } from "../../ui/post/list.js";
 
+/**
+ * Sets up and renders the home view of the application.
+ * 
+ * This function performs the following tasks:
+ * 1. Checks if the user is logged in.
+ * 2. Creates or updates the main content of the home page.
+ * 3. Sets up a container for displaying single posts.
+ * 4. Adds a "Create Post" button if the user is logged in.
+ * 5. Calls the displayPosts function to show the list of posts.
+ * 
+ * @function homeView
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function when the home page loads
+ * homeView();
+ */
+
 export default function homeView() {
   console.log('Home view loaded');
 

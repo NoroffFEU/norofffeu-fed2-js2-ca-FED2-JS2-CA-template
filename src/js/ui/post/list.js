@@ -4,6 +4,16 @@ import { setupCommentFunctionality } from "./comment.js";
 
 let isDisplayingSinglePost = false;
 
+
+ /**
+ * Sets up the home page, including the create post button and initial post display.
+ * @function setupHomePage 
+ * @returns {void}
+ * @example
+ * // Call this function when the home page loads
+ * setupHomePage();
+ */
+
 export function setupHomePage() {
   const isLoggedIn = !!localStorage.getItem('token');
 
@@ -26,6 +36,12 @@ export function setupHomePage() {
     displayPosts();
   }
 }
+
+/**
+ * Fetches and displays all posts on the home page.
+ * @async 
+ * @function displayPosts
+ */
 
 export async function displayPosts() {
   console.log("displayPosts function called");
@@ -64,6 +80,13 @@ export async function displayPosts() {
   }
 }
 
+/**
+ * Creates an HTML element for a single post.
+ * @function
+ * @param {Object} post - The post data.
+ * @returns {string} HTML string for the post.
+ */
+
 function createPostElement(post) {
   return `
     <article class="post" data-post-id="${post.id}">
@@ -79,6 +102,11 @@ function createPostElement(post) {
   `;
 }
 
+/**
+ * Sets up event listeners for post interactions.
+ * @function setupPostEventListeners
+ */
+
 function setupPostEventListeners() {
   const postsContainer = document.querySelector("#posts-container");
   if (!postsContainer) return;
@@ -86,6 +114,12 @@ function setupPostEventListeners() {
   postsContainer.removeEventListener('click', handlePostClick);
   postsContainer.addEventListener('click', handlePostClick);
 }
+
+/**
+ * Handles click events on posts.
+ * @function
+ * @param {Event} event - The click event.
+ */
 
 function handlePostClick(event) {
   const postElement = event.target.closest('.post');
@@ -100,6 +134,13 @@ function handlePostClick(event) {
   }
 }
 
+/**
+ * Handles the deletion of a post.
+ * @async
+ * @function
+ * @param {string} postId - The ID of the post to delete.
+ */
+
 async function handleDelete(postId) {
   if (confirm('Are you sure you want to delete this post?')) {
     try {
@@ -111,6 +152,13 @@ async function handleDelete(postId) {
     }
   }
 }
+
+/**
+ * Displays a single post and its comments.
+ * @async 
+ * @function displaySinglePost
+ * @param {string} postId - The ID of the post to display.
+ */
 
 export async function displaySinglePost(postId) {
   if (isDisplayingSinglePost) return;

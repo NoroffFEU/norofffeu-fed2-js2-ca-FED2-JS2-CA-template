@@ -1,5 +1,21 @@
 import { API_AUTH_REGISTER } from '../../api/constants.js';
 
+/**
+ * Sets up the registration form event listener and handles form submission.
+ * 
+ * This function attaches a submit event listener to the registration form.
+ * When the form is submitted, it prevents the default form submission,
+ * collects user data, sends a POST request to the registration API,
+ * and handles the response.
+ * 
+ * @function setupRegisterForm
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function when the registration page loads
+ * setupRegisterForm();
+ */
+
 export function setupRegisterForm() {
   const form = document.querySelector('#register-form');
   
