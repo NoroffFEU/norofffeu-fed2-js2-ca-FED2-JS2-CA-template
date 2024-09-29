@@ -1,13 +1,10 @@
-import { authGuard } from "../../utilities/authGuard.js";
 import { displayPosts } from "../../ui/post/list.js";
 
 export default function homeView() {
   console.log('Home view loaded');
 
-  // Run the authentication guard
-  authGuard();
+  const isLoggedIn = !!localStorage.getItem('token');
 
-  // Update the main content
   const main = document.querySelector("main");
   
   // Check if the single-post-container already exists
@@ -34,26 +31,26 @@ export default function homeView() {
   // Update the main content, preserving the single-post-container
   main.innerHTML = `
     <h1>Home</h1>
-    <button id="create-post-button">Create Post</button>
+    ${isLoggedIn ? '<button id="create-post-button">Create Post</button>' : ''}
     <div id="posts-container"></div>
   `;
   
   // Append the single-post-container back to main
   main.appendChild(singlePostContainer);
 
-  // Set up the Create Post button
-  const createPostButton = document.getElementById('create-post-button');
-  if (createPostButton) {
-    createPostButton.addEventListener('click', () => {
-      window.location.href = '/post/create/';
-    });
-    console.log('Create Post button set up');
-  } else {
-    console.error('Create Post button not found');
+  // Set up the Create Post button if the user is logged in
+  if (isLoggedIn) {
+    const createPostButton = document.getElementById('create-post-button');
+    if (createPostButton) {
+      createPostButton.addEventListener('click', () => {
+        window.location.href = '/post/create/';
+      });
+      console.log('Create Post button set up');
+    } else {
+      console.error('Create Post button not found');
+    }
   }
 
-  // Display the posts
   displayPosts();
-
   // You can add any additional home page logic here
 }
