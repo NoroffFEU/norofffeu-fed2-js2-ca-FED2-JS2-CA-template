@@ -55,16 +55,6 @@
                   console.error("Error loading post edit view:", error);
                 }
                 break;
-      case "/post/create/":
-        case "/post/create/index.html":
-          console.log("Attempting to load create post view");
-          try {
-            const { default: createPostView } = await import("../ui/post/create.js");
-            createPostView();
-          } catch (error) {
-            console.error("Error loading create post view:", error);
-          }
-          break;
     case "/profile/":
       try {
         const { default: profileView } = await import("../api/profile/read.js");

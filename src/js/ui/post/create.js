@@ -1,14 +1,30 @@
 import { API_SOCIAL_POSTS, API_KEY } from '../../api/constants.js';
 
-// Add this new function
-export default function postCreateView() {
+export function setupCreatePostFunctionality() {
+  console.log('Setting up create post functionality');
   const form = document.querySelector('form[name="createPost"]');
   if (form) {
+    console.log('Create post form found, adding event listener');
     form.addEventListener('submit', onCreatePost);
   } else {
     console.error("Create post form not found");
   }
-} 
+}
+
+export function showCreatePostForm() {
+  const form = document.querySelector('form[name="createPost"]');
+  if (form) {
+    form.style.display = 'block';
+  }
+}
+
+export function hideCreatePostForm() {
+  const form = document.querySelector('form[name="createPost"]');
+  if (form) {
+    form.style.display = 'none';
+  }
+}
+
 
 function isTokenExpired(token) {
   if (!token) return true;
@@ -31,14 +47,25 @@ export async function onCreatePost(event) {
   // Basic form validation
   if (!formData.get('title').trim()) {
     displayMessage(form, 'Please enter a title for your post.', 'red');
+  const mediaInput = form.querySelector('input[name="media"]');
+
+  console.log('Form elements:', { 
+    submitButton, 
+    titleInput, 
+    contentInput, 
+    tagsInput, 
+    mediaInput 
+  });
+
+  if (!titleInput) {
+    console.error('Title input not found');
     return;
   }
-
   const postData = {
-    title: formData.get('title').trim(),
-    body: formData.get('body').trim(),
-    tags: formData.get('tags') ? formData.get('tags').split(',').map(tag => tag.trim()).filter(Boolean) : [],
-    media: formData.get('media') ? formData.get('media').trim() : null
+    title: titleInput.value.trim(),
+    body: contentInput.value.trim(),
+    tags: tagsInput.value ? tagsInput.value.split(',').map(tag => tag.trim()).filter(Boolean) : [],
+    media: mediaInput.value ? mediaInput.value.trim() : null
   };
 
   console.log('Post data:', postData);
@@ -89,11 +116,11 @@ export async function onCreatePost(event) {
 
     form.reset();
     displayMessage(form, 'Post created successfully!', 'green');
-    
-    // Optional: Redirect after a delay
+
+    // Redirect to home page after successful post creation
     setTimeout(() => {
       window.location.href = '/';
-    }, 3000);
+    }, 2000);
 
   } catch (error) {
     console.error('Error creating post:', error);
