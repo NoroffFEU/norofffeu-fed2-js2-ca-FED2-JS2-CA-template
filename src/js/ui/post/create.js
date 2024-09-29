@@ -33,20 +33,19 @@ function isTokenExpired(token) {
   const decoded = JSON.parse(decodedJson);
   const exp = decoded.exp;
   return Date.now() >= exp * 1000;
-}  
+}
 
 export async function onCreatePost(event) {
   event.preventDefault();
   console.log('Form submission started');
 
   const form = event.target;
+  console.log('Form:', form);
+
   const submitButton = form.querySelector('button[type="submit"]');
-  const formData = new FormData(form);
-
-
-  // Basic form validation
-  if (!formData.get('title').trim()) {
-    displayMessage(form, 'Please enter a title for your post.', 'red');
+  const titleInput = form.querySelector('input[name="title"]');
+  const contentInput = form.querySelector('textarea[name="body"]');
+  const tagsInput = form.querySelector('input[name="tags"]');
   const mediaInput = form.querySelector('input[name="media"]');
 
   console.log('Form elements:', { 
