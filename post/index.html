@@ -8,6 +8,22 @@
 </head>
 <body>
     <h1>Posts</h1>
+
+    <!-- Posts container where all posts will be listed -->
     <div id="posts-container"></div>
+
+    <!-- Single post container, hidden initially -->
+    <div id="single-post-container" style="display: none;">
+        <div id="post-content"></div>
+        <div id="post-reactions"></div>
+        <form id="commentForm">
+            <textarea name="commentBody" required></textarea>
+            <input type="hidden" name="replyToId" value="null">
+            <button type="submit">Add Comment</button>
+        </form>
+        <div id="commentsList"></div>
+        <button id="back-to-posts">Back to Posts</button>
+    </div>
 </body>
 </html>
+
