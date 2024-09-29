@@ -1,123 +1,44 @@
-// src/js/api/post.js
+import { headers } from './headers.js';
+import { API_SOCIAL_POSTS } from './constants.js';
 
-import { API_SOCIAL_POSTS } from '/src/js/api/constants.js';
-import { headers } from '/src/js/api/headers.js';
-import { currentUser } from '/src/js/utilities/currentUser.js';
-
-// Create a new post
+// Create new post
 export async function createPost(data) {
-  const user = currentUser();
-
-  if (!user || !user.token) {
-    console.error("User is not logged in or token is missing. Redirecting to login.");
-    window.location.href = "/auth/login/index.html"; // Redirect to login page
-    return; // Prevent further execution if no user or token
-  }
-
   const response = await fetch(API_SOCIAL_POSTS, {
     method: 'POST',
-    headers: headers(true), // Ensure `Content-Type` is `application/json` and Authorization is included
+    headers: headers(true),
     body: JSON.stringify(data),
   });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Post creation failed');
-  }
-
-  const result = await response.json();
-  return result.data; // Assuming `data` contains the newly created post
+  if (!response.ok) throw new Error('Failed to create post');
+  return await response.json();
 }
 
-// Read a specific post by ID
+// Get a specific post by ID
 export async function readPost(id) {
-  const user = currentUser();
-
-  if (!user || !user.token) {
-    console.error("User is not logged in or token is missing. Redirecting to login.");
-    window.location.href = "/auth/login/index.html"; // Redirect to login page
-    return; // Prevent further execution if no user or token
-  }
   const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
     method: 'GET',
-    headers: headers(), // Use headers() to include the API key and Authorization
+    headers: headers(true),
   });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Post not found');
-  }
-
-  const result = await response.json();
-  return result.data; // Assuming `data` contains the post details
-}
-
-// Read multiple posts with pagination support
-export async function readPosts(limit = 12, page = 1) {
-  const user = currentUser();
-
-  if (!user || !user.token) {
-    console.error("User is not logged in or token is missing. Redirecting to login.");
-    window.location.href = "/auth/login/index.html"; // Redirect to login page
-    return; // Prevent further execution if no user or token
-  }
-  
-  const response = await fetch(`${API_SOCIAL_POSTS}?limit=${limit}&page=${page}`, {
-    method: 'GET',
-    headers: headers(), // Use headers() to include the API key and Authorization
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Failed to load posts');
-  }
-
-  const result = await response.json();
-  return result.data; // Assuming `data` contains a list of posts
+  if (!response.ok) throw new Error('Failed to fetch post');
+  return await response.json();
 }
 
 // Update a post by ID
 export async function updatePost(id, data) {
-  const user = currentUser();
-
-  if (!user || !user.token) {
-    console.error("User is not logged in or token is missing. Redirecting to login.");
-    window.location.href = "/auth/login/index.html"; // Redirect to login page
-    return; // Prevent further execution if no user or token
-  }
   const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
     method: 'PUT',
-    headers: headers(true), // Ensure `Content-Type` is `application/json` and Authorization is included
+    headers: headers(true),
     body: JSON.stringify(data),
   });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Failed to update post');
-  }
-
-  const result = await response.json();
-  return result.data; // Assuming `data` contains the updated post details
+  if (!response.ok) throw new Error('Failed to update post');
+  return await response.json();
 }
 
 // Delete a post by ID
 export async function deletePost(id) {
-  const user = currentUser();
-
-  if (!user || !user.token) {
-    console.error("User is not logged in or token is missing. Redirecting to login.");
-    window.location.href = "/auth/login/index.html"; // Redirect to login page
-    return; // Prevent further execution if no user or token
-  }
   const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
     method: 'DELETE',
-    headers: headers(), // Use headers() to include the API key and Authorization
+    headers: headers(true),
   });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Failed to delete post');
-  }
-
-  return true; // Return true if deletion was successful
+  if (!response.ok) throw new Error('Failed to delete post');
+  return await response.json();
 }

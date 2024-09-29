@@ -1,5 +1,5 @@
 // src/js/utilities/authGuard.js
-import { currentUser } from '/src/js/utilities/currentUser.js';
+import { currentUser } from './currentUser.js';
 
 export function authGuard() {
   // Check if the user and token are present in localStorage

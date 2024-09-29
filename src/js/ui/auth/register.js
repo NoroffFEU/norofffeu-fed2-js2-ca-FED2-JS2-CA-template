@@ -1,33 +1,22 @@
-// src/js/ui/auth/register.js
-import api from '../../api/index.js';
-export async function onRegister(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-    
-    // Grab form data
-    const form = event.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-  
-    try {
-      // Delegate the registration action to the API
-      const response = await api.auth.register(data);
-      
-      // After successful registration, you could store user or token if needed
-      const { user, token } = response;
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
+import { register } from '../../api/auth.js';
 
-      // Handle success
-      alert('Registration successful!');
-      window.location.href = '/auth/login/index.html';  // Redirect to login page after registration
-    } catch (error) {
-      // Handle error
-      alert('Registration failed: ' + error.message);
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('registerForm');
+  if (form) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const userData = Object.fromEntries(data.entries());
+
+      try {
+        const user = await register(userData);
+        localStorage.setItem('token', user.token);
+        localStorage.setItem('user', JSON.stringify(user.user));
+        window.location.href = '/auth/login.html';
+      } catch (error) {
+        console.error(error);
+        alert('Failed to register');
+      }
+    });
   }
-
-  // Ensure the event listener is attached once the DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("registerForm").addEventListener("submit", onRegister);
 });
