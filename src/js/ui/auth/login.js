@@ -11,7 +11,6 @@ import { updateNavigation } from '../../../app.js';
  * // Call this function when the login page loads
  * setupLoginForm();
  */
-
 export function setupLoginForm() {
   console.log('Setting up login form');
   const form = document.querySelector('#login-form');
@@ -37,7 +36,6 @@ export function setupLoginForm() {
  * @returns {Promise<void>}
  * @throws {Error} Throws an error if login fails or if the response is in an unexpected format.
  */ 
-
 async function onLogin(event) {
   console.log('onLogin function called');
   event.preventDefault();
@@ -49,30 +47,33 @@ async function onLogin(event) {
  
   try {
     console.log('Attempting to log in with:', { email });
-    const data = await login(email, password);
+    const response = await login(email, password);
     
-    const accessToken = data.accessToken || data.data?.accessToken;
-    if (!accessToken) {
-      console.error('Response structure:', JSON.stringify(data, null, 2));
+    // Assuming the response structure is { data: { ... }, meta: { ... } }
+    const userData = response.data;
+
+    if (!userData || !userData.accessToken) {
+      console.error('Unexpected response structure:', JSON.stringify(response, null, 2));
       throw new Error('No access token received in the expected format');
     }
     
-    localStorage.setItem('token', accessToken);
+    localStorage.setItem('token', userData.accessToken);
+    localStorage.setItem('name', userData.name);
+    localStorage.setItem('email', userData.email);
+
+    // Store the entire user object as a JSON string
+    localStorage.setItem('user', JSON.stringify(userData));
     
-    // Store individual user properties
-    const user = data.user || data.data?.user || data;
-    localStorage.setItem('name', user.name);
-    localStorage.setItem('email', user.email);
-    localStorage.setItem('user', JSON.stringify(user));
-    
-    console.log('Token stored in localStorage:', localStorage.getItem('token'));
-    console.log('Name stored in localStorage:', localStorage.getItem('name'));
-    console.log('Email stored in localStorage:', localStorage.getItem('email'));
-    console.log('User stored in localStorage:', localStorage.getItem('user'));
+    console.log('Data stored in localStorage:', {
+      token: localStorage.getItem('token'),
+      name: localStorage.getItem('name'),
+      email: localStorage.getItem('email'),
+      user: localStorage.getItem('user')
+    });
     
     updateNavigation(); // Call this after setting the token
     
-    window.location.href = '/';  // Redirect to profile page instead of home
+    window.location.href = '/';  // Redirect to home page
   } catch (error) {
     console.error('Login failed:', error);
     alert(`Login failed: ${error.message}`);
