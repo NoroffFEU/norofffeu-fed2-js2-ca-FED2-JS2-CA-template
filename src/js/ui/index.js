@@ -1,233 +1,186 @@
-import NoroffAPI from "../api/index.js";
+// src/js/ui/index.js
 
+import { login, register, logout } from '../api/auth.js';
+import { createPost, readPost, readPosts, deletePost, updatePost } from '../api/post.js';
+import { handleFormSubmit } from './form.js'; // Form handling utility function
 
-export default class NoroffApp extends NoroffAPI {
+// Main Application Class
+export default class NoroffApp {
+  // Initializes the app based on the current path
+  static async initialize() {
+    const pathname = window.location.pathname;
 
-    constructor() {
-        super();
-        this.router();
-    }
-
-    async router(href = window.location.href) {
-        const url = new URLSearchParams(href);
-        const params = Object.fromEntries(url.URLSearchParams.entries());
-        const pathname = url.pathname
-
-        switch (pathname) {
-            case "/":
-            case "/index.html":
-              await this.views.home();
-              break;
-            case "/auth/":
-              await this.views.auth();
-              break;
-            case "/auth/login.html/":
-              await this.views.login();
-              break;
-            case "/auth/register.html/":
-              await this.views.register();
-              break;
-            case "/post/":
-            case "/post/index.html/":
-              await this.views.post(params.id);
-              break;
-            case "/post/edit.html/":
-              await this.views.postEdit();
-              break;
-            case "/post/create.html/":
-              await this.views.postCreate();
-              break;
-            case "/posts/":
-            case "/posts/index.html":
-              await this.views.posts(params);
-              break;
-            case "/profile/":
-            case "/profile/index.html":
-              await this.views.profile();
-              break;
-            default:
-              await this.views.notFound();
-        }
-  
-    }      
-    static form = {
-    handleSubmit(event) {
-      event.preventDefault();
-      const form = event.target;
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-    },
-  };
-
-  static tags = {
-    split(tagString) {
-      let tags = tagString.split(",").map((tag) => tag.trim());
-      return tags;
-    },
-    join(tagArray) {
-      return tagArray.join(", ");
-    },
-  };
-
-  views = {
-    home: async () => {
-      document.querySelectorAll("[data-auth=logout]").forEach((button) => {
-        button.addEventListener("click", () => {
-          this.auth.logout();
-        });
-      });
-    },
-    login: async () => {
-      document.forms.login.addeventListener("submit", this.events.login);
-    },
-    register: async () => {
-      document.forms.register.addeventListener("submit", this.events.register);
-    },
-    post: async (id) => {
-        const post  = await this.post.read(id);
-        document.querySelector('input#id').value = id;
-        document.querySelector('#title').innerText = post.title;
-        document.querySelector('#body').innerText = post.body;
-        document.querySelector('#tags').innerText = NoroffApp.tags.join(', ');
-        document.querySelector('a.update').href = `/post/edit/?id=${id}`;
-        document.forms.deletePost.addEventListener("submit", this.events.post.delete);
-    },
-    async postUpdate(id) {
-      try {
-        const post = await this.post.read(id);
-        document.querySelector("#title").value = post.title;
-        document.querySelector("#body").value = post.body;
-        document.querySelector("#tags").value = post.tags.join(", ");
-
-        document.forms.updatePost.addeventListener(
-          "submit",
-          this.events.post.update
-        );
-      } catch (error) {
-        alert(error.message);
-        window.location.href = "/";
-      }
-    },
-    postCreate: async () => {
-        document.forms.createPost.addeventListener(
-          "submit",
-          this.events.post.create
-        );
-    },
-    posts: async (params) => {
-        const posts = await this.posts.read(params.tag, params.limit, params.page);
-        const ul = document.querySelector('ul');
-
-        const listItems = posts.map(post => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `/post/?id=${post.id}`;
-            a.textContent = post.title;
-            li.appendChild(a);
-            return li;
-        })
-
-        ul.append(...listItems);
-      }
+    switch (pathname) {
+      case '/auth/login/':
+        this.initLoginPage();
+        break;
+      case '/auth/register/':
+        this.initRegisterPage();
+        break;
+      case '/post/create/':
+        this.initCreatePostPage();
+        break;
+      case '/post/':
+        this.initSinglePostPage();
+        break;
+      case '/post/edit/':
+        this.initUpdatePostPage();
+        break;
+      case '/post/delete/':
+        this.initDeletePostPage();
+        break;
+      case '/profile/':
+        this.initProfilePage();
+        break;
+      case '/auth/logout/':
+        this.initLogoutPage();
+        break;
+      case '/':
+      default:
+        this.initHomePage();
     }
   }
-  
-  events = {
-    login: async (event) => {
-      const data = NoroffApp.form.handleSubmit(event);
 
+  // Initialize Login Page
+  static initLoginPage() {
+    const form = document.forms.login;
+    if (!form) return; // Ensure the login form is present
+
+    form.addEventListener('submit', async (event) => {
+      const data = handleFormSubmit(event); // Form handling logic
       try {
-        await this.auth.login(data);
-        window.location.href = "/";
+        await login(data);
+        window.location.href = '/profile/index.html';
       } catch (error) {
-        alert(error);
+        alert(error.message);
+        console.error('Login Error:', error);
       }
-    },
-    register: async (event) => {
-      const data = NoroffApp.form.handleSubmit(event);
+    });
+  }
 
+  // Initialize Register Page
+  static initRegisterPage() {
+    const form = document.forms.register;
+    if (!form) return; // Ensure the register form is present
+
+    form.addEventListener('submit', async (event) => {
+      const data = handleFormSubmit(event); // Form handling logic
       try {
-        await this.auth.register(data);
-        window.location.href = "/auth/login.html";
+        await register(data);
+        window.location.href = '/auth/login/index.html';
       } catch (error) {
-        alert(error);
+        alert(error.message);
+        console.error('Registration Error:', error);
       }
-    },
-    post: {
-      create: async (event) => {
-        const data = NoroffApp.form.handleSubmit(event);
+    });
+  }
 
-        try {
-          const post = await this.post.create(data);
-          window.location.href = `/post/?id=$(post.id)`;
-        } catch (error) {
-          alert(error);
-        }
-      },
-      update: async () => {
-        const id = currentPostId;
+  // Initialize Logout Page
+  static initLogoutPage() {
+    logout(); // Logout function from the API
+    window.location.href = '/index.html'; // Redirect to login page after logout
+  }
 
-        try {
-          const post = await this.post.read(id);
+  // Initialize Create Post Page
+  static initCreatePostPage() {
+    const form = document.forms.createPost;
+    if (!form) return; // Ensure the create post form is present
 
-          document.querySelector("#title").value = post.title;
-          document.querySelector("#body").value = post.body;
-          document.querySelector("#tags").value = post.tags.join(", ");
+    form.addEventListener('submit', async (event) => {
+      const data = handleFormSubmit(event);
+      try {
+        const post = await createPost(data); // Create the post using API
+        window.location.href = `/post/index.html/?id=${newPost.id}`; // Redirect to the newly created post
 
-          document.forms.updatePost.addeventListener(
-            "submit",
-            async (event) => {
-              const data = NoroffApp.form.handleSubmit(event);
+      } catch (error) {
+        alert(error.message);
+        console.error('Post Creation Error:', error);
+      }
+    });
+  }
 
-              data.tags = data.tags
-                .split(",")
-                .map((tag) => tag.trim())
-                .filter(Boolean);
+  // Initialize Update Post Page
+  static async initUpdatePostPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const form = document.forms.updatePost;
+    if (!form) return; // Ensure the update post form is present
 
-              try {
-                await this.post.update(id, data);
-                window.location.href = `/post/?id=${id}`;
-              } catch (error) {
-                console.error(error);
-                alert("Failed to update post");
-              }
-            }
-          );
-        } catch (error) {
-          alert(error);
-        }
-      },
-      delete: async (event) => {
-        const { id } = NoroffApp.form.handleSubmit(event);
+    form.addEventListener('submit', async (event) => {
+      const data = handleFormSubmit(event);
+      try {
+        await updatePost(id, data); // Update the post using API
+        window.location.href = `/post/index.html/?id=${newPost.id}`; // Redirect to the updated post's page
+      } catch (error) {
+        alert(error.message);
+        console.error('Post Update Error:', error);
+      }
+    });
+  }
 
-        try {
-          await this.post.delete(id);
-          window.location.href = "/";
-        } catch (e) {
-          console.log(e);
-          alert("Failed to delete post");
-        }
-      },
+  // Initialize Delete Post Page
+  static async initDeletePostPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    try {
+      await deletePost(id); // Delete the post using API
+      window.location.href = '/index.html'; // Redirect to the home page
+    } catch (error) {
+      console.error('Failed to delete post:', error);
+    }
+  }
 
-      view: async (id) => {
-        try {
-          const post = await this.post.read(id);
+  // Initialize Profile Page
+  static async initProfilePage() {
+    // Fetch and display user profile data
+    try {
+      const user = await currentUser(); // Fetch the current user using API
+      // Populate the DOM with user profile data
+      document.getElementById('username').textContent = user.username || "No username";
+      document.getElementById('email').textContent = user.email || "No email";
+    } catch (error) {
+      console.error('Failed to load user profile:', error);
+    }
+  }
 
-          document.querySelector("input#id").value = id;
-          document.querySelector("#title").textContent = post.title;
-          document.querySelector("#body").textContent = post.body;
-          document.querySelector("#tags").textContent = post.tags.join(", ");
-          document.querySelector("a.update").href = post.id;
+  // Initialize Index Page (
 
-          document.forms.deletePost.addEventListener(
-            "submit",
-            this.events.post.delete
-          );
-        } catch (error) {
-          alert(error.message);
-          window.location.href = "/";
-        }
-      },
-    },
-};
+  // Initialize Single Post Page
+  static async initSinglePostPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    try {
+      const post = await readPost(id); // Read the post using API
+      // Populate the DOM with post data
+      document.getElementById('title').textContent = post.title || "Untitled";
+      document.getElementById('body').textContent = post.body || "No content";
+      document.getElementById('tags').textContent = post.tags ? post.tags.join(', ') : "No tags";
+    } catch (error) {
+      console.error('Failed to load post:', error);
+    }
+  }
 
+  // Initialize Home Page
+  static async initHomePage() {
+    try {
+      const posts = await readPosts(12, 1); // Get the first 12 posts
+      const listElement = document.getElementById('postList');
+      if (!listElement) {
+        console.error("postList element not found in the DOM");
+        return;
+      }
+      listElement.innerHTML = ''; // Clear existing content before adding new posts
+
+      posts.forEach((post) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<a href="/post/?id=${post.id}">${post.title}</a>`;
+        listElement.appendChild(listItem);
+      });
+    } catch (error) {
+      console.error('Failed to load posts:', error);
+    }
+  }
+}
+
+// Initialize the app once the DOM is ready
+document.addEventListener('DOMContentLoaded', () => NoroffApp.initialize());

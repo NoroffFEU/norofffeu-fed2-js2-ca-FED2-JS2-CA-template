@@ -5,7 +5,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
+    <script type="module" src="/src/js/ui/auth/register.js"></script>
+    <script type="module" src="/src/js/api/auth/register.js"></script>
   </head>
 
   <body>
@@ -13,7 +15,7 @@
     
     <h1>Register</h1>
 
-    <form name="register">
+    <form name="register" id="registerForm">
       <div>
         <label for="name">Name</label>
         <input
@@ -50,8 +52,8 @@
         />
       </div>
 
-      <a href="/auth/login/">Login</a>
-      <button>Register</button>
+      <a href="/auth/login/index.html">Login</a>
+      <button type="submit">Register</button>
     </form>
   </body>
 </html>

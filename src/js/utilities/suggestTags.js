@@ -1,3 +1,5 @@
+// src/js/utilities/suggestTags.js
+
 const tagDictionary = {
     Education: /\b(school|education|learning|study|teach(ing)?)\b/i,
     Work: /\b(work|job|career|employment)\b/i,

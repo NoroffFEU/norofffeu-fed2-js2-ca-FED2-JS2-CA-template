@@ -1,16 +1,23 @@
+// src/js/api/auth/register.js
+
 import api from "../../api/instance.js";
 
 const api = new NoroffAPI();
 
+// Function to handle the API registration request
 export async function onRegister(event) {
-  event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
+  document.forms.register.addEventListener("submit", async (event) => {
+    event.preventDefault();  // Prevent the default form submission behavior
 
-  try {
-    await api.auth.register(data);
-  } catch (error) {
-    alert(error);
-  }
+    const formData = new FormData(event.target);  // Get the form data
+    const data = Object.fromEntries(formData.entries());  // Convert to an object
+
+    try {
+      await api.auth.register(data);  // Call the register method from your API class
+      alert('Registration successful!');
+      window.location.href = "/auth/login/index.html";  // Redirect to login page
+    } catch (error) {
+      alert('Registration failed: ' + error.message);
+    }
+  });
 }

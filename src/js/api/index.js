@@ -1,12 +1,23 @@
+// src/js/api/index.js
 
+import {
+  API_AUTH_KEY,
+  API_AUTH_LOGIN,
+  API_AUTH_REGISTER,
+  API_SOCIAL_POSTS,
+  API_SOCIAL_PROFILES,
+  API_SOCIAL_PROFILES_NAME,
+  API_SOCIAL_POSTS_TAG,
+} from './constants.js'; // Import API URLs from constants.js
+import { headers } from './headers.js'; // Import headers function from headers.js
 
 export default class NoroffAPI {
 
   get user() {
     try {
-        return JSON.parse(localStorage.user);
+      return JSON.parse(localStorage.user);
     } catch {
-        return null;
+      return null;
     }
   }
 
@@ -22,165 +33,274 @@ export default class NoroffAPI {
     localStorage.setItem('token', accessToken);
   }
 
- 
-  static paths = {
-    base: "https://v2.api.noroff.dev",
-    login: `${NoroffAPI.apiBase}/auth/login`,
-    register: `${NoroffAPI.apiBase}/auth/register`,
-    posts: (name) => `${NoroffAPI.apiBase}/social/posts/${name}`,
-    post: (name, id) => `${NoroffAPI.postsPath(name)}/social/post/${name}/${id}`,
-    createPost: (name) => `${NoroffAPI.postsPath(name)}`,
-    updatePost: (name, id) => `${NoroffAPI.postPath(name, id)}`,
-    deletePost: (name, id) => `${NoroffAPI.postPath(name, id)}`,
-  }
-
-  static util = {
-    setupHeaders: (body) => {
-        const headers = new Headers();
-        if (localStorage.token) {
-          headers.append("Authorization", `Bearer ${localStorage.token}`);
-        }
-
-        if (body) {
-            headers.append("Content-Type", "application/json");
-        }
-        return headers;
-    },
-    handleResponse: async (response, output = 'json') => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        if (output === 'json') {
-            return await response.json();
-        } else {
-            return response;
-        }
-    },
-    handleRequest: async (request, output = 'json') => {
-        const response = await fetch(request.url, {
-          method: request.method,
-          headers: NoroffAPI.util.setupHeaders(request.body),
-          body: request.body? JSON.stringify(request.body) : null,
-        });
-        return NoroffAPI.util.handleResponse(response, output);
-    }
-  }
-
+  // Authentication methods
   auth = {
-    /**
-     *  @param {Object} user - The login parameters.
-     *  @param {String} user.email - The email of the user.
-     *  @param {String} user.password - The password of the user.
-     *  @returns {Promise<Object>} The logged-in user data.
-     */
-
-    login: async ({ email, password }) => {
+    login: async function({ email, password }) {
       const body = JSON.stringify({ email, password });
 
-      const response = await fetch(NoroffAPI.paths.login, {
+      const response = await fetch(API_AUTH_LOGIN, {
         method: "POST",
-        headers: NoroffAPI.util.setupHeaders(true),
+        headers: headers(true), // Use the headers function to set the API key
         body,
       });
 
       if (response.ok) {
-        const { data } = await NoroffAPI.util.handleResponse(response);
+        const { data } = await response.json();
         const { accessToken: token, ...user } = data;
-        
+
         this.user = user;
         this.token = token;
 
-        return user;
+        return { user, token};
       }
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Couldn't login");
+    }.bind(this),
 
-      throw new Error("Couldn't login");
-    },
+    register: async function({ name, email, password }) {
+      const body = JSON.stringify({ name, email, password });
 
-    register: async ({ email, password, name }) => {
-      const body = JSON.stringify({ email, password, name });
-
-      const response = await fetch(NoroffAPI.paths.register, {
+      console.log("Request Body:", body); // Log request body
+    
+      const response = await fetch(API_AUTH_REGISTER, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers(true), // Ensure headers include Content-Type: application/json
         body,
       });
-
+    
+        console.log("Response Status:", response.status); // Log response status
       if (response.ok) {
-        const { data } = await NoroffAPI.util.handleResponse(response);
+        const { data } = await response.json();
         const { accessToken: token, ...user } = data;
         localStorage.token = token;
         localStorage.user = JSON.stringify(user);
         return data;
       }
-
-      throw new Error("Couldn't register");
-    },
-
-    logout: () => {
-      this.user = null;
-      this.token = null;
-     
-      window.location.href = "/auth/login.html";
-    },
+    
+      // Capture and log the error message returned by the server
+      const errorData = await response.json();
+      console.log("Registration Error", errorData); // Log server error message
+      throw new Error(errorData.message || "Couldn't register");
+    }.bind(this),
+    
   };
 
-    post = {
-    read: async (id) => {
-        const { data } = await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id));
-        return data
-    },
-    update: async (id,{ title, body, tags, media}) => {
-        const data = await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), {
-          method: "PUT",
-          body: JSON.stringify({ title, body, tags, media }),
-        });
-        return data
-    },
-    delete: async (id) => {
-        await NoroffAPI.util.handleRequest(NoroffAPI.paths.post(this.user.name, id), {
-          method: "DELETE"
-        }, 'text')
-    },
-    create: async ({ title, body, tags, media }) => {
-        const data = await NoroffAPI.util.handleRequest(NoroffAPI.paths.posts(this.user.name), {
-            method: "POST",
-            body: JSON.stringify({ title, body, tags, media }),
-          });
-          return data
-        }
-  }
+  // Post-related methods
+  post = {
+    create: async function({ title, body, tags, media }) {
+      const request = {
+        url: API_SOCIAL_POSTS, // Use constant for posts URL
+        method: "POST",
+        headers: headers(true), // Use headers with API key
+        body: JSON.stringify({ title, body, tags, media }),
+      };
 
+      const response = await fetch(request.url, {
+        method: request.method,
+        headers: request.headers,
+        body: request.body,
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't create post");
+    }.bind(this),
+
+    read: async function(id) {
+      const request = {
+        url: `${API_SOCIAL_POSTS}/${id}`, // Use constant for individual post URL
+        method: "GET",
+        headers: headers(), // Use headers with API key
+      };
+
+      const response = await fetch(request.url, {
+        method: request.method,
+        headers: request.headers,
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't read post");
+    },
+
+    update: async function(id, { title, body, tags, media }) {
+      const request = {
+        url: `${API_SOCIAL_POSTS}/${id}`, // Use constant for individual post URL
+        method: "PUT",
+        headers: headers(), // Use headers with API key
+        body: JSON.stringify({ title, body, tags, media }),
+      };
+
+      const response = await fetch(request.url, {
+        method: request.method,
+        headers: request.headers,
+        body: request.body,
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't update post");
+    },
+
+    delete: async function(id) {
+      const request = {
+        url: `${API_SOCIAL_POSTS}/${id}`, // Use constant for individual post URL
+        method: "DELETE",
+        headers: headers(), // Use headers with API key
+      };
+
+      const response = await fetch(request.url, {
+        method: request.method,
+        headers: request.headers,
+      });
+
+      if (response.ok) {
+        return true;
+      }
+
+      throw new Error("Couldn't delete post");
+    }
+  };
+
+  // Multiple posts handling
   posts = {
     read: async (page = 1, limit = 12, tag) => {
-        const url = new URL(NoroffAPI.paths.posts(this.user.name));
-        
-        if (tag) {
-            url.searchParams.append("tag", tag);
-        }
+      const url = new URL(API_SOCIAL_POSTS);
+      
+      if (tag) {
+        url.searchParams.append("tag", tag);
+      }
 
-        url.searchParams.append("page", page);
-        url.searchParams.append("limit", limit);
+      url.searchParams.append("page", page);
+      url.searchParams.append("limit", limit);
 
-        const response = await fetch(url, {
-            headers: NoroffAPI.util.setupHeaders(),
-        });
+      const response = await fetch(url, {
+        headers: headers(), // Use headers with API key
+      });
 
-        const { data } = await NoroffAPI.util.handleResponse(response);
+      if (response.ok) {
+        const { data } = await response.json();
         return data;
+      }
+
+      throw new Error("Couldn't read posts");
     },
+    
     create: async ({ title, body, tags, media }) => {
-        const url = new URL(NoroffAPI.paths.posts(this.user.name), {
-          
-        });
-        const response = await fetch(url, {
-            method: "POST",
-            headers: NoroffAPI.util.setupHeaders(),
-            body: JSON.stringify({ title, body, tags, media })
-        })
-        const { data } = await NoroffAPI.util.handleResponse(response);
-        return data
+      const url = new URL(API_SOCIAL_POSTS);
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: headers(), // Use headers with API key
+        body: JSON.stringify({ title, body, tags, media })
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't create post");
     }
-  }
+  };
+
+  // User profiles handling
+  profiles = {
+    read: async (username) => {
+      const url = new URL(`${API_SOCIAL_PROFILES}/${username}`);
+
+      const response = await fetch(url, {
+        headers: headers(), // Use headers with API key
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't read user profile");
+    }
+  };
+
+  // User profile name handling
+  profilesName = {
+    read: async (username) => {
+      const url = new URL(`${API_SOCIAL_PROFILES_NAME}/${username}`);
+
+      const response = await fetch(url, {
+        headers: headers(), // Use headers with API key
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't read user profile name");
+    }
+  };
+
+  // Post-related methods for a specific tag
+  postsTag = {
+    read: async (tag, page = 1, limit = 12) => {
+      const url = new URL(`${API_SOCIAL_POSTS_TAG}?tag=${tag}`);
+
+      url.searchParams.append("page", page);
+      url.searchParams.append("limit", limit);
+
+      const response = await fetch(url, {
+        headers: headers(), // Use headers with API key
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't read posts with tag");
+    }
+  };
+
+  // Search functionality
+  search = {
+    posts: async (query) => {
+      const url = new URL(`${API_SOCIAL_POSTS}?search=${query}`);
+
+      const response = await fetch(url, {
+        headers: headers(), // Use headers with API key
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't search posts");
+    }
+  };
+
+  // Tag handling
+  tags = {
+    read: async () => {
+      const response = await fetch(API_SOCIAL_POSTS_TAG, {
+        headers: headers(), // Use headers with API key
+      });
+
+      if (response.ok) {
+        const { data } = await response.json();
+        return data;
+      }
+
+      throw new Error("Couldn't read tags");
+    }
+  };
 }

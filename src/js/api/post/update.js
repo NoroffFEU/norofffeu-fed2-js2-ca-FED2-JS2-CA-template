@@ -1,22 +1,23 @@
-import { currentUser } from '../../utilities/currentUser.js';
-import { API_SOCIAL_POSTS } from '../constants.js';
+// src/js/api/post/update.js
 
-export async function updatePost(id, { title, body, tags, media }) {
+import { currentUser } from '/src/js/utilities/currentUser.js';
+import { headers } from '/src/js/api/headers.js';
+import { API_SOCIAL_POSTS } from '/src/js/api/constants.js';
+
+export async function editPost(id, { title, body, tags, media}) {
     const user = currentUser();
 
-    const response = await fetch(API_SOCIAL_POSTS(id), {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.token}`,
-        },
-        body: JSON.stringify({ title, body, tags, media }),
+    const data = { title, body, tags, media };
+    const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
+        method: 'PUT',
+        headers: headers(true),
+        body: JSON.stringify(data),
     });
 
-    if (response.ok) {
-        const { data } = await response.json();
-        return data;
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Post update failed");
     }
 
-    throw new Error("Couldn't update post" + id);
+    return await response.json();
 }

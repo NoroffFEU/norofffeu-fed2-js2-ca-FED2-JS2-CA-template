@@ -1,5 +1,14 @@
-import { onRegister } from "../../ui/auth/register";
+// src/js/router/views/register.js
 
-const form = document.forms.register;
+import { onRegister } from "../../ui/auth/register.js";
 
-form.addEventListener("submit", onRegister);
+export default async function registerRouter() {
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("registerForm");
+    if (form) {
+      form.addEventListener("submit", onRegister);
+    } else {
+      console.error("Register form not found");
+    }
+  });
+}

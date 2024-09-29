@@ -1,1 +1,7 @@
-alert("Page cannot be found in /src/views");
+// src/js/router/views/notFound.js
+
+export default function notFoundRouter() {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("notFoundMessage").textContent = "The page you're looking for does not exist.";
+    });
+  }

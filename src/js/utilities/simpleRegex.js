@@ -1,3 +1,5 @@
+// src/js/utilities/simpleRegex.js
+
 // Find a fragment anywhere in the string
 function findFramentAnywhere(form, stringToSearch) {
     const regex = new RegExp(term, 'i');
