@@ -3,11 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Post - Noroff FED2 JS2 CA</title>
+    <title>LinkUp</title>
     <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="/src/css/style.css">
   </head>
   <body>
-    <main>
+    <header class="main-header">
+      <div class="container">
+        <a href="/index.html" class="logo">LinkUp</a>
+        <nav>
+          <a href="/" id="home-link">Home</a>
+          <a href="/auth/login/" id="login-link">Login</a>
+          <a href="/auth/register/" id="register-link">Register</a>
+          <a href="/profile/" id="profile-link" style="display: none;">Profile</a>
+          <a href="/post/create/" id="createPostLink" style="display: none;">Create Post</a>
+          <button id="logout-btn" style="display: none;">Logout</button>
+        </nav>
+      </div>
+    </header>
+  <body>
+    <main class="create-form">
     <h1>Create Post</h1>
     <form name="createPost">
       <div>
