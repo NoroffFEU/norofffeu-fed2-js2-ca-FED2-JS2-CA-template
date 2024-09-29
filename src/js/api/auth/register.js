@@ -32,6 +32,5 @@ export async function register({ name, email, password }) {
     }
   } catch (error) {
     alert("Something went wrong trying to register an account");
-    console.log(error);
   }
 }

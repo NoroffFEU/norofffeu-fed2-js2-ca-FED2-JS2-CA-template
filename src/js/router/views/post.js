@@ -18,7 +18,6 @@ const showPost = async () => {
   const comments = post.comments;
   const settingsContainer = document.getElementById("postSettingsContainer");
   const commentContainer = document.getElementById("postCommentContainer");
-  console.log("post:", post);
 
   comments.forEach((comment) => {
     const commentDiv = document.createElement("div");

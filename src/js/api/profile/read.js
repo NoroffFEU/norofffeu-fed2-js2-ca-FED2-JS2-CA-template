@@ -19,11 +19,11 @@ export async function readProfile(username) {
     });
     if (response.ok) {
       const profileData = await response.json();
-      console.log(profileData.data);
+
       return profileData.data;
     }
   } catch (error) {
-    console.log(error);
+    alert("something went wrong trying to get your profile information");
   }
 }
 

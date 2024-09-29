@@ -18,7 +18,6 @@ import { headers } from "../headers";
 export async function updateProfile(username, { avatar, banner, bio }) {
   try {
     const blob = { avatar: avatar, banner: banner, bio: bio };
-    console.log(blob);
 
     const response = await fetch(API_SOCIAL_PROFILES + "/" + username, {
       method: "PUT",
@@ -37,6 +36,5 @@ export async function updateProfile(username, { avatar, banner, bio }) {
     }
   } catch (error) {
     alert("something went wrong trying to update your profile");
-    console.log(error);
   }
 }

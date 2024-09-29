@@ -25,7 +25,5 @@ export async function onCreatePost(event) {
     media: media,
   };
 
-  console.log("data:", createPostData);
-
   createPost(createPostData);
 }

@@ -24,11 +24,9 @@ export async function getKey() {
 
     if (response.ok) {
       const key = await response.json();
-      console.log(key);
       localStorage.setItem("API KEY", JSON.stringify(key));
     }
   } catch (error) {
-    console.log(error);
     alert("something went wrong trying to get apiKey");
   }
 }

@@ -10,8 +10,6 @@ export const makeAPost = (post, id) => {
   const userinfo = JSON.parse(localStorage.getItem("userInfo"));
   const username = userinfo.name;
 
-  console.log("username: ", username);
-  console.log("post Username: ", post);
   const container = document.createElement("div");
   container.className = "postContainer";
   const countDiv = document.createElement("div");

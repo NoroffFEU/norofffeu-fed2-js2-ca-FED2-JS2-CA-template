@@ -15,7 +15,6 @@ setLogoutListener();
  */
 const readHomePagePosts = async () => {
   const posts = await readPosts();
-  console.log("All posts: ", posts);
 
   posts.forEach((post) => {
     makeAPost(post, "allPosts");

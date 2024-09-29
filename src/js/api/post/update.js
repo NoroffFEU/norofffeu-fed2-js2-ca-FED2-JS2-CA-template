@@ -29,12 +29,6 @@ export async function updatePost(id, { title, body, tags, media }) {
       headers: headers(),
       body: JSON.stringify(bodyElement),
     });
-    console.log("Response:", response);
-
-    console.log("inside headers:");
-    headers().forEach((element) => {
-      console.log(element);
-    });
 
     if (response.ok) {
       alert("You updated the post!");
@@ -42,6 +36,5 @@ export async function updatePost(id, { title, body, tags, media }) {
     }
   } catch (error) {
     alert("Something went wrong trying to update the post!");
-    console.log(error);
   }
 }

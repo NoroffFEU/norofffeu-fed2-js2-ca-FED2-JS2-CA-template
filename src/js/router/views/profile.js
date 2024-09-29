@@ -25,7 +25,6 @@ const readProfileInfo = async () => {
   const username = JSON.parse(localStorage.getItem("userInfo"));
   const data = await readProfile(username.name);
   const userPosts = await readPostsByUser(username.name);
-  console.log(data);
 
   const bannerDiv = document.getElementById("profileBanner");
   const profileImageDiv = document.getElementById("profileImage");

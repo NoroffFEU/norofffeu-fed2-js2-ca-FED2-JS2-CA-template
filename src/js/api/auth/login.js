@@ -26,13 +26,11 @@ export async function login({ email, password }) {
     if (response.ok) {
       alert(`Successfully logged in"`);
       const data = await response.json();
-      console.log("Data:", data.data.name);
       localStorage.setItem("userInfo", JSON.stringify(data.data));
       localStorage.setItem("token", JSON.stringify(data.data.accessToken));
       window.location.href = "/";
     }
   } catch (error) {
     alert("Something went wrong trying to login");
-    console.log(error);
   }
 }
