@@ -12,25 +12,19 @@
   <body>
     <img src="/images/noroff-logo.png" alt="Noroff Logo" />
 
-    <h1>Home</h1>
-
-    <a href="/profile/" class="button-style">My Profile</a>
+    <h1>My posts</h1>
     <a href="/post/create/" class="button-style">Create Post</a>
-    <a href="/posts/" class="button-style">My Posts</a>
-    <a id="logoutBtn" class="button-style">Logout</a>
+    <a href="/" class="button-style">Back to main page</a>
 
-    <h2>Latest posts by Noroff students:</h2>
     <div id="posts-list"></div>
 
     <template id="post-template">
       <div class="card">
-        <h3 id="title">Loading title...</h3>
+        <h2 id="title">Loading title...</h2>
         <p id="content">Loading content...</p>
       </div>
       <br>
     </template>
-
-    <script type="module" src="src/js/ui/auth/logout.js"></script>
   </body>
 
 </html>

@@ -1,11 +1,13 @@
 import { onReadPosts } from "../../ui/home";
 import { authGuard } from "../../utilities/authGuard";
-import { readPosts } from "../../api/post/read";
+import { readPostsByUser } from "../../api/post/read";
+import { getLoggedInUser } from "../../utilities/getLoggedInUser.js";
 
 authGuard();
 
 try {
-    const posts = await readPosts();
+    const user = getLoggedInUser();
+    const posts = await readPostsByUser(user.name);
     onReadPosts(posts);
 } catch (error) {
     console.error("Failed to fill posts:", error);

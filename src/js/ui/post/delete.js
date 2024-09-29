@@ -9,7 +9,9 @@ export async function onDeletePost() {
     
     try {
         const response = await deletePost(postId);
-        console.log(response);
+        if (response) {
+            alert("Post deleted successfully");
+        }
         window.location.href = "/";
     } catch (error) {
         console.error("An error occurred during post deletion:", error);
