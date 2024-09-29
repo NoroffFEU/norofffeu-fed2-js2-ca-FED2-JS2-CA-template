@@ -5,6 +5,7 @@ export async function onReadPost() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const postIdString = urlParams.get("id");
+        
         const fetchPost = await readPost(postIdString);
         document.getElementById("content").textContent = fetchPost.body;
         document.getElementById("title").textContent = fetchPost.title;
