@@ -1,18 +1,14 @@
-import { loginUser } from '../../api/auth/login';
+import { login } from "../../api/auth/login";
 
-document.getElementById('loginForm').addEventListener('submit', async (event) => {
+export async function onLogin(event) {
     event.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const formData = new FormData(event.target);
 
-    try {
-        const result = await loginUser(email, password);
-        if (result) {
-            alert('Login successful!'); // Provide feedback to the user
-            window.location.href = '/home'; // Redirect to home page after successful login
-        }
-    } catch (error) {
-        alert(`Error: ${error.message}`);
-    }
-});
+    const loginData = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+    };
+
+    login(loginData);
+}

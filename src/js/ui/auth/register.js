@@ -1,20 +1,14 @@
-import { registerUser } from '../../api/auth/register';
+import { register } from "../../api/auth/register";
 
-document.getElementById('registerForm').addEventListener('submit', async (event) => {
+export async function onRegister(event) {
     event.preventDefault();
+    const formData = new FormData(event.target)
+    
+    const registerData = {
+        name:  formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password")
+    };
 
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const result = await registerUser(username, email, password);
-        if (result) {
-            alert('Registration successful!'); // Provide feedback to the user
-            window.location.href = '/login'; // Redirect to login page after success
-        }
-    } catch (error) {
-        alert(`Error: ${error.message}`);
-    }
-});
-
+    register(registerData)
+}  
