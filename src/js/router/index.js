@@ -73,6 +73,16 @@
         console.error("Error loading profile view:", error);
       }
       break;
+                case "/post/create/":
+                  case "/post/create/index.html":
+                    console.log("Attempting to load create post view");
+                    try {
+                      const { setupCreatePostFunctionality } = await import("../ui/post/create.js");
+                      setupCreatePostFunctionality();
+                    } catch (error) {
+                      console.error("Error loading create post view:", error);
+                    }
+                    break;
       default:
         console.log("Attempting to load not found view");
         try {
