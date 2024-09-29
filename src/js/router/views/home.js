@@ -1,4 +1,10 @@
-// home.js
+/**
+ * @file home.js
+ * @description This file handles the logic for displaying posts on the home page, including populating the post feed, adding delete functionality, and protecting the page with authentication.
+ * It also sets up the logout listener and ensures the user is authenticated.
+ */
+
+
 import { authGuard } from "../../utilities/authGuard";
 import { readPosts } from "../../api/post/read.js";
 import { deletePost } from "../../api/post/delete.js"; // Import the deletePost function
@@ -9,6 +15,21 @@ setLogoutListener();
 authGuard();
 
 const profile = await readProfile();
+/**
+ * Populates the page with a list of posts by fetching them from the API.
+ * This function retrieves posts, creates post cards, and handles delete functionality for posts.
+ * If the user is the author of a post, they are given the option to edit or delete their post.
+ * 
+ * @async
+ * @function populatePosts
+ * @throws {Error} Logs an error if the posts cannot be fetched or if there is an issue in displaying them.
+ * 
+ * @returns {Promise<void>} No return value.
+ * 
+ * @example
+ * // Automatically called when the page is loaded
+ * populatePosts();
+ */
 
 async function populatePosts() {
   const mainContent = document.querySelector(".main-content");
@@ -73,7 +94,6 @@ async function populatePosts() {
        
       `;
 
-      console.log(post.id);
 
       // Attach delete event listener
       const deleteButton = postCard.querySelector(".like-button.delete-btn");

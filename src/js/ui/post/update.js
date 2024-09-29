@@ -1,3 +1,27 @@
+/**
+ * Handles the post update form submission, sends the updated post data to the API, and provides feedback to the user.
+ * 
+ * @async
+ * @function onUpdatePost
+ * @param {Event} event - The form submission event triggered by the post update form.
+ * 
+ * @throws {Error} Throws an error if the post update request fails.
+ * 
+ * @returns {Promise<void>} No return value, but resets the form on success.
+ * 
+ * @example
+ * // Attach this function to the form's submit event:
+ * document.getElementById('updatePostForm').addEventListener('submit', onUpdatePost);
+ * 
+ * // The form should contain fields for 'title', 'content', and 'url':
+ * // <form id="updatePostForm">
+ * //   <input type="text" name="title" required>
+ * //   <textarea name="content" required></textarea>
+ * //   <input type="url" name="url" required>
+ * //   <button type="submit">Update Post</button>
+ * // </form>
+ */
+
 import { updatePost } from "../../api/post/update";
 export async function onUpdatePost(event) {
   // ui/post/create.js
@@ -23,5 +47,6 @@ export async function onUpdatePost(event) {
   } catch (error) {
     console.error("Error creating post:", error);
     alert("Failed to create post.");
+    console.log(error)
   }
 }

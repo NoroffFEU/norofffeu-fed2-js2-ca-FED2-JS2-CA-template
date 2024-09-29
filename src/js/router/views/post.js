@@ -1,3 +1,30 @@
+/**
+ * Displays a post's details on the page, including title, content, author, and comments.
+ * Handles interactions such as adding comments, and conditionally shows delete and edit buttons
+ * if the logged-in user is the author of the post.
+ * 
+ * @async
+ * @file viewPost.js
+ * 
+ * @throws {Error} Logs any error that occurs during the fetching or manipulation of post data.
+ * 
+ * @example
+ * // Ensure the URL contains a query parameter for the post ID, e.g. ?id=12
+ * // The HTML should include elements with IDs 'authorBurner', 'title', 'content', 'username', 'postimage', 'delete', 'edit', 'commentList', 'add-comment', and 'comment-body'.
+ * 
+ * // HTML example:
+ * // <div id="authorBurner"></div>
+ * // <h1 id="title"></h1>
+ * // <p id="content"></p>
+ * // <img id="postimage">
+ * // <button id="delete">Delete</button>
+ * // <button id="edit">Edit</button>
+ * // <div id="commentList"></div>
+ * // <textarea id="comment-body"></textarea>
+ * // <button id="add-comment">Add Comment</button>
+ * 
+ * // The following script would be included on a post view page to show post details and allow commenting.
+ */
 import { readPost } from "../../api/post/read";
 import { readProfile } from "../../api/profile/read.js";
 import { commentOnPost } from "../../api/post/update.js";

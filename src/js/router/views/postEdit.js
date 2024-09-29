@@ -40,7 +40,7 @@ form.addEventListener("submit", async function (e) {
     // update post in the api
     const res = await updatePost(id, {
       title: title.value,
-      body: content.textContent,
+      body: content.value,
       tags: [""],
       media,
     });

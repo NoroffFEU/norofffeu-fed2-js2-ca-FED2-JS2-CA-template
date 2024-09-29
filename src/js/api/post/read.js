@@ -1,6 +1,33 @@
+/**
+ * @file read.js
+ * @description This module contains functions for fetching social media posts from an API, either by post ID, multiple posts with optional filters, or posts by a specific user.
+ */
+
 const API_URL = "https://v2.api.noroff.dev/social/posts";
 
-// Fetch a single post by ID (consistent approach with the login method)
+/**
+ * Fetches a single post by its ID, including the author and comments.
+ * This function sends a GET request to the API and returns the post data.
+ * 
+ * @async
+ * @function readPost
+ * @param {string} id - The unique identifier of the post to fetch.
+ * 
+ * @throws {Error} Throws an error if the request to fetch the post fails.
+ * 
+ * @returns {Promise<Object>} The post data including author and comments.
+ * 
+ * @example
+ * const postId = "123456";
+ * 
+ * readPost(postId)
+ *   .then(post => {
+ *     console.log("Fetched post:", post);
+ *   })
+ *   .catch(error => {
+ *     console.error("Error fetching post:", error);
+ *   });
+ */
 export async function readPost(id) {
   try {
     const response = await fetch(
