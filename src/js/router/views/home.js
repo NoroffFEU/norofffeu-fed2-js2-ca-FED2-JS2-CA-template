@@ -4,6 +4,7 @@ import { readPosts } from "../../api/post/read";
 
 authGuard();
 
+// Fills the posts on the home page.
 try {
     const posts = await readPosts();
     onReadPosts(posts);

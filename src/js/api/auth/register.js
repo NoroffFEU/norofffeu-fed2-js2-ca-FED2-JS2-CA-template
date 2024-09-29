@@ -1,10 +1,11 @@
 import { API_AUTH_REGISTER } from "../constants.js";
 import { headers } from "../headers.js";
 
+// Register function to authenticate user and store token in localStorage
 export async function register({ name, email, password }) {
-  
+  // Create a JSON string from the data object
   const body = JSON.stringify({ name, email, password });
-
+  
   try {
     const response = await fetch(API_AUTH_REGISTER, {
       headers: headers(),

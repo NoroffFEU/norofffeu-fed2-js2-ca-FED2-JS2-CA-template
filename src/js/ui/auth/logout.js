@@ -1,5 +1,7 @@
 document.getElementById("logoutBtn").addEventListener("click", onLogout);
 
+// Function called when logout button is clicked.
+// Removes token from local storage, redirects to login page.
 export function onLogout() {
     // Remove token from local storage
     localStorage.removeItem("token");

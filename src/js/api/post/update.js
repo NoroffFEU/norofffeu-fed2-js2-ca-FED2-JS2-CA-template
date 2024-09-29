@@ -1,6 +1,7 @@
 import { API_SOCIAL_POSTS } from "../constants";
 import { headers } from "../headers";
 
+// Updates a post with PUT method to API_SOCIAL_POSTS
 export async function updatePost(id, { title, content }) {
     const postBody = JSON.stringify({ title, body: content });
     

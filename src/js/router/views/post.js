@@ -4,6 +4,7 @@ import { onReadPost } from "../../ui/post/read";
 const urlParams = new URLSearchParams(window.location.search);
 const postIdString = urlParams.get("id");
 
+// Fills the post on the single post page.
 try {
     const post = await readPost(postIdString);
     onReadPost(post)

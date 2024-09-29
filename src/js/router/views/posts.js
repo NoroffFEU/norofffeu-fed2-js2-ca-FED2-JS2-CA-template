@@ -5,6 +5,7 @@ import { getLoggedInUser } from "../../utilities/getLoggedInUser.js";
 
 authGuard();
 
+// Checks if/who's user is logged in, then fills the posts by specific user.
 try {
     const user = getLoggedInUser();
     const posts = await readPostsByUser(user.name);

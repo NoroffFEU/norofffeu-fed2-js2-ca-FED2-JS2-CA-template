@@ -1,5 +1,7 @@
 import { login } from '../../api/auth/login.js';
 
+// This function is called when the login form is submitted.
+// Calls login function from API, redirects to home page on success.
 export async function onLogin(event) {
     event.preventDefault();
     

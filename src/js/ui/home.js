@@ -1,4 +1,4 @@
-
+// Showing posts on home page. This is the same as the posts page, but it shows all posts by all users.
 export async function onReadPosts(posts) {
     const postsList = document.getElementById("posts-list");
     posts.forEach((post) => {

@@ -2,6 +2,7 @@ import { API_AUTH_LOGIN } from "../constants.js";
 // import { API_AUTH_KEY } from "../constants.js"; ??
 import { headers } from "../headers.js";
 
+// Login function to authenticate user and store token in localStorage
 export async function login({ email, password }) {
   try {
     const response = await fetch(API_AUTH_LOGIN, {

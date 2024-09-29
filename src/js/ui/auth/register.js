@@ -1,5 +1,7 @@
 import { register } from "../../api/auth/register.js";
 
+// Called when registration form is submitted. 
+// Sets values and calls register(POST) function from API.
 export async function onRegister(event) {
   event.preventDefault();
 

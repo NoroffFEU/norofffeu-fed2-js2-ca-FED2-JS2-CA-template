@@ -1,7 +1,7 @@
 import { API_SOCIAL_POSTS } from "../constants.js";
 import { headers } from "../headers.js";
 
-
+// Creates a new post with POST method to API_SOCIAL_POSTS
 export async function createPost({ title, content }) {
     const postBody = JSON.stringify({ title, body: content });
     

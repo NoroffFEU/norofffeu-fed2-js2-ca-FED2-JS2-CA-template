@@ -1,5 +1,6 @@
 import { deletePost } from "../../api/post/delete.js";
 
+// Deletes post with DELETE method in deletePost. Uses ID to delete specific post.
 export async function onDeletePost() {
     console.log("Delete post button clicked");
     

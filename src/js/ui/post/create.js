@@ -1,5 +1,7 @@
 import { createPost } from "../../api/post/create.js";
 
+// Creates new post
+// Gets values from form, uses POST method in createPost to push new post to API.
 export async function onCreatePost(event) {
   event.preventDefault();
 

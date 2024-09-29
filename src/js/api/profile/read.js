@@ -1,7 +1,7 @@
 import { API_SOCIAL_PROFILES } from "../constants";
 import { headers } from "../headers";
 
-
+// Gets specific profile from API by username.
 export async function readProfile(username) {
     try {
         const response = await fetch(`${API_SOCIAL_PROFILES}/${username}`, {
