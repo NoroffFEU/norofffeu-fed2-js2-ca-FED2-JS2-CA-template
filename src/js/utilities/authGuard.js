@@ -1,6 +1,11 @@
+// src/js/utilities/authGuard.js
+
 export function authGuard() {
-  if (!localStorage.token) {
-    alert("You must be logged in to view this page");
-    window.location.href = "/auth/login/";
+  const token = localStorage.getItem('token');
+  if (!token) {
+      console.log('No token found, redirecting to login');
+      window.location.href = '/auth/login/';
+  } else {
+      console.log('Token found, user is authenticated');
   }
 }
