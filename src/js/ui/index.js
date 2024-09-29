@@ -3,7 +3,7 @@
 import { login, register, logout } from '../api/auth.js';
 import { createPost, readPost, readPosts, deletePost, updatePost } from '../api/post.js';
 import { handleFormSubmit } from './form.js'; // Form handling utility function
-
+import { currentUser } from '../utilities/currentUser.js'; 
 // Main Application Class
 export default class NoroffApp {
   // Initializes the app based on the current path
@@ -11,25 +11,25 @@ export default class NoroffApp {
     const pathname = window.location.pathname;
 
     switch (pathname) {
-      case '/auth/login/':
+      case '/auth/login/index.html':
         this.initLoginPage();
         break;
-      case '/auth/register/':
+      case '/auth/register/index.html':
         this.initRegisterPage();
         break;
-      case '/post/create/':
+      case '/post/create/index.html':
         this.initCreatePostPage();
         break;
-      case '/post/':
+      case '/post/index.html':
         this.initSinglePostPage();
         break;
-      case '/post/edit/':
+      case '/post/edit/index.html':
         this.initUpdatePostPage();
         break;
       case '/post/delete/':
         this.initDeletePostPage();
         break;
-      case '/profile/':
+      case '/profile/index.html':
         this.initProfilePage();
         break;
       case '/auth/logout/':
@@ -90,7 +90,7 @@ export default class NoroffApp {
       const data = handleFormSubmit(event);
       try {
         const post = await createPost(data); // Create the post using API
-        window.location.href = `/post/index.html/?id=${newPost.id}`; // Redirect to the newly created post
+        window.location.href = `/post/index.html?id=${newPost.id}`; // Redirect to the newly created post
 
       } catch (error) {
         alert(error.message);
@@ -110,7 +110,7 @@ export default class NoroffApp {
       const data = handleFormSubmit(event);
       try {
         await updatePost(id, data); // Update the post using API
-        window.location.href = `/post/index.html/?id=${newPost.id}`; // Redirect to the updated post's page
+        window.location.href = `/post/index.html?id=${newPost.id}`; // Redirect to the updated post's page
       } catch (error) {
         alert(error.message);
         console.error('Post Update Error:', error);
@@ -173,7 +173,7 @@ export default class NoroffApp {
 
       posts.forEach((post) => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="/post/?id=${post.id}">${post.title}</a>`;
+        listItem.innerHTML = `<a href="/post/index.html?id=${post.id}">${post.title}</a>`;
         listElement.appendChild(listItem);
       });
     } catch (error) {

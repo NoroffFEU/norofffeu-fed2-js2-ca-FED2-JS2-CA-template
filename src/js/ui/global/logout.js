@@ -5,7 +5,7 @@ export function onLogout() {
     // Remove user-related information from local storage
     localStorage.removeItem("token");  // Remove the stored token
     localStorage.removeItem("user");   // Remove the stored user information
-  
+
     // Log a message for debugging purposes
     console.log("User has been logged out");
 
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("logoutButton");
   if (logoutButton) {
     logoutButton.addEventListener("click", onLogout);
-    
   } else {
     console.error("Logout button not found in the DOM");
   }

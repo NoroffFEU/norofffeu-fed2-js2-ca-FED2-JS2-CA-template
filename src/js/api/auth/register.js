@@ -2,7 +2,8 @@
 
 import api from "../../api/instance.js";
 
-const api = new NoroffAPI();
+
+const api = NoroffAPI();
 
 // Function to handle the API registration request
 export async function onRegister(event) {

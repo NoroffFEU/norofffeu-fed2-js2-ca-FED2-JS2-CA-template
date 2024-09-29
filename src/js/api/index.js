@@ -1,17 +1,22 @@
 // src/js/api/index.js
 
 import {
-  API_AUTH_KEY,
   API_AUTH_LOGIN,
   API_AUTH_REGISTER,
   API_SOCIAL_POSTS,
   API_SOCIAL_PROFILES,
   API_SOCIAL_PROFILES_NAME,
   API_SOCIAL_POSTS_TAG,
-} from './constants.js'; // Import API URLs from constants.js
-import { headers } from './headers.js'; // Import headers function from headers.js
+} from '/src/js/api/constants.js'; // Import API URLs from constants.js
+import { headers } from '/src/js/api/headers.js'; // Import headers function from headers.js
 
 export default class NoroffAPI {
+
+  constructor() {
+    // Bind auth methods to the class instance
+    this.auth.login = this.auth.login.bind(this);
+    this.auth.register = this.auth.register.bind(this);
+  }
 
   get user() {
     try {
@@ -68,22 +73,23 @@ export default class NoroffAPI {
         body,
       });
     
-        console.log("Response Status:", response.status); // Log response status
+      console.log("Response Status:", response.status); // Log response status
       if (response.ok) {
         const { data } = await response.json();
         const { accessToken: token, ...user } = data;
         localStorage.token = token;
         localStorage.user = JSON.stringify(user);
-        return data;
+        return { user, token };  // Return the correctly formatted data
       }
     
       // Capture and log the error message returned by the server
       const errorData = await response.json();
       console.log("Registration Error", errorData); // Log server error message
       throw new Error(errorData.message || "Couldn't register");
-    }.bind(this),
+    }.bind(this), // Ensure register function is bound to the class instance
     
   };
+
 
   // Post-related methods
   post = {
