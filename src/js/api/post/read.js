@@ -92,7 +92,7 @@ export async function readPostsByUser(username, limit = 12, page = 1) {
 
       const userPosts = data.data;
 
-      console.log(userPosts);
+      console.log("before filter", userPosts);
       const test = userPosts.filter((post) => {
         return post.author.name === username;
       });

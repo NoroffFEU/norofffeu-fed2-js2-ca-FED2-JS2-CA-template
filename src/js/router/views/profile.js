@@ -1,7 +1,7 @@
 import { readPostsByUser } from "../../api/post/read";
 import { readProfile } from "../../api/profile/read";
 import { setLogoutListener } from "../../ui/global/logout";
-import { makePost } from "../../ui/post/makePost";
+import { makeAPost } from "../../ui/post/makePost";
 import { onUpdateProfile } from "../../ui/profile/update";
 import { authGuard } from "../../utilities/authGuard";
 
@@ -53,7 +53,9 @@ const readProfileInfo = async () => {
   nameDiv.appendChild(name);
   bioDiv.appendChild(bio);
 
-  makePost(userPosts, "userPosts");
+  userPosts.forEach((post) => {
+    makeAPost(post, "userPosts");
+  });
 };
 
 readProfileInfo();
