@@ -20,6 +20,7 @@ export async function onCreatePost(event) {
         await createPost({ title, body, tags, media });
         alert('Post created successfully!');
         form.reset(); // Reset form after successful post creation
+        window.location.href = "/"
     } catch (error) {
         console.error('Error creating post:', error);
         alert('Failed to create post.');

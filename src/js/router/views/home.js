@@ -22,7 +22,9 @@ async function populatePosts() {
 
   try {
     const response = await readPosts(12, 1);
-    const posts = response.data;
+    let posts = response.data;
+    posts = posts.slice(0, 12);
+    console.log(posts.length);
 
     if (!Array.isArray(posts)) {
       console.error("Error: Expected an array of posts, but got:", posts);
@@ -41,7 +43,7 @@ async function populatePosts() {
       postCard.classList.add("post-card");
 
       postCard.innerHTML = `
-        <a href="posts/page.html">
+        <a href="/post/?id=${post.id}">
           <div class="post-header">
             <img src="${
               post.author?.avatar?.url ||
@@ -49,7 +51,7 @@ async function populatePosts() {
             }" alt="${post.author?.name || "Unknown User"}">
             <div class="username">${post.author?.name || "Unknown User"}</div>
           </div>
-        </a>
+        
         <h2>${post.title || "Untitled Post"}</h2>
         <div class="post-content">${post.body || "No content available."}</div>
         <div class="post-image">
@@ -62,16 +64,13 @@ async function populatePosts() {
           ${
             post.author?.name == profile.data.name
               ? `  
-             <button class="like-button">Edit</button>
+             <a href="/post/edit/?id=${post.id}"> <button class="like-button">Edit</button> </a>
                 <button class="like-button delete-btn">Delete</button>`
               : ``
           }
         </div>
-        <div class="comment-section">
-          <input type="text" class="comment-input" placeholder="Add a comment...">
-          <button class="comment-button">Comment</button>
-          <div class="comments-list"></div>
-        </div>
+        </a>
+       
       `;
 
       console.log(post.id);

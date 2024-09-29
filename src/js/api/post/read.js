@@ -3,14 +3,17 @@ const API_URL = "https://v2.api.noroff.dev/social/posts";
 // Fetch a single post by ID (consistent approach with the login method)
 export async function readPost(id) {
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`, // Token from local storage
-        "X-Noroff-API-Key": "9b16dd46-dba3-44c7-a516-66599a3c7358",
-      },
-    });
+    const response = await fetch(
+      `${API_URL}/${id}?_author=true&_comments=true`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Token from local storage
+          "X-Noroff-API-Key": "9b16dd46-dba3-44c7-a516-66599a3c7358",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch post");

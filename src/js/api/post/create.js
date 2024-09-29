@@ -23,3 +23,4 @@ export async function createPost({ title, body, tags, media }) {
 
   return await response.json();
 }
+

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,13 +8,22 @@
     <script type="module" src="/src/app.js"></script>
   </head>
   <body class="post-body">
-   <main class="mainp">
-    <form name="createPost" class="formp" onsubmit="create(event)" id="register-form">
-      <input type="text" id="title" name="title" placeholder="Title" required>
-      <textarea id="content" name="content" placeholder="Content" required></textarea>
-      <input type="text" id="url"  placeholder= "URL" required>
-      <button type="submit" >Publish</button>
-    </form>
-   </main>
+    <main class="mainp">
+      <form name="createPost" class="formp" id="register-form">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title"
+          required />
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Content"
+          required></textarea>
+        <input type="text" id="url" placeholder="URL" required />
+        <button type="submit">Publish</button>
+      </form>
+    </main>
   </body>
 </html>
