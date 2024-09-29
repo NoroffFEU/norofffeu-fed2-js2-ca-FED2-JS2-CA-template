@@ -1,6 +1,17 @@
 import { login } from '../../api/auth/login.js';
 import { updateNavigation } from '../../../app.js';
 
+/**
+ * Sets up the login form by attaching an event listener to handle form submission.
+ * 
+ * @function setupLoginForm
+ * @returns {void}
+ * 
+ * @example
+ * // Call this function when the login page loads
+ * setupLoginForm();
+ */
+
 export function setupLoginForm() {
   console.log('Setting up login form');
   const form = document.querySelector('#login-form');
@@ -12,6 +23,20 @@ export function setupLoginForm() {
     console.error('Login form not found');
   }
 }
+
+/**
+ * Handles the login form submission.
+ * 
+ * This function prevents the default form submission, extracts the email and password
+ * from the form, attempts to log in the user, and handles the response. On successful
+ * login, it stores the user data in localStorage, updates navigation, and redirects to the home page.
+ * 
+ * @async
+ * @function onLogin
+ * @param {Event} event - The submit event from the login form.
+ * @returns {Promise<void>}
+ * @throws {Error} Throws an error if login fails or if the response is in an unexpected format.
+ */ 
 
 async function onLogin(event) {
   console.log('onLogin function called');
@@ -33,14 +58,21 @@ async function onLogin(event) {
     }
     
     localStorage.setItem('token', accessToken);
-    localStorage.setItem('user', JSON.stringify(data.user || data.data?.user || data));
+    
+    // Store individual user properties
+    const user = data.user || data.data?.user || data;
+    localStorage.setItem('name', user.name);
+    localStorage.setItem('email', user.email);
+    localStorage.setItem('user', JSON.stringify(user));
     
     console.log('Token stored in localStorage:', localStorage.getItem('token'));
+    console.log('Name stored in localStorage:', localStorage.getItem('name'));
+    console.log('Email stored in localStorage:', localStorage.getItem('email'));
     console.log('User stored in localStorage:', localStorage.getItem('user'));
     
     updateNavigation(); // Call this after setting the token
     
-    window.location.href = '/';
+    window.location.href = '/';  // Redirect to profile page instead of home
   } catch (error) {
     console.error('Login failed:', error);
     alert(`Login failed: ${error.message}`);
