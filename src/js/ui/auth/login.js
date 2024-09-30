@@ -11,14 +11,18 @@ export async function onLogin(event) {
 
   try {
     // Call the login function and get user details
-    const userData = await login(data);
+    const { user, accessToken } = await login(data);
 
     // Store user details in localStorage
-    localStorage.setItem('user', JSON.stringify(userData.user));
-    localStorage.setItem('token', userData.token);
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', accessToken);
+
+    // Log to check if the values are stored correctly
+    console.log("User stored:", JSON.parse(localStorage.getItem('user')));
+    console.log("Token stored:", localStorage.getItem('token'));
 
     // Redirect to the profile or home page after successful login
-    window.location.href = '/profile/index.html';
+    window.location.href = '/post/create/index.html';
   } catch (error) {
     alert('Login failed: ' + error.message);
     console.error("Login Error:", error);
@@ -27,5 +31,10 @@ export async function onLogin(event) {
 
 // Attach the event listener to the form on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('loginForm').addEventListener('submit', onLogin);
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', onLogin);
+  } else {
+    console.error("Login form not found in the DOM");
+  }
 });

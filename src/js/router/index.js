@@ -1,6 +1,6 @@
 import { authGuard } from '../utilities/authGuard.js';
 
-export async function router(pathname = window.location.pathname) {
+export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case '/auth/login/index.html':
       await import('../ui/auth/login.js');

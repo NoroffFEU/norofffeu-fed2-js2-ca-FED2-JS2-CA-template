@@ -5,7 +5,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
-    <script type="module" src="/src/js/ui/profile/profile.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
+    <script type="module" src="/src/js/ui/global/logout.js"></script>
   </head>
   <body>
     <a href="/index.html">Home</a>
@@ -15,12 +16,11 @@
     <section>
       <h1>User Profile</h1>
       <div>
-        <label for="username">Username: </label>
+        <label id="username"  for="username">Username: </label>
         <span id="username">Loading...</span>
       </div>
       <div>
-        <label for="email">Email: </label>
-        <span id="email">Loading...</span>
+        <label id="email" for="email">Email: </label>
       </div>
       <div>
         <label for="bio">Bio: </label>
@@ -32,6 +32,8 @@
     <a href="/post/create/index.html">
       <button>Create Post</button>
     </a>
+
+    <ul id="postList"></ul>
 
   </body>
 </html>

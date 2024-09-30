@@ -1,27 +1,34 @@
 // src/js/api/headers.js
 
-import { API_KEY } from "/src/js/api/constants.js"; // Ensure API_KEY is imported from constants
+import { API_KEY } from './constants.js';
 
-export function headers(includeAuth = false) { // Changed parameter name to includeAuth
+// Function to build headers for various API requests
+export function headers(includeContentType = false, includeAuth = true) {
   const headers = new Headers();
 
-  // Always include the API key in the headers
+  // Always include the API key in the headers if available
   if (API_KEY) {
-    headers.append("X-Noroff-API-Key", API_KEY);
+    headers.append('X-Noroff-API-Key', API_KEY);
   } else {
-    console.error("API_KEY is missing in headers.js");
+    console.error('API_KEY is missing. Please check your configuration.');
   }
 
-  // Include Authorization header if a token is present in localStorage and `includeAuth` is true
-  const token = localStorage.getItem("token");
+  // Include Authorization header only if includeAuth is true and a valid token is present in localStorage
+  const token = localStorage.getItem('token');
   if (includeAuth && token) {
-    headers.append("Authorization", `Bearer ${token}`);
-  } else if (includeAuth) { // Only log this if includeAuth is true
-    console.error("Authorization token is missing in localStorage");
+    headers.append('Authorization', `Bearer ${token}`);
+    console.log("Authorization Header Set:", `Bearer ${token}`);
+  } else if (includeAuth) {
+    console.warn('Authorization token is missing or undefined in localStorage.');
   }
 
-  // Include Content-Type header for JSON body if necessary
-  headers.append("Content-Type", "application/json");
+  // Include Content-Type header for JSON body if specified
+  if (includeContentType) {
+    headers.append('Content-Type', 'application/json');
+  }
+
+  // Log headers for debugging purposes
+  console.log('Request Headers:', [...headers.entries()]);
 
   return headers;
 }
