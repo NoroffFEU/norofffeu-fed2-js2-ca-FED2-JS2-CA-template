@@ -15,13 +15,18 @@ export function populateCreatePostForm() {
     // Define the input fields to be added to the form
     const fields = [
         { name: "title", type: "text", placeholder: "Title", required: true },
-        { name: "body", type: "textarea", placeholder: "Post Content", required: true },
+        {
+            name: "body",
+            type: "textarea",
+            placeholder: "Post Content",
+            required: true,
+        },
         { name: "tags", type: "text", placeholder: "Tags (comma separated)" },
         { name: "media", type: "text", placeholder: "Media URL" },
     ];
 
     // Dynamically create and append input fields to the form
-    fields.forEach(field => {
+    fields.forEach((field) => {
         const label = document.createElement("label");
         label.textContent = field.placeholder;
         form.appendChild(label);
@@ -54,7 +59,7 @@ export async function onCreatePost(event) {
     // Collect input values from the form
     const title = form.title.value;
     const body = form.body.value;
-    const tags = form.tags.value.split(",").map(tag => tag.trim());
+    const tags = form.tags.value.split(",").map((tag) => tag.trim());
     const media = form.media.value;
 
     console.log("Post data:", { title, body, tags, media });
@@ -66,7 +71,7 @@ export async function onCreatePost(event) {
         if (response.ok) {
             const responseData = await response.json();
             console.log("Post created successfully!", responseData);
-            form.reset(); // Reset the form after successful post creation
+            window.location.href = "/";
         } else {
             const errorText = await response.text();
             console.error("Failed to create post:", response.status, errorText);
