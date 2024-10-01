@@ -34,9 +34,9 @@ async function displayPosts(page = 1) {
         card.innerHTML = `
                 <div class="media">
                 <img src="${
-            post.media?.url ||
-            "https://upload.wikimedia.org/wikipedia/commons/f/f9/No-image-available.jpg"
-        }" alt="${post.media?.alt || "Post Image"}">
+                    post.media?.url ||
+                    "https://upload.wikimedia.org/wikipedia/commons/f/f9/No-image-available.jpg"
+                }" alt="${post.media?.alt || "Post Image"}">
             </div>
             <h2 class="title">${post.title}</h2>
             <p class="tags">${post.tags.join(", ")}</p>
