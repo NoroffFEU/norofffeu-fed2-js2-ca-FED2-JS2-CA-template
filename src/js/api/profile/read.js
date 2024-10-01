@@ -1,5 +1,17 @@
 import { API_KEY, API_SOCIAL_PROFILES } from "../constants.js";
 
+/**
+ * Fetches the user profile data from the API based on the stored user ID.
+ *
+ * @returns {Promise<{ok: boolean, data?: Object, error?: string}>}
+ * - An object containing:
+ *   - `ok`: Indicates if the fetch was successful.
+ *   - `data`: The profile data if the fetch is successful.
+ *   - `error`: An error message if the fetch fails.
+ *
+ * @throws {Error} Throws an error if the request fails.
+ */
+
 export async function readProfile() {
     const name = localStorage.getItem("userID");
 
