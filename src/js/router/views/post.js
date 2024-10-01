@@ -8,7 +8,6 @@ import { readPost } from "../../api/post/read";
  */
 async function initialize() {
     const selectedPostId = localStorage.getItem("selectedPostId");
-    console.log("Selected Post ID:", selectedPostId);
 
     if (!selectedPostId) {
         console.error("No post ID found.");
@@ -18,10 +17,14 @@ async function initialize() {
     try {
         const post = await readPost(selectedPostId);
         const user = localStorage.getItem("userID");
-        console.log("Fetched Post:", post);
 
         if (post) {
             const postContainer = document.getElementById("postContainer");
+            const dateToString = post.data.created;
+            const date = new Date(dateToString);
+            const day = date.getUTCDate();
+            const month = date.toLocaleString("default", { month: "short" });
+            const year = date.getUTCFullYear();
 
             postContainer.innerHTML += `
                 <div class="media">
@@ -39,7 +42,8 @@ async function initialize() {
                     : ""
             }
                 <p class="body">${post.data.body}</p>
-                <p class="created">${post.data.created}</p>
+                <p class="created">${day} ${month} ${year}</p>
+                    <p>${post.data.author.name}</p>
                 `;
             if (post.data.author.name === user) {
                 const editBtn = document.createElement("button");

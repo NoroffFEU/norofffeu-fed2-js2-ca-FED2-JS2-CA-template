@@ -1,15 +1,20 @@
 import { API_AUTH_LOGIN, API_KEY } from "../constants.js";
 
 /**
- * Logs in a user with the provided email and password.
- *
+ * Logs in by sending credentials.
  * @param {Object} credentials - The login credentials.
  * @param {string} credentials.email - The user's email address.
  * @param {string} credentials.password - The user's password.
- * @returns {Promise<Object>} - A promise that resolves to an object containing the login result.
- *                              - If successful, the object has the structure: { ok: true, data: <user data> }
- *                              - If unsuccessful, the object has the structure: { ok: false, error: <error message> }
+ * @returns {Promise<{ok: boolean, data?: Object, error?: string}>}
+ * - An object containing:
+ *   - `ok`: Indicates if the login was successful.
+ *   - `data`: The response data from the server if successful.
+ *   - `error`: An error message if the login failed.
+ *
+ * @throws {Error} Throws an error if the login request fails due to issues
+ * or errors.
  */
+
 export async function login({ email, password }) {
     try {
         const response = await fetch(API_AUTH_LOGIN, {

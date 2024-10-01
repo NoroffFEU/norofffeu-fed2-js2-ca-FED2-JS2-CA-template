@@ -41,6 +41,7 @@ async function displayPosts(page = 1) {
             <h2 class="title">${post.title}</h2>
             <p class="tags">${post.tags.join(", ")}</p>
             <p class="body">${post.body}</p>
+            <p class="body">${post.name}</p>
         `;
 
         card.addEventListener("click", () => {
