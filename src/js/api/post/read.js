@@ -1,6 +1,15 @@
 import { API_SOCIAL_POSTS, API_KEY } from "../constants";
 import { getKey } from "../auth/key";
 
+/**
+ * Fetches a single post by its ID from the API.
+ *
+ * @param {string} id - The ID of the post to fetch.
+ * @returns {Promise<Object|null>} - Returns the post object if found, otherwise null.
+ *
+ * @throws {Error} Throws an error if the request fails.
+ */
+
 export async function readPost(id) {
     const accessToken = await getKey();
     if (!accessToken) {
@@ -35,6 +44,15 @@ export async function readPost(id) {
         throw error;
     }
 }
+
+/**
+ * Fetches multiple posts from the API with pagination and optional tagging.
+ *
+ * @param {number} [limit=12] - The maximum number of posts to return.
+ * @param {number} [page=1] - The page number for pagination.
+ * @param {string} [tag] - An optional tag to filter posts.
+ * @throws {Error} Throws an error if the request fails.
+ */
 
 // multiple posts
 export async function readPosts(limit = 12, page = 1, tag) {
