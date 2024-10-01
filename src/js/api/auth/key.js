@@ -5,7 +5,7 @@ export async function getKey() {
     } else {
         console.error("Access denied: No access token found.");
 
-        window.location.href = "/login";
+        window.location.href = "/auth/login/";
         return null;
     }
 }

@@ -71,4 +71,5 @@ export async function readPosts(limit = 12, page = 1, tag) {
         return { ok: false, error: error.message };
     }
 }
+
 export async function readPostsByUser(username, limit = 12, page = 1, tag) {}
