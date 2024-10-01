@@ -45,7 +45,7 @@ export async function register({ name, email, password }) {
         }
 
         alert("Your registration was successful!");
-        location.href = "./auth/login";
+        location.href = "/auth/login";
         return { ok: true, data };
     } catch (error) {
         console.error("Error:", error.message);
