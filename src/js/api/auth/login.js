@@ -2,7 +2,6 @@ import { API_AUTH_LOGIN, API_KEY } from "../constants.js";
 
 /**
  * Logs in by sending credentials.
- *
  * @param {Object} credentials - The login credentials.
  * @param {string} credentials.email - The user's email address.
  * @param {string} credentials.password - The user's password.

@@ -3,8 +3,13 @@ import { readPost } from "../../api/post/read";
 import { updatePost } from "../../api/post/update";
 import { deletePost } from "../../api/post/delete";
 
+// Ensure the user is authenticated before proceeding
 authGuard();
 
+/**
+ * Initializes the edit post form by fetching the selected post data
+ * and populating the form fields with the post's current information.
+ */
 async function initialize() {
     const selectedPostId = localStorage.getItem("selectedPostId");
     console.log("Selected Post ID:", selectedPostId);
@@ -21,31 +26,22 @@ async function initialize() {
         if (post) {
             const editPostForm = document.getElementById("editPostForm");
 
+            // Populate the edit form with the post data
             editPostForm.innerHTML = `
                 <label>Media URL</label>
-                <input type="text" id="mediaUrl" value="${
-                    post.data.media?.url || ""
-                }" placeholder="Media URL"/>
+                <input type="text" id="mediaUrl" value="${post.data.media?.url || ""}" placeholder="Media URL"/>
                 
                 <label>Media Alt</label>
-                <input type="text" id="mediaAlt" value="${
-                    post.data.media?.alt || ""
-                }" placeholder="Media Alt"/>
+                <input type="text" id="mediaAlt" value="${post.data.media?.alt || ""}" placeholder="Media Alt"/>
                 
                 <label>Title</label>
-                <input type="text" id="title" value="${
-                    post.data.title || ""
-                }" placeholder="Title"/>
+                <input type="text" id="title" value="${post.data.title || ""}" placeholder="Title"/>
                 
                 <label>Tags</label>
-                <input type="text" id="tags" value="${
-                    post.data.tags.join(", ") || ""
-                }" placeholder="Tags"/>
+                <input type="text" id="tags" value="${post.data.tags.join(", ") || ""}" placeholder="Tags"/>
                 
                 <label>Body</label>
-                <textarea id="body" placeholder="Body">${
-                    post.data.body || ""
-                }</textarea>
+                <textarea id="body" placeholder="Body">${post.data.body || ""}</textarea>
                 
                 <button type="submit" id="editPostBtn">Update Post</button>
                 <button type="submit" id="deletePostBtn">Delete Post</button>
@@ -53,6 +49,7 @@ async function initialize() {
 
             const editPostBtn = document.getElementById("editPostBtn");
 
+            // Event listener for updating the post
             editPostBtn.addEventListener("click", async (event) => {
                 event.preventDefault();
 
@@ -79,6 +76,7 @@ async function initialize() {
             });
 
             const deletePostBtn = document.getElementById("deletePostBtn");
+            // Event listener for deleting the post
             deletePostBtn.addEventListener("click", async (event) => {
                 event.preventDefault();
 
@@ -101,6 +99,7 @@ async function initialize() {
     }
 }
 
+// Initialize the form when the DOM is fully loaded
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialize);
 } else {
