@@ -1,12 +1,18 @@
 import { createPost as apiCreatePost } from "../../api/post/create.js";
 
+/**
+ * Populates the form used to create a new post with input fields dynamically.
+ * Prevents adding duplicate fields by checking for existing ones.
+ */
 export function populateCreatePostForm() {
     const form = document.forms.createPost;
 
+    // Check if the title input already exists
     if (form.querySelector("input[name='title']")) {
         return;
     }
 
+    // Define the input fields to be added to the form
     const fields = [
         { name: "title", type: "text", placeholder: "Title", required: true },
         { name: "body", type: "textarea", placeholder: "Post Content", required: true },
@@ -14,6 +20,7 @@ export function populateCreatePostForm() {
         { name: "media", type: "text", placeholder: "Media URL" },
     ];
 
+    // Dynamically create and append input fields to the form
     fields.forEach(field => {
         const label = document.createElement("label");
         label.textContent = field.placeholder;
@@ -36,11 +43,15 @@ export function populateCreatePostForm() {
     });
 }
 
+/**
+ * Handles the submission of the post creation form and sends the post data to the API.
+ * @param {Event} event - The form submit event.
+ */
 export async function onCreatePost(event) {
     event.preventDefault();
     const form = event.target;
 
-    // Collect input values
+    // Collect input values from the form
     const title = form.title.value;
     const body = form.body.value;
     const tags = form.tags.value.split(",").map(tag => tag.trim());
@@ -49,12 +60,13 @@ export async function onCreatePost(event) {
     console.log("Post data:", { title, body, tags, media });
 
     try {
+        // Send the post data to the API for creation
         const response = await apiCreatePost({ title, body, tags, media });
 
         if (response.ok) {
             const responseData = await response.json();
             console.log("Post created successfully!", responseData);
-            form.reset();
+            form.reset(); // Reset the form after successful post creation
         } else {
             const errorText = await response.text();
             console.error("Failed to create post:", response.status, errorText);
@@ -64,4 +76,5 @@ export async function onCreatePost(event) {
     }
 }
 
+// Initialize the form by populating it with input fields
 populateCreatePostForm();
