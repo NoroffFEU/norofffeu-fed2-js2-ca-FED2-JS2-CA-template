@@ -15,15 +15,25 @@ export async function onRegister(event) {
 
   try {
     // Call the register function and handle the response
-    const userData = await register(data);
-    console.log('Registration successful:', userData);
+    const { user, accessToken } = await register(data); // Register the user
 
-    // Log the localStorage values to ensure they are correctly set
-    console.log('Stored User:', localStorage.getItem('user'));
-    console.log('Stored Token:', localStorage.getItem('token'));
+    // Verify that the user object is correctly returned
+    if (!user || !accessToken) {
+      throw new Error('Registration failed: No user data or access token returned');
+    }
 
-    // Redirect to the login page after successful registration
-    window.location.href = '/auth/login/index.html';
+    console.log(`User registered successfully with name: ${user.name} and email: ${user.email}`);
+
+    // Store user and token in local storage to be used in subsequent requests
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', accessToken);
+
+    // Verify that localStorage has been correctly set
+    console.log('Stored User in localStorage:', JSON.parse(localStorage.getItem('user')));
+    console.log('Stored Token in localStorage:', localStorage.getItem('token'));
+
+    // Redirect to the profile page or home page after successful registration and login
+    window.location.href = '/profile/index.html';
   } catch (error) {
     console.error('Error during registration:', error.message);
     alert(`Registration failed: ${error.message}`);

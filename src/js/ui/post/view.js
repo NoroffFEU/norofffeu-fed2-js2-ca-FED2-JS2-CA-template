@@ -14,21 +14,36 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    // Fetch the post data using the API and populate the DOM with it
-    const post = await readPost(id);
-    document.getElementById('title').textContent = post.title;
-    document.getElementById('body').textContent = post.body;
-    document.getElementById('tags').textContent = post.tags.join(', ');
-    document.getElementById('id').value = id; // Set hidden input field value
+    // Fetch the post data using the API
+    const response = await readPost(id);
+    console.log('Post Data:', response); // Log the entire response to verify structure
+
+    // Extract post data from the response
+    const post = response.data;
+
+    // Check if post data is available
+    if (!post) {
+      displayError('No post data found.');
+      return;
+    }
+
+    // Populate existing HTML elements with post data
+    document.getElementById('title').textContent = post.title || 'No Title Available';
+    document.getElementById('body').textContent = post.body || 'No Content Available';
+
+    // Check if post.tags is defined and is an array
+    const tagsElement = document.getElementById('tags');
+    if (Array.isArray(post.tags) && post.tags.length > 0) {
+      tagsElement.textContent = `Tags: ${post.tags.join(', ')}`;
+    } else {
+      tagsElement.textContent = 'No tags';
+    }
+
+    // Set the edit link URL to include the post ID
+    const editLink = document.getElementById('editLink');
+    editLink.href = `/post/edit/index.html?id=${id}`;
+
   } catch (error) {
     displayError(error.message || 'Failed to load post.');
-  }
-  // Add event listener to the "Edit Button" button
-  const editButton = document.getElementById('updatePost');
-  if (editButton) {
-    editButton.addEventListener('click', (event) => {
-      // Redirect to the edit page with the post ID in the URL
-      window.location.href = `/post/edit/index.html?id=${id}`
-    });
   }
 });

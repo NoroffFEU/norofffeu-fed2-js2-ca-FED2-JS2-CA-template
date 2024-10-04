@@ -1,4 +1,8 @@
-import { authGuard } from '../utilities/authGuard.js';
+
+// Import the Noroff API class
+import { NoroffAPI } from '../api/index.js';
+
+const apiInstance = new NoroffAPI();
 
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {

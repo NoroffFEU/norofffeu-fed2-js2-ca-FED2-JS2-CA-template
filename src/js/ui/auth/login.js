@@ -13,16 +13,25 @@ export async function onLogin(event) {
     // Call the login function and get user details
     const { user, accessToken } = await login(data);
 
-    // Store user details in localStorage
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', accessToken);
+    // Log the received user data for debugging
+    console.log('User received from login:', user);
+    console.log('Access Token received:', accessToken);
 
-    // Log to check if the values are stored correctly
-    console.log("User stored:", JSON.parse(localStorage.getItem('user')));
-    console.log("Token stored:", localStorage.getItem('token'));
+    // Ensure user and token are defined before storing in localStorage
+    if (user && accessToken) {
+      // Store user details in localStorage
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', accessToken);
 
-    // Redirect to the profile or home page after successful login
-    window.location.href = '/post/create/index.html';
+      // Log to check if the values are stored correctly
+      console.log("User stored in localStorage:", JSON.parse(localStorage.getItem('user')));
+      console.log("Token stored in localStorage:", localStorage.getItem('token'));
+
+      // Redirect to the profile or home page after successful login
+      window.location.href = '/post/create/index.html';
+    } else {
+      throw new Error('User or access token is undefined');
+    }
   } catch (error) {
     alert('Login failed: ' + error.message);
     console.error("Login Error:", error);

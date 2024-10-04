@@ -7,6 +7,8 @@
     <title>Post View</title>
     <script type="module" src="/src/js/app.js"></script>
     <script type="module" src="/src/js/ui/global/logout.js"></script>
+    <script type="module" src="/src/js/ui/post/view.js"></script>
+    <script type="module" src="/src/js/ui/post/delete.js"></script>
   </head>
   <body>
     <a href="/index.html">Home</a>
@@ -16,11 +18,15 @@
     <section>
       <h1 id="title">Title</h1>
       <p id="body">Body content goes here...</p>
-      <p id="tags">Tags: <span id="tagList">No tags</span></p>
-      <a href="/post/edit.html?id=" id="editLink">Edit Post</a>
+      <p id="tags">Tags</p>
+      <a href="/post/edit/index.html?id=" id="editLink">Edit Post</a>
+      <a href="/posts/index.html">
+        <button id="viewPosts">View Posts</button>
+      </a>
       <form id="deleteForm">
         <button type="button" id="deleteButton">Delete Post</button>
       </form>
+      
     </section>
     
   </body>

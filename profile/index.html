@@ -7,6 +7,7 @@
     <title>Profile</title>
     <script type="module" src="/src/js/app.js"></script>
     <script type="module" src="/src/js/ui/global/logout.js"></script>
+    <script type="module" src="/src/js/ui/profile/profile.js"></script>
   </head>
   <body>
     <a href="/index.html">Home</a>
@@ -17,7 +18,7 @@
       <h1>User Profile</h1>
       <div>
         <label id="username"  for="username">Username: </label>
-        <span id="username">Loading...</span>
+        <span id="username"></span>
       </div>
       <div>
         <label id="email" for="email">Email: </label>
@@ -31,6 +32,9 @@
 
     <a href="/post/create/index.html">
       <button>Create Post</button>
+    </a>
+    <a href="/posts/index.html">
+      <button>View Posts</button>
     </a>
 
     <ul id="postList"></ul>

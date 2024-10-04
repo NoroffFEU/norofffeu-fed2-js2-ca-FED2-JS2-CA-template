@@ -10,7 +10,7 @@ import {
 } from '/src/js/api/constants.js'; // Import API URLs from constants.js
 import { headers } from '/src/js/api/headers.js'; // Import headers function from headers.js
 
-export default class NoroffAPI {
+export class NoroffAPI {
 
   constructor() {
     // Bind auth methods to the class instance

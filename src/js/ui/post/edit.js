@@ -11,20 +11,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
+    // Fetch the post data using the API and populate the form fields
     const post = await readPost(postId);
-    form.title.value = post.title;
-    form.body.value = post.body;
-    form.tags.value = post.tags.join(', ');
+    form.title.value = post.title || 'No Title Available'; // Fallback if title is missing
+    form.body.value = post.body || 'No Content Available'; // Fallback if body is missing
+    form.tags.value = Array.isArray(post.tags) ? post.tags.join(', ') : ''; // Ensure tags are an array before using join
 
+    // Handle form submission
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const formData = new FormData(form);
       const updatedData = Object.fromEntries(formData.entries());
+
+      // Convert the tags string into an array
+      updatedData.tags = updatedData.tags.split(',').map(tag => tag.trim());
+      console.log('Updated Post Data:', updatedData); // Log the updated data for debugging
+
       try {
+        // Update the post using the modified payload structure
         await updatePost(postId, updatedData);
         window.location.href = `/post/index.html?id=${postId}`;
       } catch (error) {
-        console.error(error);
+        console.error('Failed to update post:', error);
         alert('Failed to update post');
       }
     });
