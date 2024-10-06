@@ -1,5 +1,6 @@
 import { authGuard } from "../../utilities/authGuard";
-
+import { onUpdatePost } from "../../ui/post/update";
+import { readPost } from "../../api/post/read";
 authGuard();
 
 
