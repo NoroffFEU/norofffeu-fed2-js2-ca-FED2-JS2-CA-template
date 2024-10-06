@@ -2,7 +2,7 @@ import { authGuard } from "../../utilities/authGuard";
 
 authGuard();
 
-// Edit an existing post
+
 export async function editPost(postId, updatedData) {
     try {
         const response = await fetch(`${BASE_URL}/${postId}`, {
