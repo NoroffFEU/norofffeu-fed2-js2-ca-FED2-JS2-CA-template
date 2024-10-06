@@ -1,4 +1,4 @@
-const apiUrl = "https://api.noroff.dev"; // Base URL of the API
+const apiUrl = "https://api.noroff.dev"; 
 
 async function loginUser(email, password) {
     try {
@@ -35,3 +35,4 @@ document.getElementById('loginForm')?.addEventListener('submit', (event) => {
     const password = document.getElementById('password').value;
     loginUser(email, password);
 });
+

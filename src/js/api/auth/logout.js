@@ -1,7 +1,7 @@
 function logoutUser() {
-    localStorage.removeItem('jwtToken'); // Remove token from localStorage
+    localStorage.removeItem('jwtToken'); 
     alert('You have been logged out.');
-    window.location.href = 'index.html'; // Redirect to login page
+    window.location.href = 'index.html';
 }
 
 document.getElementById('logoutButton')?.addEventListener('click', () => {

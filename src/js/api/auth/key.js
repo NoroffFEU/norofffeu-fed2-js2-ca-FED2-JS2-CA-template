@@ -1,6 +1,6 @@
 export async function getKey(name) {}
 
-const API_URL = 'https://v2.api.noroff.dev/api'; // Base URL for the API
+const API_URL = 'https://docs.noroff.dev/docs/v2/auth/api-key'; 
 
 export const registerUser = async (email, password) => {
     const response = await fetch(`${API_URL}/auth/register`, {
