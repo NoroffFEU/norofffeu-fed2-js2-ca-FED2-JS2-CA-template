@@ -1,11 +1,10 @@
-import { API_KEY } from "./constants";
-
 export function headers() {
-  const headers = new Headers();
-
-  if (API_KEY) {
-    headers.append("X-Noroff-API-Key", API_KEY);
-  }
-
-  return headers;
+  const accessToken = localStorage.getItem('jwtToken'); // Retrieve the JWT token
+  const apiKey = localStorage.getItem('apiKey'); // Retrieve the API key
+  
+  return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`, // Use the stored JWT token
+      'X-Noroff-API-Key': apiKey // Use the stored API key
+  };
 }
