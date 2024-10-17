@@ -189,10 +189,10 @@ export default class NoroffApp extends NoroffAPI {
       logoutButton.addEventListener("click", (event) => {
         event.preventDefault();
   
-        NoroffAPI.user = null;
-        NoroffAPI.token = null;
-        localStorage.page = null;
-      
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("page");
+        
         alert("You have successfully logged out.");
         window.location.href = "/";
       });
