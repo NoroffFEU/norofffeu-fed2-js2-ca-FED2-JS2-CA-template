@@ -7,7 +7,7 @@ $grid-breakpoints: (
   xxl: 1400px
 );
 
-$spacer: 1rem !default;
+$spacer: 1rem;
 $spacers: (
   0: 0,
   1: $spacer * .25, // 4px
@@ -23,5 +23,12 @@ $spacers: (
   11: $spacer * 8, // 128px
   12: $spacer * 11, // 176px
 ) !default;
+
+$input-btn-padding-y: .75rem;
+
+$form-label-margin-bottom: .75rem;
+
+$link-color: #212529;
+$link-decoration: none;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
