@@ -1,17 +1,21 @@
-import NoroffAPI from "../../api/index.js";
-
-const api = new NoroffAPI()
+import { authService } from "../../api/index";
 
 export async function onRegister(event) {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    event.preventDefault(); // Prevent the default form submission
+
+    const form = event.target; // Get the form that triggered the event
+    const formData = new FormData(form); // Create a FormData object from the form
+    const data = Object.fromEntries(formData.entries()); // Convert FormData to an object
 
     try{
-        await api.auth.register(data)
-        window.location.href = "/"
+        const userData = await authService.register(data)
+        if(userData){
+            window.location.href = '/'
+        }else {
+            alert('registration failed:', userData.message)
+        }
     } catch (error){
-        console.log("Could not send resgister data",error)
+        console.error('Registration error:', error);
+        alert('An error occurred during registration. Please try again.');
     }
 }

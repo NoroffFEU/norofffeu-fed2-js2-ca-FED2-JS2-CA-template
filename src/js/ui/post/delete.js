@@ -1,24 +1,23 @@
-import NoroffAPI from "../../api"
+import { postService } from "../../api/index";
 
-const api = new NoroffAPI()
-
-export async function onDeletePost(event) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
-
-    const confirmDelete = confirm("Are you sure ?")
-    if(!confirmDelete){
-        return
-    }
+export async function onDeletePost(postId) {
+    console.log("postId",postId)
+    
+    const confirmDelete = confirm("Are you sure you want to delete this post?")
+    if(!confirmDelete) return
 
     try{
-        const response = await api.post.delete(postId);
-
+        const result = await postService.delete(postId);
+        alert('Post deleted successfully');
+        window.location.href = '/'
         if(response){
             alert("Post successfully Delete")
-        }
-
+        }else {
+            console.error('Failed to delete post:', result.message);
+            alert('Error deleting post');
+          }
     }catch(error){
-        console.log("failed to delete",error)
+        console.error('Error deleting post:', error);
+        alert('An error occurred while deleting the post.');
     }
 }

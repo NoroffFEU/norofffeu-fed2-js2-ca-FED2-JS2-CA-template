@@ -1,62 +1,78 @@
 import { authGuard } from "../../utilities/authGuard";
 authGuard();
 
-import NoroffAPI from "../../api";
-import { renderPagination } from "../../utilities/pagination";
-import { searchProfile } from "../../utilities/search";
-import { onLogout } from "../../ui/auth/logout";
+import { postService } from "../../api/index";
 
+let currentPage = 1;
+let totalPage = 1;
+let isLoading = false;
 
-const api = new NoroffAPI();
+const postGrid = document.querySelector(".post-grid");
 
-export async function displayAllProfiles(profiles) {
-  const profileContainer = document.getElementById("getAllProfiles");
-  profileContainer.innerHTML = "";
-  const profilesHTML = profiles
-    .map(
-      (profile) => `
-        <div class="profiles" onclick="window.location.href='/profile/detail/?name=${profile.name}'">
-        <h2>${profile.name}</h2>
-        <h2>${profile.email}</h2>
-        </div>
-        `
-    )
-    .join("");
+async function fetchPosts(page = currentPage) {
+  // if(isLoading) return;
+  // isLoading = true
 
-  if (!profileContainer) {
-    console.error("The profiles container was not found.");
-    return; // Exit the function if the container isn't found
-  }
+  try {
+    const result = await postService.getAll(page);
+    console.log("Home",result);
 
-  profileContainer.innerHTML = profilesHTML;
-}
+    if (result) {
+      const posts = result;
+      // const dataPage = result;
 
-async function onPageChange(page) {
-  const data = await api.Pagination.readProfiles(12, page); 
-  const { profiles, totalPages, currentPage } = data;
-  displayAllProfiles(profiles);
-  renderPagination(totalPages, currentPage, onPageChange);
-}
+      // currentPage = newCurrentPage;
+      // totalPages = pageCount;
 
-async function displayPagination(page= 1) {
-  
-  try{
-    const data = await api.Pagination.readProfiles(12, page); 
-    const {profiles, totalPages, currentPage } = data;
-   
-    const seachProfileBtn = document.getElementById('searchProfileSubmitBtn');
-    if (!seachProfileBtn){
-      return
+      renderPosts(posts);
+    } else {
+      console.error("Failed to fetch posts:", result.message);
     }
-    seachProfileBtn.addEventListener('click', searchProfile)
-    document.getElementById('logoutButton').addEventListener('click', onLogout);
-    
-    displayAllProfiles(profiles);
-    renderPagination(totalPages, currentPage, onPageChange);
-  }
-  catch (error) {
-    console.error("Error fetching profiles or rendering pagination:", error);
+  } catch (error) {
+    console.error("Error loading posts:", error);
+  } finally {
+    isLoading = false;
   }
 }
 
-displayPagination();
+function renderPosts (posts){
+  if(!Array.isArray(posts)){
+    console.error('Expected an array of posts');
+    return;
+  }
+
+  const postElements = posts.map((post) =>{
+    const postElement = document.createElement('div');
+    postElement.classList.add('post');
+
+    // const formattedDate = formatDate(post.created);
+    // const formattedTags = formatTags(post.tags)
+
+    postElement.innerHTML = `
+    <div class="post-meta">
+      <a class="profile-link" href="/profile/?username=${post.author.name}">
+        <img class="author-avatar" src="${post.author.avatar.url}" alt="${post.author.avatar.alt}" />
+      </a>
+      <div class="post-info">
+        <a class="profile-link" href="/profile/?username=${post.author.name}"><span class="mb--1"><small>${post.author.name}</small></span></a>
+       
+      </div>
+    </div>
+    <a class="post-details-link" href="/post/?id=${post.id}">
+      <h2>${post.title}</h2>
+    </a>
+    
+    `;
+
+    return postElement;
+  })
+
+  postGrid.append(...postElements);
+}
+
+fetchPosts();
+
+
+export function sum(a, b) {
+  return a + b;
+}

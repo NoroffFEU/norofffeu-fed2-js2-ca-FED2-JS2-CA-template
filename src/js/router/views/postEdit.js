@@ -1,49 +1,49 @@
 import { authGuard } from "../../utilities/authGuard";
-import NoroffAPI from "../../api";
+import { postService } from "../../api/index";
 import { onUpdatePost } from "../../ui/post/update";
-import { onDeletePost } from "../../ui/post/delete";
-
 
 authGuard();
 
+async function fetchAndUpdatePost(){
+  const postId = new URLSearchParams(window.location.search).get('id')
+  
+  if (!postId) {
+    console.error('No post ID provided in the URL')
+    return;
+  }
 
-const api = new NoroffAPI();
-
-const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id')
-
-async function displayEditPost() {
-  try {
-
-    if (!postId) {
-        throw new Error("Post ID not found in the URL");
-      }
-
-    const post = await api.post.readSinglePost(postId);
-    
-    if(!post){
-        throw new Error("Post not found");
+  try{
+    const result = await postService.post(postId);
+    if(result){
+      populateForm(result)
+    }else{
+      console.error('Failed to fetch post:', result.message);
     }
-    
-    document.getElementById('titleInput').value = post.data.title;
-    document.getElementById('bodyInput').value = post.data.body;
-    document.getElementById('tagsInput').value = post.data.tags.join(', ');
-    if(post.data.media || post.data.media.url){
-        document.getElementById('mediaInput').value = post.data.media.url;
-    }
-    
-    }
-    catch(error){
-        console.log("Error loading post for edit", error)
-    }
+  }catch(error){
+    console.error('Error fetching post:', error);
+  }
 }
 
 
-displayEditPost();
+function populateForm(post){
+  const form = document.forms['editPost'];
+  form.title.value = post.title
+  form.body.value = post.body || '';
+  form.tags.value = post.tags ? post.tags.join(', ') : '';
+  form.media.value = post.media?.url || '';
+}
 
-const form = document.forms.editPost;
-form.addEventListener("submit", onUpdatePost);
+fetchAndUpdatePost()
 
-document.getElementById('deletePostBtn').addEventListener("click", onDeletePost);
+document.getElementById('updatePost').addEventListener('click', async (event) => {
+  const postId = new URLSearchParams(window.location.search).get('id')
+  console.log("test",postId)
+  await onUpdatePost(postId, event)
+})
 
+function handleCancelBtn (event){
+  event.preventDefault();
+  window.location.href = '/';
+}
 
+document.getElementById('cancelUpdate').addEventListener('click', handleCancelBtn)

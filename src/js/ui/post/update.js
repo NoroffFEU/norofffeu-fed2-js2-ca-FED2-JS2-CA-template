@@ -1,23 +1,45 @@
+import { postService } from "../../api/index";
 
-import NoroffAPI from "../../api";
+export async function onUpdatePost(postId, event) {
+  event.preventDefault();
 
-const api = new NoroffAPI();
+  const form = document.forms["editPost"];
 
+  if (!form) {
+    console.error("Form element not found");
+    return;
+  }
 
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
 
-export async function onUpdatePost(event) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
+  data.tags = data.tags.split(",").map((tag) => tag.trim());
 
-    event.preventDefault()
-    const form = event.target
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-   
-    try{
-        await api.post.update(postId, data);
-    }catch(error){
-       console.log("Could not destructure property ",error)
-    }
+  const payload = {
+    title: data.title,
+    body: data.body,
+    tags: data.tags,
+    media: {
+      url: data.media,
+      alt: "",
+    },
+  };
+
+  console.log("payload", payload)
+
+  try {
+    const result = await postService.update(postId, payload);
+
+    if (result) {
+      console.log("Post updated successfully:", result);
+      alert("Post updated successfully!"); // Notify the user
+      window.location.href = "/";
+    }else {
+        console.error('Failed to update post:', result.message);
+        alert('Failed to update post. Please try again.');
+      }
+  } catch (error) {
+    console.error('Error updating post:', error);
+    alert('An error occurred while updating the post.');
+  }
 }
-

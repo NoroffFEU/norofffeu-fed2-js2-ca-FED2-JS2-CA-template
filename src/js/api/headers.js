@@ -1,16 +1,17 @@
-import { getCurrentUser } from "../utilities/currentUser";
+import { API_KEY, getAuthToken } from "./constants";
 
-export function headers(apiKey) {
+export function headers() {
   const headers = new Headers();
-  const {token} = getCurrentUser();
 
   headers.append("Content-Type", "application/json");
 
-  if (apiKey) {
-    headers.append("X-Noroff-API-Key", apiKey);
+  if (API_KEY) {
+    headers.append("X-Noroff-API-Key", API_KEY);
   }
-  if (token) {
-    headers.append("Authorization", `Bearer ${token}`);
+
+  const AUTH_TOKEN = getAuthToken();
+  if (AUTH_TOKEN) {
+    headers.append("Authorization", `Bearer ${AUTH_TOKEN}`);
   }
 
   return headers;

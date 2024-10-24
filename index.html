@@ -13,6 +13,12 @@
   <a href="/">
     <img src="/images/noroff-logo.png" alt="Noroff Logo" />
   </a>
+  <input
+          class="search-box form-control"
+          id="searchInput"
+          type="text"
+          placeholder="Search"
+        />
 
   <h1>Home</h1>
 
@@ -21,7 +27,7 @@
   <a href="/post/create/">Create</a>
   <a href="/auth/login/">Login</a>
   <a href="/auth/register/">Register</a>
-  <button id="logoutButton">Logout</button>
+  <button id="logout-btn">Logout</button>
 
   <div id="searchProfileCon">
     <input type="text" id="searchQueryProfile" placeholder="Search for profile by their name or bio...">
@@ -29,5 +35,13 @@
   </div>
   <div id="getAllProfiles"></div>
   <div id="paginationContainer"></div>
+
+  <main>
+    <div class="container">
+      <main>
+        <div class="post-grid"></div>
+      </main>
+    </div>
+  </main>
 </body>
 </html>
