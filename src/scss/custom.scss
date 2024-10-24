@@ -19,6 +19,9 @@ $spacers: (
   7: $spacer * 3, // 48px
   8: $spacer * 3.5, // 56px
   9: $spacer * 4, // 64px
+  10: $spacer * 5, // 80px
+  11: $spacer * 8, // 128px
+  12: $spacer * 11, // 176px
 ) !default;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
