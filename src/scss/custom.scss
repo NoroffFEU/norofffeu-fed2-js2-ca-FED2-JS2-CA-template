@@ -4,31 +4,48 @@ $grid-breakpoints: (
   md: 768px,
   lg: 1024px,
   xl: 1200px,
-  xxl: 1400px
+  xxl: 1400px,
 );
 
 $spacer: 1rem;
 $spacers: (
   0: 0,
-  1: $spacer * .25, // 4px
-  2: $spacer * .5, // 8px
-  3: $spacer, // 16px
-  4: $spacer * 1.5, // 24px
-  5: $spacer * 2, // 32px
-  6: $spacer * 2.5, // 40px
-  7: $spacer * 3, // 48px
-  8: $spacer * 3.5, // 56px
-  9: $spacer * 4, // 64px
-  10: $spacer * 5, // 80px
-  11: $spacer * 8, // 128px
-  12: $spacer * 11, // 176px
+  1: $spacer * 0.25,
+  // 4px
+  2: $spacer * 0.5,
+  // 8px
+  3: $spacer,
+  // 16px
+  4: $spacer * 1.5,
+  // 24px
+  5: $spacer * 2,
+  // 32px
+  6: $spacer * 2.5,
+  // 40px
+  7: $spacer * 3,
+  // 48px
+  8: $spacer * 3.5,
+  // 56px
+  9: $spacer * 4,
+  // 64px
+  10: $spacer * 5,
+  // 80px
+  11: $spacer * 8,
+  // 128px
+  12: $spacer * 11,
+  // 176px
 ) !default;
 
-$input-btn-padding-y: .75rem;
+$input-btn-padding-y: 0.75rem;
 
-$form-label-margin-bottom: .75rem;
+$form-label-margin-bottom: 0.75rem;
 
 $link-color: #212529;
 $link-decoration: none;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.auth-info,
+footer {
+  font-size: $font-size-sm;
+}
