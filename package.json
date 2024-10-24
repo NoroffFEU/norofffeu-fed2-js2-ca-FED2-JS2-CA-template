@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && sass src/scss:dist/css",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "sass-build": "sass src/scss:dist/css",
