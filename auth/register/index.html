@@ -9,20 +9,24 @@
     <script type="module" src="../../src/app.js" defer></script>
   </head>
 
-  <body>
+  <body class="d-flex flex-column justify-content-between min-vh-100">
     <header class="p-3 pt-lg-6 px-lg-9 pb-lg-0">
       <a href="/">
-        <img src="/public/images/noroff-logo.png" alt="Logo" class="logo" />
+        <img
+          src="/public/images/noroff-logo.png"
+          alt="Logo"
+          class="logo col-2"
+        />
       </a>
     </header>
 
-    <main class="auth-main">
-      <h1 class="page-title">Register</h1>
-
+    <main class="auth-main px-6 mb-10">
+      <h1 class="page-title mb-5 mb-lg-6 text-center">Register</h1>
       <form name="register">
-        <div>
-          <label for="name"
-            ><input
+        <div class="form-group">
+          <label for="name" class="form-label col-12">
+            <input
+              class="form-control"
               id="name"
               type="text"
               name="name"
@@ -31,12 +35,14 @@
               maxlength="20"
               pattern="^[\w]+$"
               title="Please enter a username using only letters and numbers"
-          /></label>
+            />
+          </label>
         </div>
 
-        <div>
-          <label for="email"
-            ><input
+        <div class="form-group">
+          <label for="email" class="form-label col-12">
+            <input
+              class="form-control"
               id="email"
               type="email"
               name="email"
@@ -44,31 +50,35 @@
               required
               pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
               title="Please enter a valid noroff.no or stud.noroff.no address"
-          /></label>
+            />
+          </label>
         </div>
 
-        <div>
-          <label for="password"
-            ><input
+        <div class="form-group">
+          <label for="password" class="form-label col-12">
+            <input
+              class="form-control"
               type="password"
               name="password"
               id="password"
               placeholder="Password"
               required
               minlength="8"
-          /></label>
+            />
+          </label>
         </div>
 
-        <button type="submit" class="submit-type-button">Register</button>
-        <p class="auth-info">
-          You already have an account?<a href="/auth/login/" class="auth-link"
-            >Log in</a
-          >
+        <button type="submit" class="submit-type-button btn btn-primary col-12">
+          Register
+        </button>
+        <p class="auth-info mt-4 text-center">
+          You already have an account?
+          <a href="/auth/login/" class="auth-link ms-1 fw-bold">Log in</a>
         </p>
       </form>
     </main>
 
-    <footer>
+    <footer class="d-flex justify-content-center pb-5 pb-lg-4 gap-4">
       <a href="#">Terms Of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>

@@ -9,19 +9,24 @@
     <script type="module" src="../../src/app.js" defer></script>
   </head>
 
-  <body>
+  <body class="d-flex flex-column justify-content-between min-vh-100">
     <header class="p-3 pt-lg-6 px-lg-9 pb-lg-0">
       <a href="/">
-        <img src="/public/images/noroff-logo.png" alt="Logo" class="logo" />
+        <img
+          src="/public/images/noroff-logo.png"
+          alt="Logo"
+          class="logo col-2"
+        />
       </a>
     </header>
 
-    <main class="auth-main">
-      <h1 class="page-title">Login</h1>
+    <main class="auth-main px-6 mb-10">
+      <h1 class="page-title mb-5 mb-lg-6 text-center">Login</h1>
       <form name="login">
-        <div>
-          <label for="email">
+        <div class="form-group">
+          <label for="email" class="form-label col-12">
             <input
+              class="form-control"
               id="email"
               type="email"
               name="email"
@@ -31,9 +36,10 @@
           </label>
         </div>
 
-        <div>
-          <label for="password">
+        <div class="form-group">
+          <label for="password" class="form-label col-12">
             <input
+              class="form-control"
               type="password"
               name="password"
               id="password"
@@ -43,16 +49,17 @@
           </label>
         </div>
 
-        <button type="submit" class="submit-type-button">Log in</button>
-        <p class="auth-info">
-          Don't have an account?<a href="/auth/register/" class="auth-link"
-            >Sign up</a
-          >
+        <button type="submit" class="submit-type-button btn btn-primary col-12">
+          Log in
+        </button>
+        <p class="auth-info mt-4 text-center">
+          Don't have an account?
+          <a href="/auth/register/" class="auth-link ms-1 fw-bold">Sign up</a>
         </p>
       </form>
     </main>
 
-    <footer>
+    <footer class="d-flex justify-content-center pb-5 pb-lg-4 gap-4">
       <a href="#">Terms Of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>

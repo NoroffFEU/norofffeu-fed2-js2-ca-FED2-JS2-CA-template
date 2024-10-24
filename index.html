@@ -21,11 +21,11 @@
       </a>
     </header>
 
-    <main class="auth-main">
-      <h1 class="page-title">Login</h1>
+    <main class="auth-main px-6 mb-10">
+      <h1 class="page-title mb-5 mb-lg-6 text-center">Login</h1>
       <form name="login">
         <div class="form-group">
-          <label for="email">
+          <label for="email" class="form-label col-12">
             <input
               class="form-control"
               id="email"
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <label for="password">
+          <label for="password" class="form-label col-12">
             <input
               class="form-control"
               type="password"
@@ -50,18 +50,17 @@
           </label>
         </div>
 
-        <button type="submit" class="submit-type-button btn btn-primary">
+        <button type="submit" class="submit-type-button btn btn-primary col-12">
           Log in
         </button>
-        <p class="auth-info">
-          Don't have an account?<a href="/auth/register/" class="auth-link"
-            >Sign up</a
-          >
+        <p class="auth-info mt-4 text-center">
+          Don't have an account?
+          <a href="/auth/register/" class="auth-link ms-1 fw-bold">Sign up</a>
         </p>
       </form>
     </main>
 
-    <footer>
+    <footer class="d-flex justify-content-center pb-5 pb-lg-4 gap-4">
       <a href="#">Terms Of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>
