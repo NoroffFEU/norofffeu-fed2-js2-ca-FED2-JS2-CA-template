@@ -7,10 +7,16 @@
     "dev": "vite",
     "build": "vite build",
     "deploy": "gh-pages -d dist",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sass-build": "sass src/scss:dist/css",
+    "watch": "sass --watch src/scss:dist/css & live-server"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
+    "sass": "^1.80.4",
     "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
   }
 }
