@@ -10,38 +10,49 @@
 </head>
 
 <body>
-  <a href="/">
-    <img src="/images/noroff-logo.png" alt="Noroff Logo" />
-  </a>
-  <input
-          class="search-box form-control"
-          id="searchInput"
-          type="text"
-          placeholder="Search"
-        />
-
-  <h1>Home</h1>
-
-  <a href="/profile/">My Profile</a>
-  <a href="/post/">Posts</a>
-  <a href="/post/create/">Create</a>
-  <a href="/auth/login/">Login</a>
-  <a href="/auth/register/">Register</a>
-  <button id="logout-btn">Logout</button>
-
-  <div id="searchProfileCon">
-    <input type="text" id="searchQueryProfile" placeholder="Search for profile by their name or bio...">
-    <button id="searchProfileSubmitBtn">Submit</button>
-  </div>
-  <div id="getAllProfiles"></div>
-  <div id="paginationContainer"></div>
-
+  <nav class="navbar">
+    <div class="nav-start">
+      <a clas="site-logo" href="/">
+        <img class="logo" src="/images/noroff-logo.png" alt="Noroff Logo" />
+      </a>
+      <div class="field field-search" id="header-search">
+        <form role="search" name="search">
+          <input
+            id="search-input"
+            class="input input-search"
+            placeholder="Search..."
+            id="q"
+            name="q"
+            type="text"
+          />
+          <button class="btn btn-search">
+            <ion-icon
+              class="icon icon-search"
+              name="search-outline"
+            ></ion-icon>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="nav-items">
+      <a class="nav-item" href="/profile/">My Profile</a>
+      <a class="nav-item" href="/post/create/">Create Post</a>
+      <button class="btn btn-solid btn-danger" id="btn-logout">Logout</button>
+    </div>
+  </nav>
+  
   <main>
-    <div class="container">
-      <main>
-        <div class="post-grid"></div>
-      </main>
+    <div id="home" class="container">
+      <div class="main-content"></div>
     </div>
   </main>
 </body>
+<script
+type="module"
+src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+nomodule
+src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
 </html>
