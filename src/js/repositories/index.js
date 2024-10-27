@@ -1,7 +1,7 @@
 import AuthRepository from './AuthRepository';
 import PostRepository from './PostRepository';
 import ProfileRepository from './ProfileRepository';
-import TagRepository from './TagRespository';
+import TagRepository from './TagRepository';
 
 const repositories = {
   AuthRepository,

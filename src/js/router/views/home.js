@@ -1,78 +1,86 @@
-import { authGuard } from "../../utilities/authGuard";
-authGuard();
+import controllers from '../../controllers/index';
+import utils from '../../utilities/utils';
 
-import { postService } from "../../api/index";
-
-let currentPage = 1;
-let totalPage = 1;
-let isLoading = false;
-
-const postGrid = document.querySelector(".post-grid");
-
-async function fetchPosts(page = currentPage) {
-  // if(isLoading) return;
-  // isLoading = true
-
+async function init() {
+  const container = document.querySelector('.main-content');
+  clearContent(container);
   try {
-    const result = await postService.getAll(page);
-    console.log("Home",result);
-
-    if (result) {
-      const posts = result;
-      // const dataPage = result;
-
-      // currentPage = newCurrentPage;
-      // totalPages = pageCount;
-
-      renderPosts(posts);
-    } else {
-      console.error("Failed to fetch posts:", result.message);
-    }
-  } catch (error) {
-    console.error("Error loading posts:", error);
-  } finally {
-    isLoading = false;
-  }
-}
-
-function renderPosts (posts){
-  if(!Array.isArray(posts)){
-    console.error('Expected an array of posts');
-    return;
-  }
-
-  const postElements = posts.map((post) =>{
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
-
-    // const formattedDate = formatDate(post.created);
-    // const formattedTags = formatTags(post.tags)
-
-    postElement.innerHTML = `
-    <div class="post-meta">
-      <a class="profile-link" href="/profile/?username=${post.author.name}">
-        <img class="author-avatar" src="${post.author.avatar.url}" alt="${post.author.avatar.alt}" />
-      </a>
-      <div class="post-info">
-        <a class="profile-link" href="/profile/?username=${post.author.name}"><span class="mb--1"><small>${post.author.name}</small></span></a>
-       
-      </div>
-    </div>
-    <a class="post-details-link" href="/post/?id=${post.id}">
-      <h2>${post.title}</h2>
-    </a>
+    const posts = await controllers.PostController.posts();
+    const { data } = posts;
     
-    `;
-
-    return postElement;
-  })
-
-  postGrid.append(...postElements);
+    renderPosts(container, data.posts);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    container.innerHTML = '<p>Error loading posts. Please try again later.</p>';
+  }
 }
 
-fetchPosts();
-
-
-export function sum(a, b) {
-  return a + b;
+function clearContent(target) {
+  if (target) target.innerHTML = '';
 }
+
+export async function renderPosts(target, posts) {
+  if (target) {
+    const postsElement = posts.map((post) => {
+      const createdDate = utils.date(post.created);
+      const tags = utils.formatTags(post.tags);
+
+      const postElement = document.createElement('div');
+      postElement.classList.add('story');
+      postElement.innerHTML = `
+        <div class="story__top">
+          <div class="story__meta">
+            <a class="story__author-link" href="/profile/?author=${
+              post.author.name
+            }">
+              <div class="story__author-pic">
+                <span class="profile-avatar avatar-md">
+                  <img class="avatar__image" src="${
+                    post.author.avatar.url
+                  }" alt="${post.author.avatar.alt} width="32" height="32" />
+                </span>
+              </div>
+            </a>
+            <div class="sotry__publish-info">
+              <div class="story__secondary">
+                <a class="story__author-link" href="/profile/?author=${
+                  post.author.name
+                }">${post.author.name}</a>
+              </div>
+              <div class="story__tertiary">
+                ${createdDate}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="story__identation">
+          <div class="">
+            <a class="article-link" href="/post/?id=${post.id}">
+              <h2 class="story__title">${post.title}</h2>
+            </a>
+            <div class="story__tags">${tags}</div>
+          </div>
+          <div class="story__bottom">
+            <a class="story__comment-link" href="/post/?id=${post.id}#comments">
+              <div class="story__comment">
+                <ion-icon class="icon-comment" name="chatbubble-outline"></ion-icon>
+                ${
+                  post._count.comments === 0
+                    ? 'Add Comment'
+                    : post._count.comments > 1
+                    ? ` ${post._count.comments} comments`
+                    : `${post._count.comments} comment`
+                }
+              </div>
+            </a>
+          </div>
+        </div>
+      `;
+      return postElement;
+    });
+
+    postsElement.forEach((element) => target.appendChild(element));
+  }
+}
+
+init();

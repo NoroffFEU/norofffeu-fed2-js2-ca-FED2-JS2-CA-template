@@ -4,43 +4,43 @@ const utils = {
       window.location.href = path;
     },
   
-    // getUrlParams: (param) => {
-    //   const urlParams = new URLSearchParams(window.location.search);
-    //   return urlParams.get(param);
-    // },
+    getUrlParams: (param) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    },
   
-    // date: (dateString) => {
-    //   const date = new Date(dateString);
-    //   const today = new Date();
+    date: (dateString) => {
+      const date = new Date(dateString);
+      const today = new Date();
   
-    //   // Custom mapping for 3-letter month abbreviations
-    //   const monthNames = [
-    //     'Jan',
-    //     'Feb',
-    //     'Mar',
-    //     'Apr',
-    //     'May',
-    //     'Jun',
-    //     'Jul',
-    //     'Aug',
-    //     'Sep',
-    //     'Oct',
-    //     'Nov',
-    //     'Dec',
-    //   ];
+      // Custom mapping for 3-letter month abbreviations
+      const monthNames = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
   
-    //   const day = date.getDate();
-    //   const month = monthNames[date.getMonth()]; // Get the 3-letter month abbreviation
+      const day = date.getDate();
+      const month = monthNames[date.getMonth()]; // Get the 3-letter month abbreviation
   
-    //   let formattedDate = `${month} ${day}`;
+      let formattedDate = `${month} ${day}`;
   
-    //   // Add the year only if it's not the current year
-    //   if (date.getFullYear() !== today.getFullYear()) {
-    //     formattedDate += ` ${date.getFullYear()}`;
-    //   }
+      // Add the year only if it's not the current year
+      if (date.getFullYear() !== today.getFullYear()) {
+        formattedDate += ` ${date.getFullYear()}`;
+      }
   
-    //   return formattedDate;
-    // },
+      return formattedDate;
+    },
   
     // time: (date) => {
     //   const now = new Date();
@@ -70,17 +70,17 @@ const utils = {
     //   return secondsAgo > 1 ? `${secondsAgo} seconds ago` : 'now';
     // },
   
-    // formatTags: (tags) => {
-    //   if (!tags || tags.length === 0) return '';
-    //   return tags
-    //     .map(
-    //       (tag) =>
-    //         `<a href="/tags/?tag=${encodeURIComponent(
-    //           tag
-    //         )}" class="tag">#${tag}</a>`
-    //     ) // Add '#' before each tag
-    //     .join(' '); // Join tags with a space
-    // },
+    formatTags: (tags) => {
+      if (!tags || tags.length === 0) return '';
+      return tags
+        .map(
+          (tag) =>
+            `<a href="/tags/?tag=${encodeURIComponent(
+              tag
+            )}" class="tag">#${tag}</a>`
+        ) // Add '#' before each tag
+        .join(' '); // Join tags with a space
+    },
   };
   
   export default utils;
