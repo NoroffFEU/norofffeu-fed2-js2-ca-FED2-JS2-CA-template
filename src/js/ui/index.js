@@ -611,6 +611,7 @@ export default class NoroffApp extends NoroffAPI {
       };
 
       const previousButton = document.createElement("button");
+      previousButton.classList.add("rounded-circle");
       const previousButtonIcon = document.createElement("i");
       previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
       previousButton.appendChild(previousButtonIcon);
@@ -673,6 +674,7 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const nextButton = document.createElement("button");
+      nextButton.classList.add("rounded-circle");
       const nextButtonIcon = document.createElement("i");
       nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
       nextButton.appendChild(nextButtonIcon);
