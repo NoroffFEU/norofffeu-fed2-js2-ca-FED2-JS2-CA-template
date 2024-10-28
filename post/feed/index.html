@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,33 +14,41 @@
   </head>
   <body class="post-body">
     <header
-      class="post-header p-3 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between"
+      class="post-header p-3 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between align-items-center"
     >
-      <a href="/post/feed/?page=1">
+      <a href="/post/feed/?page=1" class="col-3">
         <img
           src="/public/images/noroff-logo.png"
           alt="Logo"
-          class="logo col-2"
+          class="logo col-12"
         />
       </a>
-      <nav class="header-nav">
-        <a href="/post/create/" class="new-post-button-desktop button-dark">
+      <nav
+        class="header-nav d-flex justify-content-end align-items-center gap-2 col-9"
+      >
+        <a
+          href="/post/create/"
+          class="new-post-button-desktop button-dark d-none d-lg-inline-block border px-3 py-2 rounded"
+        >
           <i class="fa-solid fa-pen-fancy"></i>
           New Post
         </a>
-        <a class="my-page">
+        <a class="my-page border px-3 py-2 rounded">
           <i class="fa-regular fa-user"></i>
         </a>
-        <button class="logout-button">Log out</button>
+        <button class="logout-button border px-3 py-2 rounded">Log out</button>
       </nav>
     </header>
 
-    <main class="post-main">
-      <a href="/post/create/" class="new-post-button-mobile button-dark">
+    <main class="post-main mt-5 px-4">
+      <a
+        href="/post/create/"
+        class="new-post-button-mobile button-dark d-lg-none fixed-bottom text-end pe-4 mb-6"
+      >
         <i class="fa-solid fa-pen-fancy"></i>
         New Post
       </a>
-      <div class="feed"></div>
+      <div class="feed d-flex flex-column gap-4"></div>
       <div class="feed-pagination"></div>
     </main>
 
