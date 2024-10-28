@@ -44,8 +44,5 @@ $link-color: #212529;
 $link-decoration: none;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-
-.auth-info,
-footer {
-  font-size: $font-size-sm;
-}
+@import "./imports/auth.scss";
+@import "./imports/footer.scss";
