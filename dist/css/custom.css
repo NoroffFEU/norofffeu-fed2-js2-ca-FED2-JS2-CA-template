@@ -15153,7 +15153,10 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
-.auth-info,
+.auth-info {
+  font-size: 0.875rem;
+}
+
 footer {
   font-size: 0.875rem;
 }
