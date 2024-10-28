@@ -15161,4 +15161,8 @@ footer {
   font-size: 0.875rem;
 }
 
+.fixed-bottom {
+  left: auto !important;
+}
+
 /*# sourceMappingURL=custom.css.map */
