@@ -33,40 +33,71 @@
     </header>
 
     <main class="post-main mt-5 mb-10 px-4 mt-lg-10 px-lg-11">
-      <h1>New Post</h1>
+      <h1 class="text-center mb-4 mb-lg-5">New Post</h1>
 
-      <form name="createPost" class="create-form">
-        <label for="title">
-          Title
-          <input name="title" id="title" type="text" required />
-        </label>
-        <label for="img-url">
-          Image URL
-          <input name="media[url]" id="img-url" type="text" required />
-        </label>
-        <label for="img-alt">
-          Image alt
-          <input name="media[alt]" id="img-alt" type="text" required />
-        </label>
-        <label for="tags">
-          Tag
-          <input name="tags" id="tags" type="text" />
-        </label>
-        <label for="content">
-          Content
+      <form name="createPost" class="create-form mx-lg-auto">
+        <div class="form-group mb-3">
+          <label for="title" class="form-label col-12 col-lg-7 mb-2 fw-bold">
+            Title
+          </label>
+          <input
+            name="title"
+            id="title"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="img-url" class="form-label col-12 col-lg-7 mb-2 fw-bold">
+            Image URL
+          </label>
+          <input
+            name="media[url]"
+            id="img-url"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="img-alt" class="form-label col-12 col-lg-7 mb-2 fw-bold">
+            Image alt
+          </label>
+          <input
+            name="media[alt]"
+            id="img-alt"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="tags" class="form-label col-12 col-lg-7 mb-2 fw-bold">
+            Tag
+          </label>
+          <input name="tags" id="tags" type="text" class="form-control" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="content" class="form-label col-12 col-lg-7 mb-2 fw-bold">
+            Content
+          </label>
           <textarea
             name="body"
             id="content"
             cols="30"
             rows="12"
+            class="form-control"
             required
           ></textarea>
-        </label>
-        <button type="submit" class="submit-type-button">Create Post</button>
+        </div>
+        <button type="submit" class="submit-type-button btn border col-12 mt-3">
+          Create Post
+        </button>
       </form>
     </main>
 
-    <footer>
+    <footer class="d-flex justify-content-center pb-5 pb-lg-4 gap-4">
       <a href="#">Terms of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>
