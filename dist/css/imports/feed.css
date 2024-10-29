@@ -1,7 +1,17 @@
-.feed-pagination button {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-}
+/* Error: Undefined variable.
+ *    ,
+ * 11 |     color: $black;
+ *    |            ^^^^^^
+ *    '
+ *   src/scss/imports/feed.scss 11:12  root stylesheet */
 
-/*# sourceMappingURL=feed.css.map */
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+    "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 11 \2502      color: $black;\a    \2502             ^^^^^^\a    \2575 \a   src/scss/imports/feed.scss 11:12  root stylesheet";
+}

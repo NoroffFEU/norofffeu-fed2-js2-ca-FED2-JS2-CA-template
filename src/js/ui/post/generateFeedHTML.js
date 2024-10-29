@@ -37,7 +37,6 @@ export function generateFeedHTML(post) {
     "post-user-date",
     "d-flex",
     "justify-content-between",
-    "mb-3",
   );
   const postUserContainer = document.createElement("div");
   postUserContainer.classList.add(
@@ -79,8 +78,9 @@ export function generateFeedHTML(post) {
     "post-tag-comment",
     "d-flex",
     "justify-content-between",
-    "align-items-center",
-    "mb-3",
+    "align-items-start",
+    "my-4",
+    "gap-3",
   );
   const tagList = document.createElement("ul");
   tagList.classList.add(
@@ -99,8 +99,10 @@ export function generateFeedHTML(post) {
       const tagItem = document.createElement("li");
       tagItem.classList.add(
         "tag-item",
+        "bg-dark",
         "border",
-        "px-2",
+        "border-black",
+        "px-3",
         "py-1",
         "rounded-pill",
       );
@@ -129,7 +131,14 @@ export function generateFeedHTML(post) {
 
   postTextContainer.append(postUserDate, postTagComment, postTitle);
   const bootstrapFlexBox = document.createElement("div");
-  bootstrapFlexBox.classList.add("p-2", "border", "rounded", "h-100");
+  bootstrapFlexBox.classList.add(
+    "p-2",
+    "border",
+    "border-2",
+    "rounded",
+    "h-100",
+    "border-black",
+  );
   bootstrapFlexBox.append(figure, postTextContainer);
   postContainer.appendChild(bootstrapFlexBox);
 

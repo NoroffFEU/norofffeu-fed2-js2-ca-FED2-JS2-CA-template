@@ -1,5 +1,14 @@
+.post-container {
+  font-family: "Clash Display", sans-serif;
+}
+
+.tag-list {
+  font-weight: 500;
+}
+
 .feed-pagination {
   button {
+    color: $black;
     width: 2.5rem;
     height: 2.5rem;
     padding: 0;

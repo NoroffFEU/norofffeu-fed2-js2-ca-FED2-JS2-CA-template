@@ -617,7 +617,7 @@ export default class NoroffApp extends NoroffAPI {
         const button = document.createElement("button");
         button.textContent = text;
         button.dataset.page = page;
-        button.className = "pagination-button, rounded-circle";
+        button.className = "rounded-circle border border-black bg-light";
         if (page === currentPage) {
           button.classList.add("current-page");
         }
@@ -697,7 +697,12 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const nextButton = document.createElement("button");
-      nextButton.classList.add("rounded-circle");
+      nextButton.classList.add(
+        "rounded-circle",
+        "border",
+        "border-black",
+        "bg-light",
+      );
       const nextButtonIcon = document.createElement("i");
       nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
       nextButton.appendChild(nextButtonIcon);

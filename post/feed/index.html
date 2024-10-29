@@ -10,6 +10,10 @@
       crossorigin="anonymous"
     ></script>
     <!-- <link rel="stylesheet" href="../../src/css/style.css" /> -->
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=archivo@300,400,500,600,700,800&display=swap"
+      rel="stylesheet"
+    />
     <script type="module" src="../../src/app.js" defer></script>
   </head>
   <body>
@@ -24,15 +28,19 @@
       >
         <a
           href="/post/create/"
-          class="new-post-button-desktop bg-dark d-none d-lg-inline-block px-3 py-2 rounded"
+          class="new-post-button-desktop bg-dark d-none border border-2 border-black d-lg-inline-block px-3 py-2 rounded"
         >
           <i class="fa-solid fa-pen-fancy me-1"></i>
           New Post
         </a>
-        <a class="my-page bg-dark px-3 py-2 rounded">
-          <i class="fa-regular fa-user"></i>
+        <a
+          class="my-page bg-dark px-3 py-2 rounded border border-2 border-black"
+        >
+          <i class="fa-solid fa-user"></i>
         </a>
-        <button class="logout-button border-0 px-3 py-2 rounded btn btn-dark">
+        <button
+          class="logout-button border border-2 border-black px-3 py-2 rounded btn btn-dark"
+        >
           Log out
         </button>
       </nav>
@@ -41,14 +49,14 @@
     <main class="post-main mt-11 mt-lg-12 mb-10 px-4">
       <a
         href="/post/create/"
-        class="new-post-button-mobile bg-dark d-lg-none fixed-bottom text-end me-4 mb-6 px-2 py-2 rounded"
+        class="new-post-button-mobile bg-dark d-lg-none border border-black fixed-bottom text-end me-4 mb-6 px-2 py-2 rounded"
       >
         <i class="fa-solid fa-pen-fancy me-1"></i>
         New Post
       </a>
       <div class="feed container">
         <div
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 g-3"
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 gx-3 gx-lg-4 gy-5"
         ></div>
       </div>
       <div
