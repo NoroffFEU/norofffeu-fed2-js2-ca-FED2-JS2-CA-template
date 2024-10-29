@@ -9,9 +9,14 @@
 .comment-list {
   .comment-item {
     margin-top: 1rem;
+    border-bottom: solid 1px #000;
   }
   & :first-child {
     margin-top: 0;
+  }
+
+  & :last-child {
+    border-bottom: none;
   }
 }
 
@@ -33,4 +38,16 @@
 .comment-button,
 .single-pagination {
   font-size: $font-size-sm;
+}
+
+$breakpoint-lg: map-get($grid-breakpoints, lg);
+
+@media screen and (min-width: $breakpoint-lg) {
+  .single-post {
+    width: 80%;
+  }
+
+  .single-pagination {
+    width: 80%;
+  }
 }

@@ -5,15 +5,21 @@ export function generateSinglePostHTML(post) {
   const singlePostContainer = document.createElement("div");
   singlePostContainer.classList.add("single-post-container");
   const postContent = document.createElement("div");
-  postContent.classList.add("content-upper", "mb-5");
+  postContent.classList.add("content-upper", "mb-5", "mb-lg-8");
 
   const title = document.createElement("h1");
-  title.classList.add("text-center", "mb-3");
+  title.classList.add("text-center", "mb-3", "mb-lg-5");
   title.textContent = post.title;
   const figure = document.createElement("figure");
-  figure.classList.add("ratio", "ratio-4x3");
+  figure.classList.add("ratio", "ratio-16x9");
   const thumbnail = document.createElement("img");
-  thumbnail.classList.add("thumbnail", "rounded", "object-fit-fill", "mb-2");
+  thumbnail.classList.add(
+    "thumbnail",
+    "rounded",
+    "object-fit-fill",
+    "mb-2",
+    "mb-lg-3",
+  );
   if (post.media?.url) {
     thumbnail.src = post.media.url;
     thumbnail.alt = post.media.alt;
@@ -71,6 +77,7 @@ export function generateSinglePostHTML(post) {
     "align-items-center",
     "gap-1",
     "my-3",
+    "my-lg-4",
     "flex-wrap",
   );
   const tagsArray = post.tags;
@@ -103,23 +110,26 @@ export function generateSinglePostHTML(post) {
   sectionTitle.textContent = `Comment (${post.comments.length})`;
 
   const commentList = document.createElement("ul");
-  commentList.classList.add("comment-list", "list-unstyled", "pt-4", "mb-0");
+  commentList.classList.add(
+    "comment-list",
+    "list-unstyled",
+    "pt-4",
+    "mb-0",
+    "py-lg-4",
+    "px-lg-3",
+  );
   const commentsArray = post.comments;
   const originalCommentsArray = commentsArray.filter(
     (comment) => comment.replyToId === null,
   );
   for (let i = 0; i < originalCommentsArray.length; i++) {
     const commentItem = document.createElement("li");
-    commentItem.classList.add(
-      "comment-item",
-      "original-comment-item",
-      "border-bottom",
-    );
+    commentItem.classList.add("comment-item", "original-comment-item");
     const comment = originalCommentsArray[i];
     commentItem.id = comment.id;
     commentItem.dataset.username = comment.author.name;
     const commentContainer = document.createElement("div");
-    commentContainer.classList.add("comment-container", "p-3");
+    commentContainer.classList.add("comment-container", "p-3", "p-lg-2");
     const userInfo = document.createElement("div");
     userInfo.classList.add("user-info", "d-flex", "align-items-center");
     const userAvatar = document.createElement("img");
@@ -159,6 +169,7 @@ export function generateSinglePostHTML(post) {
       "bg-transparent",
       "px-0",
       "mt-3",
+      "my-lg-3",
     );
     replyButton.innerHTML = `<i class="fa-solid fa-reply me-1"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
@@ -232,10 +243,10 @@ export function generateSinglePostHTML(post) {
   }
 
   const commentForm = document.createElement("form");
-  commentForm.classList.add("comment-form", "mt-4");
+  commentForm.classList.add("comment-form", "pt-4", "border-top", "pt-lg-5");
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
-  myUserName.classList.add("my-username", "mb-0");
+  myUserName.classList.add("my-username", "mb-0", "fw-bold");
   myUserName.textContent = NoroffAPI.user;
   const replyMessage = document.createElement("p");
   replyMessage.classList.add("reply-message", "mb-0", "mt-2");
@@ -260,6 +271,7 @@ export function generateSinglePostHTML(post) {
     "btn",
     "col-12",
     "mt-3",
+    "mt-lg-2",
     "border",
   );
   commentButton.type = "submit";
