@@ -8,13 +8,21 @@
     <script type="module" src="/src/app.js"></script>
   </head>
 
-  <body>
-    <h1>Register</h1>
+  <body class="flex flex-col items-center justify-center">
+    <main>
+      <div
+        class="bg-lightGrayBlue rounded-full w-[200px] h-[200px] flex items-center justify-center mb-20 place-self-center"
+      >
+        <h1 class="header font-bold">Tompe</h1>
+        <h1 class="text-blue text-3xl font-bold">Talk</h1>
+      </div>
 
-    <form id="register">
-      <div>
-        <label for="name">Name</label>
+      <form
+        class="flex flex-col gap-6 items-center justify-center"
+        id="register"
+      >
         <input
+          class="formInputOne"
           id="name"
           type="text"
           name="name"
@@ -22,34 +30,36 @@
           maxlength="20"
           pattern="^[\w]+$"
           title="Please enter a username using only letters and numbers"
+          placeholder="Name"
         />
-      </div>
 
-      <div>
-        <label for="email">Email</label>
         <input
+          class="formInputOne"
           id="email"
           type="email"
           name="email"
           required
           pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
           title="Please enter a valid noroff.no or stud.noroff.no address"
+          placeholder="Email"
         />
-      </div>
 
-      <div>
-        <label for="password">Password</label>
         <input
+          class="formInputOne"
           type="password"
           name="password"
           id="password"
           required
           minlength="8"
+          placeholder="Password"
         />
-      </div>
-
-      <a href="/auth/login/">Login</a>
-      <button type="submit">Register</button>
-    </form>
+        <div class="flex flex-col items-center justify-center gap-3">
+          <button class="text-blue text-4xl font-bold" type="submit">
+            Register
+          </button>
+          <a class="text-white text-xl" href="/auth/login/">Login</a>
+        </div>
+      </form>
+    </main>
   </body>
 </html>
