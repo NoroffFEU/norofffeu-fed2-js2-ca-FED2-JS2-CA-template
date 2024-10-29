@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,19 +12,27 @@
     <script type="module" src="../../src/app.js" defer></script>
   </head>
   <body>
-    <header class="post-header">
-      <a href="/post/feed/?page=1">
-        <img src="/public/images/noroff-logo.png" alt="Logo" class="logo" />
+    <header
+      class="post-header p-3 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between align-items-center sticky-lg-to"
+    >
+      <a href="/post/feed/?page=1" class="col-2 col-lg-1">
+        <img
+          src="/public/images/noroff-logo.png"
+          alt="Logo"
+          class="logo col-12"
+        />
       </a>
-      <nav class="header-nav">
-        <a class="my-page">
+      <nav
+        class="header-nav d-flex justify-content-end align-items-center gap-2 col-9"
+      >
+        <a class="my-page border px-3 py-2 rounded">
           <i class="fa-regular fa-user"></i>
         </a>
-        <button class="logout-button">Log out</button>
+        <button class="logout-button border px-3 py-2 rounded">Log out</button>
       </nav>
     </header>
 
-    <main class="post-main">
+    <main class="post-main mt-5 mb-10 px-4 mt-lg-10 px-lg-11">
       <h1>New Post</h1>
 
       <form name="createPost" class="create-form">
@@ -59,7 +67,7 @@
     </main>
 
     <footer>
-      <a href="#">Terms Of Use</a>
+      <a href="#">Terms of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>
   </body>
