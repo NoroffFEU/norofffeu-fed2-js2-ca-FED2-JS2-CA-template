@@ -29,7 +29,7 @@ export function generateFeedHTML(post) {
     "post-text-container",
     "px-2",
     "pt-2",
-    "pb-5",
+    "pb-4",
   );
 
   const postUserDate = document.createElement("div");
@@ -52,7 +52,7 @@ export function generateFeedHTML(post) {
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user", "user-icon", "me-1");
   const userName = document.createElement("a");
-  userName.classList.add("post-author");
+  userName.classList.add("post-author", "link-underline");
   userName.textContent = post.author.name;
   userName.href = `/profile/?name=${post.author.name}`;
   postUserContainer.append(postUserIcon, userName);
@@ -124,7 +124,7 @@ export function generateFeedHTML(post) {
   postTagComment.append(tagList, comment);
 
   const postTitle = document.createElement("p");
-  postTitle.classList.add("post-title", "h3");
+  postTitle.classList.add("post-title", "h3", "mb-0");
   postTitle.textContent = post.title;
 
   postTextContainer.append(postUserDate, postTagComment, postTitle);

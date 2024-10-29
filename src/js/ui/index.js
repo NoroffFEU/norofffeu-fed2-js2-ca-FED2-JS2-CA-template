@@ -475,13 +475,27 @@ export default class NoroffApp extends NoroffAPI {
           const profileHeader = document.querySelector(".profile-header");
           const bannerURL = userData.banner.url;
           profileHeader.style.backgroundImage = `url(${bannerURL})`;
+          profileHeader.style.backgroundRepeat = "no-repeat";
+          profileHeader.style.backgroundSize = "cover";
 
           const buttonArea = document.querySelector(".button-area");
           const updateButton = document.createElement("button");
-          updateButton.classList.add("update-button");
+          updateButton.classList.add(
+            "update-button",
+            "btn",
+            "border",
+            "px-3",
+            "py-2",
+          );
           updateButton.textContent = "Update Profile";
           const followButton = document.createElement("button");
-          followButton.classList.add("follow-button");
+          followButton.classList.add(
+            "follow-button",
+            "btn",
+            "border",
+            "px-3",
+            "py-2",
+          );
           followButton.id = "toggle-button";
           followButton.textContent = "Follow";
           buttonArea.append(updateButton, followButton);
@@ -495,7 +509,7 @@ export default class NoroffApp extends NoroffAPI {
           updateButton.addEventListener("click", () => {
             window.location.href = "/profile/update/";
           });
-          const postFeed = document.querySelector(".feed");
+          const postFeed = document.querySelector(".row");
           postFeed.innerHTML = "";
           postData.forEach((post) => {
             const postHTML = generateFeedHTML(post);
@@ -556,6 +570,7 @@ export default class NoroffApp extends NoroffAPI {
             "fa-solid",
             "fa-chevron-left",
             "back-to-profile-icon",
+            "me-1",
           );
           backProfileButton.insertBefore(
             backIcon,
@@ -777,7 +792,7 @@ export default class NoroffApp extends NoroffAPI {
         const button = document.createElement("button");
         button.textContent = text;
         button.dataset.page = page;
-        button.className = "pagination-button";
+        button.className = "pagination-button, rounded-circle";
         if (page === this.currentPage) {
           button.classList.add("current-page");
         }
@@ -795,6 +810,7 @@ export default class NoroffApp extends NoroffAPI {
       };
 
       const previousButton = document.createElement("button");
+      previousButton.classList.add("rounded-circle");
       const previousButtonIcon = document.createElement("i");
       previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
       previousButton.appendChild(previousButtonIcon);
@@ -818,6 +834,7 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const nextButton = document.createElement("button");
+      nextButton.classList.add("rounded-circle");
       const nextButtonIcon = document.createElement("i");
       nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
       nextButton.appendChild(nextButtonIcon);
@@ -840,8 +857,8 @@ export default class NoroffApp extends NoroffAPI {
   animation = {
     headerPadding: () => {
       const header = document.querySelector(".profile-header");
-      const originalPaddingBottom = 18.4;
-      const scrollPaddingBottom = 4;
+      const originalPaddingBottom = 11.5;
+      const scrollPaddingBottom = 2.5;
       const minWidth = window.matchMedia("(min-width: 1024px)");
 
       window.addEventListener("scroll", () => {

@@ -14,9 +14,12 @@
   </head>
   <body class="post-body">
     <header
-      class="post-header profile-header px-3 pt-3 pb-11 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between align-items-center sticky-lg-top"
+      class="post-header profile-header px-3 pt-3 pt-lg-6 px-lg-9 d-flex justify-content-between align-items-center sticky-lg-top"
     >
-      <a href="/post/feed/?page=1" class="back-to-feed-on-profile">
+      <a
+        href="/post/feed/?page=1"
+        class="back-to-feed d-inline-blockw-lg-80 mx-lg-auto-on-profile"
+      >
         <i class="fa-solid fa-chevron-left me-1"></i>
         Back to Top
       </a>
@@ -37,7 +40,7 @@
       </nav>
     </header>
 
-    <main class="post-main profile-main mt-5 mb-10 px-4">
+    <main class="post-main profile-main mt-5 mb-10 mt-lg-6 px-4 px-lg-11">
       <a
         href="/post/create/"
         class="new-post-button-mobile button-dark d-lg-none fixed-bottom text-end me-4 mb-6 px-2 py-2 bg-secondary rounded"
@@ -45,21 +48,34 @@
         <i class="fa-solid fa-pen-fancy me-1"></i>
         New Post
       </a>
-      <div class="button-area"></div>
-      <div class="profile">
-        <img src="" alt="" class="avatar" />
-        <div class="user-information">
-          <h1 class="username"></h1>
-          <p class="bio"></p>
-          <ul>
-            <li>Followers: <span class="followers"></span></li>
-            <li>Following: <span class="following"></span></li>
-          </ul>
-          <p>Posts: <span class="posts"></span></p>
+      <div class="feed container">
+        <div class="button-area mb-3 d-flex justify-content-end"></div>
+        <div
+          class="profile d-flex align-items-start mb-7 mb-lg-8 gap-2 gap-lg-4"
+        >
+          <img
+            src=""
+            alt=""
+            class="avatar"
+            style="min-width: 4rem; max-width: 8rem; object-fit: contain"
+          />
+          <div class="user-information">
+            <h1 class="username mb-2"></h1>
+            <p class="bio mb-2"></p>
+            <ul class="list-unstyled d-flex align-items-center gap-2 mb-1">
+              <li>Followers: <strong class="followers"></strong></li>
+              <li>Following: <strong class="following"></strong></li>
+            </ul>
+            <p class="mb-0">Posts: <strong class="posts"></strong></p>
+          </div>
         </div>
+        <div
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 g-3"
+        ></div>
       </div>
-      <div class="feed"></div>
-      <div class="feed-pagination"></div>
+      <div
+        class="feed-pagination mt-8 d-flex justify-content-center align-items-center gap-2"
+      ></div>
     </main>
 
     <footer
