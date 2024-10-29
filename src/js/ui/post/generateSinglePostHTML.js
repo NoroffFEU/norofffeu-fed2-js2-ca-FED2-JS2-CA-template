@@ -131,7 +131,12 @@ export function generateSinglePostHTML(post) {
     const commentContainer = document.createElement("div");
     commentContainer.classList.add("comment-container", "p-3", "p-lg-2");
     const userInfo = document.createElement("div");
-    userInfo.classList.add("user-info", "d-flex", "align-items-center");
+    userInfo.classList.add(
+      "user-info",
+      "d-flex",
+      "align-items-center",
+      "font-size-sm",
+    );
     const userAvatar = document.createElement("img");
     userAvatar.classList.add("rounded-circle", "me-2");
     userAvatar.src = comment.author.avatar.url;
@@ -149,7 +154,7 @@ export function generateSinglePostHTML(post) {
       "align-items-center",
     );
     const commentText = document.createElement("p");
-    commentText.classList.add("comment-text", "m-0");
+    commentText.classList.add("comment-text", "m-0", "font-size-sm");
     commentText.textContent = comment.body;
     const commentDeleteButton = document.createElement("button");
     commentDeleteButton.classList.add(
@@ -170,6 +175,7 @@ export function generateSinglePostHTML(post) {
       "px-0",
       "mt-3",
       "my-lg-3",
+      "font-size-sm",
     );
     replyButton.innerHTML = `<i class="fa-solid fa-reply me-1"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
@@ -192,7 +198,7 @@ export function generateSinglePostHTML(post) {
     const commentContainer = document.createElement("div");
     commentContainer.classList.add("comment-container");
     const userInfo = document.createElement("div");
-    userInfo.classList.add("user-info");
+    userInfo.classList.add("user-info", "font-size-sm");
     const userAvatar = document.createElement("img");
     userAvatar.src = comment.author.avatar.url;
     const commentUser = document.createElement("a");
@@ -203,7 +209,7 @@ export function generateSinglePostHTML(post) {
     const commentContent = document.createElement("div");
     commentContent.classList.add("comment-content");
     const commentText = document.createElement("p");
-    commentText.classList.add("comment-text");
+    commentText.classList.add("comment-text", "font-size-sm");
     commentText.textContent = comment.body;
     const commentDeleteButton = document.createElement("button");
     commentDeleteButton.classList.add("comment-delete-button");
@@ -212,7 +218,7 @@ export function generateSinglePostHTML(post) {
     commentDeleteButton.appendChild(commentDeleteIcon);
     commentContent.append(commentText, commentDeleteButton);
     const replyButton = document.createElement("button");
-    replyButton.classList.add("reply-button");
+    replyButton.classList.add("reply-button", "font-size-sm");
     replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
     const replyList = document.createElement("ul");
@@ -246,10 +252,10 @@ export function generateSinglePostHTML(post) {
   commentForm.classList.add("comment-form", "pt-4", "border-top", "pt-lg-5");
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
-  myUserName.classList.add("my-username", "mb-0", "fw-bold");
+  myUserName.classList.add("my-username", "mb-0", "fw-bold", "font-size-sm");
   myUserName.textContent = NoroffAPI.user;
   const replyMessage = document.createElement("p");
-  replyMessage.classList.add("reply-message", "mb-0", "mt-2");
+  replyMessage.classList.add("reply-message", "mb-0", "mt-2", "font-size-sm");
   const fromGroup = document.createElement("div");
   fromGroup.classList.add("form-group");
   const commentTextAreaLabel = document.createElement("label");

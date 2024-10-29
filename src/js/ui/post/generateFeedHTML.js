@@ -47,6 +47,7 @@ export function generateFeedHTML(post) {
     "align-items-center",
     "text-break",
     "me-3",
+    "font-size-sm",
   );
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user", "user-icon", "me-1");
@@ -62,6 +63,7 @@ export function generateFeedHTML(post) {
     "d-flex",
     "justify-content-between",
     "align-items-center",
+    "font-size-sm",
   );
   const postDateIcon = document.createElement("i");
   postDateIcon.classList.add("fa-regular", "fa-calendar", "me-1");
