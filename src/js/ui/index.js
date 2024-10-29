@@ -290,10 +290,17 @@ export default class NoroffApp extends NoroffAPI {
           const postAuthor = postData.author.name;
 
           const editButton = document.createElement("button");
-          editButton.classList.add("edit-button", "button-dark");
+          editButton.classList.add(
+            "edit-button",
+            "button-dark",
+            "border",
+            "px-3",
+            "py-2",
+            "rounded",
+          );
           editButton.textContent = "Edit";
           const editIcon = document.createElement("i");
-          editIcon.classList.add("fa-regular", "fa-pen-to-square");
+          editIcon.classList.add("fa-regular", "fa-pen-to-square", "me-1");
           editButton.insertBefore(editIcon, editButton.firstChild);
           editButton.dataset.id = postId;
           if (postAuthor === NoroffAPI.user) {

@@ -39,15 +39,3 @@
 .single-pagination {
   font-size: $font-size-sm;
 }
-
-$breakpoint-lg: map-get($grid-breakpoints, lg);
-
-@media screen and (min-width: $breakpoint-lg) {
-  .single-post {
-    width: 80%;
-  }
-
-  .single-pagination {
-    width: 80%;
-  }
-}

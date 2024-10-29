@@ -1,7 +1,7 @@
 $breakpoint-lg: map-get($grid-breakpoints, lg);
 
 @media screen and (min-width: $breakpoint-lg) {
-  .create-form {
+  .w-lg-80 {
     width: 80%;
   }
 }
