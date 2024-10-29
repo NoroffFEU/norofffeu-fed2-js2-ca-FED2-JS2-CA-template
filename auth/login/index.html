@@ -8,34 +8,39 @@
     <script type="module" src="/src/app.js"></script>
   </head>
 
-  <body>
+  <body class="flex flex-col items-center justify-center">
     <main>
-      <h1 class="text-center">Login</h1>
-      <form class="flex flex-col" id="login">
-        <div>
-          <input
-            class="formInputOne"
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-          />
-        </div>
+      <div
+        class="bg-lightGrayBlue rounded-full w-[200px] h-[200px] flex items-center justify-center mb-20 place-self-center"
+      >
+        <h1 class="header font-bold">Tompe</h1>
+        <h1 class="text-blue text-3xl font-bold">Talk</h1>
+      </div>
+      <form class="flex flex-col items-center gap-10 w-full" id="login">
+        <input
+          class="formInputOne"
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
 
-        <div>
-          <input
-            class="formInputOne"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
-        </div>
+        <input
+          class="formInputOne"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          required
+        />
 
-        <a href="/auth/register/">Register</a>
-        <button type="submit">Login</button>
+        <div class="flex flex-col items-center justify-center gap-3">
+          <button class="text-white text-blue text-4xl font-bold" type="submit">
+            Login
+          </button>
+          <a class="text-white text-xl" href="/auth/register/">Register</a>
+        </div>
       </form>
     </main>
   </body>
