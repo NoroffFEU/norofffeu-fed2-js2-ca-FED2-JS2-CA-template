@@ -322,6 +322,7 @@ export default class NoroffApp extends NoroffAPI {
             "fa-solid",
             "fa-chevron-left",
             "back-to-profile-icon",
+            "me-1",
           );
           backProfileButton.insertBefore(
             backIcon,

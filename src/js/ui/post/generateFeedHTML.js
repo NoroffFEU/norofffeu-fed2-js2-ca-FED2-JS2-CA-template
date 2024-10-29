@@ -2,13 +2,7 @@ import { formatDate } from "../../utilities/formatDate";
 
 export function generateFeedHTML(post) {
   const postContainer = document.createElement("a");
-  postContainer.classList.add(
-    "post-container",
-    //"d-flex",
-    //"flex-column",
-    "overflow-hidden",
-    "col",
-  );
+  postContainer.classList.add("post-container", "overflow-hidden", "col");
   postContainer.id = post.id;
   postContainer.href = `/post/?id=${post.id}`;
 

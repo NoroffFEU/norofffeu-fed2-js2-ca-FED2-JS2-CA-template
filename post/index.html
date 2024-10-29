@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,47 +12,69 @@
     <script type="module" src="../src/app.js" defer></script>
   </head>
   <body class="post-body">
-    <header class="post-header">
-      <a href="/post/feed/?page=1">
-        <img src="/public/images/noroff-logo.png" alt="Logo" class="logo" />
+    <header
+      class="post-header p-3 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between align-items-center"
+    >
+      <a href="/post/feed/?page=1" class="col-2 col-lg-1">
+        <img
+          src="/public/images/noroff-logo.png"
+          alt="Logo"
+          class="logo col-12"
+        />
       </a>
-      <nav class="header-nav">
-        <a href="/post/create/" class="new-post-button-desktop button-dark">
-          <i class="fa-solid fa-pen-fancy"></i>
+      <nav
+        class="header-nav d-flex justify-content-end align-items-center gap-2 col-9"
+      >
+        <a
+          href="/post/create/"
+          class="new-post-button-desktop button-dark d-none d-lg-inline-block border px-3 py-2 rounded"
+        >
+          <i class="fa-solid fa-pen-fancy me-1"></i>
           New Post
         </a>
-        <a class="my-page">
+        <a class="my-page border px-3 py-2 rounded">
           <i class="fa-regular fa-user"></i>
         </a>
-        <button class="logout-button">Log out</button>
+        <button class="logout-button border px-3 py-2 rounded">Log out</button>
       </nav>
     </header>
 
-    <main class="post-main">
-      <a href="/post/create/" class="new-post-button-mobile button-dark">
-        <i class="fa-solid fa-pen-fancy"></i>
+    <main class="post-main mt-5 mb-10 px-4">
+      <a
+        href="/post/create/"
+        class="new-post-button-mobile button-dark d-lg-none fixed-bottom text-end me-4 mb-6 px-2 py-2 bg-secondary rounded"
+      >
+        <i class="fa-solid fa-pen-fancy me-1"></i>
         New Post
       </a>
-      <div class="back-to-feed">
+      <div class="back-to-feed mb-4">
         <a class="back-to-profile-page">
           <i class="fa-solid fa-chevron-left"></i>
         </a>
       </div>
-      <div class="single-post"></div>
-      <div class="single-pagination">
-        <button id="previous-post" class="single-pagination-button">
-          <i class="fa-solid fa-chevron-left"></i>
+      <div class="single-post mb-7"></div>
+      <div
+        class="single-pagination d-flex justify-content-between align-items-center"
+      >
+        <button
+          id="previous-post"
+          class="single-pagination-button border-0 bg-transparent"
+        >
+          <i class="fa-solid fa-chevron-left me-1"></i>
           Previous
         </button>
         <a href="" class="back-link-on-single-page">Back Feed</a>
-        <button id="next-post" class="single-pagination-button">
+        <button
+          id="next-post"
+          class="single-pagination-button border-0 bg-transparent"
+        >
           Next
-          <i class="fa-solid fa-chevron-right"></i>
+          <i class="fa-solid fa-chevron-right ms-1"></i>
         </button>
       </div>
     </main>
 
-    <footer>
+    <footer class="d-flex justify-content-center pb-5 pb-lg-4 gap-4">
       <a href="#">Terms Of Use</a>
       <a href="#">Privacy Policy</a>
     </footer>
