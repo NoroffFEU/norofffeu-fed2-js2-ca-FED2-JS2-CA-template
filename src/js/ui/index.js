@@ -254,7 +254,7 @@ export default class NoroffApp extends NoroffAPI {
           const posts = await api.posts.getPosts(12, page);
           const { data, meta } = posts;
           const { currentPage, pageCount } = meta;
-          const postFeed = document.querySelector(".feed");
+          const postFeed = document.querySelector(".row");
           postFeed.innerHTML = "";
           data.forEach((post) => {
             const postHTML = generateFeedHTML(post);

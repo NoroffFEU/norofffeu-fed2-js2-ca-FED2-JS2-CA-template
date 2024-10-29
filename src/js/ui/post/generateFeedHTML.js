@@ -4,11 +4,10 @@ export function generateFeedHTML(post) {
   const postContainer = document.createElement("a");
   postContainer.classList.add(
     "post-container",
-    "d-block",
+    //"d-flex",
+    //"flex-column",
     "overflow-hidden",
-    "border",
-    "rounded",
-    "p-2",
+    "col",
   );
   postContainer.id = post.id;
   postContainer.href = `/post/?id=${post.id}`;
@@ -47,7 +46,14 @@ export function generateFeedHTML(post) {
     "mb-3",
   );
   const postUserContainer = document.createElement("div");
-  postUserContainer.classList.add("user");
+  postUserContainer.classList.add(
+    "user",
+    "d-flex",
+    "justify-content-between",
+    "align-items-center",
+    "text-break",
+    "me-3",
+  );
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user", "user-icon", "me-1");
   const userName = document.createElement("a");
@@ -126,7 +132,10 @@ export function generateFeedHTML(post) {
   postTitle.textContent = post.title;
 
   postTextContainer.append(postUserDate, postTagComment, postTitle);
-  postContainer.append(figure, postTextContainer);
+  const bootstrapFlexBox = document.createElement("div");
+  bootstrapFlexBox.classList.add("p-2", "border", "rounded", "h-100");
+  bootstrapFlexBox.append(figure, postTextContainer);
+  postContainer.appendChild(bootstrapFlexBox);
 
   return postContainer;
 }
