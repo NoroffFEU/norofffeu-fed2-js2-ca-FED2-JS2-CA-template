@@ -43,13 +43,22 @@ $form-label-margin-bottom: 0.75rem;
 $link-color: #212529;
 $link-decoration: none;
 
+$font-weight-medium: 500;
+
+$light: #f2f2eb;
+$dark: #e1d2c4;
 $black: #0d0d0d;
 $body-color: $black;
-$body-bg: #f2f2eb;
+$link-color: $black;
+$link-color-rgb: (13, 13, 13);
+$body-bg: $light;
 $primary: #1f818c;
-$dark: #e1d2c4;
 $border-color: $dark;
 $btn-color: $black;
+$btn-font-weight: $font-weight-medium;
+$font-family-base: "Archivo", sans-serif;
+$headings-font-family: "Clash Display", sans-serif;
+$headings-font-weight: 600;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./imports/auth.scss";
@@ -61,4 +70,8 @@ $btn-color: $black;
 
 .fixed-bottom {
   left: auto !important;
+}
+
+.border-2 {
+  border-width: 2px;
 }
