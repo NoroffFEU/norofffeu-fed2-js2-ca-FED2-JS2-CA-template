@@ -17,7 +17,7 @@ body {
 }
 
 .formInputOne {
-  @apply max-w-[400px] w-full h-[50px] bg-lightGray text-black placeholder-blue px-5;
+  @apply max-w-[400px] w-full h-[50px] bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md;
 }
 
 .header {
