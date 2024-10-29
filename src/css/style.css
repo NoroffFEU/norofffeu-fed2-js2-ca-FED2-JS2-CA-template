@@ -2,24 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
-main {
-  @apply max-w-[1400px] w-full;
+main,
+header {
+  @apply max-w-[1400px] w-full px-10;
 }
 
 body {
-  @apply bg-gradient-to-b from-blue to-lightGrayBlue;
+  @apply min-h-screen bg-gradient-to-b from-blue to-lightGrayBlue bg-no-repeat bg-fixed;
 }
 
 .formInputOne {
   @apply max-w-[400px] w-full h-[50px] bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md;
 }
 
+.formInputTwo {
+  @apply max-w-[400px] h-[150px] w-full bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md;
+}
 .header {
   @apply text-white text-3xl;
+}
+
+.buttonEffect {
+  @apply transition-transform duration-150 ease-in-out scale-90 hover:scale-100;
 }
