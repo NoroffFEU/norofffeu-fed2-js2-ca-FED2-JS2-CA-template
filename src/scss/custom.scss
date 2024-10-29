@@ -43,6 +43,14 @@ $form-label-margin-bottom: 0.75rem;
 $link-color: #212529;
 $link-decoration: none;
 
+$black: #0d0d0d;
+$body-color: $black;
+$body-bg: #f2f2eb;
+$primary: #1f818c;
+$dark: #e1d2c4;
+$border-color: $dark;
+$btn-color: $black;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./imports/auth.scss";
 @import "./imports/feed.scss";
