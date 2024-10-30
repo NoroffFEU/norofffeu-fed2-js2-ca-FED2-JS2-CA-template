@@ -271,15 +271,7 @@ export function generateSinglePostHTML(post) {
   commentTextAreaLabel.appendChild(commentTextArea);
 
   const commentButton = document.createElement("button");
-  commentButton.classList.add(
-    "submit-type-button",
-    "comment-button",
-    "btn",
-    "col-12",
-    "mt-3",
-    "mt-lg-2",
-    "border",
-  );
+  commentButton.classList.add("btn", "col-12", "mt-3", "mt-lg-2", "border");
   commentButton.type = "submit";
   commentButton.innerText = "Add comment";
   commentForm.append(myUserName, replyMessage, fromGroup, commentButton);
