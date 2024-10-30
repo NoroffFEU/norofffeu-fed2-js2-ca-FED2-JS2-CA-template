@@ -1,4 +1,5 @@
-import "./css/style.css";
+// import "./css/style.css";
+
 import controllers from "./js/controllers/index";
 
 import router from "./js/router";
