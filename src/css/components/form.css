@@ -1,0 +1,50 @@
+form[role='search'] {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  form[name='login'] {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .field {
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+  }
+  
+  .field__label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .textfield {
+    appearance: none;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    border: unset;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    outline-color: rgb(84 105 212 / 0.5);
+    padding: 0.375rem 0.75rem;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  form[name='updateProfile'],
+  form[name='createPost'],
+  form[name='updatePost'] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--su-6);
+    width: 100%;
+  }
+  

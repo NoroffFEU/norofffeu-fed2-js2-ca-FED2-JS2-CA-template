@@ -1,25 +1,64 @@
-.btn-container {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-  }
-  
-  .btn {
-    font-size: 1rem;
-    line-height: 1.75rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    width: 100%;
-    border: unset;
-    border-radius: 0.25rem;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-  }
-  
-  .btn-solid {
-    color: #fff;
-    font-weight: 600;
-    background-color: rgb(84, 105, 212);
-  }
+.btn {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+}
+
+.btn-solid {
+  border: unset;
+}
+
+.btn-primary {
+  color: var(--solid-white);
+  background-color: var(--primary-color);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--bg-hover);
+}
+
+.btn-danger {
+  box-shadow: unset;
+  color: var(--solid-white);
+  background-color: var(--danger-color);
+}
+
+#btn-logout {
+  width: fit-content;
+}
+
+.btn-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  left: -3rem;
+  width: 3rem;
+}
+
+.btn-edit-profile,
+.btn-follow,
+.btn-unfollow {
+  width: fit-content;
+}
+
+.btn-pill {
+  border-radius: 2rem;
+}
+
+.btn__edit-post,
+.btn__delete-post {
+  font-size: var(--fs-xs);
+  width: fit-content;
+  border: none;
+}
