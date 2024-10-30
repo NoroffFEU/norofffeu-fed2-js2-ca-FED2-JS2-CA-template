@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @import url(_reset.css);
-@import url(input.css);
-@import url(output.css);
 
 @import url(components/button.css);
 @import url(components/form.css);
