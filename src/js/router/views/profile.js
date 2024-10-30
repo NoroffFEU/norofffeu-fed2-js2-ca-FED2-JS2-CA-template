@@ -1,6 +1,6 @@
 import { readPostsByUser } from "../../api/post/read";
 import { readProfile } from "../../api/profile/read";
-import { setLogoutListener } from "../../ui/global/logout";
+import { makeHeader } from "../../ui/global/header";
 import { makeAPost } from "../../ui/post/makePost";
 import { onUpdateProfile } from "../../ui/profile/update";
 import { authGuard } from "../../utilities/authGuard";
@@ -11,8 +11,8 @@ form.addEventListener("submit", onUpdateProfile);
 
 authGuard();
 
-setLogoutListener();
-
+const header = document.querySelector("header");
+makeHeader(header);
 /**
  * Fetches the logged in user info and Creates the HTML for profile page
  *
@@ -34,18 +34,19 @@ const readProfileInfo = async () => {
   const banner = document.createElement("img");
   banner.src = data.banner.url;
   banner.alt = data.banner.alt;
-  banner.className = "image";
+  banner.className = "object-cover w-full h-full";
 
   const profileImage = document.createElement("img");
   profileImage.src = data.avatar.url;
   profileImage.alt = data.avatar.alt;
-  profileImage.className = "image";
 
   const name = document.createElement("h2");
   name.innerText = data.name;
+  name.className = "text-3xl text-white font-semibold";
 
   const bio = document.createElement("p");
   bio.innerText = data.bio;
+  bio.className = "text-xl text-white font-semibold";
 
   bannerDiv.appendChild(banner);
   profileImageDiv.appendChild(profileImage);

@@ -26,12 +26,12 @@ body {
 }
 
 .formInputTwo {
-  @apply max-w-[400px] h-[150px] w-full bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md;
+  @apply max-w-[400px] h-[150px] w-full bg-lightGray text-black placeholder-blue p-5 shadow-white shadow-md;
 }
 .header {
   @apply text-white text-3xl;
 }
 
 .buttonEffect {
-  @apply transition-transform duration-150 ease-in-out scale-90 hover:scale-100;
+  @apply transition-transform duration-150 ease-in-out scale-90 hover:scale-100 cursor-pointer;
 }

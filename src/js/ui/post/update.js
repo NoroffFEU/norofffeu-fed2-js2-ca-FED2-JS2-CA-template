@@ -22,7 +22,7 @@ export async function onUpdatePost(event) {
   const EditPostData = {
     title: formData.get("title"),
     body: formData.get("text"),
-    tags: formData.get("tags").split(" "),
+    tags: formData.get("tags").split(","),
     media: media,
   };
 

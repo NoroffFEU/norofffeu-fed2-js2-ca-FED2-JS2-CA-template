@@ -46,14 +46,15 @@ export const makeAPost = (post, id) => {
   editSection.className = "flex gap-10";
 
   const editButton = document.createElement("button");
-  editButton.innerText = "Edit";
+  editButton.innerHTML = `<i class="fa-solid fa-pen fa-lg" style="color: #000000;"></i>`;
   editButton.addEventListener("click", () => {
-    window.location.href = "/post/edit/";
     localStorage.setItem("postID", JSON.stringify(post.id));
+    localStorage.setItem("post", JSON.stringify(post));
+    window.location.href = "/post/edit/";
   });
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerText = "Delete";
+  deleteButton.innerHTML = `<i class="fa-solid fa-trash fa-lg" style="color: #050505;"></i>`;
   deleteButton.id = post.id;
   deleteButton.addEventListener("click", onDeletePost);
 

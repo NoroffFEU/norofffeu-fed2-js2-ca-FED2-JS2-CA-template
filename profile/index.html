@@ -6,71 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/1102aaadb8.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="flex flex-col items-center">
+    <header></header>
     <main>
-      <h1>Tompe Talk</h1>
+      <div
+        id="profileBanner"
+        class="w-full max-h-[400px] overflow-hidden"
+      ></div>
 
-      <nav>
-        <a href="/">Home</a>
-        <a href="/profile/">Profile</a>
-        <a href="/post/create/">Create Post</a>
-        <button class="logout">Log Out</button>
-      </nav>
+      <div class="flex gap-10">
+        <div
+          id="profileImage"
+          class="rounded-md w-[100px] md:w-[200px] mt-[-50px] lg:mt-[-100px] ml-10 z-40 shadow-blue shadow-lg"
+        ></div>
 
-      <div class="max-h-400 w-100 position-relative overflow-hidden">
-        <div id="profileBanner"></div>
+        <div class="flex justify-between w-100 items-center">
+          <div id="username" class="text-left"></div>
+        </div>
       </div>
 
-      <div class="flex w-100 gap-10">
-        <div id="profileImage" class="profileImage"></div>
-        <div class="w-100">
-          <div class="flex justify-between w-100 items-center">
-            <div id="username" class="text-left"></div>
-            <details>
-              <summary class="cursor">Update Profile</summary>
-              <div class="flex flex-col updateProfile">
-                <form name="updateProfile">
-                  <div>
-                    <p>Profile Picture</p>
-                    <div>
-                      <label for="url">url</label>
-                      <input type="url" name="avatarUrl" />
-                    </div>
-                    <div>
-                      <label for="alt">alt</label>
-                      <input type="text" name="avatarAlt" />
-                    </div>
-                  </div>
+      <div class="mt-5 flex items-center">
+        <details class="absolute ml-4 mt-4 z-50 flex flex-row-reverse">
+          <summary class="cursor list-none shadow-white buttonEffect static">
+            <i class="fa-solid fa-gear fa-xl" style="color: #ffffff"></i>
+          </summary>
+          <div
+            class="z-50 flex flex-col absolute w-[500px] max-h-[300px] overflow-auto bg-lightGrayBlue rounded-md shadow-blue shadow-lg p-5 top-10"
+          >
+            <form
+              name="updateProfile"
+              class="w-full flex flex-col items-center gap-4"
+            >
+              <p class="text-2xl text-white font-semibold">Profile Picture</p>
 
-                  <div>
-                    <p>Cover Picture</p>
-                    <div>
-                      <label for="url">url</label>
-                      <input type="url" name="bannerUrl" />
-                    </div>
+              <input
+                type="url"
+                name="avatarUrl"
+                class="formInputOne"
+                placeholder="Insert image url here..."
+              />
 
-                    <div>
-                      <label for="alt">alt</label>
-                      <input type="text" name="bannerAlt" />
-                    </div>
-                  </div>
+              <p class="text-2xl text-white font-semibold mt-4">
+                Cover Picture
+              </p>
 
-                  <div>
-                    <p>Bio</p>
-                    <div>
-                      <label for="bio"></label>
-                      <textarea type="text" name="bio"></textarea>
-                    </div>
-                  </div>
+              <input
+                type="url"
+                name="bannerUrl"
+                class="formInputOne"
+                placeholder="Insert Image Url"
+              />
 
-                  <button>Update Profile</button>
-                </form>
-              </div>
-            </details>
+              <input
+                type="text"
+                name="bannerAlt"
+                class="formInputOne"
+                placeholder="Insert a description for the cover image"
+              />
+
+              <p class="text-2xl text-white font-semibold mt-4">Bio</p>
+
+              <textarea
+                type="text"
+                name="bio"
+                class="formInputTwo"
+                placeholder="Write your bio here! "
+              ></textarea>
+
+              <button class="buttonEffect text-blue text-3xl my-4 font-bold">
+                Update Profile
+              </button>
+            </form>
           </div>
-          <div id="bio"></div>
-        </div>
+        </details>
+        <div id="bio" class="ml-20"></div>
       </div>
 
       <div id="userPosts" class="userPosts"></div>

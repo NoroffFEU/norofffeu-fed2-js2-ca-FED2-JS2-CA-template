@@ -5,7 +5,8 @@ export const makeHeader = (header) => {
   outerContainer.className =
     "flex justify-between sticky top-0 pt-10 pb-3 bg-gradient-to-b from-blue to-transparent bg-no-repeat";
 
-  const logo = document.createElement("p");
+  const logo = document.createElement("a");
+  logo.href = "/";
   logo.innerHTML = `
     <span class="header font-semibold">Tompe</span><span class="text-lightGrayBlue text-3xl font-bold">Talk</span>
     `;

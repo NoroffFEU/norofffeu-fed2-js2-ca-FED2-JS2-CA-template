@@ -6,38 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/1102aaadb8.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
-  <body class="flex flex-col h-100">
-    <h1 class="text-center">Edit Post</h1>
-
-    <form name="editPost" class="flex flex-col items-center">
-      <div class="formContainers">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="" />
-      </div>
-
-      <div class="formContainers">
-        <label for="text">Text</label>
-        <textarea name="text" id="postText"></textarea>
-      </div>
-
-      <div class="formContainers">
-        <label for="media">Image url</label>
-        <input type="url" name="url" />
-      </div>
-
-      <div class="formContainers">
-        <label for="media">Image alt</label>
-        <input type="text" name="alt" />
-      </div>
-
-      <div class="formContainers">
-        <label for="tags">tags</label>
-        <input type="text" name="tags" />
-      </div>
-
-      <button>Save</button>
-    </form>
+  <body class="flex flex-col items-center">
+    <header></header>
+    <h1 class="text-center text-3xl text-white font-bold my-5 w-full">
+      Edit Post
+    </h1>
+    <main>
+      <form
+        id="editPost"
+        name="editPost"
+        class="flex flex-col items-center gap-4"
+      ></form>
+    </main>
   </body>
 </html>

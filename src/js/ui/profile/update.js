@@ -18,7 +18,7 @@ export async function onUpdateProfile(event) {
 
   const avatar = {
     url: formData.get("avatarUrl"),
-    alt: formData.get("avatarAlt"),
+    alt: "Profile Image",
   };
 
   const banner = {
