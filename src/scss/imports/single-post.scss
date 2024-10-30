@@ -5,10 +5,12 @@
 .comment-list {
   .comment-item {
     margin-top: 1rem;
-    border-bottom: solid 1px #000;
+    border-top: solid 1px $black;
   }
+
   & :first-child {
     margin-top: 0;
+    border: none;
   }
 
   & :last-child {

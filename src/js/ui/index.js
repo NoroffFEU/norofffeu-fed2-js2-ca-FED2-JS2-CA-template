@@ -69,9 +69,9 @@ export default class NoroffApp extends NoroffAPI {
     const originalComment = event.target.closest(".comment-item");
     this.replyToId = Number(originalComment.id);
     const originalCommentUser = originalComment.dataset.username;
-    originalComment.style.backgroundColor = "#dedede";
+    originalComment.style.backgroundColor = "#e1d2c4";
 
-    existingReplyMessage.innerHTML = `<button class="cancel" type="button"><i class="fa-solid fa-circle-xmark"></i></button>Replying to <span class="reply-to">${originalCommentUser}</span>`;
+    existingReplyMessage.innerHTML = `<button class="cancel border-0" type="button"><i class="fa-solid fa-circle-xmark"></i></button>Replying to <span class="reply-to">${originalCommentUser}</span>`;
     originalComment.dataset.replying = "true";
 
     const cancelButton = document.querySelector(".cancel");
@@ -80,13 +80,6 @@ export default class NoroffApp extends NoroffAPI {
       this.replyToId = null;
       originalComment.style.backgroundColor = "transparent";
       originalComment.dataset.replying = "false";
-    });
-  }
-
-  setupReplyButtons() {
-    const replyButtons = document.querySelectorAll(".reply-button");
-    replyButtons.forEach((button) => {
-      button.addEventListener("click", (event) => this.setReplyToId(event));
     });
   }
 
@@ -291,9 +284,11 @@ export default class NoroffApp extends NoroffAPI {
 
           const editButton = document.createElement("button");
           editButton.classList.add(
-            "edit-button",
-            "button-dark",
             "border",
+            "border-2",
+            "border-black",
+            "btn",
+            "btn-dark",
             "px-3",
             "py-2",
             "rounded",

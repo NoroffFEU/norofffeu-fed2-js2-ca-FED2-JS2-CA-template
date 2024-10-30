@@ -3,9 +3,15 @@ import { formatDate } from "../../utilities/formatDate";
 
 export function generateSinglePostHTML(post) {
   const singlePostContainer = document.createElement("div");
-  singlePostContainer.classList.add("single-post-container");
   const postContent = document.createElement("div");
-  postContent.classList.add("content-upper", "mb-5", "mb-lg-8");
+  postContent.classList.add(
+    "mb-6",
+    "pb-6",
+    "pb-lg-8",
+    "mb-lg-8",
+    "border-bottom",
+    "border-black",
+  );
 
   const title = document.createElement("h1");
   title.classList.add("text-center", "mb-3", "mb-lg-5");
@@ -13,13 +19,7 @@ export function generateSinglePostHTML(post) {
   const figure = document.createElement("figure");
   figure.classList.add("ratio", "ratio-16x9");
   const thumbnail = document.createElement("img");
-  thumbnail.classList.add(
-    "thumbnail",
-    "rounded",
-    "object-fit-fill",
-    "mb-2",
-    "mb-lg-3",
-  );
+  thumbnail.classList.add("rounded", "object-fit-fill", "mb-2", "mb-lg-3");
   if (post.media?.url) {
     thumbnail.src = post.media.url;
     thumbnail.alt = post.media.alt;
@@ -30,14 +30,12 @@ export function generateSinglePostHTML(post) {
   figure.appendChild(thumbnail);
   const postUserDate = document.createElement("div");
   postUserDate.classList.add(
-    "post-user-date",
     "d-flex",
     "justify-content-between",
     "align-items-center",
   );
   const postUserContainer = document.createElement("div");
   postUserContainer.classList.add(
-    "user",
     "d-flex",
     "justify-content-between",
     "align-items-center",
@@ -54,7 +52,6 @@ export function generateSinglePostHTML(post) {
 
   const postDateContainer = document.createElement("div");
   postDateContainer.classList.add(
-    "date",
     "d-flex",
     "justify-content-between",
     "align-items-center",
@@ -70,50 +67,45 @@ export function generateSinglePostHTML(post) {
 
   const tagList = document.createElement("ul");
   tagList.classList.add(
-    "tag-list",
     "single-post-tag-list",
     "list-unstyled",
     "d-flex",
     "align-items-center",
     "gap-1",
-    "my-3",
-    "my-lg-4",
+    "mt-3",
+    "mb-4",
+    "mt-lg-4",
+    "mb-lg-5",
     "flex-wrap",
+    "fw-medium",
   );
   const tagsArray = post.tags;
   tagsArray
     ?.filter((tag) => tag.trim().length > 0)
     .forEach((tag) => {
       const tagItem = document.createElement("li");
-      tagItem.classList.add(
-        "tag-item",
-        "border",
-        "px-2",
-        "py-1",
-        "rounded-pill",
-      );
+      tagItem.classList.add("border", "px-2", "py-1", "rounded-pill");
       tagItem.textContent = tag;
       tagList.appendChild(tagItem);
     });
 
   const contentContainer = document.createElement("div");
-  contentContainer.classList.add("content");
   const contentText = document.createElement("p");
-  contentText.classList.add("content-text", "m-0");
+  contentText.classList.add("content-text", "m-0", "font-content");
   contentText.textContent = post.body;
   contentContainer.appendChild(contentText);
 
   const commentSection = document.createElement("div");
   commentSection.classList.add("comment-section");
   const sectionTitle = document.createElement("p");
-  sectionTitle.classList.add("section-title");
-  sectionTitle.textContent = `Comment (${post.comments.length})`;
+  sectionTitle.classList.add("mb-0");
+  sectionTitle.textContent = `Comment ( ${post.comments.length} )`;
 
   const commentList = document.createElement("ul");
   commentList.classList.add(
     "comment-list",
     "list-unstyled",
-    "pt-4",
+    "pt-3",
     "mb-0",
     "py-lg-4",
     "px-lg-3",
@@ -129,7 +121,14 @@ export function generateSinglePostHTML(post) {
     commentItem.id = comment.id;
     commentItem.dataset.username = comment.author.name;
     const commentContainer = document.createElement("div");
-    commentContainer.classList.add("comment-container", "p-3", "p-lg-2");
+    commentContainer.classList.add(
+      "comment-container",
+      "px-3",
+      "pt-3",
+      "pb-4",
+      "px-lg-2",
+      "py-lg-4",
+    );
     const userInfo = document.createElement("div");
     userInfo.classList.add(
       "user-info",
@@ -147,14 +146,13 @@ export function generateSinglePostHTML(post) {
     userInfo.append(userAvatar, commentUser);
     const commentContent = document.createElement("div");
     commentContent.classList.add(
-      "comment-content",
-      "mt-2",
+      "mt-3",
       "d-flex",
       "justify-content-between",
       "align-items-center",
     );
     const commentText = document.createElement("p");
-    commentText.classList.add("comment-text", "m-0", "font-size-sm");
+    commentText.classList.add("comment-text", "m-0", "font-content");
     commentText.textContent = comment.body;
     const commentDeleteButton = document.createElement("button");
     commentDeleteButton.classList.add(
@@ -174,13 +172,19 @@ export function generateSinglePostHTML(post) {
       "bg-transparent",
       "px-0",
       "mt-3",
-      "my-lg-3",
       "font-size-sm",
     );
     replyButton.innerHTML = `<i class="fa-solid fa-reply me-1"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
     const replyList = document.createElement("ul");
-    replyList.classList.add("reply-list", "ul-padding-left");
+    replyList.classList.add(
+      "reply-list",
+      "ul-padding-left",
+      "ps-4",
+      "list-unstyled",
+      "d-flex",
+      "flex-column",
+    );
     commentItem.append(commentContainer, replyList);
     commentList.appendChild(commentItem);
   }
@@ -191,38 +195,72 @@ export function generateSinglePostHTML(post) {
   const commentItemsArray = post.comments;
   for (let i = 0; i < replyCommentsArray.length; i++) {
     const replyCommentItem = document.createElement("li");
-    replyCommentItem.classList.add("comment-item", "reply-comment-item");
+    replyCommentItem.classList.add(
+      "comment-item",
+      "reply-comment-item",
+      "border-top",
+    );
     const comment = replyCommentsArray[i];
     replyCommentItem.id = comment.id;
     replyCommentItem.dataset.username = comment.author.name;
     const commentContainer = document.createElement("div");
-    commentContainer.classList.add("comment-container");
+    commentContainer.classList.add(
+      "comment-container",
+      "px-3",
+      "pt-3",
+      "pb-2",
+      "px-lg-2",
+      "py-lg-4",
+    );
     const userInfo = document.createElement("div");
     userInfo.classList.add("user-info", "font-size-sm");
     const userAvatar = document.createElement("img");
+    userAvatar.classList.add("rounded-circle", "me-2");
     userAvatar.src = comment.author.avatar.url;
     const commentUser = document.createElement("a");
-    commentUser.classList.add("comment-username");
+    commentUser.classList.add("comment-username", "link-underline");
     commentUser.href = `/profile/?name=${comment.author.name}`;
     commentUser.textContent = comment.author.name;
     userInfo.append(userAvatar, commentUser);
     const commentContent = document.createElement("div");
-    commentContent.classList.add("comment-content");
+    commentContent.classList.add(
+      "mt-3",
+      "d-flex",
+      "justify-content-between",
+      "align-items-center",
+    );
     const commentText = document.createElement("p");
-    commentText.classList.add("comment-text", "font-size-sm");
+    commentText.classList.add(
+      "comment-text",
+      "font-size-sm",
+      "font-content",
+      "m-0",
+    );
     commentText.textContent = comment.body;
     const commentDeleteButton = document.createElement("button");
-    commentDeleteButton.classList.add("comment-delete-button");
+    commentDeleteButton.classList.add(
+      "comment-delete-button",
+      "border-0",
+      "bg-transparent",
+      "px-0",
+    );
     const commentDeleteIcon = document.createElement("i");
     commentDeleteIcon.classList.add("fa-solid", "fa-trash-can");
     commentDeleteButton.appendChild(commentDeleteIcon);
     commentContent.append(commentText, commentDeleteButton);
     const replyButton = document.createElement("button");
-    replyButton.classList.add("reply-button", "font-size-sm");
-    replyButton.innerHTML = `<i class="fa-solid fa-reply"></i>Reply`;
+    replyButton.classList.add(
+      "reply-button",
+      "font-size-sm",
+      "border-0",
+      "bg-transparent",
+      "px-0",
+      "mt-3",
+    );
+    replyButton.innerHTML = `<i class="fa-solid fa-reply me-1"></i>Reply`;
     commentContainer.append(userInfo, commentContent, replyButton);
     const replyList = document.createElement("ul");
-    replyList.classList.add("reply-list");
+    replyList.classList.add("reply-list", "list-unstyled");
     replyCommentItem.append(commentContainer, replyList);
     const parentComment = commentItemsArray.find(
       (commentItem) => Number(commentItem.id) === comment.replyToId,
@@ -249,10 +287,16 @@ export function generateSinglePostHTML(post) {
   }
 
   const commentForm = document.createElement("form");
-  commentForm.classList.add("comment-form", "pt-4", "border-top", "pt-lg-5");
+  commentForm.classList.add(
+    "pt-5",
+    "mt-4",
+    "border-top",
+    "border-black",
+    "pt-lg-5",
+  );
   commentForm.name = "comment";
   const myUserName = document.createElement("p");
-  myUserName.classList.add("my-username", "mb-0", "fw-bold", "font-size-sm");
+  myUserName.classList.add("mb-0", "fw-semibold", "font-size-sm");
   myUserName.textContent = NoroffAPI.user;
   const replyMessage = document.createElement("p");
   replyMessage.classList.add("reply-message", "mb-0", "mt-2", "font-size-sm");
@@ -264,14 +308,20 @@ export function generateSinglePostHTML(post) {
   fromGroup.appendChild(commentTextAreaLabel);
 
   const commentTextArea = document.createElement("textarea");
-  commentTextArea.classList.add("form-control");
+  commentTextArea.classList.add("form-control", "border-primary");
   commentTextArea.placeholder = "Write comment here";
   commentTextArea.name = "comment";
   commentTextArea.id = "comment";
   commentTextAreaLabel.appendChild(commentTextArea);
 
   const commentButton = document.createElement("button");
-  commentButton.classList.add("btn", "col-12", "mt-3", "mt-lg-2", "border");
+  commentButton.classList.add(
+    "btn",
+    "col-12",
+    "mt-2",
+    "mt-lg-2",
+    "btn-primary",
+  );
   commentButton.type = "submit";
   commentButton.innerText = "Add comment";
   commentForm.append(myUserName, replyMessage, fromGroup, commentButton);

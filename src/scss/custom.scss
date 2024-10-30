@@ -56,8 +56,8 @@ $primary: #1f818c;
 $border-color: $dark;
 $btn-color: $black;
 $btn-font-weight: $font-weight-medium;
-$font-family-base: "Archivo", sans-serif;
-$headings-font-family: "Clash Display", sans-serif;
+$font-family-base: "Clash Display", sans-serif;
+$input-font-family: "Archivo", sans-serif;
 $headings-font-weight: 600;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
@@ -74,4 +74,8 @@ $headings-font-weight: 600;
 
 .border-2 {
   border-width: 2px;
+}
+
+.font-content {
+  font-family: "Archivo", sans-serif;
 }
