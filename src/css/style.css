@@ -22,7 +22,7 @@ body {
 }
 
 .formInputOne {
-  @apply max-w-[400px] w-full h-[50px] bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md;
+  @apply max-w-[400px] w-full h-[50px] bg-lightGray text-black placeholder-blue px-5 shadow-white shadow-md hover:bg-lightGrayBlue;
 }
 
 .formInputTwo {
@@ -33,5 +33,5 @@ body {
 }
 
 .buttonEffect {
-  @apply transition-transform duration-150 ease-in-out scale-90 hover:scale-100 cursor-pointer;
+  @apply transition-transform duration-150 ease-in-out scale-90 hover:scale-100 cursor-pointer hover:bg-lightGrayBlue/60 hover:rounded-md px-4 py-2;
 }

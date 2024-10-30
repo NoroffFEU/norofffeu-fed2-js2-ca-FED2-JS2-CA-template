@@ -7,12 +7,13 @@ export const makeHeader = (header) => {
 
   const logo = document.createElement("a");
   logo.href = "/";
+  logo.className = "buttonEffect";
   logo.innerHTML = `
     <span class="header font-semibold">Tompe</span><span class="text-lightGrayBlue text-3xl font-bold">Talk</span>
     `;
 
   const nav = document.createElement("nav");
-  nav.className = "flex gap-10 items-center";
+  nav.className = "flex items-center";
 
   const postCreate = document.createElement("a");
   postCreate.href = "/post/create/";

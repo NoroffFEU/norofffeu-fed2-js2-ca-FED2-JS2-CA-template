@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/1102aaadb8.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body>
-    <h1>Tompe Talk</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/profile/">Profile</a>
-      <a href="/post/create/">Create Post</a>
-      <button class="logout">Log Out</button>
-    </nav>
+  <body class="flex flex-col items-center">
+    <header></header>
+    <main>
+      <div id="postContainer"></div>
 
-    <div id="postContainer"></div>
-
-    <div
-      id="postCommentContainer"
-      class="w-100 flex flex-col items-center"
-    ></div>
+      <div
+        id="postCommentContainer"
+        class="w-100 flex flex-col items-center"
+      ></div>
+    </main>
   </body>
 </html>

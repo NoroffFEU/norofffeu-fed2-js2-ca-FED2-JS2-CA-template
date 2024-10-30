@@ -54,7 +54,7 @@ export const makeAPost = (post, id) => {
   });
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerHTML = `<i class="fa-solid fa-trash fa-lg" style="color: #050505;"></i>`;
+  deleteButton.innerHTML = `<i id="${post.id}" class="fa-solid fa-trash fa-lg" style="color: #050505;"></i>`;
   deleteButton.id = post.id;
   deleteButton.addEventListener("click", onDeletePost);
 
@@ -70,7 +70,8 @@ export const makeAPost = (post, id) => {
         <p><i class="fa-solid fa-heart fa-xl" style="color: #c50d0d;"></i> ${post._count.reactions}</p>`;
 
   const seePost = document.createElement("button");
-  seePost.className = "text-blue text-l font-semibold text-center w-full";
+  seePost.className =
+    "buttonEffect text-blue text-l font-semibold text-center w-full";
   seePost.innerText = "See Post";
 
   seePost.addEventListener("click", () => {
