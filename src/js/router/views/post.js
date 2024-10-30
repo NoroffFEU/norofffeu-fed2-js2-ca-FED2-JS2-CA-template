@@ -22,10 +22,9 @@ const showPost = async () => {
   const commentContainer = document.getElementById("postCommentContainer");
 
   const outerContainer = document.getElementById("postContainer");
-  outerContainer.className = "flex flex-col items-center mt-20";
+  outerContainer.className = "flex flex-col items-center mt-20 w-full";
 
-  const userinfo = JSON.parse(localStorage.getItem("userInfo"));
-  const username = userinfo.name;
+  const username = post.author.name;
 
   const container = document.createElement("div");
   container.className =
@@ -37,9 +36,14 @@ const showPost = async () => {
   title.innerText = post.title;
   title.className = "text-center text-blue text-2xl font-semibold";
 
+  const author = document.createElement("p");
+  author.innerHTML = `<p>Author: ${username}`;
+  author.className = "text-blue text-lg font-bold";
+
   const text = document.createElement("p");
   text.innerText = post.body;
   text.className = "text-blue text-xl font-semibold";
+
   const imageDiv = document.createElement("div");
   imageDiv.className =
     "max-h-[500px] overflow-hidden w-auto flex items-center justify-center";
@@ -75,31 +79,32 @@ const showPost = async () => {
   tagsDiv.className = "flex gap-4";
 
   const tagText = document.createElement("p");
-  tagText.className = "text-blue text-xl font-bold";
+  tagText.className = "text-blue text-lg font-bold";
   tagText.innerText = "Tags:";
   post.tags.forEach((tagText) => {
     const tag = document.createElement("p");
     tag.innerText = tagText;
-    tag.className = "text-blue text-xl font-bold";
+    tag.className = "text-blue text-lg font-bold";
 
     tagsDiv.append(tag);
   });
 
   countDiv.append(reactionSection);
   reactionSection.append(commentsDiv, reactionDiv);
-  container.append(title, text, imageDiv, tagsContainer, countDiv);
+  container.append(title, text, imageDiv, author, tagsContainer, countDiv);
   tagsContainer.append(tagText, tagsDiv);
   outerContainer.append(container);
 
   comments.forEach((comment) => {
     const commentDiv = document.createElement("div");
-    commentDiv.className = "postContainer postCommentContainer";
+    commentDiv.className = "bg-lightGray w-full p-5 rounded-md max-w-[750px] w";
 
     const commentInfoDiv = document.createElement("div");
     commentInfoDiv.className = "flex justify-between";
 
     const commentAuthor = document.createElement("p");
     commentAuthor.innerText = comment.author.name;
+    commentAuthor.className = "text-blue text-xl";
 
     const commentDate = document.createElement("p");
     commentDate.innerText = comment.created;

@@ -39,7 +39,7 @@ const readProfileInfo = async () => {
   const profileImage = document.createElement("img");
   profileImage.src = data.avatar.url;
   profileImage.alt = data.avatar.alt;
-  profileImage.className = "rounded-md border-white border-4 ";
+  profileImage.className = "rounded-md border-white border-4";
 
   const name = document.createElement("h2");
   name.innerText = data.name;
