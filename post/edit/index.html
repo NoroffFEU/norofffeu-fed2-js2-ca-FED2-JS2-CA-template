@@ -9,7 +9,6 @@
       src="https://kit.fontawesome.com/98d292e689.js"
       crossorigin="anonymous"
     ></script>
-    <!-- <link rel="stylesheet" href="../../src/css/style.css" /> -->
     <link
       href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=archivo@300,400,500,600,700,800&display=swap"
       rel="stylesheet"
@@ -28,18 +27,18 @@
       >
         <a
           href="/post/create/"
-          class="bg-dark d-none border border-2 border-black d-lg-inline-block px-3 py-2 rounded"
+          class="btn btn-light hover-dark d-none border border-2 d-lg-inline-block px-3 py-2 rounded"
         >
           <i class="fa-solid fa-pen-fancy me-1"></i>
           New Post
         </a>
         <a
-          class="my-page bg-dark px-3 py-2 rounded border border-2 border-black"
+          class="my-page btn btn-light hover-dark px-3 py-2 rounded border border-2"
         >
           <i class="fa-solid fa-user"></i>
         </a>
         <button
-          class="logout-button border border-2 border-black px-3 py-2 rounded"
+          class="logout-button border border-2 px-3 py-2 rounded btn btn-light"
         >
           Log out
         </button>
@@ -95,12 +94,15 @@
             required
           ></textarea>
         </div>
-        <button type="submit" class="font-size-sm btn border col-12 mt-3">
+        <button
+          type="submit"
+          class="font-size-sm btn btn-primary border-2 col-12 mt-3"
+        >
           Update Post
         </button>
       </form>
       <button
-        class="delete-button font-size-sm btn border col-12 mt-3 w-lg-80 d-block mx-lg-auto"
+        class="delete-button font-size-sm btn btn-danger border-2 col-12 mt-3 w-lg-80 d-block mx-lg-auto"
       >
         Delete This Post
       </button>

@@ -321,6 +321,7 @@ export function generateSinglePostHTML(post) {
     "mt-2",
     "mt-lg-2",
     "btn-primary",
+    "border-2",
   );
   commentButton.type = "submit";
   commentButton.innerText = "Add comment";

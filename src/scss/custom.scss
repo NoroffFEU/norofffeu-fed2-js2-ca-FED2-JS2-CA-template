@@ -46,19 +46,23 @@ $link-decoration: none;
 $font-weight-medium: 500;
 
 $light: #f2f2eb;
+//$light: #eefcfa;
 $dark: #e1d2c4;
 $black: #0d0d0d;
 $body-color: $black;
 $link-color: $black;
 $link-color-rgb: (13, 13, 13);
 $body-bg: $light;
-$primary: #1f818c;
-$border-color: $dark;
-$btn-color: $black;
+//$primary: #1f818c;
+$primary: #025951;
+$border-color: $primary;
+$btn-color: $primary;
+$btn-link-hover-color: $primary;
 $btn-font-weight: $font-weight-medium;
 $font-family-base: "Clash Display", sans-serif;
 $input-font-family: "Archivo", sans-serif;
 $headings-font-weight: 600;
+$input-border-color: $black;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./imports/auth.scss";
@@ -78,4 +82,39 @@ $headings-font-weight: 600;
 
 .font-content {
   font-family: "Archivo", sans-serif;
+}
+
+.color-green {
+  color: $primary;
+}
+
+.btn-light {
+  --bs-btn-color: #025951;
+}
+
+.btn:disabled {
+  pointer-events: auto;
+  cursor: not-allowed;
+}
+
+.btn-light:hover {
+  background-color: $primary;
+  color: $light;
+}
+
+.btn-primary:hover {
+  background-color: $light;
+  color: $primary;
+  border-color: $primary;
+}
+
+.btn-danger:hover {
+  background-color: $light;
+  color: $danger;
+  border-color: $danger;
+}
+
+.hover-dark:hover {
+  background-color: #025951;
+  color: $light;
 }

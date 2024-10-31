@@ -286,12 +286,12 @@ export default class NoroffApp extends NoroffAPI {
           editButton.classList.add(
             "border",
             "border-2",
-            "border-black",
-            "btn",
-            "btn-dark",
+            "bg-light",
             "px-3",
             "py-2",
             "rounded",
+            "color-green",
+            "fw-medium",
           );
           editButton.textContent = "Edit";
           const editIcon = document.createElement("i");
@@ -477,10 +477,13 @@ export default class NoroffApp extends NoroffAPI {
           const updateButton = document.createElement("button");
           updateButton.classList.add(
             "update-button",
-            "btn",
             "border",
+            "border-2",
             "px-3",
             "py-2",
+            "rounded",
+            "btn",
+            "btn-light",
           );
           updateButton.textContent = "Update Profile";
           const followButton = document.createElement("button");
@@ -488,8 +491,11 @@ export default class NoroffApp extends NoroffAPI {
             "follow-button",
             "btn",
             "border",
+            "border-2",
             "px-3",
             "py-2",
+            "rounded",
+            "btn-light",
           );
           followButton.id = "toggle-button";
           followButton.textContent = "Follow";
@@ -612,9 +618,10 @@ export default class NoroffApp extends NoroffAPI {
         const button = document.createElement("button");
         button.textContent = text;
         button.dataset.page = page;
-        button.className = "rounded-circle border border-black bg-light";
+        button.className = "rounded-circle border border-2 btn btn-light";
         if (page === currentPage) {
-          button.classList.add("current-page");
+          button.classList.add("current-page", "btn-primary");
+          button.classList.remove("btn-light");
         }
         button.addEventListener("click", () => {
           this.events.post.displayPosts(page);
@@ -624,14 +631,25 @@ export default class NoroffApp extends NoroffAPI {
 
       const createEllipsis = () => {
         const ellipsis = document.createElement("span");
+        ellipsis.classList.add("color-green");
         ellipsis.textContent = "...";
         return ellipsis;
       };
 
       const previousButton = document.createElement("button");
-      previousButton.classList.add("rounded-circle");
+      previousButton.classList.add(
+        "rounded-circle",
+        "border",
+        "border-2",
+        "btn",
+        "btn-light",
+      );
       const previousButtonIcon = document.createElement("i");
-      previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
+      previousButtonIcon.classList.add(
+        "fa-solid",
+        "fa-chevron-left",
+        "color-green",
+      );
       previousButton.appendChild(previousButtonIcon);
       paginationContainer.appendChild(previousButton);
       previousButton.addEventListener("click", () => {
@@ -642,7 +660,6 @@ export default class NoroffApp extends NoroffAPI {
 
       if (currentPage === 1) {
         previousButton.disabled = true;
-        previousButton.style.cursor = "not-allowed";
       } else {
         previousButton.disabled = false;
       }
@@ -695,11 +712,16 @@ export default class NoroffApp extends NoroffAPI {
       nextButton.classList.add(
         "rounded-circle",
         "border",
-        "border-black",
-        "bg-light",
+        "border-2",
+        "btn",
+        "btn-light",
       );
       const nextButtonIcon = document.createElement("i");
-      nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
+      nextButtonIcon.classList.add(
+        "fa-solid",
+        "fa-chevron-right",
+        "color-green",
+      );
       nextButton.appendChild(nextButtonIcon);
       paginationContainer.appendChild(nextButton);
       nextButton.addEventListener("click", () => {
@@ -710,7 +732,6 @@ export default class NoroffApp extends NoroffAPI {
 
       if (currentPage === pageCount) {
         nextButton.disabled = true;
-        nextButton.style.cursor = "not-allowed";
       } else {
         nextButton.disabled = false;
       }
@@ -743,7 +764,6 @@ export default class NoroffApp extends NoroffAPI {
           });
         } else {
           previousButton.disabled = true;
-          previousButton.style.cursor = "not-allowed";
         }
       }
 
@@ -768,17 +788,14 @@ export default class NoroffApp extends NoroffAPI {
                 window.location.href = `/post/?id=${nextPostId}`;
               } else {
                 nextButton.disabled = true;
-                nextButton.style.cursor = "not-allowed";
               }
             });
           } catch (error) {
             alert(error.message);
             nextButton.disabled = true;
-            nextButton.style.cursor = "not-allowed";
           }
         } else {
           nextButton.disabled = true;
-          nextButton.style.cursor = "not-allowed";
         }
       }
     },
@@ -792,9 +809,11 @@ export default class NoroffApp extends NoroffAPI {
         const button = document.createElement("button");
         button.textContent = text;
         button.dataset.page = page;
-        button.className = "pagination-button, rounded-circle";
+        button.className =
+          "pagination-button, rounded-circle border border-2 btn btn-light";
         if (page === this.currentPage) {
-          button.classList.add("current-page");
+          button.classList.add("current-page", "btn-primary");
+          button.classList.remove("btn-light");
         }
         button.addEventListener("click", () => {
           this.currentPage = page;
@@ -805,14 +824,25 @@ export default class NoroffApp extends NoroffAPI {
 
       const createEllipsis = () => {
         const ellipsis = document.createElement("span");
+        ellipsis.classList.add("color-green");
         ellipsis.textContent = "...";
         return ellipsis;
       };
 
       const previousButton = document.createElement("button");
-      previousButton.classList.add("rounded-circle");
+      previousButton.classList.add(
+        "rounded-circle",
+        "border",
+        "border-2",
+        "btn",
+        "btn-light",
+      );
       const previousButtonIcon = document.createElement("i");
-      previousButtonIcon.classList.add("fa-solid", "fa-chevron-left");
+      previousButtonIcon.classList.add(
+        "fa-solid",
+        "fa-chevron-left",
+        "color-green",
+      );
       previousButton.appendChild(previousButtonIcon);
       paginationContainer.appendChild(previousButton);
       previousButton.addEventListener("click", () => {
@@ -823,7 +853,6 @@ export default class NoroffApp extends NoroffAPI {
 
       if (this.currentPage === 1) {
         previousButton.disabled = true;
-        previousButton.style.cursor = "not-allowed";
       } else {
         previousButton.disabled = false;
       }
@@ -834,9 +863,19 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const nextButton = document.createElement("button");
-      nextButton.classList.add("rounded-circle");
+      nextButton.classList.add(
+        "rounded-circle",
+        "border",
+        "border-2",
+        "btn",
+        "btn-light",
+      );
       const nextButtonIcon = document.createElement("i");
-      nextButtonIcon.classList.add("fa-solid", "fa-chevron-right");
+      nextButtonIcon.classList.add(
+        "fa-solid",
+        "fa-chevron-right",
+        "color-green",
+      );
       nextButton.appendChild(nextButtonIcon);
       paginationContainer.appendChild(nextButton);
       nextButton.addEventListener("click", () => {
@@ -847,7 +886,6 @@ export default class NoroffApp extends NoroffAPI {
 
       if (this.currentPage === pageCount) {
         nextButton.disabled = true;
-        nextButton.style.cursor = "not-allowed";
       } else {
         nextButton.disabled = false;
       }

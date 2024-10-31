@@ -99,7 +99,7 @@ export function generateFeedHTML(post) {
       const tagItem = document.createElement("li");
       tagItem.classList.add(
         "tag-item",
-        "bg-dark",
+        "bg-light",
         "border",
         "border-black",
         "px-3",
@@ -137,7 +137,6 @@ export function generateFeedHTML(post) {
     "border-2",
     "rounded",
     "h-100",
-    "border-black",
   );
   bootstrapFlexBox.append(figure, postTextContainer);
   postContainer.appendChild(bootstrapFlexBox);
