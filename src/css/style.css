@@ -1,11 +1,17 @@
 /* Import external stylesheets first */
 @import url(_reset.css);
+
 @import url(components/button.css);
 @import url(components/form.css);
 @import url(components/icon.css);
 @import url(components/input.css);
+
 @import url(commons/_variables.css);
+@import url(commons/_image.css);
+
 @import url(home.css);
+@import url(element/article.css);
+@import url(profile.css);
 
 /* Then, add Tailwind CSS directives */
 @tailwind base;
