@@ -77,7 +77,7 @@ const utils = {
           (tag) =>
             `<a href="/tags/?tag=${encodeURIComponent(
               tag
-            )}" class="tag">#${tag}</a>`
+            )}" class="tag ">#${tag}</a>`
         ) // Add '#' before each tag
         .join(' '); // Join tags with a space
     },

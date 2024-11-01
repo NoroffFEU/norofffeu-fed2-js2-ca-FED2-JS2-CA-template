@@ -1,9 +1,8 @@
-.story__identation {
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 2.03125rem);
-  padding-left: calc(var(--su-7) + var(--su-2));
-}
+
+.story__title {
+  margin-bottom: var(--su-1);
+} 
+
 
 /* .story__top {
   margin-bottom: var(--su-2);
@@ -69,15 +68,7 @@
   text-decoration: none;
 }
 
-.story__title {
-  font-size: var(--fs-2xl);
-  margin-bottom: var(--su-1);
-}
 
-.story__tags {
-  display: flex;
-  gap: 1rem;
-}
 
 .story__bottom {
   display: flex;
