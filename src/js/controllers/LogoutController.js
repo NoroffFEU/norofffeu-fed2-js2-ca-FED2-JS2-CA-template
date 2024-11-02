@@ -9,9 +9,10 @@ class LogoutController {
   }
 
   initEvents() {
-    const logoutButton = document.getElementById('btn-logout');
-    if (logoutButton) 
-      logoutButton.addEventListener('click', (e) => this.handleLogout(e));
+    const logoutButton = document.getElementsByClassName('btn-danger')
+    Array.from(logoutButton).forEach(button => {
+      button.addEventListener('click', (e) => this.handleLogout(e));
+    });
   }
 
   handleLogout(event) {
