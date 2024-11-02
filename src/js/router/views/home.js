@@ -2,6 +2,11 @@ import controllers from "../../controllers/index";
 import utils from "../../utilities/utils";
 
 async function init() {
+  const menuButton = document.getElementById("menuButton");
+  const menuIcon = document.getElementById("menuIcon");
+  const closeIcon = document.getElementById("closeIcon");
+  const mobileMenu = document.getElementById("mobile-menu");
+
   const container = document.querySelector(".main-content");
   clearContent(container);
   try {
@@ -9,6 +14,12 @@ async function init() {
     const { data } = posts;
 
     renderPosts(container, data.posts);
+
+    menuButton.addEventListener("click", () => {
+      menuIcon.classList.toggle("hidden"); // Toggle 'hamburger' icon
+      closeIcon.classList.toggle("hidden"); // Toggle 'close' icon
+      mobileMenu.classList.toggle("hidden");// Toggle mobile menu visibility
+    });
   } catch (error) {
     console.error("Error fetching posts:", error);
     container.innerHTML = "<p>Error loading posts. Please try again later.</p>";

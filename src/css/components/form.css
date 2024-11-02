@@ -12,7 +12,6 @@ form[role='search'] {
   .field {
     display: flex;
     flex-direction: column;
-    /* width: 100%; */
   }
   
   .field__label {
