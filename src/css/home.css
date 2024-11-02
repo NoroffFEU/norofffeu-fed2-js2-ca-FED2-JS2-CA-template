@@ -1,0 +1,12 @@
+#home {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    max-width: 43.75rem;
+  }
