@@ -5,7 +5,7 @@
 
 # API key
 To find your API key, you need to create .env file 
-VITE_API_KEY = "PUT YOUR API KEY HERE"
+``` VITE_API_KEY = "PUT YOUR API KEY HERE" ```
 
 ## Admin Login
 User: `natnoppol123@stud.noroff.no`
