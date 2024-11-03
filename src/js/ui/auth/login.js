@@ -15,6 +15,7 @@ export async function onLogin(event) {
     // Save access token and profile data to local storage
     await saveKey("accessToken", responseData.data.accessToken);
     await saveKey("profileData", responseData);
+    window.location.href = "#";
   } catch (error) {
     console.error("Login failed:", error.message);
   }

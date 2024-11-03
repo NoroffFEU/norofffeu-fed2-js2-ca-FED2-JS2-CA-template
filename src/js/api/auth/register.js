@@ -1,5 +1,5 @@
 import { API_AUTH_REGISTER } from "../constants";
-import { makeRequest } from "./makeRequest";
+import { makeRequest } from "../makeRequest";
 
 export async function register({ name, email, password }) {
   const formData = {

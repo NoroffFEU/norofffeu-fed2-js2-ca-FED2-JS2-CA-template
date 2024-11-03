@@ -1,5 +1,5 @@
 import { getKey } from "./auth/key";
-import { API_AUTH_KEY, API_KEY } from "./constants";
+import { API_KEY } from "./constants";
 
 export async function getHeaders(requireApiKey = false) {
   const headers = {
@@ -7,7 +7,7 @@ export async function getHeaders(requireApiKey = false) {
   };
 
   // Retrieve the access token
-  const accessToken = await getKey("token");
+  const accessToken = await getKey("accessToken");
 
   // Add Authorization header if token is available
   if (accessToken) {
@@ -17,7 +17,7 @@ export async function getHeaders(requireApiKey = false) {
   }
 
   // Add API Key if required
-  if (requireApiKey && API_AUTH_KEY) {
+  if (requireApiKey && API_KEY) {
     headers["X-Noroff-API-Key"] = API_KEY;
   }
 

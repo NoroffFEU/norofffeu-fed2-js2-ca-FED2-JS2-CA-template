@@ -1,4 +1,4 @@
-import { getHeaders } from "../getHeaders";
+import { getHeaders } from "./getHeaders";
 
 export async function makeRequest(
   url,

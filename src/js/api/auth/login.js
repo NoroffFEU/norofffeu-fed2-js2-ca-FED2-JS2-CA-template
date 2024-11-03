@@ -1,5 +1,5 @@
 import { API_AUTH_LOGIN } from "../constants";
-import { makeRequest } from "./makeRequest";
+import { makeRequest } from "../makeRequest";
 
 export async function login({ email, password }) {
   const formData = {
