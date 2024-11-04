@@ -91,7 +91,12 @@ export function generateSinglePostHTML(post) {
 
   const contentContainer = document.createElement("div");
   const contentText = document.createElement("p");
-  contentText.classList.add("content-text", "m-0", "font-content");
+  contentText.classList.add(
+    "content-text",
+    "m-0",
+    "font-content",
+    "font-size-sm",
+  );
   contentText.textContent = post.body;
   contentContainer.appendChild(contentText);
 
