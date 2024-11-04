@@ -36,38 +36,35 @@ $spacers: (
   // 176px
 ) !default;
 
-$input-btn-padding-y: 0.75rem;
-
-$form-label-margin-bottom: 0.75rem;
-
-$link-color: #212529;
-$link-decoration: none;
-
+$font-family-base: "Clash Display", sans-serif;
 $font-weight-medium: 500;
+$headings-font-weight: 600;
 
 $light: #f2f2eb;
-//$light: #eefcfa;
 $dark: #e1d2c4;
 $black: #0d0d0d;
-$body-color: $black;
-$link-color: $black;
-$link-color-rgb: (13, 13, 13);
-$body-bg: $light;
-//$primary: #1f818c;
 $primary: #025951;
+$body-color: $black;
+$body-bg: $light;
 $border-color: $primary;
+
 $btn-color: $primary;
 $btn-link-hover-color: $primary;
 $btn-font-weight: $font-weight-medium;
-$font-family-base: "Clash Display", sans-serif;
-$input-font-family: "Archivo", sans-serif;
-$headings-font-weight: 600;
+
 $input-border-color: $black;
+$input-btn-padding-y: 0.75rem;
+$input-font-family: "Archivo", sans-serif;
+
+$link-color: $black;
+$link-color-rgb: (13, 13, 13);
+$link-decoration: none;
+
+$form-label-margin-bottom: 0.75rem;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./imports/feed.scss";
 @import "./imports/single-post.scss";
-@import "./imports/content-width.scss";
 @import "./imports/typography.scss";
 @import "./imports/profile.scss";
 @import "./imports/header.scss";
@@ -125,4 +122,10 @@ $input-border-color: $black;
 .hover-dark:hover {
   background-color: #025951;
   color: $light;
+}
+
+@media screen and (min-width: map-get($grid-breakpoints, lg)) {
+  .w-lg-80 {
+    width: 80%;
+  }
 }
