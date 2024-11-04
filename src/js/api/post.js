@@ -6,8 +6,6 @@ import { currentUser } from "/src/js/utilities/currentUser.js";
 export async function createPost(data) {
   const user = currentUser();
 
-  console.log('Current user:', user);
-  console.log('Token from localStorage:', localStorage.getItem('token'));
 
   // Check if user is logged in and token is available
   if (!user || !localStorage.getItem('token')) {
@@ -68,8 +66,6 @@ export async function deletePost(id) {
       headers: headers(true), // Include Content-Type and Authorization
     });
 
-    // Log the response to check if it's empty or contains an error
-    console.log('Delete Post Response:', response);
 
     if (!response.ok) {
       throw new Error(`Failed to delete post: ${response.status} ${response.statusText}`);
@@ -83,7 +79,6 @@ export async function deletePost(id) {
 
     // If the response contains text, parse it as JSON
     const result = JSON.parse(text);
-    console.log('Parsed Delete Post Response:', result);
 
     return result;
   } catch (error) {
@@ -108,7 +103,6 @@ export async function readPosts(page = 1, perPage = 12, tag = null) {
 
   // Log the response to inspect its structure
   const result = await response.json();
-  console.log('readPosts API Response:', result);
 
   if (!response.ok) throw new Error("Failed to fetch posts");
 
