@@ -65,7 +65,6 @@ $headings-font-weight: 600;
 $input-border-color: $black;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "./imports/auth.scss";
 @import "./imports/feed.scss";
 @import "./imports/single-post.scss";
 @import "./imports/content-width.scss";
