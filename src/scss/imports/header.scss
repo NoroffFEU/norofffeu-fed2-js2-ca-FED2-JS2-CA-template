@@ -10,13 +10,21 @@
   background: #f2f2eb;
 }
 
-.logout-button {
+.button-border {
   border: solid 2px #025951;
 }
 
 @media screen and (max-width: 1023px) {
   .border-none {
     border: none;
+  }
+
+  .nav-bg-pink {
+    background-color: #ffe6ff;
+  }
+
+  .nav-bg-transparent {
+    background-color: transparent;
   }
 }
 

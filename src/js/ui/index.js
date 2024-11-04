@@ -286,14 +286,15 @@ export default class NoroffApp extends NoroffAPI {
 
           const editButton = document.createElement("button");
           editButton.classList.add(
-            "border",
-            "border-2",
-            "bg-light",
+            "nav-link",
+            "btn",
+            "btn-light",
             "px-3",
             "py-2",
             "rounded",
-            "color-green",
-            "fw-medium",
+            "button-border",
+            "border-none",
+            "nav-bg-pink",
           );
           editButton.textContent = "Edit";
           const editIcon = document.createElement("i");
@@ -305,8 +306,11 @@ export default class NoroffApp extends NoroffAPI {
           } else {
             editButton.style.display = "none";
           }
-          const headerNav = document.querySelector(".header-nav");
-          headerNav.insertBefore(editButton, headerNav.firstChild);
+          const navItem = document.createElement("div");
+          navItem.classList.add("nav-item");
+          navItem.appendChild(editButton);
+          const navbarUl = document.querySelector(".navbar-nav");
+          navbarUl.insertBefore(editButton, navbarUl.firstChild);
           editButton.addEventListener("click", () => {
             window.location.href = `/post/edit/?id=${postId}`;
           });
@@ -899,17 +903,24 @@ export default class NoroffApp extends NoroffAPI {
       const header = document.querySelector(".profile-header");
       const originalPaddingBottom = 11.5;
       const scrollPaddingBottom = 2.5;
-      const minWidth = window.matchMedia("(min-width: 1024px)");
+      //const minWidth = window.matchMedia("(min-width: 1024px)");
 
+      // window.addEventListener("scroll", () => {
+      //   if (minWidth.matches) {
+      //     if (window.scrollY > 0) {
+      //       header.style.paddingBottom = `${scrollPaddingBottom}rem`;
+      //     } else {
+      //       header.style.paddingBottom = `${originalPaddingBottom}rem`;
+      //     }
+      //   } else {
+      //     header.style.paddingBottom = "12.8rem";
+      //   }
+      // });
       window.addEventListener("scroll", () => {
-        if (minWidth.matches) {
-          if (window.scrollY > 0) {
-            header.style.paddingBottom = `${scrollPaddingBottom}rem`;
-          } else {
-            header.style.paddingBottom = `${originalPaddingBottom}rem`;
-          }
+        if (window.scrollY > 0) {
+          header.style.paddingBottom = `${scrollPaddingBottom}rem`;
         } else {
-          header.style.paddingBottom = "12.8rem";
+          header.style.paddingBottom = `${originalPaddingBottom}rem`;
         }
       });
     },

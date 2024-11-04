@@ -16,28 +16,58 @@
   </head>
   <body>
     <header
-      class="p-3 pt-lg-6 px-lg-9 pb-lg-0 d-flex justify-content-between align-items-center sticky-lg-top"
+      class="p-3 pt-lg-6 px-lg-9 d-flex justify-content-between align-items-center fixed-top bg-light"
     >
-      <a href="/post/feed/?page=1" class="col-2 col-md-2">
-        <img src="/public/images/Postlyfe.svg" alt="Logo" class="col-12" />
-      </a>
       <nav
-        class="header-nav d-flex justify-content-end align-items-center gap-2 col-9"
+        class="navbar navbar-expand-lg header-nav justify-content-between w-100 py-0"
       >
-        <a
-          class="my-page btn btn-light hover-dark px-3 py-2 rounded border border-2"
-        >
-          <i class="fa-solid fa-user"></i>
-        </a>
-        <button
-          class="logout-button border border-2 px-3 py-2 rounded btn btn-light"
-        >
-          Log out
-        </button>
+        <div class="container-fluid px-0">
+          <a href="/post/feed/?page=1" class="nav-brand col-2 col-md-2">
+            <img src="/public/images/Postlyfe.svg" alt="Logo" class="col-12" />
+          </a>
+          <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul
+              class="navbar-nav ms-auto my-7 my-lg-0 text-center gap-2 align-items-center"
+            >
+              <li class="nav-item d-none d-lg-block">
+                <a
+                  class="nav-link my-page btn btn-light hover-dark px-3 py-2 rounded border border-2"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </a>
+              </li>
+              <li class="nav-item d-lg-none">
+                <a class="nav-link my-page btn btn-light hover-dark px-3 py-2">
+                  My Page
+                </a>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link logout-button button-border border-none px-3 py-2 rounded btn btn-light"
+                >
+                  Log out
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
 
-    <main class="mt-5 mb-10 px-4 mt-lg-10 px-lg-11">
+    <main class="mt-11 mb-10 px-4 mt-lg-12 px-lg-11">
       <h1 class="text-center mb-4 mb-lg-5">New Post</h1>
 
       <form name="createPost" class="w-lg-80 mx-lg-auto">
