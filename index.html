@@ -8,42 +8,51 @@
   <link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container">
-      <a href="/index.html" class="logo">LinkUp</a>
+  <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+      <a href="/index.html" class="text-2xl font-bold text-blue-500 no-underline">LinkUp</a>
       <nav>
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./profile/index.html">My Profile</a></li>
-          <li><a href="./auth/login/index.html" id="login-link">Login</a></li>
-          <li><a href="./auth/register/index.html" id="register-link">Register</a></li>
-          <li><button id="logout-btn" style="display: none;">Logout</button></li>
+        <ul class="flex space-x-4">
+          <li><a href="./index.html" class="font-semibold text-gray-700 hover:text-blue-500 transition-colors">Home</a></li>
+          <li><a href="./profile/index.html" class="font-semibold text-gray-700 hover:text-blue-500 transition-colors">My Profile</a></li>
+          <li><a href="./auth/login/index.html" id="login-link" class="font-semibold text-gray-700 hover:text-blue-500 transition-colors">Login</a></li>
+          <li><a href="./auth/register/index.html" id="register-link" class="font-semibold text-gray-700 hover:text-blue-500 transition-colors">Register</a></li>
+          <li><button id="logout-btn" class="font-semibold text-gray-700 hover:text-blue-500 transition-colors hidden">Logout</button></li>
         </ul>
       </nav>
     </div>
   </header>
-
-  <main id="main-content">
-    <div id="create-post-section">
-      <button id="create-post-button">Create Post</button>
+  <main id="main-content" class="container mx-auto px-4 mt-20 py-8">
+    <div id="create-post-section" class="bg-purple-50 rounded-lg shadow-md p-4 mb-8">
+      <button id="create-post-button" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-md transition-colors">Create Post</button>
     </div>
-    <div id="posts-container"></div>
-    
+    <div id="posts-container" class="space-y-4"></div>
     <!-- Section for displaying a single post -->
-    <div id="single-post-container" style="display: none;">
-      <div id="post-content"></div>
-      <div id="post-reactions"></div>
-      <form id="commentForm">
-        <textarea name="commentBody" required></textarea>
-        <input type="hidden" name="replyToId" value="null">
-        <button type="submit">Add Comment</button>
-      </form>
-      <div id="commentsList"></div>
-    </div>
+<div id="single-post-container" class="hidden">
+  <div id="post-content" class="bg-white rounded-lg shadow-md p-6 mb-4"></div>
+  <div id="post-reactions" class="mb-4"></div>
+  <form id="commentForm" class="space-y-4">
+    <label for="commentBody" class="sr-only">Comment</label>
+    <textarea
+      id="commentBody"
+      name="commentBody" 
+      placeholder="Write your comment here..."
+      title="Comment"
+      required 
+      class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-y"
+    ></textarea>
+    <input type="hidden" name="replyToId" value="null">
+    <button 
+      type="submit" 
+      class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-md transition-colors"
+    >Add Comment</button>
+  </form>
+  <div id="commentsList" class="mt-6 space-y-4"></div>
+</div>
   </main>
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 LinkUp. All rights reserved.</p>
+  <footer class="bg-gray-800 text-white py-6 mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-gray-300">&copy; 2024 LinkUp. All rights reserved.</p>
     </div>
   </footer>
 </body>
