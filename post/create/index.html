@@ -7,42 +7,67 @@
     <script type="module" src="/src/app.js"></script>
     <link rel="stylesheet" href="/src/css/style.css">
   </head>
-  <body>
-    <header class="main-header">
-      <div class="container">
-        <a href="/index.html" class="logo">LinkUp</a>
-        <nav>
-          <a href="/" id="home-link">Home</a>
-          <a href="/auth/login/" id="login-link">Login</a>
-          <a href="/auth/register/" id="register-link">Register</a>
-          <a href="/profile/" id="profile-link" style="display: none;">Profile</a>
-          <a href="/post/create/" id="createPostLink" style="display: none;">Create Post</a>
-          <button id="logout-btn" style="display: none;">Logout</button>
+  <body class="bg-gray-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+        <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
+        <nav class="flex space-x-4">
+          <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
+          <a href="/auth/login/" id="login-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Login</a>
+          <a href="/auth/register/" id="register-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Register</a>
+          <a href="/profile/" id="profile-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Profile</a>
+          <a href="/post/create/" id="createPostLink" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Create Post</a>
+          <button id="logout-btn" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Logout</button>
         </nav>
       </div>
     </header>
-  <body>
-    <main class="create-form">
-    <h1>Create Post</h1>
-    <form name="createPost">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-      </div>
-      <div>
-        <label for="body">Body:</label>
-        <textarea id="body" name="body"></textarea>
-      </div>
-      <div>
-        <label for="tags">Tags (comma-separated):</label>
-        <input type="text" id="tags" name="tags">
-      </div>
-      <div>
-        <label for="media">Media URL:</label>
-        <input type="url" id="media" name="media">
-      </div>
-      <button type="submit">Create Post</button>
-    </form>
-  </main>
+
+    <main class="container mx-auto px-4 mt-20 py-8 max-w-2xl">
+      <h1 class="text-3xl font-bold text-purple-600 mb-8">Create Post</h1>
+      <form name="createPost" class="bg-white rounded-lg shadow-md p-6 space-y-6">
+        <div class="space-y-2">
+          <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
+          <input 
+            type="text" 
+            id="title" 
+            name="title" 
+            required 
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          >
+        </div>
+        <div class="space-y-2">
+          <label for="body" class="block text-sm font-medium text-gray-700">Body:</label>
+          <textarea 
+            id="body" 
+            name="body" 
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 h-32 resize-y"
+          ></textarea>
+        </div>
+        <div class="space-y-2">
+          <label for="tags" class="block text-sm font-medium text-gray-700">Tags (comma-separated):</label>
+          <input 
+            type="text" 
+            id="tags" 
+            name="tags" 
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          >
+        </div>
+        <div class="space-y-2">
+          <label for="media" class="block text-sm font-medium text-gray-700">Media URL:</label>
+          <input 
+            type="url" 
+            id="media" 
+            name="media" 
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          >
+        </div>
+        <button 
+          type="submit" 
+          class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+        >
+          Create Post
+        </button>
+      </form>
+    </main>
   </body>
 </html>

@@ -76,7 +76,7 @@ async function loadProfile(name) {
 
     if (!name || name === 'undefined') {
         console.error("Invalid profile name provided to loadProfile function");
-        profileContainer.innerHTML = "<p>Error: Invalid profile name. Please log in again.</p>";
+        profileContainer.innerHTML = "<p class='text-red-600'>Error: Invalid profile name. Please log in again.</p>";
         return;
     }
 
@@ -85,14 +85,29 @@ async function loadProfile(name) {
         const profile = await readProfile(name);
         
         const profileHTML = `
-            <h2>${profile.name}'s Profile</h2>
-            <p>Email: ${profile.email}</p>
-            <p>Bio: ${profile.bio || 'No bio available'}</p>
-            ${profile.avatar ? `<img src="${profile.avatar.url}" alt="${profile.avatar.alt || 'Profile avatar'}" style="max-width: 200px;">` : ''}
-            ${profile.banner ? `<img src="${profile.banner.url}" alt="${profile.banner.alt || 'Profile banner'}" style="max-width: 200px;">` : ''}
-            <p>Posts: ${profile._count?.posts || 0}</p>
-            <p>Followers: ${profile._count?.followers || 0}</p>
-            <p>Following: ${profile._count?.following || 0}</p>
+            <div class="flex items-center space-x-4 mb-6">
+                ${profile.avatar ? 
+                    `<img src="${profile.avatar.url}" alt="${profile.avatar.alt || 'Profile avatar'}" class="w-24 h-24 rounded-full object-cover">` : 
+                    `<div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-500">No Avatar</span>
+                    </div>`
+                }
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">${profile.name}'s Profile</h2>
+                    <p class="text-gray-600">${profile.email}</p>
+                </div>
+            </div>
+            ${profile.banner ? 
+                `<img src="${profile.banner.url}" alt="${profile.banner.alt || 'Profile banner'}" class="w-full h-48 object-cover rounded-lg mb-6">` : ''
+            }
+            <div class="space-y-4">
+                <p class="text-gray-700">${profile.bio || 'No bio available'}</p>
+                <div class="flex space-x-6">
+                    <span class="text-gray-600">Posts: ${profile._count?.posts || 0}</span>
+                    <span class="text-gray-600">Followers: ${profile._count?.followers || 0}</span>
+                    <span class="text-gray-600">Following: ${profile._count?.following || 0}</span>
+                </div>
+            </div>
         `;
         
         profileContainer.innerHTML = profileHTML;
@@ -103,7 +118,7 @@ async function loadProfile(name) {
         
     } catch (error) {
         console.error("Error loading profile:", error);
-        profileContainer.innerHTML = `<p>Error loading profile for ${name}. Please try again later.</p>`;
+        profileContainer.innerHTML = `<p class="text-red-600">Error loading profile for ${name}. Please try again later.</p>`;
     }
 }
 
@@ -122,17 +137,46 @@ async function loadProfile(name) {
 
 function createUpdateForm(profile) {
     const form = document.createElement('form');
+    form.className = 'mt-8 bg-white rounded-lg shadow-md p-6 space-y-6';
     form.innerHTML = `
-        <h3>Update Profile</h3>
-        <label for="bio">Bio:</label>
-        <textarea id="bio" name="bio">${profile.bio || ''}</textarea><br>
-        <label for="avatar-url">Avatar URL:</label>
-        <input type="url" id="avatar-url" name="avatar-url" value="${profile.avatar?.url || ''}"><br>
-        <label for="banner-url">Banner URL:</label>
-        <input type="url" id="banner-url" name="banner-url" value="${profile.banner?.url || ''}"><br>
-        <button type="submit">Update Profile</button>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Update Profile</h3>
+        <div class="space-y-2">
+            <label for="bio" class="block text-sm font-medium text-gray-700">Bio:</label>
+            <textarea 
+                id="bio" 
+                name="bio" 
+                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 h-32 resize-y"
+            >${profile.bio || ''}</textarea>
+        </div>
+        <div class="space-y-2">
+            <label for="avatar-url" class="block text-sm font-medium text-gray-700">Avatar URL:</label>
+            <input 
+                type="url" 
+                id="avatar-url" 
+                name="avatar-url" 
+                value="${profile.avatar?.url || ''}"
+                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            >
+        </div>
+        <div class="space-y-2">
+            <label for="banner-url" class="block text-sm font-medium text-gray-700">Banner URL:</label>
+            <input 
+                type="url" 
+                id="banner-url" 
+                name="banner-url" 
+                value="${profile.banner?.url || ''}"
+                class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            >
+        </div>
+        <button 
+            type="submit" 
+            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+        >
+            Update Profile
+        </button>
     `;
 
+    // Event listener remains the same
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const updateData = {
@@ -144,7 +188,7 @@ function createUpdateForm(profile) {
         try {
             await updateProfile(profile.name, updateData);
             alert('Profile updated successfully!');
-            loadProfile(profile.name); // Reload the profile to show updated info
+            loadProfile(profile.name);
         } catch (error) {
             console.error('Error updating profile:', error);
             alert('Failed to update profile. Please try again.');
@@ -166,35 +210,46 @@ function createUpdateForm(profile) {
 
 async function loadAllProfiles(container, currentUserName) {
     const allProfilesContainer = document.createElement('div');
-    allProfilesContainer.innerHTML = '<h2>All Profiles</h2>';
+    allProfilesContainer.className = 'mt-8 pb-8';  // Added pb-8 here
+    allProfilesContainer.innerHTML = '<h2 class="text-2xl font-bold text-gray-800 mb-6">All Profiles</h2>';
     container.appendChild(allProfilesContainer);
 
     try {
         const allProfilesData = await getAllProfiles();
-        const profilesList = document.createElement('ul');
-        profilesList.style.listStyle = 'none';
-        profilesList.style.padding = '0';
+        const profilesGrid = document.createElement('div');
+        profilesGrid.className = 'grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-0';
 
         allProfilesData.data.forEach(profile => {
-            const listItem = document.createElement('li');
-            listItem.style.marginBottom = '10px';
-            listItem.innerHTML = `
-                <img src="${profile.avatar?.url || '/default-avatar.png'}" alt="${profile.name}'s avatar" style="width: 50px; height: 50px; vertical-align: middle;">
-                <span style="margin-left: 10px;">${profile.name}</span>
+            const profileCard = document.createElement('div');
+            profileCard.className = 'bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow';
+            profileCard.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <img 
+                        src="${profile.avatar?.url || '/default-avatar.png'}" 
+                        alt="${profile.name}'s avatar" 
+                        class="w-12 h-12 rounded-full object-cover"
+                    >
+                    <div>
+                        <h3 class="font-semibold text-gray-800">${profile.name}</h3>
+                        <p class="text-sm text-gray-600">Following: ${profile._count?.following || 0}</p>
+                    </div>
+                </div>
             `;
 
-            // Don't show follow button for the current user
             if (profile.name !== currentUserName) {
                 const followBtn = createFollowBtn(profile.name, profile.isFollowing);
-                listItem.appendChild(followBtn);
+                followBtn.className = 'mt-4 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors';
+                profileCard.appendChild(followBtn);
             }
 
-            profilesList.appendChild(listItem);
+            profilesGrid.appendChild(profileCard);
         });
 
-        allProfilesContainer.appendChild(profilesList);
+        allProfilesContainer.appendChild(profilesGrid);
     } catch (error) {
         console.error("Error loading all profiles:", error);
-        allProfilesContainer.innerHTML += '<p>Error loading profiles. Please try again later.</p>';
+        allProfilesContainer.innerHTML += `
+            <p class="text-red-600 mt-4">Error loading profiles. Please try again later.</p>
+        `;
     }
 }

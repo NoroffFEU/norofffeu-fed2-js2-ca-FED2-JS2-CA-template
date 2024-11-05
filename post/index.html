@@ -7,34 +7,47 @@
     <script type="module" src="/src/app.js"></script>
     <link rel="stylesheet" href="/src/css/style.css">
 </head>
-<body>
-    <header class="main-header">
-        <div class="container">
-            <a href="/index.html" class="logo">LinkUp</a>
-            <nav>
-                <a href="/" id="home-link">Home</a>
-                <a href="/profile/" id="profile-link" style="display: none;">Profile</a>
-                <button id="logout-btn" style="display: none;">Logout</button>
+<body class="bg-gray-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+            <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
+            <nav class="flex space-x-4">
+                <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
+                <a href="/profile/" id="profile-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Profile</a>
+                <button id="logout-btn" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Logout</button>
             </nav>
         </div>
     </header>
-    <h1>Post</h1>
 
-    <!-- Posts container where all posts will be listed -->
-    <div id="posts-container"></div>
+    <main class="container mx-auto px-4 mt-20 py-8">
+        <h1 class="text-3xl font-bold text-purple-600 mb-8">Post</h1>
 
-    <!-- Single post container, hidden initially -->
-    <div id="single-post-container" style="display: none;">
-        <div id="post-content"></div>
-        <div id="post-reactions"></div>
-        <form id="commentForm">
-            <textarea name="commentBody" required></textarea>
-            <input type="hidden" name="replyToId" value="null">
-            <button type="submit">Add Comment</button>
-        </form>
-        <div id="commentsList"></div>
-        <button id="back-to-posts">Back to Posts</button>
-    </div>
+        <!-- Posts container where all posts will be listed -->
+        <div id="posts-container" class="space-y-4"></div>
+
+        <!-- Single post container, hidden initially -->
+        <div id="single-post-container" class="hidden">
+            <div id="post-content" class="bg-white rounded-lg shadow-md p-6 mb-4"></div>
+            <div id="post-reactions" class="mb-4"></div>
+            <form id="commentForm" class="bg-white rounded-lg shadow-md p-6 mb-4 space-y-4">
+                <textarea 
+                    name="commentBody" 
+                    required 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-y min-h-[100px]"
+                    placeholder="Write your comment..."
+                ></textarea>
+                <input type="hidden" name="replyToId" value="null">
+                <button 
+                    type="submit" 
+                    class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-md transition-colors"
+                >Add Comment</button>
+            </form>
+            <div id="commentsList" class="space-y-4"></div>
+            <button 
+                id="back-to-posts" 
+                class="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-2 rounded-md transition-colors"
+            >Back to Posts</button>
+        </div>
+    </main>
 </body>
 </html>
-

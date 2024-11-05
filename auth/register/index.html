@@ -3,61 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Register - LinkUp</title>
     <script type="module" src="/src/app.js"></script>
     <link rel="stylesheet" href="/src/css/style.css">
   </head>
   
-  <body>
-    <header class="main-header">
-      <div class="container">
-        <a href="/index.html" class="logo">LinkUp</a>
-        <nav>
-          <a href="/" id="home-link">Home</a>
-          <a href="/auth/login/" id="login-link">Login</a>
+  <body class="bg-gray-50">
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+      <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+        <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
+        <nav class="flex space-x-4">
+          <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
+          <a href="/auth/login/" id="login-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Login</a>
         </nav>
       </div>
-    <h1>Register</h1>
-    
-    <form id="register-form" name="register">
-      <div>
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          required
-          maxlength="20"
-          pattern="^[\w]+$"
-          title="Please enter a username using only letters and numbers"
-        />
-      </div>
+    </header>
 
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          required
-          pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-          title="Please enter a valid noroff.no or stud.noroff.no address"
-        />
-      </div>
+    <main class="container mx-auto px-4 mt-20 py-8">
+      <div class="max-w-md mx-auto">
+        <h1 class="text-3xl font-bold text-purple-600 mb-8 text-center">Register</h1>
+        
+        <form id="register-form" name="register" class="bg-white rounded-lg shadow-md p-6 space-y-6">
+          <div class="space-y-2">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              required
+              maxlength="20"
+              pattern="^[\w]+$"
+              title="Please enter a username using only letters and numbers"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            />
+          </div>
 
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          minlength="8"
-        />
-      </div>
+          <div class="space-y-2">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+              title="Please enter a valid noroff.no or stud.noroff.no address"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            />
+          </div>
 
-      <button>Register</button>
-    </form>
+          <div class="space-y-2">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              minlength="8"
+              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            />
+          </div>
+
+          <button 
+            type="submit"
+            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+          >
+            Register
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-gray-600">
+          Already have an account? 
+          <a href="/auth/login/" class="text-purple-600 hover:text-purple-700 font-semibold">Login here</a>
+        </p>
+      </div>
+    </main>
+
     <script type="module">
       import { setupRegisterForm } from '/src/js/ui/auth/register.js';
       document.addEventListener('DOMContentLoaded', setupRegisterForm);
