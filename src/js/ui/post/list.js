@@ -14,24 +14,21 @@ let isDisplayingSinglePost = false;
  * setupHomePage();
  */
 
-export function setupHomePage() {
+ export function setupHomePage() {
   const isLoggedIn = !!localStorage.getItem('token');
+  console.log("Is logged in:", isLoggedIn); // Debug log
 
   const createPostButton = document.getElementById('create-post-button');
+  console.log("Create post button:", createPostButton); // Debug log
+
   if (createPostButton) {
     if (isLoggedIn) {
-      createPostButton.style.display = 'block';
-      createPostButton.addEventListener('click', () => {
-        window.location.href = '/post/create/';
-      });
-      console.log('Create Post button set up');
+      createPostButton.className = "bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-md transition-colors";
     } else {
-      createPostButton.style.display = 'none';
+      createPostButton.className = "hidden";
     }
-  } else {
-    console.error('Create Post button not found');
   }
-  
+
   if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
     displayPosts();
   }
@@ -89,15 +86,17 @@ export async function displayPosts() {
 
 function createPostElement(post) {
   return `
-    <article class="post" data-post-id="${post.id}">
-      <h2>${post.title}</h2>
-      ${post.author ? `<p>Posted by: ${post.author.name}</p>` : ''}
-      <p>${post.body}</p>
-      ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
-      <p>Tags: ${post.tags.join(', ')}</p>
-      <p>Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
-      <a href="/post/edit/index.html?id=${post.id}" class="edit-post-button">Edit</a>
-      <button class="delete-post-button" data-post-id="${post.id}">Delete</button>
+    <article class="bg-white rounded-lg shadow-md p-6 mb-4 hover:shadow-lg transition-shadow" data-post-id="${post.id}">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-2">${post.title}</h2>
+      ${post.author ? `<p class="text-gray-600 mb-2">Posted by: ${post.author.name}</p>` : ''}
+      <p class="text-gray-700 mb-4">${post.body}</p>
+      ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}" class="max-w-[250px] h-auto rounded-md mb-4 object-cover" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
+      <p class="text-gray-600 text-sm mb-2">Tags: ${post.tags.join(', ')}</p>
+      <p class="text-gray-600 text-sm mb-4">Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
+      <div class="flex space-x-2">
+        <a href="/post/edit/index.html?id=${post.id}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors">Edit</a>
+        <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors" data-post-id="${post.id}">Delete</button>
+      </div>
     </article>
   `;
 }
@@ -183,14 +182,15 @@ export async function displaySinglePost(postId) {
     const { data: postData } = await readPost(postId);
     
     postContent.innerHTML = `
-      <h2>${postData.title}</h2>
-      ${postData.author ? `<p>Posted by: ${postData.author.name}</p>` : ''}
-      <p>${postData.body}</p>
-      ${postData.media ? `<img src="${postData.media.url}" alt="${postData.media.alt || 'Post image'}" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
-      <p>Tags: ${postData.tags.join(', ')}</p>
-      <p>Comments: ${postData._count.comments} | Reactions: ${postData._count.reactions}</p>
+      <article class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">${postData.title}</h2>
+        ${postData.author ? `<p class="text-gray-600 mb-2">Posted by: ${postData.author.name}</p>` : ''}
+        <p class="text-gray-700 mb-4">${postData.body}</p>
+        ${postData.media ? `<img src="${postData.media.url}" alt="${postData.media.alt || 'Post image'}" class="max-w-[250px] h-auto rounded-md mb-4 object-cover" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
+        <p class="text-gray-600 text-sm mb-2">Tags: ${postData.tags.join(', ')}</p>
+        <p class="text-gray-600 text-sm mb-4">Comments: ${postData._count.comments} | Reactions: ${postData._count.reactions}</p>
+      </article>
     `;
-    
     setupCommentFunctionality(postId);
     
     const backButton = document.getElementById('back-to-posts');
@@ -198,6 +198,7 @@ export async function displaySinglePost(postId) {
       const newBackButton = document.createElement('button');
       newBackButton.id = 'back-to-posts';
       newBackButton.textContent = 'Back to Posts';
+      newBackButton.className = 'mt-4 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md transition-colors';
       newBackButton.addEventListener('click', () => {
         singlePostContainer.style.display = 'none';
         postsContainer.style.display = 'block';
