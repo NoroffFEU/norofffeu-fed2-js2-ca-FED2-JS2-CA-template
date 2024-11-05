@@ -6,36 +6,3 @@
   }
 }
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-header {
-  background-color: #efa3a3;
-  color: #fff;
-  padding: 10px;
-}
-
-#heading {
-  margin: 50px;
-  display: flex;
-  justify-content: center;
-}
-#heading h1 {
-  font-size: 2em;
-}
-
-#navbar {
-  display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-}
-
-#main {
-  padding: 20px;
-}
-#main h2, p {
-  display: flex;
-  justify-content: center;
-}

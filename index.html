@@ -7,39 +7,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noroff FED2 JS2 CA</title>
   <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <script type="module" src="/src/js/ui/global/logout.js"></script>
   <script type="module" src="/src/js/app.js"></script>
   <script type="module" src="/src/js/ui/home/home.js"></script>
 </head>
 
 <body>
-  <header>
-    <div id="noroff-logo">
-      <img src="public/images/noroff-logo.png" alt="Noroff Logo" />
+ <!-- Navbar -->
+ <header class="navbar navbar-expand-lg navbar-light bg-light py-3">
+  <div class="container">
+    <a href="/" class="navbar-brand d-flex align-items-center">
+      <img src="public/images/noroff-logo.png" alt="Noroff Logo" id="noroff-logo" class="me-2" />
+    </a>
+    <div class="ms-auto d-flex align-items-center">
+      <a class="nav-link" href="/profile/index.html">My Profile</a>
+      <a class="nav-link" href="/auth/login/index.html">Login</a>
+      <a class="nav-link" href="/auth/register/index.html">Register</a>
+      <button id="logoutButton" class="btn btn-outline-primary ms-2">Logout</button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <section id="heading">
-    <h1>Welcome to Instabook</h1>
-  </section>
-
-  <section id="navbar">
-  <a href="/profile/index.html">My Profile</a>
-  <a href="/auth/login/index.html">Login</a>
-  <a href="/auth/register/index.html">Register</a>
-  <button id="logoutButton">Logout</button>
-  </section>
-
-  <section id="main">
+<!-- Main Content -->
+<main class="container my-5">
+  <section id="main" class="text-center">
     <h2>Welcome to the Noroff FED2 JS2 CA</h2>
     <p>This is a simple web application that demonstrates the use of HTML, CSS, and JavaScript. It provides a registration and login functionality.</p>
   </section>
 
   <section>
     <h2>Recent Posts</h2>
-    <ul id="postList">
+    <ul id="postList" class="list-group">
       <!-- List of recent posts will be dynamically populated here -->
     </ul>
   </section>
+</main>
+
 </body>
 </html>
