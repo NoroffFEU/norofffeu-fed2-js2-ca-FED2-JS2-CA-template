@@ -48,11 +48,15 @@ export default function homeView() {
 
   // Update the main content, preserving the single-post-container
   main.innerHTML = `
-    <h1>Home</h1>
-    ${isLoggedIn ? '<button id="create-post-button">Create Post</button>' : ''}
-    <div id="posts-container"></div>
-  `;
-  
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-purple-600">Home</h1>
+    ${isLoggedIn ? 
+      `<button id="create-post-button" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-md transition-colors">Create Post</button>`
+      : ''
+    }
+  </div>
+  <div id="posts-container" class="clear-both"></div>
+`;
   // Append the single-post-container back to main
   main.appendChild(singlePostContainer);
 
