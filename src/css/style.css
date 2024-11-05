@@ -1,4 +1,6 @@
-@import url(_reset.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * Reset and base styles */
 * {
@@ -14,197 +16,17 @@ body {
   background-color: #f4f4f4;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
 
 img {
   max-width: 300px;
 }
 /* Header styles */
-.main-header {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-.main-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #3498db;
-  text-decoration: none;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-}
-
-nav ul li {
-  margin-left: 1rem;
-}
-
-nav ul li a, nav ul li button, a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-
-nav ul li a:hover, nav ul li button:hover, a:hover {
-  color: #3498db;
-}
-
-/* Main content styles */
-.main-content {
-  margin-top: 80px; /* To account for fixed header */
-  padding: 2rem 0;
-}
 
 /* Create post section styles */
 
-.create-form {
-    max-width: 1000px;
-    margin: 50px auto;
-    text-align: center;
-    padding: 100px;
-}
-
-#create-post-section {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-#create-post-section h2 {
-  margin-bottom: 1rem;
-}
-
-#post-content {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  resize: vertical;
-}
-
-#submit-post {
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#submit-post:hover {
-  background-color: #2980b9;
-}
-
-#create-post-button {
-    display: block;
-    width: 200px;
-    padding: 10px;
-    margin: 20px 20px;
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    float: right;
-  }
-  
-  #create-post-button:hover {
-    background-color: #45a049;
-  }
-
 /* Post styles */
-.post {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .post h2 {
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-  
-  .post p {
-    margin-bottom: 0.5rem;
-    color: #666;
-  }
-  
-  .post img {
-    width: 250px;
-    height: auto;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-  }
-  
-  .post img.error {
-    display: none;
-  }
-  
-  .edit-post-button, .delete-post-button {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .edit-post-button {
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .edit-post-button:hover {
-    background-color: #2980b9;
-  }
-  
-  .delete-post-button {
-    background-color: #e74c3c;
-    color: #fff;
-  }
-  
-  .delete-post-button:hover {
-    background-color: #c0392b;
-  }
 
 /* Footer styles */
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
-}
 
 /* Responsive design */
 @media (max-width: 768px) {
