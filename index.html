@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./src/css/style.css" />
 
     <style>
-      /* Styles for the like button */
+      /* Styles for the like button 
       .like-button {
         background-color: #007bff;
         color: white;
@@ -24,7 +24,7 @@
         background-color: #0056b3;
       }
 
-      /* Styles for the comment section */
+      /* Styles for the comment section 
       .comment-section {
         margin-top: 15px;
       }
@@ -64,76 +64,71 @@
         font-size: 14px;
         color: #555;
       }
+        */
     </style>
+     <script>
+      // JavaScript to toggle the mobile menu visibility
+      function toggleMenu() {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+      }
+    </script>
   </head>
   <body>
-    <nav>
-      <div class="logo-section">
-        <img src="./public/images/LOgoBuzzNut.jpg" alt="BuzzNet Logo" />
-      </div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search BuzzNet..." />
-        <button>Search</button>
+    <nav class="w-full bg-white shadow-md fixed top-0 left-0 z-50 px-5 py-3">
+      <div class="flex justify-between items-center">
+        <!-- Logo Section -->
+        <div class="logo-section flex items-center">
+          <img src="./public/images/LOgoBuzzNut.jpg" alt="BuzzNet Logo" class="w-24 h-auto" />
+        </div>
+
+        <!-- Hamburger Icon -->
+        <button class="sm:hidden text-gray-700 focus:outline-none" onclick="toggleMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <!-- Desktop Menu (Hidden on mobile) -->
+        <div class="hidden sm:flex sm:items-center sm:space-x-4">
+          <!-- Search Bar -->
+          <div class="search-bar flex mr-96">
+            <input type="text" placeholder="Search BuzzNet..." class="w-64 px-4 py-2  border border-orange-500 rounded-1-md text-sm" />
+            <button class="bg-orange-500 text-white px-4 py-2 h-11 rounded-r-md text-sm">Search</button>
+          </div>
+
+          <!-- Button Container -->
+          <div class="flex space-x-2">
+            <a href="./post/create/" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm flex items-center" id="newpost-btn" title="Add a post">➕ Post</a>
+            <a href="#" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm" id="logOut">Log out</a>
+          </div>
+        </div>
       </div>
 
-      <div class="button-container">
-        <a
-          href="./post/create/"
-          class="create-btn"
-          id="newpost-btn"
-          title="add a post"
-          >➕ Post</a
-        >
-        <a href="#" class="register-btn" id="logOut">Log out</a>
+      <!-- Mobile Menu (Visible when toggled) -->
+      <div id="mobile-menu" class="sm:hidden mt-3 hidden">
+        <!-- Search Bar (Mobile) -->
+        <div class="search-bar flex  mb-3">
+          <input type="text" placeholder="Search BuzzNet..." class="w-full px-3 py-2 border border-orange-500 rounded-l-md text-sm" />
+          <button class="bg-orange-500 text-white h-11 px-4 py-2 rounded-1-md text-sm">Search</button>
+        </div>
+
+        <!-- Button Container (Mobile) -->
+        <div class="flex flex-col items-start space-y-2">
+          <a href="./post/create/" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm w-full text-center ">➕ Post</a>
+          <a href="#" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm w-full text-center"  id="logOutMobile">Log out</a>
+        </div>
       </div>
     </nav>
 
-    <!-- Main Content Section -->
-    <main class="main-content">
-      <h1>Welcome to BuzzNet</h1>
-      <p>Discover, connect, and share your ideas!</p>
+    <main class="main-content mt-20 px-5">
+       <h1 class="text-center text-3xl font-bold mb-2">Welcome to BuzzNet</h1>
+       <p class="text-center text-lg mb-10">Discover, connect, and share your ideas!</p>
 
-      <!-- Example Post Card with Image -->
-      <div class="post-card">
-        <a href="posts/page.html">
-          <div class="post-header">
-            <img
-              src="./public/images/photo-1515021477923-4d707a1cd1ba.avif"
-              alt="User Profile" />
-            <div class="username">John Doe</div>
-          </div>
-        </a>
-        <h2>GYm tips</h2>
-        <div class="post-content">
-          which method is the best when going to the gym
-        </div>
-        <!-- Single Image -->
-        <div class="post-image">
-          <img
-            src="./public/images/photo-1534438327276-14e5300c3a48.avif"
-            alt="Post Image" />
-        </div>
-        <!-- Like Button and Comment Section -->
-        <div class="post-actions">
-          <button class="like-button">👍 Like</button>
-          <a href="./post/edit/index.html"
-            ><button class="like-button">Edit</button></a
-          >
-          <button class="like-button delete-btn">Delete</button>
-        </div>
-        <div class="comment-section">
-          <input
-            type="text"
-            class="comment-input"
-            placeholder="Add a comment..." />
-          <button class="comment-button">Comment</button>
-          <div class="comments-list"></div>
-        </div>
-      </div>
-      <a href="/post/">
-        <button style="margin-left: 50%">View more posts</button>
-      </a>
+    <!-- Placeholder message until posts load -->
+        <div class="no-posts-message text-center text-gray-500">Loading posts...</div>
     </main>
+
+    
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>

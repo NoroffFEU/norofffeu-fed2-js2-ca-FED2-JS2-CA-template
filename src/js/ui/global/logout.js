@@ -17,11 +17,19 @@
 import { onLogout } from '../auth/logout.js';
 export function setLogoutListener() {
     const logoutBtn = document.getElementById('logOut');
+    const logOutMobile = document.getElementById('logOutMobile');
+    
     if (logoutBtn) {
         logoutBtn.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent the default anchor link behavior
             onLogout();
         });
     }
-}
 
+    if (logOutMobile) {
+        logOutMobile.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent the default anchor link behavior
+            onLogout();
+        });
+    }
+}
