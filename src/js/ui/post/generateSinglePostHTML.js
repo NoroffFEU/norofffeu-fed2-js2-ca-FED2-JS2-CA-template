@@ -14,7 +14,7 @@ export function generateSinglePostHTML(post) {
   );
 
   const title = document.createElement("h1");
-  title.classList.add("text-center", "mb-3", "mb-lg-5");
+  title.classList.add("text-center", "text-break", "mb-3", "mb-lg-5");
   title.textContent = post.title;
   const figure = document.createElement("figure");
   figure.classList.add("ratio", "ratio-16x9");
