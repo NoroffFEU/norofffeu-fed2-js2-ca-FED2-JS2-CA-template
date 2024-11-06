@@ -25,6 +25,7 @@
     "bootstrap": "^5.3.3"
   },
   "lint-staged": {
-    "*.{html,scss,js,css,md}": "prettier --write"
+    "*.{html,scss,js,css,md}": "prettier --write",
+    "*.{js,css,md}": "prettier --write"
   }
 }
