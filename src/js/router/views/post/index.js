@@ -2,6 +2,17 @@ import controllers from '../../../controllers/index';
 import utils from '../../../utilities/utils';
 
 async function init() {
+  const menuIcon = document.getElementById("menuIcon");
+  const closeIcon = document.getElementById("closeIcon");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuButton.addEventListener("click", () => {
+    menuIcon.classList.toggle("hidden"); // Toggle 'hamburger' icon
+    closeIcon.classList.toggle("hidden"); // Toggle 'close' icon
+    mobileMenu.classList.toggle("hidden");// Toggle mobile menu visibility
+  });
+
+
   const container = document.querySelector('.container');
   clearContent(container);
   try {
@@ -27,8 +38,8 @@ async function renderPost(post, target) {
   const postElement = document.createElement('article');
   const SecondPostElement = document.createElement('div');
 
-  postElement.classList.add('max-w-full', 'mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
-  SecondPostElement.classList.add('max-w-full', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
+  postElement.classList.add('max-w-full', 'mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-1/3');
+  SecondPostElement.classList.add('max-w-full','mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
 
   const postCreated = utils.date(post.created);
   const tags = utils.formatTags(post.tags);
@@ -43,20 +54,17 @@ async function renderPost(post, target) {
 
   `;
 
-  
-
   SecondPostElement.innerHTML= `
     <div class="p-4 max-w-full mx-auto">
       <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
         <div class="flex items-center mb-3">
-          <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
-            <a class="profile-link " href="/profile/?author=${post.author.name}">
-              <span class="profile-avatar avatar-l">
-                <img class="avatar__image" src="${post.author.avatar?.url}" alt="${
-                  post.author.avatar?.alt
-                    }" />
-              </span>
+          <div class="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
+             <a class="" href="/profile/?author=${post.author.name}">
+              <img class="" src="${
+              post.author.avatar.url
+              }" alt="${post.author.avatar.alt} width="32" height="32" />
             </a>
+          </div>
             
             <div>
               <div>
