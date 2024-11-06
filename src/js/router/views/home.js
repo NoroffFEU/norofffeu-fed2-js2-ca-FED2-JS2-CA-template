@@ -37,7 +37,6 @@ export async function renderPosts(target, posts) {
       const tags = utils.formatTags(post.tags);
 
       const postElement = document.createElement("div");
-      postElement.classList.add("story");
       postElement.innerHTML = `
       
 
@@ -46,7 +45,7 @@ export async function renderPosts(target, posts) {
       <div class="flex items-center mb-3">
         <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
           <a class="" href="/profile/?author=${post.author.name}">
-            <img class="avatar__image" src="${
+            <img class="" src="${
               post.author.avatar.url
             }" alt="${post.author.avatar.alt} width="32" height="32" />
           </a>
@@ -67,7 +66,7 @@ export async function renderPosts(target, posts) {
       </div>
       <div class="flex flex-col justify-between flex-grow">
         <a href="/post/?id=${post.id}">
-          <h2 class="story__title leading-relaxed text-base text-white dark:text-gray-300">
+          <h2 class="story__title leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center">
           ${post.title}
           </h2>
         </a>

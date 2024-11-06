@@ -6,8 +6,23 @@
   padding: 0.25rem 0.5rem;
   width: 100%;
 }
+.btn-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  left: -3rem;
+  width: 3rem;
+}
+.btn-danger {
+  box-shadow: unset;
+  color: var(--solid-white);
+  background-color: var(--danger-color);
+}
 
-.btn-solid {
+/* .btn-solid {
   border: unset;
 }
 
@@ -35,16 +50,7 @@
   width: fit-content;
 }
 
-.btn-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  position: relative;
-  left: -3rem;
-  width: 3rem;
-}
+
 
 .btn-edit-profile,
 .btn-follow,
@@ -61,4 +67,4 @@
   font-size: var(--fs-xs);
   width: fit-content;
   border: none;
-}
+} */

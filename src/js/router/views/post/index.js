@@ -25,55 +25,84 @@ function clearContent(target) {
 
 async function renderPost(post, target) {
   const postElement = document.createElement('article');
-  postElement.classList.add('article');
+  const SecondPostElement = document.createElement('div');
+
+  postElement.classList.add('max-w-full', 'mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
+  SecondPostElement.classList.add('max-w-full', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
+
   const postCreated = utils.date(post.created);
   const tags = utils.formatTags(post.tags);
 
+
   postElement.innerHTML = `
-    <header id="main-title" class="article__header">
-      <img class="article__cover__image" src="${
+      <img class="article__cover__image w-full h-auto object-cover md:rounded-lg" src="${
         post.media?.url ? post.media?.url : ''
       }" style="aspect-ratio: auto 1000/420;" width="1000" height="420" alt="${
     post.media?.alt ? post.media?.alt : ''
-  }" />
-    </header>
-    <div class="article__header__meta">
-      <div class="article__post-info">
-        <a class="profile-link" href="/profile/?author=${post.author.name}">
-          <span class="profile-avatar avatar-l">
-            <img class="avatar__image" src="${post.author.avatar?.url}" alt="${
-    post.author.avatar?.alt
-  }" />
-          </span>
-        </a>
-        <div class="pl-3 flex-1 mt-1">
-          <div class="author-name">
-            <a class="profile-link" href="/profile/?author=${post.author.name}">
-              ${post.author.name}
-            </a>
-          </div>
-          <p class="article__created fs-xs">Posted on ${postCreated}</p>
-          <div class="article__actions">
-            ${
-              isAuthor(post.author.name)
-                ? `<button class="btn btn-pill btn-primary btn__edit-post" id="editPost">Edit Post</button>
-                  <button class="btn btn-pill btn-danger  btn__delete-post" id="deletePost">Delete Post</button>`
-                : ''
-            }
-          </div>
-        </div>
-      </div>
-      <div class="multiple_reactions_engagement"></div>
-      <h1 class="l:fs-5xl lh-tight mb-2">${post.title}</h1>
-      <div class="spec__tags flex flex-wrap">${tags}</div>
-    </div>
-    <div class="article__main">
-      <div id="article-body" class="article__body text-styles spec__body">
-        ${post.body}
-      </div>
-    </div>
+    }" />
+
   `;
+
+  
+
+  SecondPostElement.innerHTML= `
+    <div class="p-4 max-w-full mx-auto">
+      <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
+            <a class="profile-link " href="/profile/?author=${post.author.name}">
+              <span class="profile-avatar avatar-l">
+                <img class="avatar__image" src="${post.author.avatar?.url}" alt="${
+                  post.author.avatar?.alt
+                    }" />
+              </span>
+            </a>
+            
+            <div>
+              <div>
+                <a href="/profile/?author=
+                      ${post.author.name}">
+                      <h2 class="text-white dark:text-white text-lg font-medium hover:text-blue-600">${post.author.name}</h2>
+                </a>
+              </div>
+              <div>
+                      <h2 class="text-white dark:text-white text-lg font-medium">Posted on ${postCreated}</h2>
+              </div>
+            </div>             
+
+
+            <div class="flex flex-col justify-between flex-grow">
+              <h2 class="story__title leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center">
+                ${post.title}
+              </h2>
+    
+              <div class="leading-relaxed text-base text-white dark:text-gray-300">
+                ${tags}
+              </div>
+
+              <div class="article__main">
+                <div id="article-body" class="leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center">
+                ${post.body}
+              </div>
+            </div>
+            
+            <div class="article__actions">
+                ${
+                isAuthor(post.author.name)
+                ? `<button class="btn btn-pill btn-primary btn__edit-post" id="editPost">Edit Post</button>
+                <button class="btn btn-pill btn-danger  btn__delete-post" id="deletePost">Delete Post</button>`
+                : ''
+                }
+            </div>
+          </div>
+        </div> 
+      </div>   
+    </div>     
+  
+  `
+ 
   target.appendChild(postElement);
+  target.appendChild(SecondPostElement);
 }
 
 function attachEditEvent(id) {
@@ -108,3 +137,5 @@ function isAuthor(author) {
 }
 
 init();
+
+
