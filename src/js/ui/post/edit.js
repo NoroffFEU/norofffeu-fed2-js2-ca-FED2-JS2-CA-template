@@ -11,8 +11,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    // Fetch the post data using the API and populate the form fields
+    // Fetch the post data using the API
     const post = await readPost(postId);
+
+    // Check if the post data is available
+    if (!post) {
+      throw new Error('Post data not found');
+    }
+
+    // Populate the form fields with post data
     form.title.value = post.title || 'No Title Available'; // Fallback if title is missing
     form.body.value = post.body || 'No Content Available'; // Fallback if body is missing
     form.tags.value = Array.isArray(post.tags) ? post.tags.join(', ') : ''; // Ensure tags are an array before using join

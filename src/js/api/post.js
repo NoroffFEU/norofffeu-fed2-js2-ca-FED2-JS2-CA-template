@@ -88,12 +88,10 @@ export async function deletePost(id) {
 }
 
 // Get a paginated list of posts, optionally filtered by tag
-export async function readPosts(page = 1, perPage = 12, tag = null) {
-  const params = new URLSearchParams({
-    page,
-    perPage,
-  });
+// src/js/api/post.js
 
+export async function readPosts(page = 1, perPage = 12, tag = null) {
+  const params = new URLSearchParams({ page, perPage });
   if (tag) params.append('tag', tag);
 
   const response = await fetch(`${API_SOCIAL_POSTS}?${params.toString()}`, {
@@ -101,12 +99,8 @@ export async function readPosts(page = 1, perPage = 12, tag = null) {
     headers: headers(true),
   });
 
-  // Log the response to inspect its structure
-  const result = await response.json();
-
   if (!response.ok) throw new Error("Failed to fetch posts");
 
-  // Return result.data if it exists, otherwise return the whole result
-  return result.data || result;
+  const result = await response.json();
+  return result.data || result; // Return the post data array
 }
-
