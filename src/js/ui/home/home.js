@@ -1,41 +1,31 @@
-import { readPosts } from '../../api/post.js';
+// src/js/ui/home/home.js
+
+import { readPosts } from '../../api/post.js'; // Assuming readPosts fetches post data
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const posts = await readPosts(12, 1);
+    const posts = await readPosts(1, 5); // Fetch first 5 recent posts
+    const postList = document.getElementById('postList');
+    postList.innerHTML = ''; // Clear any existing content
 
-    // Log the response to see its structure
-    console.log('Posts Response:', posts);
+    posts.forEach(post => {
+      const postCard = document.createElement('div');
+      postCard.className = 'col-md-6 mb-4'; // Bootstrap classes for responsive layout
 
-    const postListElement = document.getElementById('postList');
-
-    if (!postListElement) {
-      console.error('postList element not found in the DOM');
-      return;
-    }
-
-    postListElement.innerHTML = '';
-
-    // Check if `posts` is an array and iterate accordingly
-    if (Array.isArray(posts)) {
-      posts.forEach((post) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="/posts/index.html?id=${post.id}">${post.title}</a>`;
-        postListElement.appendChild(listItem);
-      });
-    } else if (posts.data && Array.isArray(posts.data)) {
-      // Handle cases where posts might be wrapped in a `data` property
-      posts.data.forEach((post) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="/posts/index.html?id=${post.id}">${post.title}</a>`;
-        postListElement.appendChild(listItem);
-      });
-    } else {
-      console.error('Unexpected posts data format:', posts);
-      alert('Unexpected posts data format received. Please check the console for details.');
-    }
+      // Card HTML structure
+      postCard.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">${post.title || 'Untitled'}</h5>
+            <p class="card-text">${post.body ? post.body.slice(0, 100) + '...' : 'No Content Available'}</p>
+            <a href="/post/view/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      `;
+      
+      postList.appendChild(postCard);
+    });
   } catch (error) {
-    console.error('Failed to load posts:', error);
-    alert('Failed to load posts');
+    console.error('Failed to load recent posts:', error);
   }
 });

@@ -3,49 +3,50 @@
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noroff FED2 JS2 CA</title>
-  <link rel="stylesheet" href="src/css/style.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="src/css/style.css">
   <script type="module" src="/src/js/ui/global/logout.js"></script>
   <script type="module" src="/src/js/app.js"></script>
   <script type="module" src="/src/js/ui/home/home.js"></script>
 </head>
 
 <body>
- <!-- Navbar -->
- <header class="navbar navbar-expand-lg navbar-light bg-dark py-3">
-  <div class="container">
-    <a href="/" class="navbar-brand d-flex align-items-center">
-      <img src="public/images/noroff-logo.png" alt="Noroff Logo" id="noroff-logo" class="me-2" />
-    </a>
-    <div class="ms-auto d-flex align-items-center">
-      <a class="nav-link" href="/profile/index.html">My Profile</a>
-      <a class="nav-link" href="/auth/login/index.html">Login</a>
-      <a class="nav-link" href="/auth/register/index.html">Register</a>
-      <button id="logoutButton" class="btn btn-outline-primary ms-2">Logout</button>
+  <!-- Navbar -->
+  <header class="navbar navbar-expand-lg navbar-light bg-dark py-3">
+    <div class="container">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <img src="public/images/noroff-logo.png" alt="Noroff Logo" id="noroff-logo" class="me-2" />
+      </a>
+      <div class="ms-auto d-flex align-items-center">
+        <a class="nav-link" href="/profile/index.html">My Profile</a>
+        <a class="nav-link" href="/auth/login/index.html">Login</a>
+        <a class="nav-link" href="/auth/register/index.html">Register</a>
+        <button id="logoutButton" class="btn btn-outline-primary ms-2">Logout</button>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- Main Content -->
-<main class="container my-5">
-  <section id="main" class="text-center">
-    <h2>Welcome to the Noroff FED2 JS2 CA</h2>
-    <p>This is a simple web application that demonstrates the use of HTML, CSS, and JavaScript. It provides a registration and login functionality.</p>
-  </section>
+  <!-- Main Content -->
+  <main class="container my-5">
+    <section id="main" class="text-center">
+      <h2>Welcome to the Noroff FED2 JS2 CA</h2>
+      <p>This is a simple web application that demonstrates the use of HTML, CSS, and JavaScript. It provides a registration and login functionality.</p>
+    </section>
 
-  <section class="d-flex justify-content-center">
-    <div class="card p-4" style="width: 100%; max-width: 600px; background-color: #f3a1a1; border-radius: 8px;">
-      <h2 class="text-center">Recent Posts</h2>
-      <ul id="postList" class="list-group list-group-flush">
-        <!-- List of recent posts will be dynamically populated here -->
-      </ul>
-    </div>
-  </section>
-</main>
+    <!-- Recent Posts Section -->
+    <section class="mt-5">
+      <div class="card p-4 shadow-sm">
+        <h2 class="text-center mb-4">Recent Posts</h2>
+        <div id="postList" class="row">
+          <!-- List of recent posts will be dynamically populated here as individual cards -->
+        </div>
+      </div>
+    </section>
+  </main>
 
-<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JavaScript Bundle -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
