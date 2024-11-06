@@ -11908,11 +11908,7 @@ h2, .h2 {
 #postList .list-group-item:hover {
   background-color: white;
 }
-#postList .list-group-item a {
-  color: #ff6b6b;
-  font-weight: 600;
-  text-decoration: none;
-}
+
 #postList .list-group-item a:hover {
   text-decoration: underline;
 }
