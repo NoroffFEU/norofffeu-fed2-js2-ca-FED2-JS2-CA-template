@@ -58,26 +58,26 @@ async function renderPost(post, target) {
     <div class="p-4 max-w-full mx-auto">
       <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
         <div class="flex items-center mb-3">
-          <div class="w-12 h-12 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
+          <div class="w-12 h-12 mr-4 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
              <a class="" href="/profile/?author=${post.author.name}">
               <img class="" src="${
               post.author.avatar.url
               }" alt="${post.author.avatar.alt} width="32" height="32" />
             </a>
           </div>
-            
+            <div>
             <div>
               <div>
-                <a href="/profile/?author=
-                      ${post.author.name}">
-                      <h2 class="text-white dark:text-white text-lg font-medium hover:text-blue-600">${post.author.name}</h2>
+                <a href="/profile/?author=${post.author.name}">
+                  <h2 class="text-white dark:text-white text-lg   font-medium hover:text-blue-600">
+                    ${post.author.name}
+                  </h2>
                 </a>
               </div>
               <div>
-                      <h2 class="text-white dark:text-white text-lg font-medium">Posted on ${postCreated}</h2>
+                <h2 class="text-white dark:text-white text-lg font-medium">Posted on ${postCreated}</h2>
               </div>
             </div>             
-
 
             <div class="flex flex-col justify-between flex-grow">
               <h2 class="story__title leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center">
@@ -93,7 +93,7 @@ async function renderPost(post, target) {
                 ${post.body}
               </div>
             </div>
-            
+            </div>
             <div class="article__actions">
                 ${
                 isAuthor(post.author.name)
