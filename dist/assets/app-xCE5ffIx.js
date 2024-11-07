@@ -4502,11 +4502,16 @@ function _i(M) {
 }
 function gi(M) {
   const a = document.createElement("a");
-  a.classList.add("post-container", "overflow-hidden", "col"),
+  a.classList.add(
+    "post-container",
+    "overflow-hidden",
+    "col",
+    "hover-scale-img",
+  ),
     (a.id = M.id),
     (a.href = `/post/?id=${M.id}`);
   const l = document.createElement("figure");
-  l.classList.add("ratio", "ratio-4x3", "m-0");
+  l.classList.add("ratio", "ratio-4x3", "m-0", "overflow-hidden", "rounded");
   const c = document.createElement("img");
   c.classList.add("thumbnail", "rounded", "object-fit-fill"),
     M.media?.url
