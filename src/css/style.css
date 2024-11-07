@@ -171,7 +171,7 @@ nav {
 }
 */
 
-/* Registration css style */
+/* Registration css style *
 * {
     margin: 0;
     padding: 0;
@@ -210,7 +210,7 @@ nav {
     flex-direction: column;
 }
 
-/* Input Fields */
+/* Input Fields *
 .form-container input[type="text"],
 .form-container input[type="email"],
 .form-container input[type="password"] {
@@ -228,7 +228,7 @@ nav {
     border-color: #ff9100;
 }
 
-/* Submit Button */
+/* Submit Button 
 .form-container button {
     padding: 12px;
     border: none;
@@ -245,7 +245,7 @@ nav {
     background: linear-gradient(135deg, #ff9100, #ff4500);
 }
 
-/* Switch between Login/Register */
+/* Switch between Login/Register 
 .form-container p {
     text-align: center;
     margin-top: 20px;
@@ -261,7 +261,7 @@ nav {
     text-decoration: underline;
 }
 
-/* Responsive Design */
+/* Responsive Design 
 @media screen and (max-width: 480px) {
     .form-container {
         padding: 30px;
@@ -280,8 +280,8 @@ nav {
     }
 }
 
-
-/*Login page stye */
+*/
+/*Login page stye 
 
 .login-main {
     background: linear-gradient(135deg, #ff4500, #ff9100);
@@ -360,7 +360,8 @@ nav {
     text-decoration: underline;
 }
 
-/*Posting html page styles */
+
+/*Posting html page styles 
 .post-body{
     background-color: #ff9100;
 }
@@ -394,8 +395,8 @@ input[type="text"]:focus, textarea:focus {
 }
 
 textarea {
-    resize: vertical; /* Allow vertical resizing only */
-    min-height: 100px; /* Set a minimum height */
+    resize: vertical; 
+    min-height: 100px; 
 }
 
 button {
@@ -413,15 +414,16 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Placeholder styles */
+/* Placeholder styles 
 ::placeholder {
     color: #aaa;
-    opacity: 1; /* Firefox lowers the opacity of placeholders */
+    opacity: 1; 
 }
 
-/* Responsive styling */
+/* Responsive styling 
 @media (max-width: 600px) {
     .mainp {
         width: 90%;
     }
 }
+    */
