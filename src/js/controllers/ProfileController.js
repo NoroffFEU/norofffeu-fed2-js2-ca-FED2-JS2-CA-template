@@ -66,6 +66,10 @@ class ProfileController {
           : data.banner,
     };
   }
+
+  onCancelProfileUpdate() {
+    utils.redirectTo(`/profile/`);
+  }
 }
 
 export default new ProfileController();

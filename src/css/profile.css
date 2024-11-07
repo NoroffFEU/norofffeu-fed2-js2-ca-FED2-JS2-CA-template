@@ -99,12 +99,12 @@
     text-align: center;
   }
   
-  .articles-list {
+  /* .articles-list {
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 4rem 1rem 1rem;
-  }
+  } */
   
   /* profile update */
   #profile-edit {
