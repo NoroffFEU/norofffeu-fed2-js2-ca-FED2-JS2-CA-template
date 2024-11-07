@@ -2,12 +2,23 @@ import { formatDate } from "../../utilities/formatDate";
 
 export function generateFeedHTML(post) {
   const postContainer = document.createElement("a");
-  postContainer.classList.add("post-container", "overflow-hidden", "col");
+  postContainer.classList.add(
+    "post-container",
+    "overflow-hidden",
+    "col",
+    "hover-scale-img",
+  );
   postContainer.id = post.id;
   postContainer.href = `/post/?id=${post.id}`;
 
   const figure = document.createElement("figure");
-  figure.classList.add("ratio", "ratio-4x3", "m-0");
+  figure.classList.add(
+    "ratio",
+    "ratio-4x3",
+    "m-0",
+    "overflow-hidden",
+    "rounded",
+  );
   const thumbnail = document.createElement("img");
   thumbnail.classList.add("thumbnail", "rounded", "object-fit-fill");
   if (post.media?.url) {
