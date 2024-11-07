@@ -2,24 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* Reset and base styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f4f4f4;
-}
-
-
-img {
-  max-width: 300px;
-}
 /* Header styles */
 
 /* Create post section styles */

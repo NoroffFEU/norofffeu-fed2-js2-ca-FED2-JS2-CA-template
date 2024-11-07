@@ -86,21 +86,62 @@ export async function displayPosts() {
 
 function createPostElement(post) {
   return `
-    <article class="bg-white rounded-lg shadow-md p-6 mb-4 hover:shadow-lg transition-shadow" data-post-id="${post.id}">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-2">${post.title}</h2>
-      ${post.author ? `<p class="text-gray-600 mb-2">Posted by: ${post.author.name}</p>` : ''}
-      <p class="text-gray-700 mb-4">${post.body}</p>
-      ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt || 'Post image'}" class="max-w-[250px] h-auto rounded-md mb-4 object-cover" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
-      <p class="text-gray-600 text-sm mb-2">Tags: ${post.tags.join(', ')}</p>
-      <p class="text-gray-600 text-sm mb-4">Comments: ${post._count.comments} | Reactions: ${post._count.reactions}</p>
-      <div class="flex space-x-2">
-        <a href="/post/edit/index.html?id=${post.id}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors">Edit</a>
-        <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors" data-post-id="${post.id}">Delete</button>
+    <article class="bg-gray-800 rounded-xl shadow-lg mb-12 overflow-hidden max-w-4xl mx-auto" data-post-id="${post.id}">
+      <!-- Author header -->
+      <div class="flex items-center p-5 border-b border-gray-700">
+        <div class="w-12 h-12 bg-blue-400 bg-opacity-20 rounded-full flex items-center justify-center text-base font-medium text-blue-400">
+          ${post.author ? post.author.name.charAt(0).toUpperCase() : '?'}
+        </div>
+        <span class="ml-3 text-lg font-semibold text-gray-100">${post.author ? post.author.name : 'Anonymous'}</span>
+      </div>
+
+      <!-- Post media -->
+      ${post.media ? 
+        `<div class="w-full">
+          <img src="${post.media.url}" 
+               alt="${post.media.alt || 'Post image'}" 
+               class="w-full h-auto max-h-[600px] object-cover"
+               onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');"
+          >
+         </div>` 
+        : ''
+      }
+
+      <!-- Post content -->
+      <div class="p-6">
+        <h2 class="text-2xl font-semibold text-gray-100 mb-3">${post.title}</h2>
+        <p class="text-gray-300 text-base mb-4">${post.body}</p>
+        
+        <div class="text-gray-400 text-base mb-4">
+          <span>${post._count.comments} comments</span>
+          <span class="mx-2">•</span>
+          <span>${post._count.reactions} reactions</span>
+        </div>
+
+        ${post.tags.length > 0 ? 
+          `<div class="flex flex-wrap gap-2 mb-4">
+            ${post.tags.map(tag => `
+              <span class="text-sm text-blue-400 bg-blue-400 bg-opacity-10 px-3 py-1 rounded-full">#${tag}</span>
+            `).join('')}
+          </div>`
+          : ''
+        }
+
+        <div class="flex space-x-3 pt-4 border-t border-gray-700">
+          <a href="/post/edit/index.html?id=${post.id}" 
+             class="text-base bg-blue-400 hover:bg-blue-500 text-gray-900 py-2.5 px-5 rounded-lg transition-colors">
+            Edit
+          </a>
+          <button 
+            class="text-base bg-red-500 hover:bg-red-600 text-white py-2.5 px-5 rounded-lg transition-colors"
+            data-post-id="${post.id}">
+            Delete
+          </button>
+        </div>
       </div>
     </article>
   `;
 }
-
 /**
  * Sets up event listeners for post interactions.
  * @function setupPostEventListeners
