@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/js/api/auth/login.js"></script>
+    <script type="module" src="/src/app.js"></script>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <img src="/public/images/noroff-logo.png" alt="Noroff logo" class="img">
+   
 
   </head>
 
@@ -21,6 +25,11 @@
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required />
       </div>
+
+       <!-- Error/ success message-->
+       <div id="errorMessages" style="color: red;"></div>
+       <div id="successMessages" style="color: green;"></div>
+ 
 
       <a href="/auth/register/">Register</a>
       <button>Login</button>
