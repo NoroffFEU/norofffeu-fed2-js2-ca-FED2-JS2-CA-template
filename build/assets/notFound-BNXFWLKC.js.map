@@ -1,0 +1,1 @@
+{"version":3,"file":"notFound-BNXFWLKC.js","sources":["../../src/js/router/views/notFound.js"],"sourcesContent":["alert(\"Page cannot be found in /src/views\");\r\n"],"names":[],"mappings":"AAAA,MAAM,oCAAoC"}

@@ -1,0 +1,2 @@
+const c=JSON.parse(localStorage.getItem("API KEY")),e=c?.data.key,t="https://v2.api.noroff.dev",a=`${t}/auth`,r=`${a}/login`,A=`${a}/register`,n=`${t}/social`,I=`${n}/posts`,p=`${n}/profiles`;function S(){const o=new Headers;if(e&&o.append("X-Noroff-API-Key",e),localStorage.token){const s="Bearer "+JSON.parse(localStorage.getItem("token"));o.append("Authorization",s)}return o.append("content-Type","application/json"),o}export{r as A,A as a,I as b,p as c,S as h};
+//# sourceMappingURL=headers-C9OjJDj3.js.map
