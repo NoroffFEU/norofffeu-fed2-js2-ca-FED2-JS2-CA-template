@@ -105,6 +105,7 @@ $form-label-margin-bottom: 0.75rem;
 .btn-light:hover {
   background-color: $primary;
   color: $light;
+  border-color: $primary;
 }
 
 .btn-primary:hover {
@@ -122,6 +123,18 @@ $form-label-margin-bottom: 0.75rem;
 .hover-dark:hover {
   background-color: #025951;
   color: $light;
+}
+
+.hover-underline {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.hover-color-opacity {
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 @media screen and (min-width: map-get($grid-breakpoints, lg)) {

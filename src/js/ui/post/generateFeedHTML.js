@@ -58,6 +58,7 @@ export function generateFeedHTML(post) {
     "text-break",
     "me-3",
     "font-size-sm",
+    "hover-color-opacity",
   );
   const postUserIcon = document.createElement("i");
   postUserIcon.classList.add("fa-regular", "fa-user", "user-icon", "me-1");

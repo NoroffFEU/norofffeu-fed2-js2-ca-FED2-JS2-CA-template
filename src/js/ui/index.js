@@ -762,6 +762,7 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const previousButton = document.getElementById("previous-post");
+      previousButton.classList.add("hover-underline");
       if (previousButton) {
         if (currentIndex > 0) {
           const previousPostId = data[currentIndex - 1].id;
@@ -774,6 +775,7 @@ export default class NoroffApp extends NoroffAPI {
       }
 
       const nextButton = document.getElementById("next-post");
+      nextButton.classList.add("hover-underline");
       if (nextButton) {
         if (currentIndex < data.length - 1) {
           const nextPostId = data[currentIndex + 1]?.id;
