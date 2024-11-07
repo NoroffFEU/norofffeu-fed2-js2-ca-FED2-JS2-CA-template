@@ -15295,6 +15295,7 @@ header {
 .btn-light:hover {
   background-color: #025951;
   color: #f2f2eb;
+  border-color: #025951;
 }
 
 .btn-primary:hover {
@@ -15312,6 +15313,14 @@ header {
 .hover-dark:hover {
   background-color: #025951;
   color: #f2f2eb;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+.hover-color-opacity:hover {
+  opacity: 0.5;
 }
 
 @media screen and (min-width: 1024px) {

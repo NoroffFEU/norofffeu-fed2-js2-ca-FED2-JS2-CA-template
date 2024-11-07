@@ -5,8 +5,8 @@
   new MutationObserver((h) => {
     for (const m of h)
       if (m.type === "childList")
-        for (const f of m.addedNodes)
-          f.tagName === "LINK" && f.rel === "modulepreload" && c(f);
+        for (const g of m.addedNodes)
+          g.tagName === "LINK" && g.rel === "modulepreload" && c(g);
   }).observe(document, { childList: !0, subtree: !0 });
   function l(h) {
     const m = {};
@@ -73,7 +73,7 @@ var Dr =
           (n = n.replace(/#([^\s"#']+)/g, (e, t) => `#${CSS.escape(t)}`)),
         n
       ),
-      f = (n) => {
+      g = (n) => {
         n.dispatchEvent(new Event(h));
       },
       v = (n) =>
@@ -99,7 +99,7 @@ var Dr =
         }
         return e;
       },
-      g = (n) =>
+      f = (n) =>
         !n ||
         n.nodeType !== Node.ELEMENT_NODE ||
         !!n.classList.contains("disabled") ||
@@ -171,7 +171,7 @@ var Dr =
         };
         e.addEventListener(h, o),
           setTimeout(() => {
-            i || f(e);
+            i || g(e);
           }, s);
       },
       fe = (n, e, t, s) => {
@@ -565,7 +565,7 @@ var Dr =
           ]
             .map((t) => `${t}:not([tabindex^="-"])`)
             .join(",");
-          return this.find(e, n).filter((t) => !g(t) && S(t));
+          return this.find(e, n).filter((t) => !f(t) && S(t));
         },
         getSelectorFromElement(n) {
           const e = De(n);
@@ -586,7 +586,7 @@ var Dr =
         d.on(document, t, `[data-bs-dismiss="${s}"]`, function (i) {
           if (
             (["A", "AREA"].includes(this.tagName) && i.preventDefault(),
-            g(this))
+            f(this))
           )
             return;
           const o = C.getElementFromSelector(this) || this.closest(`.${s}`);
@@ -797,7 +797,7 @@ var Dr =
         this._slide(at);
       }
       pause() {
-        this._isSliding && f(this._element), this._clearInterval();
+        this._isSliding && g(this._element), this._clearInterval();
       }
       cycle() {
         this._clearInterval(),
@@ -2530,7 +2530,7 @@ var Dr =
         return this._isShown() ? this.hide() : this.show();
       }
       show() {
-        if (g(this._element) || this._isShown()) return;
+        if (f(this._element) || this._isShown()) return;
         const e = { relatedTarget: this._element };
         if (!d.trigger(this._element, so, e).defaultPrevented) {
           if (
@@ -2548,7 +2548,7 @@ var Dr =
         }
       }
       hide() {
-        if (g(this._element) || !this._isShown()) return;
+        if (f(this._element) || !this._isShown()) return;
         const e = { relatedTarget: this._element };
         this._completeHide(e);
       }
@@ -3222,7 +3222,7 @@ var Dr =
     }
     d.on(document, Bo, '[data-bs-toggle="offcanvas"]', function (n) {
       const e = C.getElementFromSelector(this);
-      if ((["A", "AREA"].includes(this.tagName) && n.preventDefault(), g(this)))
+      if ((["A", "AREA"].includes(this.tagName) && n.preventDefault(), f(this)))
         return;
       d.one(e, Ws, () => {
         S(this) && this.focus();
@@ -3959,7 +3959,7 @@ var Dr =
         (this._targetLinks = new Map()), (this._observableSections = new Map());
         const e = C.find(Pn, this._config.target);
         for (const t of e) {
-          if (!t.hash || g(t)) continue;
+          if (!t.hash || f(t)) continue;
           const s = C.findOne(decodeURI(t.hash), this._element);
           S(s) &&
             (this._targetLinks.set(decodeURI(t.hash), t),
@@ -4087,7 +4087,7 @@ var Dr =
       _keydown(e) {
         if (![hr, Gs, mr, Js, $n, Zs].includes(e.key)) return;
         e.stopPropagation(), e.preventDefault();
-        const t = this._getChildren().filter((i) => !g(i));
+        const t = this._getChildren().filter((i) => !f(i));
         let s;
         if ([$n, Zs].includes(e.key)) s = t[e.key === $n ? 0 : t.length - 1];
         else {
@@ -4157,7 +4157,7 @@ var Dr =
     }
     d.on(document, cr, ni, function (n) {
       ["A", "AREA"].includes(this.tagName) && n.preventDefault(),
-        g(this) || nt.getOrCreateInstance(this).show();
+        f(this) || nt.getOrCreateInstance(this).show();
     }),
       d.on(window, ur, () => {
         for (const n of C.find(pr)) nt.getOrCreateInstance(n);
@@ -4341,9 +4341,9 @@ class T {
           h,
           "Could not login this account",
         ),
-        { accessToken: f, ...v } = m;
+        { accessToken: g, ...v } = m;
       return (
-        (T.token = f),
+        (T.token = g),
         (T.user = v),
         (window.location.href = "/post/feed/?page=1"),
         m
@@ -4369,12 +4369,12 @@ class T {
   post = {
     create: async ({ title: a, body: l, tags: c, media: h }) => {
       const m = JSON.stringify({ title: a, body: l, tags: c, media: h }),
-        f = await fetch(T.paths.socialPost, {
+        g = await fetch(T.paths.socialPost, {
           headers: le(!0),
           method: "POST",
           body: m,
         }),
-        v = await T.util.handleResponse(f, "Could not create post");
+        v = await T.util.handleResponse(g, "Could not create post");
       return (window.location.href = "/post/feed/?page=1"), v;
     },
     delete: async (a) => {
@@ -4398,11 +4398,11 @@ class T {
       return await T.util.handleResponse(h, "Could not get the post");
     },
     update: async (a, { title: l, body: c, tags: h, media: m }) => {
-      const f = JSON.stringify({ title: l, body: c, tags: h, media: m }),
+      const g = JSON.stringify({ title: l, body: c, tags: h, media: m }),
         v = await fetch(`${T.paths.socialPost}/${a}`, {
           headers: le(!0),
           method: "PUT",
-          body: f,
+          body: g,
         });
       await T.util.handleResponse(v, "Could not update post"),
         (window.location.href = `/post/?id=${a}`);
@@ -4411,12 +4411,12 @@ class T {
       const h = { body: l };
       c !== void 0 && (h.replyToId = c);
       const m = JSON.stringify(h),
-        f = await fetch(`${T.paths.socialPost}/${a}/comment`, {
+        g = await fetch(`${T.paths.socialPost}/${a}/comment`, {
           headers: le(!0),
           method: "POST",
           body: m,
         });
-      return await T.util.handleResponse(f, "Could not comment on the post");
+      return await T.util.handleResponse(g, "Could not comment on the post");
     },
     deleteComment: async (a, l) => {
       const c = await fetch(`${T.paths.socialPost}/${a}/comment/${l}`, {
@@ -4465,12 +4465,12 @@ class T {
     },
     update: async (a, { bio: l, avatar: c, banner: h }) => {
       const m = JSON.stringify({ bio: l, avatar: c, banner: h }),
-        f = await fetch(`${T.paths.socialProfiles}/${a}`, {
+        g = await fetch(`${T.paths.socialProfiles}/${a}`, {
           headers: le(!0),
           method: "PUT",
           body: m,
         });
-      await T.util.handleResponse(f, "Could not update profile."),
+      await T.util.handleResponse(g, "Could not update profile."),
         (window.location.href = `/profile/?name=${a}`);
     },
     follow: async (a) => {
@@ -4528,8 +4528,8 @@ function gi(M) {
   h.classList.add("post-text-container", "px-2", "pt-2", "pb-4");
   const m = document.createElement("div");
   m.classList.add("post-user-date", "d-flex", "justify-content-between");
-  const f = document.createElement("div");
-  f.classList.add(
+  const g = document.createElement("div");
+  g.classList.add(
     "user",
     "d-flex",
     "justify-content-between",
@@ -4537,6 +4537,7 @@ function gi(M) {
     "text-break",
     "me-3",
     "font-size-sm",
+    "hover-color-opacity",
   );
   const v = document.createElement("i");
   v.classList.add("fa-regular", "fa-user", "user-icon", "me-1");
@@ -4544,7 +4545,7 @@ function gi(M) {
   E.classList.add("post-author", "link-underline"),
     (E.textContent = M.author.name),
     (E.href = `/profile/?name=${M.author.name}`),
-    f.append(v, E);
+    g.append(v, E);
   const S = document.createElement("div");
   S.classList.add(
     "date",
@@ -4553,13 +4554,13 @@ function gi(M) {
     "align-items-center",
     "font-size-sm",
   );
-  const g = document.createElement("i");
-  g.classList.add("fa-regular", "fa-calendar", "me-1");
+  const f = document.createElement("i");
+  f.classList.add("fa-regular", "fa-calendar", "me-1");
   const w = document.createElement("p");
   w.classList.add("mb-0"),
     (w.textContent = _i(M.created)),
-    S.append(g, w),
-    m.append(f, S);
+    S.append(f, w),
+    m.append(g, S);
   const P = document.createElement("div");
   P.classList.add(
     "post-tag-comment",
@@ -4644,8 +4645,8 @@ function jr(M) {
       : ((m.src = "../../../../images/default-thumbnail.jpg"),
         (m.alt = "No Media Available")),
     h.appendChild(m);
-  const f = document.createElement("div");
-  f.classList.add("d-flex", "justify-content-between", "align-items-center");
+  const g = document.createElement("div");
+  g.classList.add("d-flex", "justify-content-between", "align-items-center");
   const v = document.createElement("div");
   v.classList.add(
     "d-flex",
@@ -4661,15 +4662,15 @@ function jr(M) {
     (S.textContent = M.author.name),
     (S.href = `/profile/?name=${M.author.name}`),
     v.append(E, S);
-  const g = document.createElement("div");
-  g.classList.add("d-flex", "justify-content-between", "align-items-center");
+  const f = document.createElement("div");
+  f.classList.add("d-flex", "justify-content-between", "align-items-center");
   const w = document.createElement("i");
   w.classList.add("fa-regular", "fa-calendar", "me-1");
   const P = document.createElement("p");
   P.classList.add("m-0"),
     (P.textContent = _i(M.created)),
-    g.append(w, P),
-    f.append(v, g);
+    f.append(w, P),
+    g.append(v, f);
   const W = document.createElement("ul");
   W.classList.add(
     "single-post-tag-list",
@@ -4889,7 +4890,7 @@ function jr(M) {
     (Ve.innerText = "Add comment"),
     Be.append(it, Et, Ct, Ve),
     V.append(z, ce, Be),
-    l.append(c, h, f, W, X),
+    l.append(c, h, g, W, X),
     a.append(l, V),
     a
   );
@@ -5060,9 +5061,9 @@ Please try again.`);
       create: async (a) => {
         const l = ze.form.handleSubmit(a),
           c = { url: l["media[url]"], alt: l["media[alt]"] },
-          { title: h, body: m, tags: f } = l,
-          v = f
-            ? f
+          { title: h, body: m, tags: g } = l,
+          v = g
+            ? g
                 .split(",")
                 .map((E) => E.trim())
                 .filter((E) => E.length > 0)
@@ -5090,19 +5091,19 @@ Please try again.`);
         try {
           const l = await Y.posts.getPosts(12, a),
             { data: c, meta: h } = l,
-            { currentPage: m, pageCount: f } = h,
+            { currentPage: m, pageCount: g } = h,
             v = document.querySelector(".row");
           (v.innerHTML = ""),
-            c.forEach((g) => {
-              const w = gi(g);
+            c.forEach((f) => {
+              const w = gi(f);
               v.appendChild(w);
             });
           const E = `${window.location.pathname}?page=${a}`;
           window.history.replaceState({}, "", E),
-            this.pagination.feedPagination(m, f),
+            this.pagination.feedPagination(m, g),
             window.scrollTo({ top: 0, behavior: "smooth" }),
-            document.querySelectorAll(".post-container").forEach((g) => {
-              g.addEventListener("click", () => {
+            document.querySelectorAll(".post-container").forEach((f) => {
+              f.addEventListener("click", () => {
                 const P = new URLSearchParams(window.location.search).get(
                   "page",
                 );
@@ -5118,8 +5119,8 @@ Please try again.`);
           const l = new URLSearchParams(window.location.search).get("id"),
             h = (await Y.post.readPost(l)).data,
             m = h.author.name,
-            f = document.createElement("button");
-          f.classList.add(
+            g = document.createElement("button");
+          g.classList.add(
             "nav-link",
             "btn",
             "btn-light",
@@ -5130,25 +5131,25 @@ Please try again.`);
             "border-none",
             "nav-bg-pink",
           ),
-            (f.textContent = "Edit");
+            (g.textContent = "Edit");
           const v = document.createElement("i");
           v.classList.add("fa-regular", "fa-pen-to-square", "me-1"),
-            f.insertBefore(v, f.firstChild),
-            (f.dataset.id = l),
+            g.insertBefore(v, g.firstChild),
+            (g.dataset.id = l),
             m === T.user
-              ? (f.style.display = "block")
-              : (f.style.display = "none");
+              ? (g.style.display = "block")
+              : (g.style.display = "none");
           const E = document.createElement("div");
-          E.classList.add("nav-item"), E.appendChild(f);
+          E.classList.add("nav-item"), E.appendChild(g);
           const S = document.querySelector(".navbar-nav");
-          S.insertBefore(f, S.firstChild),
-            f.addEventListener("click", () => {
+          S.insertBefore(g, S.firstChild),
+            g.addEventListener("click", () => {
               window.location.href = `/post/edit/?id=${l}`;
             });
-          const g = document.querySelector(".single-post");
-          g.innerHTML = "";
+          const f = document.querySelector(".single-post");
+          f.innerHTML = "";
           const w = jr(h);
-          g.appendChild(w);
+          f.appendChild(w);
           const P = document.querySelector(".back-to-profile-page");
           (P.href = `/profile/?name=${m}`), (P.textContent = `${m}'s page`);
           const W = document.createElement("i");
@@ -5178,17 +5179,17 @@ Please try again.`);
           const l = new URLSearchParams(window.location.search).get("id"),
             c = await Y.post.readPost(l),
             { data: h } = c,
-            { title: m, body: f, tags: v, media: E } = h;
+            { title: m, body: g, tags: v, media: E } = h;
           (document.getElementById("title").value = m),
-            (document.getElementById("content").value = f),
+            (document.getElementById("content").value = g),
             (document.getElementById("tags").value = v.join(",")),
             (document.getElementById("img-url").value = E.url),
             (document.getElementById("img-alt").value = E.alt),
             document.forms.editPost.addEventListener("submit", async (S) => {
-              const g = ze.form.handleSubmit(S);
-              (g.tags = g.tags.split(",").map((w) => w.trim())),
-                (g.media = { url: g["media[url]"], alt: g["media[alt]"] }),
-                await Y.post.update(l, g);
+              const f = ze.form.handleSubmit(S);
+              (f.tags = f.tags.split(",").map((w) => w.trim())),
+                (f.media = { url: f["media[url]"], alt: f["media[alt]"] }),
+                await Y.post.update(l, f);
             });
         } catch (a) {
           alert(a.message);
@@ -5205,14 +5206,14 @@ Please try again.`);
           try {
             await Y.post.comment(m, { body: c, replyToId: this.replyToId }),
               location.reload();
-          } catch (f) {
-            alert(f.message);
+          } catch (g) {
+            alert(g.message);
           }
         else
           try {
             await Y.post.comment(m, { body: c }), location.reload();
-          } catch (f) {
-            alert(f.message);
+          } catch (g) {
+            alert(g.message);
           }
       },
       deleteComment: () => {
@@ -5220,13 +5221,13 @@ Please try again.`);
           l.addEventListener("click", async (c) => {
             try {
               const m = new URLSearchParams(window.location.search).get("id"),
-                f = c.target.closest(".comment-item"),
-                v = f.id;
+                g = c.target.closest(".comment-item"),
+                v = g.id;
               window.confirm("Are you sure you want to delete this comment?") &&
-                (await Y.post.deleteComment(m, v), f.remove());
-              const g = (await Y.post.readPost(m)).data.comments.length,
+                (await Y.post.deleteComment(m, v), g.remove());
+              const f = (await Y.post.readPost(m)).data.comments.length,
                 w = document.querySelector(".section-title");
-              w.textContent = `Comment (${g})`;
+              w.textContent = `Comment (${f})`;
             } catch (h) {
               alert(h.message);
             }
@@ -5240,14 +5241,14 @@ Please try again.`);
         try {
           const h = await Y.profile.readUsersPosts(c, 12, a),
             m = await Y.profile.readProfile(c),
-            f = h.data,
+            g = h.data,
             v = m.data,
             E = document.querySelector(".avatar");
           E.src = v.avatar.url;
           const S = document.querySelector(".username");
           S.textContent = v.name;
-          const g = document.querySelector(".bio");
-          (g.textContent = v.bio),
+          const f = document.querySelector(".bio");
+          (f.textContent = v.bio),
             (document.querySelector(".followers").textContent =
               v._count.followers),
             (document.querySelector(".following").textContent =
@@ -5293,7 +5294,7 @@ Please try again.`);
             });
           const U = document.querySelector(".row");
           (U.innerHTML = ""),
-            f.forEach((fe) => {
+            g.forEach((fe) => {
               const xe = gi(fe);
               U.appendChild(xe);
             });
@@ -5314,20 +5315,20 @@ Please try again.`);
           const a = T.user,
             l = await Y.profile.readProfile(a),
             { data: c } = l,
-            { bio: h, avatar: m, banner: f } = c;
+            { bio: h, avatar: m, banner: g } = c;
           (document.getElementById("bio").value = h || ""),
-            (document.getElementById("banner").value = f.url || ""),
-            (document.getElementById("banner-alt").value = f.alt || ""),
+            (document.getElementById("banner").value = g.url || ""),
+            (document.getElementById("banner-alt").value = g.alt || ""),
             (document.getElementById("avatar").value = m.url || ""),
             (document.getElementById("avatar-alt").value = m.alt || ""),
             document.forms.updateProfile.addEventListener(
               "submit",
               async (S) => {
                 S.preventDefault();
-                const g = ze.form.handleSubmit(S);
-                (g.banner = { url: g["banner[url]"], alt: g["banner[alt]"] }),
-                  (g.avatar = { url: g["avatar[url]"], alt: g["avatar[alt]"] }),
-                  await Y.profile.update(a, g);
+                const f = ze.form.handleSubmit(S);
+                (f.banner = { url: f["banner[url]"], alt: f["banner[alt]"] }),
+                  (f.avatar = { url: f["avatar[url]"], alt: f["avatar[alt]"] }),
+                  await Y.profile.update(a, f);
               },
             );
           const v = document.querySelector(".back-to-profile-page");
@@ -5354,8 +5355,8 @@ Please try again.`);
               a.textContent === "Follow"
                 ? (await Y.profile.follow(c), (a.textContent = "Unfollow"))
                 : (await Y.profile.unfollow(c), (a.textContent = "Follow"));
-            const f = (await Y.profile.readProfile(c)).data._count.followers;
-            document.querySelector(".followers").textContent = f;
+            const g = (await Y.profile.readProfile(c)).data._count.followers;
+            document.querySelector(".followers").textContent = g;
           } catch (l) {
             alert(l.message);
           }
@@ -5368,10 +5369,10 @@ Please try again.`);
     feedPagination: async (a, l) => {
       const c = document.querySelector(".feed-pagination");
       c.innerHTML = "";
-      const h = (g, w) => {
+      const h = (f, w) => {
           const P = document.createElement("button");
           return (
-            (P.textContent = g),
+            (P.textContent = f),
             (P.dataset.page = w),
             (P.className = "rounded-circle border border-2 btn btn-light"),
             w === a &&
@@ -5384,11 +5385,11 @@ Please try again.`);
           );
         },
         m = () => {
-          const g = document.createElement("span");
-          return g.classList.add("color-green"), (g.textContent = "..."), g;
+          const f = document.createElement("span");
+          return f.classList.add("color-green"), (f.textContent = "..."), f;
         },
-        f = document.createElement("button");
-      f.classList.add(
+        g = document.createElement("button");
+      g.classList.add(
         "rounded-circle",
         "border",
         "border-2",
@@ -5398,12 +5399,12 @@ Please try again.`);
       const v = document.createElement("i");
       if (
         (v.classList.add("fa-solid", "fa-chevron-left", "color-green"),
-        f.appendChild(v),
-        c.appendChild(f),
-        f.addEventListener("click", () => {
+        g.appendChild(v),
+        c.appendChild(g),
+        g.addEventListener("click", () => {
           a > 1 && this.events.post.displayPosts(a - 1);
         }),
-        a === 1 ? (f.disabled = !0) : (f.disabled = !1),
+        a === 1 ? (g.disabled = !0) : (g.disabled = !1),
         a < 4)
       ) {
         for (let w = 1; w < 4; w++) {
@@ -5411,12 +5412,12 @@ Please try again.`);
           c.appendChild(P);
         }
         c.appendChild(m());
-        const g = h(l, l);
-        c.appendChild(g);
+        const f = h(l, l);
+        c.appendChild(f);
       }
       if (a >= 4 && a <= l - 3) {
-        const g = h(1, 1);
-        c.appendChild(g), c.appendChild(m());
+        const f = h(1, 1);
+        c.appendChild(f), c.appendChild(m());
         const w = Math.max(3, a - 2),
           P = Math.min(l - 2, a + 2);
         for (let ne = w; ne <= P; ne++) {
@@ -5428,16 +5429,16 @@ Please try again.`);
         c.appendChild(W);
       }
       if (a > l - 3) {
-        const g = h(1, 1);
-        c.appendChild(g), c.appendChild(m());
+        const f = h(1, 1);
+        c.appendChild(f), c.appendChild(m());
         for (let w = l - 2; w <= l; w++) {
           const P = h(w, w);
           c.appendChild(P);
         }
       }
       if (l <= 7)
-        for (let g = 1; g < 8; g++) {
-          const w = h(g, g);
+        for (let f = 1; f < 8; f++) {
+          const w = h(f, f);
           c.appendChild(w);
         }
       const E = document.createElement("button");
@@ -5462,8 +5463,8 @@ Please try again.`);
         { data: l, meta: c } = a;
       const h = c.totalCount;
       let m = 1;
-      const f = new URLSearchParams(window.location.search),
-        v = Number(f.get("id"));
+      const g = new URLSearchParams(window.location.search),
+        v = Number(g.get("id"));
       let E = l.findIndex((w) => w.id === v);
       for (; E === -1 && m * 100 < h; ) {
         m++;
@@ -5471,18 +5472,18 @@ Please try again.`);
         (l = l.concat(w.data)), (E = l.findIndex((P) => P.id === v));
       }
       const S = document.getElementById("previous-post");
-      if (S)
+      if ((S.classList.add("hover-underline"), S))
         if (E > 0) {
           const w = l[E - 1].id;
           S.addEventListener("click", () => {
             window.location.href = `/post/?id=${w}`;
           });
         } else S.disabled = !0;
-      const g = document.getElementById("next-post");
-      if (g)
+      const f = document.getElementById("next-post");
+      if ((f.classList.add("hover-underline"), f))
         if (E < l.length - 1) {
           const w = l[E + 1]?.id;
-          g.addEventListener("click", () => {
+          f.addEventListener("click", () => {
             w && (window.location.href = `/post/?id=${w}`);
           });
         } else if (m * 100 < h) {
@@ -5491,30 +5492,30 @@ Please try again.`);
             let w = await Y.posts.getPosts(100, m);
             (l = l.concat(w.data)), (E = l.findIndex((W) => W.id === v));
             const P = l[E + 1]?.id;
-            g.addEventListener("click", () => {
-              P ? (window.location.href = `/post/?id=${P}`) : (g.disabled = !0);
+            f.addEventListener("click", () => {
+              P ? (window.location.href = `/post/?id=${P}`) : (f.disabled = !0);
             });
           } catch (w) {
-            alert(w.message), (g.disabled = !0);
+            alert(w.message), (f.disabled = !0);
           }
-        } else g.disabled = !0;
+        } else f.disabled = !0;
     },
     profilePagination: async (a, l) => {
       this.currentPage = a;
       const c = document.querySelector(".feed-pagination");
       c.innerHTML = "";
-      const h = (S, g) => {
+      const h = (S, f) => {
           const w = document.createElement("button");
           return (
             (w.textContent = S),
-            (w.dataset.page = g),
+            (w.dataset.page = f),
             (w.className =
               "pagination-button, rounded-circle border border-2 btn btn-light"),
-            g === this.currentPage &&
+            f === this.currentPage &&
               (w.classList.add("current-page", "btn-primary"),
               w.classList.remove("btn-light")),
             w.addEventListener("click", () => {
-              (this.currentPage = g), this.events.profile.displayProfilePage(g);
+              (this.currentPage = f), this.events.profile.displayProfilePage(f);
             }),
             w
           );
@@ -5527,9 +5528,9 @@ Please try again.`);
         "btn",
         "btn-light",
       );
-      const f = document.createElement("i");
-      f.classList.add("fa-solid", "fa-chevron-left", "color-green"),
-        m.appendChild(f),
+      const g = document.createElement("i");
+      g.classList.add("fa-solid", "fa-chevron-left", "color-green"),
+        m.appendChild(g),
         c.appendChild(m),
         m.addEventListener("click", () => {
           this.currentPage > 1 &&
@@ -5537,8 +5538,8 @@ Please try again.`);
         }),
         this.currentPage === 1 ? (m.disabled = !0) : (m.disabled = !1);
       for (let S = 1; S <= l; S++) {
-        const g = h(S, S);
-        c.appendChild(g);
+        const f = h(S, S);
+        c.appendChild(f);
       }
       const v = document.createElement("button");
       v.classList.add(
