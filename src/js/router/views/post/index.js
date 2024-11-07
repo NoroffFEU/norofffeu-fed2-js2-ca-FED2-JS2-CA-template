@@ -39,7 +39,7 @@ async function renderPost(post, target) {
   const SecondPostElement = document.createElement('div');
 
   postElement.classList.add('max-w-full', 'mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
-  SecondPostElement.classList.add('max-w-full','mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-1/3');
+  SecondPostElement.classList.add('max-w-full','mx-auto', 'p-4', 'w-full','sm:w-1/2', 'lg:w-2/3');
 
   const postCreated = utils.date(post.created);
   const tags = utils.formatTags(post.tags);
@@ -55,7 +55,7 @@ async function renderPost(post, target) {
   `;
 
   SecondPostElement.innerHTML= `
-    <div class="p-4 max-w-full mx-auto">
+    <div class="p-4 max-w-full mx-auto break-all">
       <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
         <div class="flex items-center mb-3">
           <div class="w-20 h-20 mr-4 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
@@ -75,7 +75,7 @@ async function renderPost(post, target) {
                   </a>
                 </div>
                 <div>
-                  <h2 class="text-white dark:text-white text-lg font-medium">Posted on ${postCreated}</h2>
+                  <h2 class="text-white dark:text-white text-lg font-medium">Posted on: ${postCreated}</h2>
                 </div>
               </div>             
 
@@ -93,7 +93,7 @@ async function renderPost(post, target) {
                   ${post.body}
                 </div>
               </div>
-              <div class="article__actions">
+              <div class="article__actions flex gap-4 ">
                   ${
                   isAuthor(post.author.name)
                   ? `<button class="w-full text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" id="editPost">Edit Post</button>

@@ -40,7 +40,7 @@ export async function renderPosts(target, posts) {
       postElement.innerHTML = `
       
 
-  <div class="p-4 max-w-xl">
+  <div class="p-4 max-w-xl w-full">
     <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
       <div class="flex items-center mb-3">
         <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-indigo-500 text-white flex-shrink-0">
@@ -64,17 +64,17 @@ export async function renderPosts(target, posts) {
         </div>
 
       </div>
-      <div class="flex flex-col justify-between flex-grow">
+      <div class="flex flex-col justify-between flex-grow gap-1">
         <a href="/post/?id=${post.id}">
-          <h2 class="story__title leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center">
+          <h2 class="story__title leading-relaxed text-xl text-white dark:text-gray-300 hover:text-blue-600 inline-flex items-center break-all">
           ${post.title}
           </h2>
         </a>
-      <div class="leading-relaxed text-base text-white dark:text-gray-300">
+        <div class="leading-relaxed text-base text-white dark:text-gray-300">
         ${tags}
       </div>
         <a class="mt-3 text-black dark:text-white hover:text-blue-600 inline-flex items-center" href="/post/?id=${post.id}#comments">
-          <div class="story__comment">
+          <div class="story__comment flex items-center gap-1">
                     <ion-icon class="icon-comment" name="chatbubble-outline"></ion-icon>
                     ${
                       post._count.comments === 0
