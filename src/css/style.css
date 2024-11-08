@@ -1,4 +1,9 @@
 @import url(_reset.css);
+/* styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 * {
   margin: 0;
