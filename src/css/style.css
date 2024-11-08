@@ -1,102 +1,102 @@
 @import url(_reset.css);
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .button-style {
-    background-color: #c0c0c0;
-    color: #000000;
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 20%;
-    border: 2px solid #000000;
+  background-color: #c0c0c0;
+  color: #000000;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 20%;
+  border: 2px solid #000000;
 }
 
 .button-style:hover {
-    background-color: #d3d3d3;
-    cursor: pointer;
+  background-color: #d3d3d3;
+  cursor: pointer;
 }
 
 .button-style:active {
-    background-color: #c0c0c0;
+  background-color: #c0c0c0;
 }
 
 .card {
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    width: 300px;
-  }
-  
-  .card h2 {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .card p {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .card a {
-    background-color: #333;
-    color: #fff;
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
-  }
-  
-  .card a:hover {
-    background-color: #444;
-  }
-  
-  .card:active {
-    background-color: #f1f1f1;
-  }
-  
-  .card:focus {
-    background-color: #f1f1f1;
-  }
-  
-  .card:target {
-    background-color: #f1f1f1;
-  }
-  
-  .card:visited {
-    background-color: #f1f1f1;
-  }
-  
-  .card:link {
-    background-color: #f1f1f1;
-  }
-  
-  .card:after {
-    content: " ";
-    display: block;
-    clear: both;
-  }
-  
-  .card img {
-    float: left;
-    margin-right: 10px;
-  }
-  
-  .card:hover {
-    background-color: #f9f9f9;
-    cursor: pointer;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+}
+
+.card h2 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card a {
+  background-color: #333;
+  color: #fff;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.card a:hover {
+  background-color: #444;
+}
+
+.card:active {
+  background-color: #f1f1f1;
+}
+
+.card:focus {
+  background-color: #f1f1f1;
+}
+
+.card:target {
+  background-color: #f1f1f1;
+}
+
+.card:visited {
+  background-color: #f1f1f1;
+}
+
+.card:link {
+  background-color: #f1f1f1;
+}
+
+.card:after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.card img {
+  float: left;
+  margin-right: 10px;
 }
 
 .card:hover {
-    background-color: #f9f9f9;
-    cursor: pointer;
-  }
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
