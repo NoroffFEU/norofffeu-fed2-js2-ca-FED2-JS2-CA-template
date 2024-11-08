@@ -1,5 +1,6 @@
 import controllers from "../../controllers/index";
 import utils from "../../utilities/utils";
+import InfiniteScroll from '../../utilities/infiniteScroll';
 
 async function init() {
   const menuButton = document.getElementById("menuButton");
@@ -7,38 +8,68 @@ async function init() {
   const closeIcon = document.getElementById("closeIcon");
   const mobileMenu = document.getElementById("mobile-menu");
 
+  menuButton.addEventListener("click", () => {
+    menuIcon.classList.toggle("hidden"); // Toggle 'hamburger' icon
+    closeIcon.classList.toggle("hidden"); // Toggle 'close' icon
+    mobileMenu.classList.toggle("hidden");// Toggle mobile menu visibility
+  });
+
   const container = document.querySelector(".main-content");
   clearContent(container);
-  try {
-    const posts = await controllers.PostController.posts();
-    const { data } = posts;
 
-    renderPosts(container, data.posts);
+  const infiniteScroll = new InfiniteScroll({
+    container: container,
+    threshold: 200,
+    onLoad: async () => {
+      try {
+        if (infiniteScroll.nextPage <= infiniteScroll.totalPages) {
+          const { data, meta } = await fetchPosts(infiniteScroll.nextPage);
+          await renderPosts(data, container);
 
-    menuButton.addEventListener("click", () => {
-      menuIcon.classList.toggle("hidden"); // Toggle 'hamburger' icon
-      closeIcon.classList.toggle("hidden"); // Toggle 'close' icon
-      mobileMenu.classList.toggle("hidden");// Toggle mobile menu visibility
-    });
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    container.innerHTML = "<p>Error loading posts. Please try again later.</p>";
-  }
+          // Update pagination
+          infiniteScroll.currentPage = meta.currentPage;
+          infiniteScroll.totalPages = meta.pageCount;
+          infiniteScroll.nextPage = meta.nextPage;
+        }
+      } catch (error) {
+        console.error('Error loading more posts:', error);
+        container.innerHTML +=
+          '<p>Error loading more posts. Please try again later.</p>';
+      }
+    },
+  });
+
+  // Load the first page of posts initially
+  const { data, meta } = await fetchPosts(1);
+  renderPosts(data, container);
+
+  // Set initial pagination details
+  infiniteScroll.currentPage = meta.currentPage;
+  infiniteScroll.totalPages = meta.pageCount;
+  infiniteScroll.nextPage = meta.nextPage;
 }
 
 function clearContent(target) {
   if (target) target.innerHTML = "";
 }
 
-export async function renderPosts(target, posts) {
+async function fetchPosts(page = 1) {
+  const { data, meta } = await controllers.PostController.posts(page);
+  return { data: data.posts, meta };
+}
+
+export async function renderPosts(posts, target) {
   if (target) {
     const postsElement = posts.map((post) => {
       const createdDate = utils.date(post.created);
       const tags = utils.formatTags(post.tags);
 
       const postElement = document.createElement("div");
+      postElement.setAttribute(
+        'class',
+        'story p-4 bg-white rounded shadow-md mx-auto mb-2 w-full max-w-[616px] w-full'
+      );
       postElement.innerHTML = `
-      
 
   <div class="p-4 max-w-xl w-full">
     <div class="flex rounded-lg h-full dark:bg-gray-800 bg-teal-400 p-8 flex-col">
