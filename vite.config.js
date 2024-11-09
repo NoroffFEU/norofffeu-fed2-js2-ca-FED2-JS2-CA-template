@@ -2,7 +2,6 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: '/fed2-js2-ca-shiwa4656/',
   appType: "mpa",
   build: {
     rollupOptions: {
