@@ -5,6 +5,7 @@ export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/fed2-js2-ca-shiwa4656/' : '/', // Adjust this to match your GitHub Pages repository name
   appType: "mpa",
   build: {
+    target: 'es2022',
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
