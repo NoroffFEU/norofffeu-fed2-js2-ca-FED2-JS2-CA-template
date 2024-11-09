@@ -8,6 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const postList = document.getElementById('postList');
   const pagination = document.getElementById('pagination');
+  const logoutButton = document.getElementById('logoutButton');
+
+  // Check login status and hide logout button if not logged in
+  function toggleLogoutButton() {
+    const isLoggedIn = localStorage.getItem('token'); // Check for token in localStorage
+
+    if (isLoggedIn) {
+      logoutButton.style.display = 'block'; // Show if logged in
+    } else {
+      logoutButton.style.display = 'none'; // Hide if not logged in
+    }
+  }
 
   // Fetch and render posts based on the current page
   async function loadPosts(page) {
@@ -77,4 +89,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial load
   loadPosts(currentPage);
+  toggleLogoutButton(); // Check login status on page load
 });
