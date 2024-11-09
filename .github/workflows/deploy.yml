@@ -32,4 +32,5 @@ jobs:
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: npx gh-pages -d dist -b css-frameworks
+        run: |
+          npx gh-pages -d dist -b css-frameworks -r https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/NoroffFEU/fed2-js2-ca-shiwa4656.git
