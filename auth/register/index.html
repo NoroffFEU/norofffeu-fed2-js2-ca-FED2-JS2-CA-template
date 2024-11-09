@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - LinkUp</title>
     <script type="module" src="/src/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/style.css">
   </head>
   
-  <body class="bg-gray-50">
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+  <body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
       <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
-        <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
-        <nav class="flex space-x-4">
-          <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
-          <a href="/auth/login/" id="login-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Login</a>
+        <a href="/index.html" class="text-4xl font-bold text-blue-400 hover:text-blue-500 transition-colors font-poppins">LinkUp</a>
+        <nav class="flex space-x-6">
+          <a href="/" id="home-link" class="text-lg font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a>
+          <a href="/auth/login/" id="login-link" class="text-lg font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
         </nav>
       </div>
     </header>
 
     <main class="container mx-auto px-4 mt-20 py-8">
       <div class="max-w-md mx-auto">
-        <h1 class="text-3xl font-bold text-purple-600 mb-8 text-center">Register</h1>
+        <h1 class="text-3xl font-bold text-blue-400 mb-8 text-center">Register</h1>
         
-        <form id="register-form" name="register" class="bg-white rounded-lg shadow-md p-6 space-y-6">
+        <form id="register-form" name="register" class="bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
           <div class="space-y-2">
-            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
             <input
               id="name"
               type="text"
@@ -34,12 +35,12 @@
               maxlength="20"
               pattern="^[\w]+$"
               title="Please enter a username using only letters and numbers"
-              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             />
           </div>
 
           <div class="space-y-2">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
             <input
               id="email"
               type="email"
@@ -47,40 +48,35 @@
               required
               pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
               title="Please enter a valid noroff.no or stud.noroff.no address"
-              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             />
           </div>
 
           <div class="space-y-2">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
             <input
               type="password"
               name="password"
               id="password"
               required
               minlength="8"
-              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
             />
           </div>
 
           <button 
             type="submit"
-            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+            class="mx-auto block w-1/3 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-2 px-4 rounded-md transition-colors"
           >
             Register
           </button>
         </form>
 
-        <p class="mt-4 text-center text-gray-600">
+        <p class="mt-4 text-center text-gray-400">
           Already have an account? 
-          <a href="/auth/login/" class="text-purple-600 hover:text-purple-700 font-semibold">Login here</a>
+          <a href="/auth/login/" class="text-blue-400 hover:text-blue-500 font-semibold">Login here</a>
         </p>
       </div>
     </main>
-
-    <script type="module">
-      import { setupRegisterForm } from '/src/js/ui/auth/register.js';
-      document.addEventListener('DOMContentLoaded', setupRegisterForm);
-    </script>
   </body>
 </html>
