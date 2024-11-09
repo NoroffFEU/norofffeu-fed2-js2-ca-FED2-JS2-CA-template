@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - css-frameworks  
+      - css-frameworks  # Adjust this to your deployment branch
 
 jobs:
   build:
@@ -30,4 +30,6 @@ jobs:
           git config --global user.name "shiwa4656"
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx gh-pages -d dist -b css-frameworks
