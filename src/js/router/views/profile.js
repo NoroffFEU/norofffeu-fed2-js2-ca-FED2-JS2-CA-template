@@ -29,15 +29,9 @@ export async function profileView() {
         }
     }
 
-    console.log("URL profile name:", profileName);
-    console.log("Logged in user name:", loggedInUserName);
-    console.log("localStorage contents:", JSON.parse(JSON.stringify(localStorage)));
-
     if (!profileName) {
         profileName = loggedInUserName;
     }
-
-    console.log("Final profile name to load:", profileName);
 
     if (profileName && profileName !== 'undefined') {
         await loadProfile(profileName);
@@ -57,13 +51,12 @@ async function loadProfile(name) {
     }
 
     try {
-        console.log("Attempting to load profile for:", name);
         const profile = await readProfile(name);
         
         const updateForm = createUpdateForm(profile);
         const profileHTML = `
-        <div class="grid grid-cols-4 gap-6">
-            <div class="col-span-3 bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="col-span-1 md:col-span-3 bg-gray-800 rounded-lg shadow-md p-6">
                 <div class="flex items-center space-x-4 mb-6">
                     ${profile.avatar ?
                         `<img src="${profile.avatar.url}" alt="${profile.avatar.alt || 'Profile avatar'}" class="w-16 h-16 rounded-full object-cover">` :
@@ -77,23 +70,23 @@ async function loadProfile(name) {
                     </div>
                 </div>
                 ${profile.banner ?
-                    `<div class="flex justify-start">
+                    `<div class="flex justify-center md:justify-start mb-6">
                         <img src="${profile.banner.url}" 
                              alt="${profile.banner.alt || 'Profile banner'}" 
-                             class="w-48 h-48 object-cover rounded-lg mb-6">
+                             class="w-48 h-48 object-cover rounded-lg">
                     </div>` :
                     ''
                 }
                 <div class="space-y-4">
                     <p class="text-gray-300">${profile.bio || 'No bio available'}</p>
-                    <div class="flex space-x-6 text-gray-400">
+                    <div class="flex flex-row justify-around md:justify-start md:space-x-6 py-4 text-gray-400">
                         <span>Posts: ${profile._count?.posts || 0}</span>
                         <span>Followers: ${profile._count?.followers || 0}</span>
                         <span>Following: ${profile._count?.following || 0}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-span-1">
+            <div class="col-span-1 order-last md:order-none">
                 ${updateForm.html}
             </div>
         </div>
@@ -143,7 +136,7 @@ function createUpdateForm(profile) {
                 </div>
                 <button 
                     type="submit" 
-                    class="w-full bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-2 px-4 rounded-md transition-colors"
+                    class="mx-auto block w-full md:w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-2 px-4 rounded-md transition-colors"
                 >
                     Update Profile
                 </button>
@@ -179,52 +172,52 @@ function createUpdateForm(profile) {
 }
 
 async function loadAllProfiles(container, currentUserName) {
-  const allProfilesContainer = document.createElement('div');
-  allProfilesContainer.className = 'mt-8 pb-8';
-  allProfilesContainer.innerHTML = '<h2 class="text-2xl font-bold text-blue-400 mb-6">All Profiles</h2>';
-  container.appendChild(allProfilesContainer);
+    const allProfilesContainer = document.createElement('div');
+    allProfilesContainer.className = 'mt-8 pb-8';
+    allProfilesContainer.innerHTML = '<h2 class="text-2xl font-bold text-blue-400 mb-6">All Profiles</h2>';
+    container.appendChild(allProfilesContainer);
 
-  try {
-    const allProfilesData = await getAllProfiles();
-    const profilesGrid = document.createElement('div');
-    profilesGrid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
+    try {
+        const allProfilesData = await getAllProfiles();
+        const profilesGrid = document.createElement('div');
+        profilesGrid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4';
 
-    allProfilesData.data.forEach(profile => {
-        const profileCard = document.createElement('div');
-        profileCard.className = 'bg-gray-800 rounded-lg shadow-md p-3 hover:shadow-xl transition-shadow flex flex-col items-center'; // Added flex and center alignment
-        profileCard.innerHTML = `
-            <div class="flex flex-col items-center text-center"> <!-- Changed to flex-col and centered -->
-                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden mb-2">
-                    ${profile.avatar?.url ? 
-                        `<img 
-                            src="${profile.avatar.url}" 
-                            alt="${profile.name}'s avatar" 
-                            class="w-full h-full object-cover"
-                        >` :
-                        `<div class="text-xl text-blue-400">${profile.name.charAt(0).toUpperCase()}</div>`
-                    }
+        allProfilesData.data.forEach(profile => {
+            const profileCard = document.createElement('div');
+            profileCard.className = 'bg-gray-800 rounded-lg shadow-md p-3 hover:shadow-xl transition-shadow flex flex-col items-center';
+            profileCard.innerHTML = `
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden mb-2">
+                        ${profile.avatar?.url ? 
+                            `<img 
+                                src="${profile.avatar.url}" 
+                                alt="${profile.name}'s avatar" 
+                                class="w-full h-full object-cover"
+                            >` :
+                            `<div class="text-xl text-blue-400">${profile.name.charAt(0).toUpperCase()}</div>`
+                        }
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-semibold text-gray-100">${profile.name}</h3>
+                        <p class="text-sm text-gray-400">Following: ${profile._count?.following || 0}</p>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <h3 class="font-semibold text-gray-100">${profile.name}</h3>
-                    <p class="text-sm text-gray-400">Following: ${profile._count?.following || 0}</p>
-                </div>
-            </div>
+            `;
+        
+            if (profile.name !== currentUserName) {
+                const followBtn = createFollowBtn(profile.name, profile.isFollowing);
+                followBtn.className = 'mt-2 w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-1.5 px-3 rounded-md transition-colors text-sm';
+                profileCard.appendChild(followBtn);
+            }
+        
+            profilesGrid.appendChild(profileCard);
+        });
+        
+        allProfilesContainer.appendChild(profilesGrid);
+    } catch (error) {
+        console.error("Error loading all profiles:", error);
+        allProfilesContainer.innerHTML += `
+            <p class="text-red-500 mt-4">Error loading profiles. Please try again later.</p>
         `;
-    
-        if (profile.name !== currentUserName) {
-            const followBtn = createFollowBtn(profile.name, profile.isFollowing);
-            followBtn.className = 'mt-2 w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-1.5 px-3 rounded-md transition-colors text-sm';
-            profileCard.appendChild(followBtn);
-        }
-    
-        profilesGrid.appendChild(profileCard);
-    });
-    
-    allProfilesContainer.appendChild(profilesGrid);
-  } catch (error) {
-    console.error("Error loading all profiles:", error);
-    allProfilesContainer.innerHTML += `
-      <p class="text-red-500 mt-4">Error loading profiles. Please try again later.</p>
-    `;
-  }
+    }
 }
