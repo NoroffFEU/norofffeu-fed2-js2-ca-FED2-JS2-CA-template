@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - css-frameworks  
+      - css-frameworks  # Adjust this to your deployment branch
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build project
         run: npm run build
@@ -30,4 +30,7 @@ jobs:
           git config --global user.name "shiwa4656"
 
       - name: Deploy to GitHub Pages
-        run: npx gh-pages -d dist -b css-frameworks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          npx gh-pages -d dist -b css-frameworks -r https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/NoroffFEU/fed2-js2-ca-shiwa4656.git
