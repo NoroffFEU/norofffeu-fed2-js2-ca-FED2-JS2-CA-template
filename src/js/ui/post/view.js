@@ -1,22 +1,25 @@
+// src/js/ui/post/view.js
 
 import { readPosts } from '../../api/post.js';
-import { displayError } from '../../utilities/errorHandler.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
+let currentPage = 1;
+let postsPerPage = 12;
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadPosts(currentPage, postsPerPage);
+  setupPaginationControls();
+});
+
+// Load posts based on the current page and limit
+async function loadPosts(page, limit) {
   try {
-    // Fetch the posts
-    const posts = await readPosts();
-
-    // Get the postList element where cards will be rendered
+    const posts = await readPosts(page, limit);
     const postList = document.getElementById('postList');
-    postList.innerHTML = ''; // Clear any existing content
+    postList.innerHTML = ''; // Clear existing posts
 
-    // Loop through each post and create a card
     posts.forEach(post => {
       const postCard = document.createElement('div');
-      postCard.className = 'col-md-4 mb-4'; // Bootstrap grid class for responsive layout
-
-      // Card HTML structure
+      postCard.className = 'col-md-4 mb-4';
       postCard.innerHTML = `
         <div class="card h-100 shadow-sm">
           <div class="card-body">
@@ -26,12 +29,51 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         </div>
       `;
-
-      // Append the card to the postList
       postList.appendChild(postCard);
     });
-
   } catch (error) {
-    displayError(error.message || 'Failed to load posts.');
+    console.error('Failed to load posts:', error);
   }
-});
+}
+
+// Set up pagination control listeners
+function setupPaginationControls() {
+  document.querySelectorAll('[data-page]').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const page = parseInt(btn.getAttribute('data-page'));
+      goToPage(page);
+    });
+  });
+
+  document.querySelectorAll('[data-limit]').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      const limit = parseInt(btn.getAttribute('data-limit'));
+      setPostsPerPage(limit);
+    });
+  });
+}
+
+// Go to a specific page
+function goToPage(page) {
+  currentPage = page;
+  loadPosts(currentPage, postsPerPage);
+  updateUrlParams();
+}
+
+// Set the number of posts per page
+function setPostsPerPage(limit) {
+  postsPerPage = limit;
+  currentPage = 1; // Reset to the first page
+  loadPosts(currentPage, postsPerPage);
+  updateUrlParams();
+}
+
+// Update URL parameters to reflect the current page and limit
+function updateUrlParams() {
+  const url = new URL(window.location);
+  url.searchParams.set('page', currentPage);
+  url.searchParams.set('limit', postsPerPage);
+  window.history.pushState({}, '', url);
+}

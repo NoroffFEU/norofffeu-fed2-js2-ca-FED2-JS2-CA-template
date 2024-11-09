@@ -17,6 +17,8 @@ export const API_SOCIAL = `${API_BASE}/social`;
 
 export const API_SOCIAL_POSTS = `${API_SOCIAL}/posts`;
 
+export const API_SOCIAL_POSTS_ID = (id) => `${API_SOCIAL}/posts/${id}`;
+
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
 
 export const API_SOCIAL_PROFILES_NAME = `${API_SOCIAL}/profiles/<name>`;
