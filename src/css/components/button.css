@@ -21,50 +21,8 @@
   color: var(--solid-white);
   background-color: var(--danger-color);
 }
-
-/* .btn-solid {
-  border: unset;
-}
-
-.btn-primary {
-  color: var(--solid-white);
-  background-color: var(--primary-color);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 1px solid var(--primary-color);
-}
-
-.btn-primary:hover {
-  background-color: var(--bg-hover);
-}
-
-.btn-danger {
+.btn-danger-cancel {
   box-shadow: unset;
   color: var(--solid-white);
   background-color: var(--danger-color);
 }
-
-#btn-logout {
-  width: fit-content;
-}
-
-
-
-.btn-edit-profile,
-.btn-follow,
-.btn-unfollow {
-  width: fit-content;
-}
-
-.btn-pill {
-  border-radius: 2rem;
-}
-
-.btn__edit-post,
-.btn__delete-post {
-  font-size: var(--fs-xs);
-  width: fit-content;
-  border: none;
-} */

@@ -8,6 +8,7 @@ async function init() {
 
   populateProfileData(data);
   attachUpdateEvent(user.name);
+  attachCancelEvent();
 }
 
 function populateProfileData(profile) {
@@ -23,6 +24,15 @@ function attachUpdateEvent(name) {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       controllers.ProfileController.onUpdateProfile(event, name);
+    });
+  }
+}
+
+function attachCancelEvent() {
+  const cancelButton = document.getElementById('cancelAction');
+  if (cancelButton) {
+    cancelButton.addEventListener('click', () => {
+      controllers.ProfileController.onCancelProfileUpdate();
     });
   }
 }
