@@ -5,25 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile - LinkUp</title>
     <script type="module" src="/src/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/style.css">
 </head>
-<body class="bg-gray-50">
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+<body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
-            <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
-            <nav class="flex space-x-4">
-                <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
-                <button id="logout-btn" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Logout</button>
+            <a href="/index.html" class="text-4xl font-bold text-blue-400 hover:text-blue-500 transition-colors font-poppins">LinkUp</a>
+            <nav class="flex space-x-6">
+                <a href="/" id="home-link" class="text-lg font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a>
+                <button id="logout-btn" class="text-lg font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
             </nav>
         </div>
     </header>
 
     <main class="container mx-auto px-4 mt-20 py-8">
-        <h1 class="text-3xl font-bold text-purple-600 mb-8">Profile</h1>
+        <h1 class="text-3xl font-bold text-blue-400 ml-[20%] mb-8">Profile</h1>
         <div id="profile-container"></div>
         <div id="all-profiles-container"></div>
-        <!-- Remove this empty form -->
-        <!-- <form name="updateProfile"></form> -->
     </main>
 </body>
 </html>
