@@ -1,0 +1,8 @@
+import{a as c}from"./read-CvYznuT1.js";import{r as s}from"./read-CPXTQGQW.js";import{c as i}from"./update-Bv5InA9r.js";const m=await s(),d=new URLSearchParams(window.location.search),r=d.get("id");console.log(r);const t=(await c(r)).data;console.log(t);const l=document.getElementById("authorBurner"),u=document.querySelector("#title"),g=document.querySelector("#content"),p=document.querySelector("#username"),y=document.querySelector("#postimage"),f=document.getElementById("delete"),h=document.getElementById("edit");u.textContent=t.title;g.textContent=t.body;l.src=t.author.banner.url;p.textContent=t.author.name;y.src=t.media?.url;t.author?.name!==m.data.name&&(f.remove(),h.remove());const x=document.getElementById("commentList");let a="";t.comments&&t.comments.forEach(e=>{const n=new Date(e.created).toLocaleDateString(),o=`<div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 18px; color: #262626; display: flex; align-items: flex-start; padding: 10px 0;">
+    <img src="${e.author.banner.url}" alt="${e.author.name}" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover;">
+    <div>
+      <span style="font-weight: bold; margin-right: 5px;">${e.author.name}</span>
+      <span>${e.body}</span>
+      <div style="font-size: 12px; color: #8e8e8e; margin-top: 5px;">${n}</div>
+    </div>
+  </div>`;a+=o});console.log(a);x.insertAdjacentHTML("afterbegin",a);const b=document.querySelector("#add-comment"),v=document.querySelector("#comment-body");b.addEventListener("click",async function(e){e.preventDefault();const n=v.value;try{const o=await i(r,{body:n});location.reload()}catch(o){console.log(o)}});
