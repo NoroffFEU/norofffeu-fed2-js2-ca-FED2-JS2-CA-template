@@ -1,9 +1,9 @@
-name: Deploy Vite Project to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - css-frameworks
+      - main  # Adjust this to your default branch
 
 jobs:
   build:
@@ -23,6 +23,11 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "shorwacstudy@gmail.com"
+          git config --global user.name "shiwa4656"
 
       - name: Deploy to GitHub Pages
         run: npx gh-pages -d dist -b css-frameworks
