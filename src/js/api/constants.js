@@ -1,4 +1,5 @@
-export const API_KEY = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; // Ensure this is the correct API key
+export const API_KEY = "80498f5b-6a54-4f2a-9727-d9f604fdeb67"; 
+// Ensure this is the correct API key
 
 export const API_BASE_URL = "https://v2.api.noroff.dev";
 
