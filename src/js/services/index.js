@@ -4,7 +4,7 @@ import ProfileService from './ProfileService';
 import TagService from './TagService';
 import FollowService from './FollowService';
 import SearchService from './SearchService';
-import CommentRepository from '../repositories/CommentRepository';
+import CommentService from './CommentService';
 
 const services = {
   AuthService,
@@ -13,7 +13,7 @@ const services = {
   TagService,
   FollowService,
   SearchService,
-  CommentRepository
+  CommentService
 };
 
 export default services;

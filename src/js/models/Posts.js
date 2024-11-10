@@ -9,12 +9,12 @@ export class Posts {
           post.author,
           post.body,
           post.created,
+          post.comments,
           post.id,
           post.media,
           post.tags,
           post.title,
           post.updated,
-          post.comments,
         )
     );
   }

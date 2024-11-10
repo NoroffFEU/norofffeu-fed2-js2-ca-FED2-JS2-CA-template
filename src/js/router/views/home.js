@@ -55,7 +55,7 @@ function clearContent(target) {
 
 async function fetchPosts(page = 1) {
   const { data, meta } = await controllers.PostController.posts(page);
-  console.log("data", data)
+  
   return { data: data.posts, meta };
 }
 
