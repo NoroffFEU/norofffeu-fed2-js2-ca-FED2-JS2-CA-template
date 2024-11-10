@@ -30,5 +30,13 @@ export const routes = {
       path: '/src/js/router/views/tags/index.js',
       protected: true,
     },
+    '/follow/': {
+    path: '/src/js/router/views/follow/index.js',
+    protected: true,
+    },
+    '/search/': {
+      path: '/src/js/router/views/search/index.js',
+      protected: true,
+    },
     '/notFound/': { path: '/src/js/router/views/notFound.js', protected: false },
   };

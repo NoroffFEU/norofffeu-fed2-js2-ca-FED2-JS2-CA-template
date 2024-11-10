@@ -20,19 +20,19 @@
               <span class="absolute -inset-0.5"></span>
               <span class="sr-only">Open main menu</span>
               <!--
-                  Icon when menu is closed.
-      
-                  Menu open: "hidden", Menu closed: "block"
-                -->
+                Icon when menu is closed.
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
               <svg id="menuIcon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" data-slot="icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
               <!--
-                  Icon when menu is open.
-      
-                  Menu open: "block", Menu closed: "hidden"
-                -->
+                Icon when menu is open.
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
               <svg id="closeIcon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" data-slot="icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -48,17 +48,31 @@
             </div>
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-  
-                <div class="field field-search" id="header-search">
+                <!-- search -->
+                <div class="field">
                   <form role="search" name="search">
-                    <input id="search-input" class="input input-search" placeholder="Search..." id="q" name="q"
-                      type="text" />
-                    <button class="btn btn-search">
-                      <ion-icon class="icon icon-search" name="search-outline"></ion-icon>
+                    <input
+                    id="search-input"
+                    class="input input-search"
+                    placeholder="Search..."
+                    id="q"
+                    name="q"
+                    type="text"
+                  />
+                    <button class="btn-search">
+                      <ion-icon
+                          class="icon icon-search"
+                          name="search-outline"
+                      ></ion-icon>
                     </button>
                   </form>
                 </div>
+  
+                <a
+                    href="/follow/"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                    >Network</a
+                  >
   
                 <a href="/profile/"
                   class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
@@ -102,16 +116,32 @@
       <div class="sm:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2">
   
-          <div class="field field-search" id="header-search">
+          <!-- search -->
+          <div class="field">
             <form role="search" name="search">
-              <input id="search-input" class="input input-search" placeholder="Search..." id="q" name="q" type="text" />
-              <button class="btn btn-search">
-                <ion-icon class="icon icon-search" name="search-outline"></ion-icon>
+              <input
+              id="search-input"
+              class="input input-search"
+              placeholder="Search..."
+              id="q"
+              name="q"
+              type="text"
+            />
+              <button class="btn-search">
+                <ion-icon
+                    class="icon icon-search"
+                    name="search-outline"
+                ></ion-icon>
               </button>
             </form>
           </div>
   
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+          href="/follow/"
+          class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+          >Network</a
+          >
           <a href="/profile/"
             class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
             aria-current="page">My Profile</a>
@@ -120,7 +150,7 @@
             Post</a>
   
           <button class="btn-danger block px-3 py-2 text-base font-medium  text-white hover:bg-red-700" id="btn-logout"
-            role="menuitem" tabindex="0">
+            role="menuitem" tabindex="-1">
             Logout
           </button>
         </div>
@@ -180,10 +210,10 @@
                       type="text" name="alt" id="alt" />
                   </div>
   
-                  <div class="post-create__actions flex gap-4">
+                  <div class="flex gap-4">
                     <button
                       class="w-full text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
-                    <button class="btn btn-danger hover:bg-red-700" id="cancelAction" type="button">
+                    <button class="w-full text-white btn-danger-cancel hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" id="cancelAction" type="button">
                       Cancel
                     </button>
                   </div>

@@ -1,11 +1,3 @@
-.btn {
-  font-size: 1rem;
-  line-height: 1.75rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  width: 100%;
-}
 .btn-search {
   display: flex;
   align-items: center;
