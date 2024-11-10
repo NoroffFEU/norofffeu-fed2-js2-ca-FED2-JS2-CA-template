@@ -51,22 +51,21 @@ export default async function postEditView() {
       title: formData.get('title'),
       body: formData.get('body'),
       tags: formData.get('tags') ? formData.get('tags').split(',').map(tag => tag.trim()).filter(Boolean) : [],
-      media: formData.get('media') ? formData.get('media') : null
+      media: formData.get('media') ? { url: formData.get('media').trim() } : null
     };
     
     console.log("Submitting updated post data:", updatedPostData);
     
     try {
-      const updatedPost = await apiUpdatePost(postId, updatedPostData);
-      console.log("Post updated successfully:", updatedPost);
-      
-      // Redirect to the single post view
-      window.location.href = `/post/?id=${postId}`;
+        const updatedPost = await apiUpdatePost(postId, updatedPostData);
+        console.log("Post updated successfully:", updatedPost);
+        
+        window.location.href = `/post/?id=${postId}`;
     } catch (error) {
-      console.error("Error updating post:", error);
-      // Show an error message to the user
+        console.error("Error updating post:", error);
+        alert('Failed to update post. Please try again.');
     }
-  });
+});
 }
 
 /**

@@ -126,7 +126,9 @@ export async function onCreatePost(event) {
     title: titleInput.value.trim(),
     body: contentInput.value.trim(),
     tags: tagsInput.value ? tagsInput.value.split(',').map(tag => tag.trim()).filter(Boolean) : [],
-    media: mediaInput.value ? mediaInput.value.trim() : null
+    media: mediaInput.value && mediaInput.value.trim() !== '' ? 
+        { url: mediaInput.value.trim() }  // Media should be an object with a url property
+        : null
   };
 
   console.log('Post data:', postData);
