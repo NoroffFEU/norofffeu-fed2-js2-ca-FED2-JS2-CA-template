@@ -3,8 +3,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({ 
   appType: "mpa",
+  base: "",
   build: {
-    target: 'es2022',
+    target: 'es2022', // or "esnext", depending on your preference
     rollupOptions: {
       input: {
         main: resolve(__dirname, "./index.html"),
