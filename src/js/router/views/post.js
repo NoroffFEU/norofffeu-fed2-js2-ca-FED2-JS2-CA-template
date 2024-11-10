@@ -5,96 +5,90 @@
  * 
  * @async
  * @file viewPost.js
- * 
- * @throws {Error} Logs any error that occurs during the fetching or manipulation of post data.
- * 
- * @example
- * // Ensure the URL contains a query parameter for the post ID, e.g. ?id=12
- * // The HTML should include elements with IDs 'authorBurner', 'title', 'content', 'username', 'postimage', 'delete', 'edit', 'commentList', 'add-comment', and 'comment-body'.
- * 
- * // HTML example:
- * // <div id="authorBurner"></div>
- * // <h1 id="title"></h1>
- * // <p id="content"></p>
- * // <img id="postimage">
- * // <button id="delete">Delete</button>
- * // <button id="edit">Edit</button>
- * // <div id="commentList"></div>
- * // <textarea id="comment-body"></textarea>
- * // <button id="add-comment">Add Comment</button>
- * 
- * // The following script would be included on a post view page to show post details and allow commenting.
  */
-import { readPost } from "../../api/post/read";
+
+import { readPost } from "../../api/post/read.js";
 import { readProfile } from "../../api/profile/read.js";
 import { commentOnPost } from "../../api/post/update.js";
 
-const profile = await readProfile();
-// id params
-const urlParams = new URLSearchParams(window.location.search);
+(async function () {
+  try {
+    const profile = await readProfile();
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
 
-// Extract the value of the 'id' parameter
-const id = urlParams.get("id");
+    if (!id) {
+      console.error("Post ID not found in URL");
+      return;
+    }
 
-console.log(id); // Outputs '12' if the URL is something like ?id=12
-const post = (await readPost(id)).data;
-console.log(post);
+    const postResponse = await readPost(id);
+    const post = postResponse.data;
 
-const burner = document.getElementById("authorBurner");
-const title = document.querySelector("#title");
-const content = document.querySelector("#content");
-const username = document.querySelector("#username");
-const postimage = document.querySelector("#postimage");
-const deletebtn = document.getElementById("delete");
-const edit = document.getElementById("edit");
+    // Populate post details
+    document.getElementById("authorBurner").src = post.author.banner?.url || "";
+    document.getElementById("username").textContent = post.author.name;
+    document.getElementById("title").textContent = post.title;
+    document.getElementById("content").textContent = post.body;
+    document.getElementById("postimage").src = post.media?.url || "";
 
-title.textContent = post.title;
-content.textContent = post.body;
-burner.src = post.author.banner.url;
-username.textContent = post.author.name;
-postimage.src = post.media?.url;
+    // Render existing comments
+    renderComments(post.comments);
 
-if (post.author?.name !== profile.data.name) {
-  deletebtn.remove();
-  edit.remove();
+    // Handle adding new comments
+    document.getElementById("add-comment").addEventListener("click", async (e) => {
+      e.preventDefault();
+      await addComment(id);
+    });
+
+  } catch (error) {
+    console.error("Error loading post:", error);
+  }
+})();
+
+/**
+ * Renders the list of comments on the page.
+ * @param {Array} comments - List of comments to render
+ */
+function renderComments(comments) {
+  const commentList = document.getElementById("commentList");
+  commentList.innerHTML = ""; // Clear previous comments
+
+  if (comments && comments.length > 0) {
+    comments.forEach(comment => {
+      const date = new Date(comment.created).toLocaleDateString();
+      const commentHtml = `
+        <div class="flex items-start space-x-4">
+          <img src="${comment.author.banner.url}" alt="${comment.author.name}" class="w-8 h-8 rounded-full object-cover">
+          <div>
+            <span class="font-bold">${comment.author.name}</span>
+            <p>${comment.body}</p>
+            <span class="text-xs text-gray-500">${date}</span>
+          </div>
+        </div>`;
+      commentList.insertAdjacentHTML("beforeend", commentHtml);
+    });
+  } else {
+    commentList.innerHTML = "<p class='text-gray-500'>No comments yet.</p>";
+  }
 }
 
-const comment = document.getElementById("commentList");
+/**
+ * Adds a new comment to the post
+ * @param {string} postId - The ID of the post to comment on
+ */
+async function addComment(postId) {
+  const commentBody = document.getElementById("comment-body").value.trim();
 
-let commentListHtml = "";
-
-if (post.comments) {
-  post.comments.forEach((comment) => {
-    const date = new Date(comment.created).toLocaleDateString();
-    const html = `<div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 18px; color: #262626; display: flex; align-items: flex-start; padding: 10px 0;">
-    <img src="${comment.author.banner.url}" alt="${comment.author.name}" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover;">
-    <div>
-      <span style="font-weight: bold; margin-right: 5px;">${comment.author.name}</span>
-      <span>${comment.body}</span>
-      <div style="font-size: 12px; color: #8e8e8e; margin-top: 5px;">${date}</div>
-    </div>
-  </div>`;
-
-    commentListHtml += html;
-  });
-}
-
-console.log(commentListHtml);
-
-comment.insertAdjacentHTML("afterbegin", commentListHtml);
-
-const addCommentBtn = document.querySelector("#add-comment");
-const commentBody = document.querySelector("#comment-body");
-
-addCommentBtn.addEventListener("click", async function (e) {
-  e.preventDefault();
-
-  const comment = commentBody.value;
+  if (!commentBody) {
+    alert("Comment cannot be empty!");
+    return;
+  }
 
   try {
-    const res = await commentOnPost(id, { body: comment });
-    location.reload();
+    await commentOnPost(postId, { body: commentBody });
+    location.reload(); // Reload to display the new comment
   } catch (error) {
-    console.log(error);
+    console.error("Error adding comment:", error);
   }
-});
+}

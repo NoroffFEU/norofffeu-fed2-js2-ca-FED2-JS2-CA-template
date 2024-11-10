@@ -4,8 +4,11 @@ import { deletePost } from "../../api/post/delete.js"; // Import the deletePost 
 import { setLogoutListener } from "../../ui/global/logout.js";
 import { readProfile } from "../../api/profile/read.js";
 
+
 setLogoutListener();
 authGuard();
+
+
 
 const profile = await readProfile();
 
