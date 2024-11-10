@@ -1,28 +1,39 @@
-import { API_SOCIAL_POSTS } from "../constants";
-import { headers } from "../headers";
+import { API_SOCIAL_POSTS } from "../constants.js";
+import { headers } from "../headers.js";
 
-export async function readPost() {
-    
-    const id = new URLSearchParams(window.location.search).get("id");
+export async function readPost(id) {
+    if (!id) {
+        throw new Error("Post ID is required");
+    }
 
-     try {
-         const response = await fetch(`${API_SOCIAL_POSTS}/${id}?_author=true`, {
-             method: "GET",
-             headers: headers(),
-         });
+    try {
+        console.log('Fetching post with ID:', id);
+        console.log('Using URL:', `${API_SOCIAL_POSTS}/${id}`);
+        console.log('Headers:', headers());
 
-         if (response.ok) {
-             const data = await response.json();
-             const post = data.data
-             return post; 
-         } else {
-             console.error("Failed to fetch post:", response.status, response.statusText);
-             return null; 
-         }
-     } catch (error) {
-         console.error("An error occurred while fetching the post:", error);
-         return null; 
-     }
+        const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
+            method: 'GET',
+            headers: headers()
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('API Error Response:', errorData);
+            throw new Error(`Failed to fetch post: ${response.status} - ${errorData.message || 'Unknown error'}`);
+        }
+
+        const data = await response.json();
+        console.log('Post data received:', data);
+        
+        if (!data.data) {
+            throw new Error('No post data found in response');
+        }
+
+        return data.data;
+    } catch (error) {
+        console.error('Error in readPost:', error);
+        throw error;
+    }
 }
 
 export async function readPosts(limit = 12, page = 1, tag) {

@@ -4,3 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Optional: Add smooth transitions */
+#mobileMenu {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Optional: Add slide animation */
+#mobileMenu {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+#mobileMenu:not(.hidden) {
+    transform: translateY(0);
+    opacity: 1;
+} 
+

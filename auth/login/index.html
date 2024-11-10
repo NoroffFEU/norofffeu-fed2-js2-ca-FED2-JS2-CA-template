@@ -4,25 +4,132 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <title>Login - Social Media Platform</title>
     <script type="module" src="/src/app.js"></script>
   </head>
 
-  <body>
-    <h1>Login</h1>
-    <form name="login">
-      <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required />
-      </div>
+  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <header class="sticky top-0 bg-white dark:bg-gray-800 border-b dark:border-gray-700 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <img src="/images/noroff-logo.png" alt="Noroff Logo" class="h-8" />
 
-      <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
-      </div>
+          <!-- Hamburger button (visible only on mobile) -->
+          <button id="menuBtn" class="sm:hidden p-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="menuIcon" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              <path id="closeIcon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-      <a href="/auth/register/">Register</a>
-      <button type="submit" id="login-button">Login</button>
-    </form>
+          <!-- Desktop navigation (hidden on mobile) -->
+          <nav class="hidden sm:flex items-center space-x-6">
+            <a href="/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">Home</a>
+            <a href="/profile/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">My Profile</a>
+            <a href="/auth/login/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">Login</a>
+            <a href="/auth/register/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white">Register</a>
+            <a href="/post/create/" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Create Post</a>
+            <button id="logoutBtn" class="text-red-500 hover:text-red-600">Logout</button>
+          </nav>
+        </div>
+
+        <!-- Mobile navigation (hidden by default) -->
+        <nav id="mobileMenu" class="hidden sm:hidden pb-4">
+          <div class="flex flex-col space-y-3">
+            <a href="/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white py-2">Home</a>
+            <a href="/profile/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white py-2">My Profile</a>
+            <a href="/auth/login/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white py-2">Login</a>
+            <a href="/auth/register/" class="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white py-2">Register</a>
+            <a href="/post/create/" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center">Create Post</a>
+            <button id="mobileLogoutBtn" class="text-red-500 hover:text-red-600 py-2">Logout</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+        <!-- Logo/Brand Section -->
+        <div class="text-center mb-8">
+          <img src="/images/noroff-logo.png" alt="Noroff Logo" class="h-12 mx-auto mb-4">
+          <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            Please sign in to your account
+          </p>
+        </div>
+
+        <!-- Login Form -->
+        <form name="login" class="space-y-6">
+          <!-- Email Field -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Email Address
+            </label>
+            <div class="mt-1">
+              <input 
+                id="email" 
+                type="email" 
+                name="email" 
+                required 
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 
+                       focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                placeholder="you@example.com"
+              >
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Password
+            </label>
+            <div class="mt-1">
+              <input 
+                type="password" 
+                name="password" 
+                id="password" 
+                required 
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 
+                       focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                placeholder="Password"
+              >
+            </div>
+          </div>
+
+          <div class="flex flex-col space-y-4 mt-6">
+            <button 
+                type="submit" 
+                id="login-button"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
+                       bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+                       transition-colors duration-200"
+            >
+                Sign In
+            </button>
+
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                        or
+                    </span>
+                </div>
+            </div>
+
+            <a 
+                href="/auth/register/" 
+                class="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium 
+                       text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 
+                       focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            >
+                Create New Account
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
   </body>
 </html>

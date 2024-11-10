@@ -23,14 +23,4 @@ export async function onUpdatePost(event, postId) {
         }];
     }
 
-    console.log("Update data:", updateData);
-
-    try {
-        const result = await updatePost(postId, updateData);
-        alert('Post successfully updated');
-        window.location.href = `/post/?id=${postId}`;
-    } catch (error) {
-        console.error("Update error:", error);
-        alert(`Failed to update post: ${error.message}`);
-    }
 }
