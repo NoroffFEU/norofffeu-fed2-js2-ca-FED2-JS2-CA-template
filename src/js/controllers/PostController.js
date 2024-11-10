@@ -6,10 +6,10 @@ class PostController {
     this.postService = services.PostService;
   }
 
-  async posts() {
+  async posts(page = 1) {
     try {
-      const { data, meta } = await this.postService.posts();
-      return { data, meta };
+      const { success, data, meta } = await this.postService.posts(page);
+      return { success, data, meta };
     } catch (error) {
       console.error('Fetch posts error:', error);
       throw new Error('Fetch posts failed.');
@@ -19,6 +19,7 @@ class PostController {
   async post(id) {
     try {
       const { data, meta } = await this.postService.post(id);
+      
       return { data, meta };
     } catch (error) {
       console.error('Fetch post error:', error);

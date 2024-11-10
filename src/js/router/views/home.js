@@ -55,6 +55,7 @@ function clearContent(target) {
 
 async function fetchPosts(page = 1) {
   const { data, meta } = await controllers.PostController.posts(page);
+  console.log("data", data)
   return { data: data.posts, meta };
 }
 
@@ -114,7 +115,7 @@ export async function renderPosts(posts, target) {
                           ? ` ${post._count.comments} comments`
                           : `${post._count.comments} comment`
                     }
-            </div>
+          </div>
         </a>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import controllers from '../../../controllers/index';
 import utils from '../../../utilities/utils';
+import { initComment } from './comment';
 
 async function init() {
   const menuIcon = document.getElementById("menuIcon");
@@ -15,11 +16,13 @@ async function init() {
 
   const container = document.querySelector('.container');
   clearContent(container);
+
   try {
     const id = utils.getUrlParams('id');
-    const post = await controllers.PostController.post(id);
-    const { data } = post;
-    renderPost(data, container)
+    const post = await fetchPost(id);
+
+    await renderPostElement(post, id, container);
+    await renderCommentElement(post, id, container);
 
     attachEditEvent(id);
     attachDeleteEvent(id);
@@ -28,6 +31,17 @@ async function init() {
     console.error('Error fetching posts:', error);
     container.innerHTML = '<p>Error loading post. Please try again later.</p>';
   }
+}
+
+function renderPostElement(post, id, target) {
+  renderPost(post, target);
+  attachEditEvent(id);
+  attachDeleteEvent(id);
+}
+
+async function fetchPost(id) {
+  const { data } = await controllers.PostController.post(id);
+  return data;
 }
 
 function clearContent(target) {
@@ -143,6 +157,63 @@ function isAuthor(author) {
   if (authUser.name === author) return true;
   return false;
 }
+
+function renderCommentElement(post, id, target) {
+  renderCommentInput(post.author, target);
+  submitCommentHandler(id);
+  const commentContainer = createCommentContainer();
+  initComment(post.comments, commentContainer);
+}
+
+function renderCommentInput(user, target) {
+  const commentElement = document.createElement('section');
+  commentElement.id = 'comments';
+  commentElement.setAttribute('class', 'flex flex-col max-w-screen-md mx-auto');
+
+  commentElement.innerHTML = `
+    <div id="comment-container" class="max-w-xl">
+      <form name="comment" id="new_comment" class="flex">
+        <span class=" mr-2 shrink-0">
+          <img class="h-8 w-8 rounded-full" src="${user.avatar.url}" alt="${user.avatar.alt}" width="32" height="32" loading="lazy">
+        </span>
+        <div class="comment-form__inner">
+          <div class="comment-form__field" data-tracking-name="comment_form_textfield">
+            <textarea placeholder="Add to the discussion" (event)" id="text-area" class="crayons-textfield comment-textarea textfield--ghost" aria-label="Add a comment to the discussion" name="comment" rows="3" cols="50"></textarea>
+          </div>
+          <div class="my-4">
+            <button type="submit" class="flex w-fit justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600btn-submit-comment mr-2" data-tracking-name="comment_submit_button">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  `;
+  target.appendChild(commentElement);
+}
+
+function submitCommentHandler(id) {
+  const form = document.forms.comment;
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      controllers.CommentController.onComment(event, id);
+    });
+  }
+}
+
+function createCommentContainer() {
+  const section = document.querySelector('section');
+  const commentContainer = document.getElementById('comments-container');
+  if (commentContainer) {
+    commentContainer = document.createElement('div');
+    commentContainer.id = 'comments-container';
+    commentContainer.setAttribute('class', 'comments flex');
+    section.appendChild(commentContainer);
+  }
+  return section;
+}
+
+
+
 
 init();
 

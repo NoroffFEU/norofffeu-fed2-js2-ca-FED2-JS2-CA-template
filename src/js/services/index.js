@@ -4,6 +4,7 @@ import ProfileService from './ProfileService';
 import TagService from './TagService';
 import FollowService from './FollowService';
 import SearchService from './SearchService';
+import CommentRepository from '../repositories/CommentRepository';
 
 const services = {
   AuthService,
@@ -11,7 +12,8 @@ const services = {
   ProfileService,
   TagService,
   FollowService,
-  SearchService
+  SearchService,
+  CommentRepository
 };
 
 export default services;

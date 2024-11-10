@@ -3,8 +3,9 @@ import { headers } from '../api/headers';
 import models from '../models/index';
 
 class PostRepository {
-  async posts() {
-    const response = await fetch(`${API_SOCIAL_POSTS}?limit=12&page=1&_author=true`, {
+  async posts(page = 1) {
+    const endpoint = `${API_SOCIAL_POSTS}?limit=12&page=${page}&_author=true&_comments=true`;
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: headers(),
     });
@@ -12,8 +13,7 @@ class PostRepository {
     if (!response.ok) throw new Error('Fetching all posts failed');
 
     try {
-      const result = await response.json();
-      const { data, meta } = result;
+      const { data, meta } = await response.json();
 
       return {
         success: true,
@@ -25,8 +25,10 @@ class PostRepository {
     }
   }
 
+  
   async post(id) {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${id}?_comments=true&_author=true`, {
+    const endpoint = `${API_SOCIAL_POSTS}/${id}?_author=true&_comments=true`;
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: headers(),
     });
@@ -41,11 +43,12 @@ class PostRepository {
         data.author,
         data.body,
         data.created,
+        data.comments,
         data.id,
         data.media,
         data.tags,
         data.title,
-        data.updated,
+        data.updated
       );
       return { success: true, data: postInstance, meta };
     } catch (error) {
@@ -55,7 +58,8 @@ class PostRepository {
 
   async create(data) {
     const payload = JSON.stringify(data);
-    const response = await fetch(`${API_SOCIAL_POSTS}`, {
+    const endpoint = `${API_SOCIAL_POSTS}`;
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: headers(),
       body: payload,
@@ -71,13 +75,14 @@ class PostRepository {
         data.author,
         data.body,
         data.created,
+        data.comments,
         data.id,
         data.media,
         data.tags,
         data.title,
-        data.updated,
+        data.updated
       );
-      return { success: true, data: postInstance, meta: meta };
+      return { success: true, data: postInstance, meta };
     } catch (error) {
       return { success: false, message: error.message };
     }
@@ -85,7 +90,8 @@ class PostRepository {
 
   async update(id, data) {
     const payload = JSON.stringify(data);
-    const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
+    const endpoint = `${API_SOCIAL_POSTS}/${id}`;
+    const response = await fetch(endpoint, {
       method: 'PUT',
       headers: headers(),
       body: payload,
@@ -101,20 +107,22 @@ class PostRepository {
         data.author,
         data.body,
         data.created,
+        data.comments,
         data.id,
         data.media,
         data.tags,
         data.title,
-        data.updated,
+        data.updated
       );
-      return { success: true, data: postInstance, meta: meta };
+      return { success: true, data: postInstance, meta };
     } catch (error) {
       return { success: false, message: error.message };
     }
   }
 
   async delete(id) {
-    const response = await fetch(`${API_SOCIAL_POSTS}/${id}`, {
+    const endpoint = `${API_SOCIAL_POSTS}/${id}`;
+    const response = await fetch(endpoint, {
       method: 'DELETE',
       headers: headers(),
     });
@@ -126,7 +134,7 @@ class PostRepository {
     try {
       const result = await response.json();
       const { data, meta } = result;
-      return { success: true, data: data, meta: meta };
+      return { success: true, data: data, meta };
     } catch (error) {
       return { success: false, message: error.message };
     }

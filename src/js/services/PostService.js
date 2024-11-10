@@ -5,8 +5,8 @@ class PostService {
     this.postRepository = repositories.PostRepository;
   }
 
-  async posts() {
-    return await this.postRepository.posts();
+  async posts(page = 1) {
+    return await this.postRepository.posts(page);
   }
 
   async post(id) {
