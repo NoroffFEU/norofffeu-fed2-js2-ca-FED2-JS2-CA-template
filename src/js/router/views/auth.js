@@ -1,1 +1,3 @@
-alert("Auth Index Page");
+export default function auth() {
+    alert("Auth Index Page");
+}

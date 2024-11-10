@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <title>My Profile - Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
   </head>
   <body>
-    <h1>Profile</h1>
+    <h1 id="profile-title">My Profile</h1>
 
-    <form name="updateProfile">
-      <button>Update Profile</button>
-    </form>
+    <a href="/">Home</a>
+    <a href="/post/create/">Create Post</a>
+    <button id="logoutBtn">Logout</button>
+
+    <h2>My Recent Posts</h2>
+    <div id="profile-posts"></div>
   </body>
 </html>
