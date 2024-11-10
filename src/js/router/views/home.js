@@ -49,7 +49,7 @@ export default function homeView() {
   // Update the main content, preserving the single-post-container
   main.innerHTML = `
   <div class="flex justify-between items-center mb-8">
-    <h1 class="text-3xl font-bold text-blue-400 ml-[20%]">Home</h1>
+    <h1 class="text-2xl font-bold text-blue-400 ml">Home</h1>
     ${isLoggedIn ? 
       `<button id="create-post-button" class="bg-blue-400 hover:bg-blue-500 text-white font-semibold px-6 py-2 rounded-md transition-colors">Create Post</button>`
       : ''

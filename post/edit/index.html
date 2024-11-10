@@ -7,64 +7,84 @@
     <script type="module" src="/src/app.js"></script>
     <link rel="stylesheet" href="/src/css/style.css">
 </head>
-<body class="bg-gray-50">
-    <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
-            <a href="/index.html" class="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">LinkUp</a>
-            <nav class="flex space-x-4">
-                <a href="/" id="home-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors">Home</a>
-                <a href="/profile/" id="profile-link" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Profile</a>
-                <button id="logout-btn" class="font-semibold text-gray-700 hover:text-purple-500 transition-colors hidden">Logout</button>
+<body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
+        <div class="max-w-6xl mx-auto px-3 flex justify-between items-center py-3"> <!-- Reduced from 7xl to 6xl, px-4 to px-3, py-4 to py-3 -->
+            <a href="/index.html" class="text-2xl font-bold text-blue-400 hover:text-blue-500 transition-colors font-poppins">LinkUp</a> <!-- Reduced from text-4xl to text-2xl -->
+            
+            <!-- Hamburger Menu Button (visible on mobile) -->
+            <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-blue-400" title="Toggle Menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <!-- Reduced from w-6 h-6 to w-5 h-5 -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                </svg>
+            </button>
+    
+            <!-- Desktop Navigation -->
+            <nav id="desktop-nav" class="hidden md:flex space-x-4"> <!-- Reduced space-x-6 to space-x-4 -->
+                <a href="/" id="home-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a> <!-- Reduced from text-lg to text-base -->
+                <a href="/profile/" id="profile-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+                <a href="/auth/login/" id="login-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+                <a href="/auth/register/" id="register-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+                <button id="logout-btn" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
             </nav>
         </div>
+    
+        <!-- Mobile Navigation (hidden by default) -->
+        <nav id="mobile-nav" class="hidden bg-gray-800 md:hidden">
+            <div class="px-3 py-2 space-y-2"> <!-- Reduced padding and spacing -->
+                <a href="/" id="home-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a>
+                <a href="/profile/" id="profile-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+                <a href="/auth/login/" id="login-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+                <a href="/auth/register/" id="register-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+                <button id="logout-btn-mobile" class="block w-full text-left text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
+            </div>
+        </nav>
     </header>
 
-    <main class="container mx-auto px-4 mt-20 py-8 max-w-2xl">
-        <h1 class="text-3xl font-bold text-purple-600 mb-8">Edit Post</h1>
-        <form name="editPost" class="bg-white rounded-lg shadow-md p-6 space-y-6">
-            <div class="space-y-2">
-                <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
-                <input 
-                    type="text" 
-                    id="title" 
-                    name="title" 
-                    required 
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+    <main class="container mx-auto px-3 mt-16 py-6 max-w-xl"> <!-- Reduced spacing and max width -->
+        <h1 class="text-2xl font-bold text-blue-400 mb-6 text-center">Edit Post</h1>
+        <form name="editPost" class="bg-gray-800 rounded-lg shadow-md p-4 space-y-4"> <!-- Reduced padding and spacing -->
+            <div class="space-y-1">
+                <label for="title" class="block text-xs font-medium text-gray-300">Title:</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
                 >
             </div>
-            <div class="space-y-2">
-                <label for="body" class="block text-sm font-medium text-gray-700">Body:</label>
-                <textarea 
-                    id="body" 
-                    name="body" 
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 h-32 resize-y"
+            <div class="space-y-1">
+                <label for="body" class="block text-xs font-medium text-gray-300">Body:</label>
+                <textarea
+                    id="body"
+                    name="body"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 h-24 resize-y"
                 ></textarea>
             </div>
-            <div class="space-y-2">
-                <label for="tags" class="block text-sm font-medium text-gray-700">Tags (comma-separated):</label>
-                <input 
-                    type="text" 
-                    id="tags" 
-                    name="tags" 
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            <div class="space-y-1">
+                <label for="tags" class="block text-xs font-medium text-gray-300">Tags (comma-separated):</label>
+                <input
+                    type="text"
+                    id="tags"
+                    name="tags"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
                 >
             </div>
-            <div class="space-y-2">
-                <label for="media" class="block text-sm font-medium text-gray-700">Media URL:</label>
-                <input 
-                    type="url" 
-                    id="media" 
-                    name="media" 
-                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            <div class="space-y-1">
+                <label for="media" class="block text-xs font-medium text-gray-300">Media URL:</label>
+                <input
+                    type="url"
+                    id="media"
+                    name="media"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
                 >
             </div>
             <button 
-                type="submit" 
-                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                type="submit"
+                class="mx-auto block w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-1.5 px-3 rounded text-sm transition-colors"
             >
                 Update Post
             </button>
         </form>
     </main>
-</body>
-</html>

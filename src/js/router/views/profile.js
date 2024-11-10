@@ -65,7 +65,7 @@ async function loadProfile(name) {
                         </div>`
                     }
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-100">${profile.name}'s Profile</h2>
+                        <h2 class="text-1xl font-bold text-gray-100">${profile.name}'s Profile</h2>
                         <p class="text-gray-400">${profile.email}</p>
                     </div>
                 </div>
@@ -103,46 +103,47 @@ async function loadProfile(name) {
 
 function createUpdateForm(profile) {
     const formHtml = `
-        <div class="bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
-            <h3 class="text-xl font-semibold text-gray-100 mb-4">Update Profile</h3>
-            <form id="updateProfileForm" class="space-y-6">
-                <div class="space-y-2">
-                    <label for="bio" class="block text-sm font-medium text-gray-300">Bio:</label>
+        <div class="bg-gray-800 rounded-lg shadow-md p-4 space-y-4"> <!-- Reduced padding and spacing -->
+            <h3 class="text-sm font-semibold text-gray-100 mb-2">Update Profile</h3> <!-- Reduced text size and margin -->
+            <form id="updateProfileForm" class="space-y-4"> <!-- Reduced spacing -->
+                <div class="space-y-1"> <!-- Reduced spacing -->
+                    <label for="bio" class="block text-xs font-medium text-gray-300">Bio:</label> <!-- Reduced text size -->
                     <textarea 
                         id="bio" 
                         name="bio" 
-                        class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-32 resize-y placeholder-gray-400"
+                        class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded-md text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 h-24 resize-y placeholder-gray-400"
                     >${profile.bio || ''}</textarea>
                 </div>
-                <div class="space-y-2">
-                    <label for="avatar-url" class="block text-sm font-medium text-gray-300">Avatar URL:</label>
+                <div class="space-y-1"> <!-- Reduced spacing -->
+                    <label for="avatar-url" class="block text-xs font-medium text-gray-300">Avatar URL:</label> <!-- Reduced text size -->
                     <input 
                         type="url" 
                         id="avatar-url" 
                         name="avatar-url" 
                         value="${profile.avatar?.url || ''}"
-                        class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-400"
+                        class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded-md text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-400"
                     >
                 </div>
-                <div class="space-y-2">
-                    <label for="banner-url" class="block text-sm font-medium text-gray-300">Banner URL:</label>
+                <div class="space-y-1"> <!-- Reduced spacing -->
+                    <label for="banner-url" class="block text-xs font-medium text-gray-300">Banner URL:</label> <!-- Reduced text size -->
                     <input 
                         type="url" 
                         id="banner-url" 
                         name="banner-url" 
                         value="${profile.banner?.url || ''}"
-                        class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-400"
+                        class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded-md text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 placeholder-gray-400"
                     >
                 </div>
                 <button 
                     type="submit" 
-                    class="mx-auto block w-full md:w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-2 px-4 rounded-md transition-colors"
+                    class="mx-auto block w-full md:w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-1 px-3 rounded text-sm transition-colors"
                 >
                     Update Profile
                 </button>
             </form>
         </div>
     `;
+
 
     return {
         html: formHtml,

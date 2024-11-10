@@ -86,7 +86,7 @@ export async function displayPosts() {
 
 function createPostElement(post) {
   return `
-    <article class="bg-gray-800 rounded-xl shadow-lg mb-12 overflow-hidden max-w-4xl mx-auto" data-post-id="${post.id}">
+    <article class="bg-gray-800 rounded-xl shadow-lg mb-12 overflow-hidden max-w-2xl mx-auto" data-post-id="${post.id}">
       <!-- Author header -->
       <div class="flex items-center p-5 border-b border-gray-700">
         <div class="w-12 h-12 bg-blue-400 bg-opacity-20 rounded-full flex items-center justify-center text-base font-medium text-blue-400">
@@ -97,24 +97,25 @@ function createPostElement(post) {
 
       <!-- Post media -->
       ${post.media ? 
-        `<div class="w-full">
-          <img src="${post.media.url}" 
-               alt="${post.media.alt || 'Post image'}" 
-               class="w-full h-auto max-h-[600px] object-cover"
-               onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');"
-          >
-         </div>` 
-        : ''
+        `<div class="max-w-lg mx-auto"> <!-- Container to limit width -->
+          <div class="relative pt-[75%]"> <!-- 4:3 aspect ratio -->
+            <img src="${post.media.url}" 
+                 alt="${post.media.alt || 'Post image'}" 
+                 class="absolute inset-0 w-full h-full object-cover rounded-lg"
+                 onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');"
+            >
+          </div>
+         </div>` : ''
       }
 
       <!-- Post content -->
       <div class="p-6">
-        <h2 class="text-2xl font-semibold text-gray-100 mb-3">${post.title}</h2>
+        <h2 class="text-1xl font-semibold text-gray-100 mb-3">${post.title}</h2>
         <p class="text-gray-300 text-base mb-4">${post.body}</p>
         
         <div class="text-gray-400 text-base mb-4">
           <span>${post._count.comments} comments</span>
-          <span class="mx-2">•</span>
+          <span class="mx-1">•</span>
           <span>${post._count.reactions} reactions</span>
         </div>
 
@@ -223,13 +224,13 @@ export async function displaySinglePost(postId) {
     const { data: postData } = await readPost(postId);
     
     postContent.innerHTML = `
-      <article class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-2">${postData.title}</h2>
-        ${postData.author ? `<p class="text-gray-600 mb-2">Posted by: ${postData.author.name}</p>` : ''}
-        <p class="text-gray-700 mb-4">${postData.body}</p>
+      <article class="bg-gray-700 rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold text-gray-100 mb-2">${postData.title}</h2>
+        ${postData.author ? `<p class="text-gray-400 mb-2">Posted by: ${postData.author.name}</p>` : ''}
+        <p class="text-gray-400 mb-4">${postData.body}</p>
         ${postData.media ? `<img src="${postData.media.url}" alt="${postData.media.alt || 'Post image'}" class="max-w-[250px] h-auto rounded-md mb-4 object-cover" onerror="this.onerror=null; this.src='/images/fallback-image.jpg'; this.classList.add('error');">` : ''}
-        <p class="text-gray-600 text-sm mb-2">Tags: ${postData.tags.join(', ')}</p>
-        <p class="text-gray-600 text-sm mb-4">Comments: ${postData._count.comments} | Reactions: ${postData._count.reactions}</p>
+        <p class="text-gray-400 text-sm mb-2">Tags: ${postData.tags.join(', ')}</p>
+        <p class="text-gray-400 text-sm mb-4">Comments: ${postData._count.comments} | Reactions: ${postData._count.reactions}</p>
       </article>
     `;
     setupCommentFunctionality(postId);
