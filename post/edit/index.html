@@ -1,18 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post - LinkUp</title>
     <script type="module" src="/src/app.js"></script>
-  </head>
+    <link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
+        <div class="max-w-6xl mx-auto px-3 flex justify-between items-center py-3"> <!-- Reduced from 7xl to 6xl, px-4 to px-3, py-4 to py-3 -->
+            <a href="/index.html" class="text-2xl font-bold text-blue-400 hover:text-blue-500 transition-colors font-poppins">LinkUp</a> <!-- Reduced from text-4xl to text-2xl -->
+            
+            <!-- Hamburger Menu Button (visible on mobile) -->
+            <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-blue-400" title="Toggle Menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <!-- Reduced from w-6 h-6 to w-5 h-5 -->
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                </svg>
+            </button>
+    
+            <!-- Desktop Navigation -->
+            <nav id="desktop-nav" class="hidden md:flex space-x-4"> <!-- Reduced space-x-6 to space-x-4 -->
+                <a href="/" id="home-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a> <!-- Reduced from text-lg to text-base -->
+                <a href="/profile/" id="profile-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+                <a href="/auth/login/" id="login-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+                <a href="/auth/register/" id="register-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+                <button id="logout-btn" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
+            </nav>
+        </div>
+    
+        <!-- Mobile Navigation (hidden by default) -->
+        <nav id="mobile-nav" class="hidden bg-gray-800 md:hidden">
+            <div class="px-3 py-2 space-y-2"> <!-- Reduced padding and spacing -->
+                <a href="/" id="home-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a>
+                <a href="/profile/" id="profile-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+                <a href="/auth/login/" id="login-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+                <a href="/auth/register/" id="register-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+                <button id="logout-btn-mobile" class="block w-full text-left text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
+            </div>
+        </nav>
+    </header>
 
-  <body>
-    <h1>Edit Post</h1>
-
-    <form name="editPost">
-      <button>Edit Post</button>
-    </form>
-  </body>
-</html>
+    <main class="container mx-auto px-3 mt-16 py-6 max-w-xl"> <!-- Reduced spacing and max width -->
+        <h1 class="text-2xl font-bold text-blue-400 mb-6 text-center">Edit Post</h1>
+        <form name="editPost" class="bg-gray-800 rounded-lg shadow-md p-4 space-y-4"> <!-- Reduced padding and spacing -->
+            <div class="space-y-1">
+                <label for="title" class="block text-xs font-medium text-gray-300">Title:</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
+                >
+            </div>
+            <div class="space-y-1">
+                <label for="body" class="block text-xs font-medium text-gray-300">Body:</label>
+                <textarea
+                    id="body"
+                    name="body"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400 h-24 resize-y"
+                ></textarea>
+            </div>
+            <div class="space-y-1">
+                <label for="tags" class="block text-xs font-medium text-gray-300">Tags (comma-separated):</label>
+                <input
+                    type="text"
+                    id="tags"
+                    name="tags"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
+                >
+            </div>
+            <div class="space-y-1">
+                <label for="media" class="block text-xs font-medium text-gray-300">Media URL:</label>
+                <input
+                    type="url"
+                    id="media"
+                    name="media"
+                    class="w-full p-1.5 bg-gray-700 border border-gray-600 rounded text-sm text-gray-100 focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
+                >
+            </div>
+            <button 
+                type="submit"
+                class="mx-auto block w-1/2 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-1.5 px-3 rounded text-sm transition-colors"
+            >
+                Update Post
+            </button>
+        </form>
+    </main>

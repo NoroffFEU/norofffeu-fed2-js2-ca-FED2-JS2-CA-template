@@ -1,1 +1,2 @@
 alert("Auth Index Page");
+

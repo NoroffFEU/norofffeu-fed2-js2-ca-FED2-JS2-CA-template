@@ -2,54 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
+    <title>Register - LinkUp</title>
     <script type="module" src="/src/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/style.css">
   </head>
-
-  <body>
-    <h1>Register</h1>
-
-    <form name="register">
-      <div>
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          required
-          maxlength="20"
-          pattern="^[\w]+$"
-          title="Please enter a username using only letters and numbers"
-        />
+  
+  <body class="bg-gray-900 text-gray-100">
+    <header class="fixed top-0 left-0 right-0 bg-gray-800 shadow-md z-50">
+      <div class="max-w-6xl mx-auto px-3 flex justify-between items-center py-3"> <!-- Reduced from 7xl to 6xl, px-4 to px-3, py-4 to py-3 -->
+          <a href="/index.html" class="text-2xl font-bold text-blue-400 hover:text-blue-500 transition-colors font-poppins">LinkUp</a> <!-- Reduced from text-4xl to text-2xl -->
+          
+          <!-- Hamburger Menu Button (visible on mobile) -->
+          <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-blue-400" title="Toggle Menu">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <!-- Reduced from w-6 h-6 to w-5 h-5 -->
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+              </svg>
+          </button>
+  
+          <!-- Desktop Navigation -->
+          <nav id="desktop-nav" class="hidden md:flex space-x-4"> <!-- Reduced space-x-6 to space-x-4 -->
+              <a href="/" id="home-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a> <!-- Reduced from text-lg to text-base -->
+              <a href="/profile/" id="profile-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+              <a href="/auth/login/" id="login-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+              <a href="/auth/register/" id="register-link" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+              <button id="logout-btn" class="text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
+          </nav>
       </div>
+  
+      <!-- Mobile Navigation (hidden by default) -->
+      <nav id="mobile-nav" class="hidden bg-gray-800 md:hidden">
+          <div class="px-3 py-2 space-y-2"> <!-- Reduced padding and spacing -->
+              <a href="/" id="home-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Home</a>
+              <a href="/profile/" id="profile-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">My Profile</a>
+              <a href="/auth/login/" id="login-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Login</a>
+              <a href="/auth/register/" id="register-link-mobile" class="block text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors">Register</a>
+              <button id="logout-btn-mobile" class="block w-full text-left text-base font-semibold text-gray-300 hover:text-blue-400 transition-colors hidden">Logout</button>
+          </div>
+      </nav>
+  </header>
 
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          required
-          pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-          title="Please enter a valid noroff.no or stud.noroff.no address"
-        />
+    <main class="container mx-auto px-4 mt-20 py-8">
+      <div class="max-w-md mx-auto">
+        <h1 class="text-3xl font-bold text-blue-400 mb-8 text-center">Register</h1>
+        
+        <form id="register-form" name="register" class="bg-gray-800 rounded-lg shadow-md p-6 space-y-6">
+          <div class="space-y-2">
+            <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              required
+              maxlength="20"
+              pattern="^[\w]+$"
+              title="Please enter a username using only letters and numbers"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+              title="Please enter a valid noroff.no or stud.noroff.no address"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              minlength="8"
+              class="w-full p-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+            />
+          </div>
+
+          <button 
+            type="submit"
+            class="mx-auto block w-1/3 bg-blue-400 hover:bg-blue-500 text-gray-900 font-semibold py-2 px-4 rounded-md transition-colors"
+          >
+            Register
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-gray-400">
+          Already have an account? 
+          <a href="/auth/login/" class="text-blue-400 hover:text-blue-500 font-semibold">Login here</a>
+        </p>
       </div>
-
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          minlength="8"
-        />
-      </div>
-
-      <a href="/auth/login/">Login</a>
-      <button>Register</button>
-    </form>
+    </main>
   </body>
 </html>

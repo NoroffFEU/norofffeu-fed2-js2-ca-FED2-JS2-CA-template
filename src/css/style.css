@@ -1,1 +1,23 @@
-@import url(_reset.css);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Header styles */
+
+/* Create post section styles */
+
+/* Post styles */
+
+/* Footer styles */
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+  }
+}
