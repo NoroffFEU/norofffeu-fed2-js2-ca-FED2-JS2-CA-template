@@ -117,6 +117,8 @@ async function isFollowing() {
       data: { following: followingUsers },
     } = await controllers.ProfileController.profile(authUserName);
 
+    
+
     // Check if the current user is following the author
     return filterUsersByName(followingUsers, getAuthor()).length > 0;
   } catch (error) {
@@ -132,6 +134,10 @@ async function isFollowing() {
  * @returns {Array} - Filtered list of users.
  */
 function filterUsersByName(users, searchName) {
+  if (!Array.isArray(users)) {
+    console.log('Users list is not an array or is undefined');
+    return []; 
+  }
   return users.filter((user) =>
     user.name.toLowerCase().includes(searchName.toLowerCase())
   );

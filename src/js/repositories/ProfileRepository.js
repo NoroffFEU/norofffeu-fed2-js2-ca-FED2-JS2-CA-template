@@ -4,7 +4,8 @@ import models from '../models/index';
 
 class ProfileRepository {
   async profiles() {
-    const response = await fetch(`${API_SOCIAL_PROFILES}?_posts=true`, {
+    const endpoint = `${API_SOCIAL_PROFILES}?_posts=true&_following=true&_followers=true`;
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: headers(),
     });
@@ -26,7 +27,8 @@ class ProfileRepository {
   }
 
   async profile(name) {
-    const response = await fetch(`${API_SOCIAL_PROFILES}/${name}?_posts=true`, {
+    const endpoint = `${API_SOCIAL_PROFILES}/${name}?_posts=true&_following=true&_followers=true`;
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: headers(),
     });
@@ -34,8 +36,7 @@ class ProfileRepository {
     if (!response.ok) throw new Error('Fetching profile failed');
 
     try {
-      const result = await response.json();
-      const { data, meta } = result;
+      const { data, meta } = await response.json();
 
       const profileInstance = new models.Profile(
         data._count,
@@ -43,6 +44,8 @@ class ProfileRepository {
         data.banner,
         data.bio,
         data.email,
+        data.followers,
+        data.following,
         data.name,
         data.posts
       );
@@ -59,7 +62,8 @@ class ProfileRepository {
 
   async update(name, data) {
     const payload = JSON.stringify(data);
-    const response = await fetch(`${API_SOCIAL_PROFILES}/${name}`, {
+    const endpoint = `${API_SOCIAL_PROFILES}/${name}`;
+    const response = await fetch(endpoint, {
       method: 'PUT',
       headers: headers(),
       body: payload,
@@ -76,6 +80,8 @@ class ProfileRepository {
         data.banner,
         data.bio,
         data.email,
+        data.followers,
+        data.following,
         data.name,
         data.posts
       );
@@ -90,20 +96,17 @@ class ProfileRepository {
     }
   }
 
-  async posts(name) {
-    const response = await fetch(
-      `${API_SOCIAL_PROFILES}/${name}/posts?_posts=true&_author=true`,
-      {
-        method: 'GET',
-        headers: headers(),
-      }
-    );
+  async posts(name, page = 1) {
+    const endpoint = `${API_SOCIAL_PROFILES}/${name}/posts?limit=12&page=${page}&_author=true&_posts=true&_following=true&_followers=true&_comments=true`;
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: headers(),
+    });
 
     if (!response.ok) throw new Error('Fetching all posts by profile failed');
 
     try {
-      const result = await response.json();
-      const { data, meta } = result;
+      const { data, meta } = await response.json();
 
       return {
         success: true,
@@ -116,7 +119,8 @@ class ProfileRepository {
   }
 
   async follow(name) {
-    const response = await fetch(`${API_SOCIAL_PROFILES}/${name}/follow`, {
+    const endpoint = `${API_SOCIAL_PROFILES}/${name}/follow`;
+    const response = await fetch(endpoint, {
       method: 'PUT',
       headers: headers(),
     });
@@ -138,7 +142,8 @@ class ProfileRepository {
   }
 
   async unfollow(name) {
-    const response = await fetch(`${API_SOCIAL_PROFILES}/${name}/unfollow`, {
+    const endpoint = `${API_SOCIAL_PROFILES}/${name}/unfollow`;
+    const response = await fetch(endpoint, {
       method: 'PUT',
       headers: headers(),
     });
@@ -160,7 +165,8 @@ class ProfileRepository {
   }
 
   async search(query) {
-    const response = await fetch(`${API_SOCIAL_PROFILES}/search?q=${query}`, {
+    const endpoint = `${API_SOCIAL_PROFILES}/search?q=${query}`;
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: headers(),
     });
@@ -176,6 +182,8 @@ class ProfileRepository {
         data.banner,
         data.bio,
         data.email,
+        data.followers,
+        data.following,
         data.name,
         data.posts
       );

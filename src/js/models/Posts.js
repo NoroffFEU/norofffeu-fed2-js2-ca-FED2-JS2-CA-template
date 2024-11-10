@@ -14,6 +14,7 @@ export class Posts {
           post.tags,
           post.title,
           post.updated,
+          post.comments,
         )
     );
   }

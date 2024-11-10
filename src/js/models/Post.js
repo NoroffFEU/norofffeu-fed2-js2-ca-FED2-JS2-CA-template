@@ -1,5 +1,5 @@
 export class Post {
-    constructor(_count, author, body, created, id, media, tags, title, updated) {
+    constructor(_count, author, body, created, id, media, tags, title, updated, comments = [],) {
       this._count = _count;
       this.author = author;
       this.body = body;

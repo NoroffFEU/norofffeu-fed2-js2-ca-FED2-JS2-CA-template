@@ -6,6 +6,7 @@ import ProfileController from './ProfileController';
 import RegisterController from './RegisterController';
 import TagsController from './TagsController';
 import FollowController from './FollowController';
+import SearchController from './SearchController';
 
 const controllers = {
   AuthController,
@@ -15,7 +16,8 @@ const controllers = {
   ProfileController,
   RegisterController,
   TagsController,
-  FollowController
+  FollowController,
+  SearchController
 };
 
 export default controllers;

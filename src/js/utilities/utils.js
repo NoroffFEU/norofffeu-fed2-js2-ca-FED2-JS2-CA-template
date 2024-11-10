@@ -71,17 +71,20 @@ const utils = {
     // },
   
     formatTags: (tags) => {
-      if (!tags || tags.length === 0) return '';
-      return tags
-        .map(
-          (tag) =>
-            `<a href="/tags/?tag=${encodeURIComponent(
-              tag
-            )}" class="tag ">#${tag}</a>`
-        ) // Add '#' before each tag
-        .join(' '); // Join tags with a space
-    },
-  };
+    if (typeof tags === 'string') {
+      tags = [tags]; // Wrap the string in an array
+    }
+    if (!tags || tags.length === 0) return '';
+    return tags
+      .map(
+        (tag) =>
+          `<a href="/tags/?tag=${encodeURIComponent(
+            tag
+          )}" class="tag bg-gray-100 rounded-2xl text-sm px-1 py-2 hover:bg-gray-200">#${tag}</a>`
+      ) // Add '#' before each tag
+      .join(' '); // Join tags with a space
+  },
+};
   
   export default utils;
   
