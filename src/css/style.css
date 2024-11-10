@@ -4,7 +4,7 @@
   display: none !important;
 }
 
-.button-style {
+.btn-style-primary {
   background-color: #c0c0c0;
   color: #000000;
   display: inline-block;
@@ -12,17 +12,40 @@
   padding: 10px;
   text-align: center;
   text-decoration: none;
-  width: 20%;
+  width: 30%;
   border: 2px solid #000000;
+  border-radius: 10px;
 }
 
-.button-style:hover {
+.btn-style-secondary {
+  background-color: #313131;
+  color: #ffffff;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 30%;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+.btn-style-primary:hover {
   background-color: #d3d3d3;
   cursor: pointer;
 }
 
-.button-style:active {
+.btn-style-secondary:hover {
+  background-color: #6b6b6b;
+  cursor: pointer;
+}
+
+.btn-style-primary:active {
   background-color: #c0c0c0;
+}
+
+.btn-style-secondary:active {
+  background-color: #777777;
 }
 
 .card {

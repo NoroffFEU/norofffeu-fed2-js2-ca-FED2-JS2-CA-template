@@ -1,23 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noroff FED2 JS2 CA</title>
     <script type="module" src="/src/app.js"></script>
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-M9U8uW1zNCpQdTSfO3jIbr9FF9lO8ZQe7Qz4GA9u7Qr8G8h0yZSwNkg7G4gdI1iE"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
-    <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+  <body class="bg-gray-100 text-gray-500 ml-10 mr-10">
+
+    <div class="container text-center py-5">
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+    </div>
 
     <h1>Home</h1>
 
-    <a href="/profile/" class="button-style">My Profile</a>
-    <a href="/post/create/" class="button-style">Create Post</a>
-    <a href="/posts/" class="button-style">My Posts</a>
-    <a id="logoutBtn" class="button-style">Logout</a>
+    <a href="/profile/" class="btn-style-primary">My Profile</a>
+    <a href="/post/create/" class="btn-style-primary">Create Post</a>
+    <a href="/posts/" class="btn-style-primary">My Posts</a>
+    <a id="logoutBtn" class="btn-style-primary">Logout</a>
 
     <h2>Latest posts by Noroff students:</h2>
     <div id="posts-list"></div>
@@ -27,10 +41,9 @@
         <h3 id="title">Loading title...</h3>
         <p id="content">Loading content...</p>
       </div>
-      <br>
+      <br />
     </template>
 
     <script type="module" src="src/js/ui/auth/logout.js"></script>
   </body>
-
 </html>
