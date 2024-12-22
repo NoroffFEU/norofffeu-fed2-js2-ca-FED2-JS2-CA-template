@@ -38,24 +38,17 @@
     <i class="closeIcon material-icons">close</i>
   </button>
 
-  <br>
-  <h1 class="text-center mb-10 text-3xl">Profile page</h1>
+  <h1 class="text-3xl text-center mt-5 mb-10">This is a view of your posts!</h1>
 
-  <form name="updateProfile">
-    <button class="btn-style-1">Update Profile</button>
-    <a href="/" class="btn-style-2">Back to main page</a>
-  </form>
+  <div id="posts-list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"></div>
 
-  <div id="profile-container" class="mt-10 mb-10 flex flex-col items-center">
-    <img
-      src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      alt="John Doe´s profile image" class="profile-img rounded-full mb-5" />
-    <h2 class="text-2xl mb-5 ">John Doe´s profile</h2>
-    <p class="text-xl mb-5">johndoesemail@email.com</p>
-    <p class="text-xl text-wrap mb-5 w-1/2">"John Doe | Explorer of life’s adventures 🌍 | Tech enthusiast 💻 | Coffee
-      connoisseur
-      ☕ |
-      Sharing moments, insights, and positivity ✨ | 📍Currently: Japan"</p>
+  <template id="post-template">
+    <div class="card">
+      <h2 id="title" class="text-xl mb-2 mt-2">Loading title...</h2>
+      <p id="content" class="text-base mb-3">Loading content...</p>
+      <button class="btn-style-1">View post</button>
+    </div>
+  </template>
 </body>
 
 </html>

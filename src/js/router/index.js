@@ -15,6 +15,9 @@ export default async function router(pathname = window.location.pathname) {
     case "/auth/register/":
       await import("./views/register.js");
       break;
+    case "/posts/": // Added a new page to display posts by specific user, in this case the logged in user.
+      await import("./views/posts.js");
+      break;
     case "/post/":
       await import("./views/post.js");
       break;

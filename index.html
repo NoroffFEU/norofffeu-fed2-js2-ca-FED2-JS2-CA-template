@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,16 +7,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noroff FED2 JS2 CA</title>
   <script type="module" src="/src/app.js"></script>
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-M9U8uW1zNCpQdTSfO3jIbr9FF9lO8ZQe7Qz4GA9u7Qr8G8h0yZSwNkg7G4gdI1iE" crossorigin="anonymous" />
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
-  <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+<body class="bg-gray-100 text-gray-500 ml-10 mr-10">
+  <header class="flex justify-between items-center" id="header">
+    <div class="mt-5 mb-5">
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" class="scale-75" />
+    </div>
 
-  <h1>Home</h1>
+    <nav>
+      <a href="/profile/" class="btn-style-1 pr-5">My Profile</a>
+      <a href="/post/create/" class="btn-style-1 pr-5">Create Post</a>
+      <a href="/posts/" class="btn-style-1 pr-5">My Posts</a>
+      <a id="logoutBtn" class="btn-style-2">Log out</a>
+    </nav>
+  </header>
 
-  <a href="/profile/">My Profile</a>
-  <a href="/auth/login/">Login</a>
-  <a href="/auth/register/">Register</a>
-  <button>Logout</button>
+
+
+  <!-- Hamburger menu -->
+  <ul class="menu">
+    <li><a class="menuItem ml-10 text-lg" href="/">Home</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/profile/">My Profile</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/posts/">My Posts</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/post/create/">Create Post</a></li>
+    <li><a class="menuItem ml-10 text-lg" id="logoutBtn">Log out</a></li>
+  </ul>
+  <button class="hamburger">
+    <i class="menuIcon material-icons">menu</i>
+    <i class="closeIcon material-icons">close</i>
+  </button>
+
+  <br>
+
+  <h1 class="text-5xl text-center mt-5 mb-5">Welcome to the Noroff JS-2 home page!</h1>
+  <h2 class="text-2xl text-center mb-20">Here you can see different posts created by students to the Noroff API.
+    <br>Feel free to create your own post or view your own posts.
+  </h2>
+
+
+  <div id="posts-list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"></div>
+
+  <template id="post-template">
+    <div class="card mt-5 mb-5">
+      <img src="#" alt="Placeholder image" id="card-img-top" />
+      <h3 id="title" class="text-xl mb-2 mt-2">Loading title...</h3>
+      <p id="content" class="text-base mb-3">Loading content...</p>
+      <button class="btn-style-1">View post</button>
+    </div>
+  </template>
+
+  <script type="module" src="src/js/ui/auth/logout.js"></script>
 </body>
+
 </html>

@@ -4,11 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev-v": "vite",
+    "build-v": "vite build",
+    "preview": "vite preview",
+    "dev": "npx tailwindcss -i ./src/css/input.css -o ./src/css/style.css --watch",
+    "build": "npx tailwindcss -i ./src/css/input.css -o ./src/css/style.css --minify"
   },
   "devDependencies": {
+    "tailwindcss": "^3.4.17",
     "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "tailwind": "^4.0.0"
   }
 }

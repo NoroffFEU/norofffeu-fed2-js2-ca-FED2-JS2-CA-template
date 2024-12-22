@@ -1,13 +1,55 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
-  <body>
-    <h1>Post Page</h1>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noroff FED2 JS2 CA</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-100 text-gray-500 ml-10 mr-10 h-full">
+  <header class="flex justify-between items-center" id="header">
+    <div class="mt-5 mb-5">
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" class="scale-75" />
+    </div>
+
+    <nav>
+      <a href="/profile/" class="btn-style-1 pr-5">My Profile</a>
+      <a href="/post/create/" class="btn-style-1 pr-5">Create Post</a>
+      <a href="/posts/" class="btn-style-1 pr-5">My Posts</a>
+      <a id="logoutBtn" class="btn-style-2">Log out</a>
+    </nav>
+  </header>
+
+  <!-- Hamburger menu -->
+  <ul class="menu">
+    <li><a class="menuItem ml-10 text-lg" href="/">Home</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/profile/">My Profile</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/posts/">My Posts</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/post/create/">Create Post</a></li>
+    <li><a class="menuItem ml-10 text-lg" id="logoutBtn">Log out</a></li>
+  </ul>
+  <button class="hamburger">
+    <i class="menuIcon material-icons">menu</i>
+    <i class="closeIcon material-icons">close</i>
+  </button>
+
+  <br>
+  <a href="/posts/" class="btn-style-1">My Posts</a>
+  <a id="edit-post-btn" class="hidden btn-style-2">Edit post</a>
+
+  <div id="post-container" class="mt-10 mb-10 flex flex-col items-center">
+    <img src="#" alt="Placeholder image" id="image" class="post-img" />
+    <h2 id="title" class="text-2xl ">Loading title...</h2>
+    <p id="content" class="text-xl">Loading content...</p>
+    <br>
+    <a id="delete-post-btn" class="hidden btn-style-2">Delete post</a>
+  </div>
+
+  <script type="module" src="/src/app.js"></script>
+</body>
+
 </html>
