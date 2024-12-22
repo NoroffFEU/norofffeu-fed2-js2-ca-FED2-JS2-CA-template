@@ -13,3 +13,11 @@
 input {
   @apply border border-gray-400 rounded;
 }
+
+.post-img {
+  @apply w-1/4;
+}
+
+.profile-img {
+  @apply w-1/2;
+}

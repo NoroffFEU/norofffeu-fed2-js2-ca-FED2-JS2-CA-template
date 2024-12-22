@@ -1,30 +1,39 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noroff FED2 JS2 CA</title>
+  <script type="module" src="/src/app.js"></script>
+</head>
 
-  <body>
-    <img src="/images/noroff-logo.png" alt="Noroff Logo" />
+<body class="bg-gray-100 text-gray-500 ml-10 mr-10">
+  <header class="flex justify-between items-center">
+    <div class="mt-5 mb-5">
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" class="scale-75" />
+    </div>
 
-    <h1>My posts</h1>
-    <a href="/post/create/" class="btn-style-primary">Create Post</a>
-    <a href="/" class="btn-style-primary">Back to main page</a>
+    <nav>
+      <a href="/profile/" class="btn-style-1 pr-5">My Profile</a>
+      <a href="/post/create/" class="btn-style-1 pr-5">Create Post</a>
+      <a href="/posts/" class="btn-style-1 pr-5">My Posts</a>
+      <a id="logoutBtn" class="btn-style-2">Log out</a>
+    </nav>
+  </header>
 
-    <div id="posts-list"></div>
+  <h1 class="text-3xl text-center mt-5 mb-10">This is a view of your posts!</h1>
 
-    <template id="post-template">
-      <div class="card">
-        <h2 id="title">Loading title...</h2>
-        <p id="content">Loading content...</p>
-      </div>
-      <br>
-    </template>
-  </body>
+  <div id="posts-list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"></div>
+
+  <template id="post-template">
+    <div class="card">
+      <h2 id="title" class="text-xl mb-2 mt-2">Loading title...</h2>
+      <p id="content" class="text-base mb-3">Loading content...</p>
+      <button class="btn-style-1">View post</button>
+    </div>
+  </template>
+</body>
 
 </html>

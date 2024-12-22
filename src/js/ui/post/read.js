@@ -5,18 +5,19 @@ import { getLoggedInUser } from "../../utilities/getLoggedInUser.js";
 // If user is author on post, edit and delete buttons are shown.
 // Buttons are hidden by default as user does not have permission to edit or delete others posts.
 export async function onReadPost(post) {
-    document.getElementById("content").textContent = post.body;
-    document.getElementById("title").textContent = post.title;
+  document.getElementById("content").textContent = post.body;
+  document.getElementById("title").textContent = post.title;
+  document.getElementById("image").src = post.media.url;
 
-    const loggedInUser = getLoggedInUser();
+  const loggedInUser = getLoggedInUser();
 
-    if (loggedInUser && loggedInUser.email === post.author.email) {
-        const editButton = document.getElementById("edit-post-btn");
-        editButton.href = `/post/edit/?id=${post.id}`;
-        editButton.classList.remove("hidden");
-        
-        const deleteButton = document.getElementById("delete-post-btn");
-        deleteButton.addEventListener("click", onDeletePost);
-        deleteButton.classList.remove("hidden");
-    }
+  if (loggedInUser && loggedInUser.email === post.author.email) {
+    const editButton = document.getElementById("edit-post-btn");
+    editButton.href = `/post/edit/?id=${post.id}`;
+    editButton.classList.remove("hidden");
+
+    const deleteButton = document.getElementById("delete-post-btn");
+    deleteButton.addEventListener("click", onDeletePost);
+    deleteButton.classList.remove("hidden");
+  }
 }

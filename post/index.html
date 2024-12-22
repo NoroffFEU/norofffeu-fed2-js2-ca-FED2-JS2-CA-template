@@ -1,22 +1,38 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-  </head>
-  <body>
-    <h1>Post Page</h1>
-    <a href="/posts/" class="btn-style-primary">My Posts</a>
-    <a id="edit-post-btn" class="hidden btn-style-primary">Edit post</a>
-    
-    <div id="post-container">
-      <h2 id="title">Loading title...</h2>
-      <p id="content">Loading content...</p>
-      <a id="delete-post-btn" class="hidden btn-style-primary">Delete post</a>
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noroff FED2 JS2 CA</title>
+</head>
+
+<body class="bg-gray-100 text-gray-500 ml-10 mr-10 h-full">
+  <header class="flex justify-between items-center">
+    <div class="mt-5 mb-5">
+      <img src="/images/noroff-logo.png" alt="Noroff Logo" class="scale-75" />
     </div>
-    
-    <script type="module" src="/src/app.js"></script>
-  </body>
+
+    <nav>
+      <a href="/profile/" class="btn-style-1 pr-5">My Profile</a>
+      <a href="/post/create/" class="btn-style-1 pr-5">Create Post</a>
+      <a href="/posts/" class="btn-style-1 pr-5">My Posts</a>
+      <a id="logoutBtn" class="btn-style-2">Log out</a>
+    </nav>
+  </header>
+  <a href="/posts/" class="btn-style-1">My Posts</a>
+  <a id="edit-post-btn" class="hidden btn-style-2">Edit post</a>
+
+  <div id="post-container" class="mt-10 mb-10 flex flex-col items-center">
+    <img src="#" alt="Placeholder image" id="image" class="post-img" />
+    <h2 id="title" class="text-2xl ">Loading title...</h2>
+    <p id="content" class="text-xl">Loading content...</p>
+    <br>
+    <a id="delete-post-btn" class="hidden btn-style-2">Delete post</a>
+  </div>
+
+  <script type="module" src="/src/app.js"></script>
+</body>
+
 </html>

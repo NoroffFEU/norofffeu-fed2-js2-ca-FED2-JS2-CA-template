@@ -9,7 +9,9 @@ export async function onReadPosts(posts) {
     });
     postClone.getElementById("title").textContent = post.title;
     postClone.getElementById("content").textContent = post.body;
-    postClone.getElementById("card-img-top").src = post.media.url;
+    if (post.media) {
+      postClone.getElementById("card-img-top").src = post.media.url;
+    }
     postsList.appendChild(postClone);
   });
 }
