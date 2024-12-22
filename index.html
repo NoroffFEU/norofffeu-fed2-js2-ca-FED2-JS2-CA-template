@@ -11,6 +11,7 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-M9U8uW1zNCpQdTSfO3jIbr9FF9lO8ZQe7Qz4GA9u7Qr8G8h0yZSwNkg7G4gdI1iE" crossorigin="anonymous" />
 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 text-gray-500 ml-10 mr-10">
@@ -26,6 +27,23 @@
       <a id="logoutBtn" class="btn-style-2">Log out</a>
     </nav>
   </header>
+
+
+
+  <!-- Hamburger menu -->
+  <ul class="menu">
+    <li><a class="menuItem ml-10 text-lg" href="/">Home</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/profile/">My Profile</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/posts/">My Posts</a></li>
+    <li><a class="menuItem ml-10 text-lg" href="/post/create/">Create Post</a></li>
+    <li><a class="menuItem ml-10 text-lg" id="logoutBtn">Log out</a></li>
+  </ul>
+  <button class="hamburger">
+    <i class="menuIcon material-icons">menu</i>
+    <i class="closeIcon material-icons">close</i>
+  </button>
+
+  <br>
 
   <h1 class="text-5xl text-center mt-5 mb-5">Welcome to the Noroff JS-2 home page!</h1>
   <h2 class="text-2xl text-center mb-20">Here you can see different posts created by students to the Noroff API.
